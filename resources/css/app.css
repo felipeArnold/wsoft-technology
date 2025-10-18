@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+
+/* Filament Admin Theme overrides for color palette */
+
+:root {
+    /* Neutrals — Estrutura e leitura */
+    --app-bg: #F9FAFB; /* fundo */
+    --app-surface: #FFFFFF; /* cards */
+    --app-border: #E5E7EB; /* bordas */
+    --app-text: #374151; /* textos */
+
+    /* Primária — Confiança e tecnologia */
+    --app-primary: #1E3A8A; /* azul petróleo */
+    --app-primary-accent: #3B82F6; /* azul claro */
+
+    /* Secundária — Crescimento e finanças */
+    --app-success: #10B981; /* verde esmeralda */
+    --app-success-soft: #6EE7B7; /* verde suave */
+
+    /* Apoio — Ações e alertas */
+    --app-warning: #F59E0B; /* amarelo ouro */
+    --app-danger: #EF4444; /* vermelho suave */
+}
+
+/* Base backgrounds & text */
+html, body {
+    background-color: var(--app-bg);
+    color: var(--app-text);
+}
+
+/* Filament surfaces (cards, sections, tables) */
+.fi-section, .fi-widget, .fi-card, .fi-fo-field-wrp, .fi-ta, .fi-in {
+    background-color: var(--app-surface);
+}
+
+/* Card & container borders */
+.fi-section, .fi-widget, .fi-card, .fi-ta, .fi-in, .fi-sidebar, .fi-topbar {
+    border-color: var(--app-border);
+}
+
+/* Primary emphasis (headings inside Filament) */
+.fi-heading, .fi-ta-header, .fi-topbar, .fi-sidebar .fi-logo {
+    color: var(--app-primary);
+}
+
+/* Links & interactive accents */
+a, .fi-link, .fi-btn-primary:hover {
+    color: var(--app-primary-accent);
+}
+
+/* Dark mode */
+:root.dark, .dark {
+    --app-bg: #0F172A;      /* Fundo */
+    --app-surface: #1E293B; /* Card */
+    --app-text: #F8FAFC;    /* Texto primário */
+    /* Destaques mantêm a paleta */
+}
+
+.dark html, .dark body {
+    background-color: var(--app-bg);
+    color: var(--app-text);
+}
+
+/* Buttons quick tuning (relies on Filament color tokens under the hood) */
+.fi-btn-primary {
+    background-color: var(--app-primary) !important;
+}
+.fi-btn-primary:hover {
+    background-color: var(--app-primary-accent) !important;
+}
+
+/* Secondary buttons */
+.fi-btn-secondary {
+    background-color: var(--app-border) !important;
+    color: var(--app-primary) !important;
+}

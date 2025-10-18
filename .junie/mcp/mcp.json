@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Users/felipewustarnold/Library/Application Support/Herd/bin/php83",
+            "args": [
+                "/Users/felipewustarnold/Herd/Pessoal/wsoft-technology/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
