@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
-use App\Filament\Resources\CashPaymentsWidgetResource\Widgets\BlogPostsChart;
-use App\Filament\Widgets\PaymentMethodsWidget;
+use App\Filament\Pages\Auth\RegisterTeam;
 use App\Models\Tenant;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -43,16 +43,17 @@ final class AdminPanelProvider extends PanelProvider
                 Tenant::class,
                 slugAttribute: 'slug'
             )
+            ->tenantRegistration(RegisterTeam::class)
             ->multiFactorAuthentication([
                 EmailAuthentication::make()->codeExpiryMinutes(2),
             ])
+//            ->tenantProfile(EditTeamProfile::class)
             ->navigationGroups([
                 'Cadastros',
                 'Financeiro',
                 'Serviços',
                 'Configurações',
             ])
-//                ->tenantProfile(EditTeamProfile::class)
             ->colors([
                 'danger' => Color::Red,
                 'gray' => Color::Gray,
@@ -65,6 +66,7 @@ final class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('components.logo'))
             ->favicon(asset('images/icon.webp'))
             ->brandLogo(asset('images/logo-azul.webp'))
+            ->defaultThemeMode(ThemeMode::Light)
             ->darkModeBrandLogo(
                 fn (): string => Auth::check()
                     ? asset('images/logo-azul.webp')
@@ -75,14 +77,13 @@ final class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->plugins([
-                FilamentApexChartsPlugin::make()
+                FilamentApexChartsPlugin::make(),
             ])
             ->pages([
                 Dashboard::class,
-//                FinancialDashboard::class,
+                //                FinancialDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
-
 
             ->middleware([
                 EncryptCookies::class,

@@ -40,4 +40,18 @@ final class Tenant extends Model
     {
         return Storage::url($this->avatar);
     }
+
+    public static function generateUniqueSlug(string $name): string
+    {
+        $baseSlug = \Str::slug($name);
+        $slug = $baseSlug;
+        $counter = 1;
+
+        while (self::where('slug', $slug)->exists()) {
+            $slug = "{$baseSlug}-{$counter}";
+            $counter++;
+        }
+
+        return $slug;
+    }
 }
