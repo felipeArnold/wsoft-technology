@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -21,6 +22,7 @@ use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Icetalker\FilamentTableRepeater\Forms\Components\TableRepeater;
 use Illuminate\Support\Facades\Auth;
+use Leandrocfe\FilamentPtbrFormFields\Document;
 use Leandrocfe\FilamentPtbrFormFields\Money;
 
 class AccountsPayableForm
@@ -81,18 +83,47 @@ class AccountsPayableForm
                                                 Select::make('person_id')
                                                     ->label('Fornecedor')
                                                     ->placeholder('Selecione o fornecedor')
-                                                    ->options(fn () => Person::where('client_or_supplier', 'person')->pluck('name', 'id'))
+                                                    ->options(fn () => Person::query()->where('people.is_supplier', true)->pluck('name', 'id'))
                                                     ->native(false)
                                                     ->searchable()
+                                                    ->preload()
                                                     ->createOptionForm([
-                                                        TextInput::make('name')
-                                                            ->label('Nome')
-                                                            ->required(),
-                                                        Hidden::make('client_or_supplier')
-                                                            ->default('person'),
+                                                        Section::make('Dados do fornecedor')
+                                                            ->description('Insira os dados do fornecedor')
+                                                            ->collapsible()
+                                                            ->schema([
+                                                                Hidden::make('is_supplier')->default(true),
+                                                                Document::make('document')
+                                                                    ->label('CNPJ')
+                                                                    ->cnpj()
+                                                                    ->columnSpan(1),
+                                                                TextInput::make('name')
+                                                                    ->label('Razão Social')
+                                                                    ->rules([
+                                                                        'required',
+                                                                        'max:50',
+                                                                    ]),
+                                                                TextInput::make('surname')
+                                                                    ->label('Nome Fantasia')
+                                                                    ->rules([
+                                                                        'nullable',
+                                                                        'max:50',
+                                                                    ]),
+                                                                DatePicker::make('birth_date')
+                                                                    ->label('Data de fundação')
+                                                                    ->native(false)
+                                                                    ->rules([
+                                                                        'nullable',
+                                                                        'date',
+                                                                        'before:today',
+                                                                    ]),
+                                                                ])
+                                                                ->columnSpanFull()
+                                                                ->columns(2)
+                                                                ->grow(true),
                                                     ])
                                                     ->createOptionUsing(function (array $data): int {
-                                                        return Person::create($data)->getKey();
+                                                        return Person::query()->create($data)->getKey();
                                                     })
                                                     ->required()
                                                     ->columnSpan(4),

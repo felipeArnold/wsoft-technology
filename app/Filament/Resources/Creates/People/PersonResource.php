@@ -17,6 +17,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use UnitEnum;
 
@@ -31,6 +32,26 @@ final class PersonResource extends Resource
     protected static ?string $label = 'Clientes';
 
     protected static string|UnitEnum|null $navigationGroup = 'Cadastros';
+
+    protected static ?int $navigationSort = 1;
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'name',
+            'document',
+            'surname',
+        ];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'Nome' => $record->name,
+            'Documento' => $record->document,
+            'Apelido' => $record->surname,
+        ];
+    }
 
     public static function form(Schema $schema): Schema
     {

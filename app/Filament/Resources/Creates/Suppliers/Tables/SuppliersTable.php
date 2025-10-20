@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace App\Filament\Resources\Creates\People\Tables;
+namespace App\Filament\Resources\Creates\Suppliers\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Models\Person\Person;
@@ -12,29 +10,28 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-final class PeopleTable
+class SuppliersTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-            ->query(Person::query()->where('is_client', true))
-                ->columns([
+            ->query(Person::query()->where('is_supplier', true))
+            ->columns([
                 TextColumn::make('name')
-                    ->label('Nome')
+                    ->label('Razão Social')
                     ->description(fn ($record) => $record->document)
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('surname')
-                    ->label('Apelido')
+                    ->label('Nome Fantasia')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('document')
-                    ->label('Documento')
+                    ->label('CNPJ')
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
@@ -51,23 +48,8 @@ final class PeopleTable
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('birth_date')
-                    ->label('Data de nascimento')
+                    ->label('Data de fundação')
                     ->date()
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('nationality')
-                    ->label('Nacionalidade')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('naturalness')
-                    ->label('Naturalidade')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('profession')
-                    ->label('Profissão')
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
@@ -103,7 +85,7 @@ final class PeopleTable
                     ->toggleable(),
             ])
             ->filters([
-                TrashedFilter::make(),
+                //
             ])
             ->recordActions([
                 EditAction::make(),
@@ -117,8 +99,8 @@ final class PeopleTable
                 FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
             ->striped()
-            ->emptyStateIcon('heroicon-o-users')
-            ->emptyStateHeading('Nenhuma pessoa encontrada')
-            ->emptyStateDescription('Crie uma nova pessoa clicando no botão abaixo');
+            ->emptyStateIcon('heroicon-o-shopping-bag')
+            ->emptyStateHeading('Nenhum fornecedor encontrado')
+            ->emptyStateDescription('Crie uma novo fornecedor para que ele apareça aqui.');
     }
 }

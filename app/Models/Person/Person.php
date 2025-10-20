@@ -6,6 +6,7 @@ namespace App\Models\Person;
 
 use App\Models\Tenant;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,6 +55,7 @@ final class Person extends Model
                 ->description('Insira os dados pessoais do cliente')
                 ->collapsible()
                 ->schema([
+                    Hidden::make('is_client')->default(true),
                     TextInput::make('name')
                         ->label('Nome')
                         ->rules([
@@ -113,6 +115,65 @@ final class Person extends Model
                 ->grow(true),
             Section::make('Endereços')
                 ->description('Endereços do cliente')
+                ->collapsible()
+                ->schema([
+                    ...Addresses::getForm(),
+                ])
+                ->columnSpanFull()
+                ->columns(1)
+                ->grow(true),
+        ];
+    }
+
+    public static function getFormSuppliers(): array
+    {
+        return [
+            Section::make('Dados do fornecedor')
+                ->description('Insira os dados do fornecedor')
+                ->collapsible()
+                ->schema([
+                    Hidden::make('is_supplier')->default(true),
+                    Document::make('document')
+                        ->label('CNPJ')
+                        ->cnpj()
+                        ->columnSpan(1),
+                    TextInput::make('name')
+                        ->label('Razão Social')
+                        ->rules([
+                            'required',
+                            'max:50',
+                        ]),
+                    TextInput::make('surname')
+                        ->label('Nome Fantasia')
+                        ->rules([
+                            'nullable',
+                            'max:50',
+                        ]),
+                    DatePicker::make('birth_date')
+                        ->label('Data de fundação')
+                        ->native(false)
+                        ->rules([
+                            'nullable',
+                            'date',
+                            'before:today',
+                        ]),
+                ])
+                ->columnSpanFull()
+                ->columns(2)
+                ->grow(true),
+
+            Section::make('Contato')
+                ->description('Dados de contato do fornecedor')
+                ->collapsible()
+                ->schema([
+                    ...Emails::getForm(),
+                    ...Phones::getForm(),
+                ])
+                ->columnSpanFull()
+                ->columns(2)
+                ->grow(true),
+            Section::make('Endereços')
+                ->description('Endereços do fornecedor')
                 ->collapsible()
                 ->schema([
                     ...Addresses::getForm(),

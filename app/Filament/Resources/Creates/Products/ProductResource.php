@@ -11,6 +11,7 @@ use App\Filament\Resources\Creates\Products\Pages\ViewProduct;
 use App\Filament\Resources\Creates\Products\Schemas\ProductForm;
 use App\Filament\Resources\Creates\Products\Schemas\ProductInfolist;
 use App\Filament\Resources\Creates\Products\Tables\ProductsTable;
+use App\Helpers\FormatterHelper;
 use App\Models\Product;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -30,6 +31,26 @@ final class ProductResource extends Resource
     protected static ?string $label = 'Produtos';
 
     protected static string|UnitEnum|null $navigationGroup = 'Cadastros';
+
+    protected static ?int $navigationSort = 3;
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'name',
+            'sku',
+        ];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+        return [
+            'Nome' => $record->name,
+            'SKU' => $record->sku,
+            'Preço' => FormatterHelper::money($record->price_sale),
+            'Estoque' => $record->stock,
+        ];
+    }
 
     public static function form(Schema $schema): Schema
     {

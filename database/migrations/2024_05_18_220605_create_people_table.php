@@ -20,15 +20,14 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
             $table->string('name', 50);
-            $table->enum('client_or_supplier', ['person', 'supplier'])
-                ->default('person');
-            $table->enum('type', ['P', 'L'])->default('P');
             $table->string('surname', 50)->nullable();
             $table->string('document', 14)->nullable();
             $table->date('birth_date')->nullable();
             $table->string('nationality', 50)->nullable();
             $table->string('naturalness', 50)->nullable();
             $table->string('profession', 50)->nullable();
+            $table->boolean('is_client')->default(false);
+            $table->boolean('is_supplier')->default(false);
             $table->timestamps();
             $table->softDeletes();
             $table->index(['tenant_id', 'name', 'surname', 'document']);
