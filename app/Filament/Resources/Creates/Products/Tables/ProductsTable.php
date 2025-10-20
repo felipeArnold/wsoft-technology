@@ -13,7 +13,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 final class ProductsTable
 {

@@ -16,7 +16,6 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Collection;
-use pxlrbt\FilamentExcel\Actions\ExportBulkAction;
 
 final class ServiceOrdersTable
 {

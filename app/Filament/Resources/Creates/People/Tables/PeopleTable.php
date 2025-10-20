@@ -21,7 +21,7 @@ final class PeopleTable
     {
         return $table
             ->query(Person::query()->where('is_client', true))
-                ->columns([
+            ->columns([
                 TextColumn::make('name')
                     ->label('Nome')
                     ->description(fn ($record) => $record->document)

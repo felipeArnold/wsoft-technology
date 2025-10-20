@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Financial\AccountsPayables;
 
-use AccountsPayable;
 use App\Filament\Resources\Financial\AccountsPayables\Pages\CreateAccountsPayable;
 use App\Filament\Resources\Financial\AccountsPayables\Pages\EditAccountsPayable;
 use App\Filament\Resources\Financial\AccountsPayables\Pages\ListAccountsPayables;
@@ -16,16 +17,15 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
-class AccountsPayableResource extends Resource
+final class AccountsPayableResource extends Resource
 {
     protected static ?string $model = Accounts::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowTrendingDown;
 
-
     protected static ?string $label = 'Contas a Pagar';
 
-   protected static string | UnitEnum | null $navigationGroup = 'Financeiro';
+    protected static string|UnitEnum|null $navigationGroup = 'Financeiro';
 
     protected static ?string $pluralLabel = 'Contas a Pagar';
 

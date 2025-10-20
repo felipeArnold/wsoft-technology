@@ -7,7 +7,6 @@ namespace App\Filament\Resources\Creates\Products\Pages;
 use App\Filament\Resources\Creates\Products\ProductResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Filament\Widgets\StatsOverviewWidget\Stat;
 
 final class ListProducts extends ListRecords
 {
@@ -21,5 +20,4 @@ final class ListProducts extends ListRecords
                 ->icon('heroicon-o-plus'),
         ];
     }
-
 }

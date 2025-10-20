@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Creates\Suppliers\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
@@ -12,7 +14,7 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SuppliersTable
+final class SuppliersTable
 {
     public static function configure(Table $table): Table
     {

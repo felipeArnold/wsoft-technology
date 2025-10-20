@@ -10,9 +10,9 @@ use App\Models\EmailTemplate;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Colors\Color;
-use Filament\Notifications\Notification;
 
 final class ViewServiceOrder extends ViewRecord
 {

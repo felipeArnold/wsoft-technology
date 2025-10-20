@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Creates\Suppliers;
 
 use App\Filament\Resources\Creates\Suppliers\Pages\CreateSupplier;
@@ -15,7 +17,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
-class SupplierResource extends Resource
+final class SupplierResource extends Resource
 {
     protected static ?string $model = Person::class;
 

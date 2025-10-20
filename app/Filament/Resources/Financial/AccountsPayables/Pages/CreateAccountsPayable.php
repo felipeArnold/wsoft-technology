@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Financial\AccountsPayables\Pages;
 
 use App\Filament\Resources\Financial\AccountsPayables\AccountsPayableResource;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateAccountsPayable extends CreateRecord
+final class CreateAccountsPayable extends CreateRecord
 {
     protected static string $resource = AccountsPayableResource::class;
 }

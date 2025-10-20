@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Financial\AccountsPayables\Schemas;
 
 use App\Helpers\FormatterHelper;
@@ -9,8 +11,6 @@ use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\MorphToSelect;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Auth;
 use Leandrocfe\FilamentPtbrFormFields\Document;
 use Leandrocfe\FilamentPtbrFormFields\Money;
 
-class AccountsPayableForm
+final class AccountsPayableForm
 {
     public static function configure(Schema $schema): Schema
     {
@@ -117,10 +117,10 @@ class AccountsPayableForm
                                                                         'date',
                                                                         'before:today',
                                                                     ]),
-                                                                ])
-                                                                ->columnSpanFull()
-                                                                ->columns(2)
-                                                                ->grow(true),
+                                                            ])
+                                                            ->columnSpanFull()
+                                                            ->columns(2)
+                                                            ->grow(true),
                                                     ])
                                                     ->createOptionUsing(function (array $data): int {
                                                         return Person::query()->create($data)->getKey();
@@ -263,9 +263,9 @@ class AccountsPayableForm
                                                     // Preserve existing fields if present
                                                     $items[$i]['installment_number'] = $items[$i]['installment_number'] ?? ($i + 1);
                                                     $items[$i]['due_date'] = $items[$i]['due_date'] ?? (
-                                                    $installmentsCount > 1
-                                                        ? Carbon::now()->addMonths($i)->format('Y-m-d')
-                                                        : Carbon::now()->format('Y-m-d')
+                                                        $installmentsCount > 1
+                                                            ? Carbon::now()->addMonths($i)->format('Y-m-d')
+                                                            : Carbon::now()->format('Y-m-d')
                                                     );
                                                     $items[$i]['status'] = $items[$i]['status'] ?? 0;
                                                 }

@@ -26,7 +26,6 @@ final class AccountsReceivableResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowTrendingUp;
 
-
     protected static ?string $label = 'Contas a Receber';
 
     protected static string|UnitEnum|null $navigationGroup = 'Financeiro';

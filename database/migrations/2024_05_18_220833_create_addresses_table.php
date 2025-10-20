@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('city', 50);
             $table->string('state', 2);
             $table->timestamps();
-            $table->index(['addressable_type', 'addressable_id', 'postal_code', 'city'] );
+            $table->index(['addressable_type', 'addressable_id', 'postal_code', 'city']);
         });
     }
 

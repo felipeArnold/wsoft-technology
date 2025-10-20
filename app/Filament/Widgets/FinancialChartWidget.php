@@ -13,7 +13,7 @@ final class FinancialChartWidget extends ChartWidget
 {
     public ?string $filter = '12months';
 
-//    protected static ?string $heading = 'Receitas vs Despesas - Últimos 12 Meses';
+    //    protected static ?string $heading = 'Receitas vs Despesas - Últimos 12 Meses';
 
     protected static ?int $sort = 2;
 

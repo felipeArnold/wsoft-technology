@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Str;
 
 /**
  * @property int $id
@@ -26,6 +27,20 @@ final class Tenant extends Model
 
     protected $guarded = ['id'];
 
+    public static function generateUniqueSlug(string $name): string
+    {
+        $baseSlug = Str::slug($name);
+        $slug = $baseSlug;
+        $counter = 1;
+
+        while (self::where('slug', $slug)->exists()) {
+            $slug = "{$baseSlug}-{$counter}";
+            $counter++;
+        }
+
+        return $slug;
+    }
+
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
@@ -39,19 +54,5 @@ final class Tenant extends Model
     public function getFilamentAvatarUrl(): ?string
     {
         return Storage::url($this->avatar);
-    }
-
-    public static function generateUniqueSlug(string $name): string
-    {
-        $baseSlug = \Str::slug($name);
-        $slug = $baseSlug;
-        $counter = 1;
-
-        while (self::where('slug', $slug)->exists()) {
-            $slug = "{$baseSlug}-{$counter}";
-            $counter++;
-        }
-
-        return $slug;
     }
 }

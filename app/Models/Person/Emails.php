@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models\Person;
 
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Icetalker\FilamentTableRepeater\Forms\Components\TableRepeater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

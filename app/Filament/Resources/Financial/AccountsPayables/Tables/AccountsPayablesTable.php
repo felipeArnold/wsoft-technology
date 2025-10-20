@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Financial\AccountsPayables\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
@@ -19,7 +21,7 @@ use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
-class AccountsPayablesTable
+final class AccountsPayablesTable
 {
     public static function configure(Table $table): Table
     {
@@ -234,10 +236,10 @@ class AccountsPayablesTable
                 Action::make('create')
                     ->label('Criar nova conta a pagar')
                     ->icon('heroicon-m-plus')
-                    ->url('accounts-payable/create'),
+                    ->url('accounts-payables/create'),
             ])
             ->recordUrl(function ($record) {
-                return 'accounts-payable/'.$record->accounts->id.'/edit';
+                return 'accounts-payables/'.$record->accounts->id.'/edit';
             })
             ->defaultSort('due_date');
     }

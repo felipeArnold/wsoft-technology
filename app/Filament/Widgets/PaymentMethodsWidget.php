@@ -7,7 +7,6 @@ namespace App\Filament\Widgets;
 use App\Enum\AccountsReceivable\PaymentMethodEnum;
 use App\Enum\AccountsReceivable\PaymentStatusEnum;
 use App\Models\Accounts\AccountsInstallments;
-use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\Date;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
@@ -19,7 +18,7 @@ final class PaymentMethodsWidget extends ApexChartWidget
 
     protected static ?int $sort = 5;
 
-//    protected int|string|array $columnSpan = 'half';
+    //    protected int|string|array $columnSpan = 'half';
 
     protected function getOptions(): array
     {
@@ -54,55 +53,54 @@ final class PaymentMethodsWidget extends ApexChartWidget
         ];
     }
 
-
-//    protected function getType(): string
-//    {
-//        return 'doughnut';
-//    }
-//
-//    protected function getFilters(): ?array
-//    {
-//        return [
-//            '7days' => 'Últimos 7 dias',
-//            '15days' => 'Últimos 15 dias',
-//            '30days' => 'Últimos 30 dias',
-//            '90days' => 'Últimos 90 dias',
-//        ];
-//    }
-//
-//    private function getPaymentMethodsData(): array
-//    {
-//        $days = match ($this->filter) {
-//            '7days' => 7,
-//            '15days' => 15,
-//            '90days' => 90,
-//            default => 30,
-//        };
-//
-//        $startDate = Date::now()->subDays($days);
-//        $endDate = Date::now();
-//
-//        $labels = [];
-//        $values = [];
-//
-//        foreach (PaymentMethodEnum::cases() as $method) {
-//            $amount = AccountsInstallments::query()
-//                ->whereHas('accounts', function ($q) use ($method) {
-//                    $q->where('payment_method', $method->value);
-//                })
-//                ->where('status', PaymentStatusEnum::PAID)
-//                ->whereBetween('paid_at', [$startDate, $endDate])
-//                ->sum('amount');
-//
-//            if ($amount > 0) {
-//                $labels[] = $method->getLabel();
-//                $values[] = (float) $amount;
-//            }
-//        }
-//
-//        return [
-//            'labels' => $labels,
-//            'values' => $values,
-//        ];
-//    }
+    //    protected function getType(): string
+    //    {
+    //        return 'doughnut';
+    //    }
+    //
+    //    protected function getFilters(): ?array
+    //    {
+    //        return [
+    //            '7days' => 'Últimos 7 dias',
+    //            '15days' => 'Últimos 15 dias',
+    //            '30days' => 'Últimos 30 dias',
+    //            '90days' => 'Últimos 90 dias',
+    //        ];
+    //    }
+    //
+    //    private function getPaymentMethodsData(): array
+    //    {
+    //        $days = match ($this->filter) {
+    //            '7days' => 7,
+    //            '15days' => 15,
+    //            '90days' => 90,
+    //            default => 30,
+    //        };
+    //
+    //        $startDate = Date::now()->subDays($days);
+    //        $endDate = Date::now();
+    //
+    //        $labels = [];
+    //        $values = [];
+    //
+    //        foreach (PaymentMethodEnum::cases() as $method) {
+    //            $amount = AccountsInstallments::query()
+    //                ->whereHas('accounts', function ($q) use ($method) {
+    //                    $q->where('payment_method', $method->value);
+    //                })
+    //                ->where('status', PaymentStatusEnum::PAID)
+    //                ->whereBetween('paid_at', [$startDate, $endDate])
+    //                ->sum('amount');
+    //
+    //            if ($amount > 0) {
+    //                $labels[] = $method->getLabel();
+    //                $values[] = (float) $amount;
+    //            }
+    //        }
+    //
+    //        return [
+    //            'labels' => $labels,
+    //            'values' => $values,
+    //        ];
+    //    }
 }

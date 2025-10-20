@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Person;
 
 use Filament\Forms\Components\Repeater;
@@ -22,7 +24,7 @@ use Leandrocfe\FilamentPtbrFormFields\Cep;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  */
-class Addresses extends Model
+final class Addresses extends Model
 {
     use HasFactory;
 

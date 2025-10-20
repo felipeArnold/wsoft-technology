@@ -40,7 +40,7 @@ final class ListEnvelopes extends ListRecords
             'all' => Tab::make()
                 ->label('Todos')
                 ->badgeColor('gray')
-                ->modifyQueryUsing(fn (Builder $query) => $query)
+                ->modifyQueryUsing(fn (Builder $query) => $query),
         ];
     }
 

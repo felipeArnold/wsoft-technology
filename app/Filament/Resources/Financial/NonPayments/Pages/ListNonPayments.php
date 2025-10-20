@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Financial\NonPayments\Pages;
 
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\Financial\NonPayments\NonPaymentResource;
 use App\Models\Accounts\AccountsInstallments;
 use Filament\Actions\Action;
@@ -58,9 +57,7 @@ final class ListNonPayments extends ListRecords
                 ->requiresConfirmation()
                 ->modalHeading('Enviar Lembretes em Lote')
                 ->modalDescription('Enviar lembretes de pagamento para todos os clientes inadimplentes?')
-                ->action(function (): void {
-
-                }),
+                ->action(function (): void {}),
         ];
     }
 

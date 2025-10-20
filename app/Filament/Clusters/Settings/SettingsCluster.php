@@ -13,7 +13,7 @@ final class SettingsCluster extends Cluster
 {
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Configurações';
+    protected static string|UnitEnum|null $navigationGroup = 'Configurações';
 
     protected static ?string $label = 'Configurações';
 
