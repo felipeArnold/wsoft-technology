@@ -20,7 +20,7 @@ final class AccountsReceivablesOverview extends BaseWidget
 
         // Consider only installments tied to receivables accounts
         $baseQuery = AccountsInstallments::query()
-            ->whereHas('accounts', function ($q) {
+            ->whereHas('accounts', function ($q): void {
                 $q->where('type', 'receivables');
             });
 
@@ -29,9 +29,9 @@ final class AccountsReceivablesOverview extends BaseWidget
             ->count();
 
         $overdueCount = (clone $baseQuery)
-            ->where(function ($q) use ($today) {
+            ->where(function ($q) use ($today): void {
                 $q->where('status', PaymentStatusEnum::OVERDUE)
-                    ->orWhere(function ($q2) use ($today) {
+                    ->orWhere(function ($q2) use ($today): void {
                         $q2->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL])
                             ->whereDate('due_date', '<', $today);
                     });

@@ -27,6 +27,8 @@ final class Accounts extends Model
         'discount_amount' => 'decimal:2',
         'interest_amount' => 'decimal:2',
         'fine_amount' => 'decimal:2',
+        'due_date' => 'date',
+        'paid_at' => 'datetime',
     ];
 
     public function tenant(): BelongsTo

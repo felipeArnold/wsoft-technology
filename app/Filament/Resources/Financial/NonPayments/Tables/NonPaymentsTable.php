@@ -152,8 +152,7 @@ final class NonPaymentsTable
                 fn (Action $action) => $action
                     ->button()
                     ->label('Filtros')
-                    ->color('danger')
-                    ->icon('heroicon-o-funnel'),
+                    ->icon('heroicon-o-funnel')
             )
             ->groups([
                 Group::make('accounts.user.name')->label('Responsável')->collapsible(),

@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[ObservedBy(AccountsInstallmentsObserver::class)]
 final class AccountsInstallments extends Model
@@ -30,9 +29,9 @@ final class AccountsInstallments extends Model
         return $this->belongsTo(Tenant::class);
     }
 
-    public function accounts(): HasOne
+    public function accounts(): BelongsTo
     {
-        return $this->hasOne(Accounts::class, 'id', 'accounts_id');
+        return $this->belongsTo(Accounts::class, 'accounts_id');
     }
 
     protected function amount(): Attribute

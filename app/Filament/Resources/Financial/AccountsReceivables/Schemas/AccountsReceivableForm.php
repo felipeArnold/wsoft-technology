@@ -82,7 +82,7 @@ final class AccountsReceivableForm
                                                 Select::make('person_id')
                                                     ->label('Cliente')
                                                     ->placeholder('Selecione o cliente')
-                                                    ->options(fn () => Person::where('client_or_supplier', 'person')->pluck('name', 'id'))
+                                                    ->options(fn () => Person::query()->where('is_client', true)->pluck('name', 'id'))
                                                     ->native(false)
                                                     ->searchable()
                                                     ->createOptionForm([
@@ -93,7 +93,7 @@ final class AccountsReceivableForm
                                                             ->default('person'),
                                                     ])
                                                     ->createOptionUsing(function (array $data): int {
-                                                        return Person::create($data)->getKey();
+                                                        return Person::query()->create($data)->getKey();
                                                     })
                                                     ->required()
                                                     ->columnSpan(4),

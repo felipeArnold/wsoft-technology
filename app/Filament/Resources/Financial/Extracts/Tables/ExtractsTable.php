@@ -216,8 +216,7 @@ final class ExtractsTable
                 fn (Action $action) => $action
                     ->button()
                     ->label('Filtros')
-                    ->color('primary')
-                    ->icon('heroicon-o-funnel'),
+                    ->icon('heroicon-o-funnel')
             )
             ->groups([
                 Group::make('accounts.type')->label('Tipo')->collapsible(),

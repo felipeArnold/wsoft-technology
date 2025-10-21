@@ -26,7 +26,7 @@ final class AccountsPayablesOverview extends BaseWidget
 
         $overdueCount = (clone $baseQuery)
             ->where('status', PaymentStatusEnum::OVERDUE)
-            ->orWhere(function ($q) use ($today) {
+            ->orWhere(function ($q) use ($today): void {
                 $q->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL])
                     ->whereDate('due_date', '<', $today);
             })

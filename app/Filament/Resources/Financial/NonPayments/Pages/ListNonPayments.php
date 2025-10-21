@@ -53,7 +53,7 @@ final class ListNonPayments extends ListRecords
             Action::make('send_bulk_reminders')
                 ->label('Enviar Lembretes')
                 ->icon('heroicon-o-envelope')
-                ->color('warning')
+                ->color('primary')
                 ->requiresConfirmation()
                 ->modalHeading('Enviar Lembretes em Lote')
                 ->modalDescription('Enviar lembretes de pagamento para todos os clientes inadimplentes?')

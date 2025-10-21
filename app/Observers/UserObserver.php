@@ -10,6 +10,8 @@ final class UserObserver
 {
     public function creating($user)
     {
+        unset($user['password_confirmation']);
+
         Tenant::creating(function ($tenant) use ($user): void {
             $tenant->users()->attach($user);
         });

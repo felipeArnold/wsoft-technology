@@ -22,7 +22,7 @@ final class FinancialDashboardOverview extends BaseWidget
 
         // Contas a Receber
         $receivablesQuery = AccountsInstallments::query()
-            ->whereHas('accounts', function ($q) {
+            ->whereHas('accounts', function ($q): void {
                 $q->where('type', 'receivables');
             });
 
@@ -36,9 +36,9 @@ final class FinancialDashboardOverview extends BaseWidget
             ->sum('amount');
 
         $overdueReceivables = (clone $receivablesQuery)
-            ->where(function ($q) use ($today) {
+            ->where(function ($q) use ($today): void {
                 $q->where('status', PaymentStatusEnum::OVERDUE)
-                    ->orWhere(function ($q2) use ($today) {
+                    ->orWhere(function ($q2) use ($today): void {
                         $q2->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL])
                             ->whereDate('due_date', '<', $today);
                     });
@@ -47,7 +47,7 @@ final class FinancialDashboardOverview extends BaseWidget
 
         // Contas a Pagar
         $payablesQuery = AccountsInstallments::query()
-            ->whereHas('accounts', function ($q) {
+            ->whereHas('accounts', function ($q): void {
                 $q->where('type', 'payables');
             });
 
@@ -61,9 +61,9 @@ final class FinancialDashboardOverview extends BaseWidget
             ->sum('amount');
 
         $overduePayables = (clone $payablesQuery)
-            ->where(function ($q) use ($today) {
+            ->where(function ($q) use ($today): void {
                 $q->where('status', PaymentStatusEnum::OVERDUE)
-                    ->orWhere(function ($q2) use ($today) {
+                    ->orWhere(function ($q2) use ($today): void {
                         $q2->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL])
                             ->whereDate('due_date', '<', $today);
                     });
@@ -111,7 +111,7 @@ final class FinancialDashboardOverview extends BaseWidget
         for ($i = 6; $i >= 0; $i--) {
             $date = (clone $today)->subDays($i);
             $amount = AccountsInstallments::query()
-                ->whereHas('accounts', function ($q) {
+                ->whereHas('accounts', function ($q): void {
                     $q->where('type', 'receivables');
                 })
                 ->where('status', PaymentStatusEnum::PAID)
@@ -132,7 +132,7 @@ final class FinancialDashboardOverview extends BaseWidget
         for ($i = 6; $i >= 0; $i--) {
             $date = (clone $today)->subDays($i);
             $amount = AccountsInstallments::query()
-                ->whereHas('accounts', function ($q) {
+                ->whereHas('accounts', function ($q): void {
                     $q->where('type', 'payables');
                 })
                 ->where('status', PaymentStatusEnum::PAID)
@@ -154,7 +154,7 @@ final class FinancialDashboardOverview extends BaseWidget
             $date = (clone $today)->subDays($i);
 
             $received = AccountsInstallments::query()
-                ->whereHas('accounts', function ($q) {
+                ->whereHas('accounts', function ($q): void {
                     $q->where('type', 'receivables');
                 })
                 ->where('status', PaymentStatusEnum::PAID)
@@ -162,7 +162,7 @@ final class FinancialDashboardOverview extends BaseWidget
                 ->sum('amount');
 
             $paid = AccountsInstallments::query()
-                ->whereHas('accounts', function ($q) {
+                ->whereHas('accounts', function ($q): void {
                     $q->where('type', 'payables');
                 })
                 ->where('status', PaymentStatusEnum::PAID)
@@ -184,9 +184,9 @@ final class FinancialDashboardOverview extends BaseWidget
             $date = (clone $today)->subDays($i);
 
             $overdue = AccountsInstallments::query()
-                ->where(function ($q) use ($date) {
+                ->where(function ($q) use ($date): void {
                     $q->where('status', PaymentStatusEnum::OVERDUE)
-                        ->orWhere(function ($q2) use ($date) {
+                        ->orWhere(function ($q2) use ($date): void {
                             $q2->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL])
                                 ->whereDate('due_date', '<', $date);
                         });
