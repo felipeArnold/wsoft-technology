@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Financial\NonPayments\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use App\Helpers\FormatterHelper;
 use App\Models\Accounts\AccountsInstallments;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -60,7 +61,8 @@ final class NonPaymentsTable
                     ->color('danger')
                     ->toggleable()
                     ->summarize([
-                        Sum::make()->label('Total Inadimplente'),
+                        Sum::make()->label('Total Inadimplente')
+                            ->formatStateUsing(fn ($state) => FormatterHelper::money($state, true)),
                     ]),
                 TextColumn::make('due_date')
                     ->label('Vencimento')
@@ -68,10 +70,8 @@ final class NonPaymentsTable
                     ->sortable()
                     ->toggleable()
                     ->color('danger')
-                    ->weight('bold')
-                    ->description(function ($record) {
-                        $daysOverdue = $record->due_date->diffInDays(now());
-                        $daysOverdue = $daysOverdue === 0 ? 'Hoje' : $daysOverdue;
+                    ->weight('bold')->description(function ($record) {
+                        $daysOverdue = (int) $record->due_date->diffInDays(now());
 
                         return "{$daysOverdue} dias em atraso";
                     }),

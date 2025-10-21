@@ -231,6 +231,13 @@
       <path value="$PROJECT_DIR$/vendor/league/uri" />
       <path value="$PROJECT_DIR$/vendor/league/csv" />
       <path value="$PROJECT_DIR$/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/vendor/captainhook/captainhook-phar" />
+      <path value="$PROJECT_DIR$/vendor/sebastianfeldmann/git" />
+      <path value="$PROJECT_DIR$/vendor/sebastianfeldmann/camino" />
+      <path value="$PROJECT_DIR$/vendor/captainhook/secrets" />
+      <path value="$PROJECT_DIR$/vendor/captainhook/captainhook" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/sebastianfeldmann/cli" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
