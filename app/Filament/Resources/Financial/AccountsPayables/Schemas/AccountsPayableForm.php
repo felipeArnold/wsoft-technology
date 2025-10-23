@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Repeater\TableColumn;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -20,7 +22,6 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
-use Icetalker\FilamentTableRepeater\Forms\Components\TableRepeater;
 use Illuminate\Support\Facades\Auth;
 use Leandrocfe\FilamentPtbrFormFields\Document;
 use Leandrocfe\FilamentPtbrFormFields\Money;
@@ -315,11 +316,18 @@ final class AccountsPayableForm
                                     ->description('Detalhamento e ajustes finos das parcelas geradas')
                                     ->icon('heroicon-o-list-bullet')
                                     ->schema([
-                                        TableRepeater::make('installments')
+                                        Repeater::make('installments')
                                             ->relationship('installments')
                                             ->label('Parcelas')
                                             ->default([])
+                                            ->compact(true)
                                             ->addable(false)
+                                            ->table([
+                                                TableColumn::make('Parcela'),
+                                                TableColumn::make('Valor'),
+                                                TableColumn::make('Vencimento'),
+                                                TableColumn::make('Status'),
+                                            ])
                                             ->schema([
                                                 TextInput::make('installment_number')
                                                     ->label('Parcela')
@@ -340,9 +348,7 @@ final class AccountsPayableForm
                                                     ])
                                                     ->native(false)
                                                     ->columnSpan(2),
-                                            ])
-                                            ->columns(7)
-                                            ->columnSpanFull(),
+                                            ]),
                                     ])
                                     ->columnSpanFull(),
 

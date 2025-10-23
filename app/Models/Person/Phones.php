@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Person;
 
-use Icetalker\FilamentTableRepeater\Forms\Components\TableRepeater;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Repeater\TableColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,20 +43,23 @@ final class Phones extends Model
         'id' => 'integer',
     ];
 
-    public static function getForm(): array
+    public static function getForm(): Repeater
     {
-        return [
-            TableRepeater::make('phones')
-                ->relationship('phones')
-                ->label('Telefones')
-                ->schema([
-                    PtbrPhone::make('number')
-                        ->label('Telefone')
-                        ->tel()
-                        ->default(null),
-                ])
-                ->default([])
-                ->columnSpan(1),
-        ];
+        return Repeater::make('phones')
+            ->relationship()
+            ->hiddenLabel()
+            ->table([
+                TableColumn::make('Número'),
+            ])
+            ->compact(true)
+            ->schema([
+                PtbrPhone::make('number')
+                    ->label('Telefone')
+                    ->tel()
+                    ->default(null),
+            ])
+            ->defaultItems(1)
+            ->columnSpan(1)
+            ->addActionLabel('Adicionar telefone');
     }
 }

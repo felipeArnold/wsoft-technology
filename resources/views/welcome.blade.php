@@ -36,7 +36,7 @@
             background: linear-gradient(135deg, hsl(var(--hero-gradient-from)), hsl(var(--hero-gradient-to)));
         }
 
-        .bg-gradient-to-br {
+        .bg-linear-to-br {
             background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
         }
 
@@ -77,7 +77,7 @@
 </head>
 <body class="antialiased">
 <!-- Hero Section -->
-<section class="relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
+<section class="relative overflow-hidden bg-linear-to-br from-white via-gray-50 to-white">
     <div class="container mx-auto px-4 py-20 md:py-32">
         <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             <!-- Left Column - Content -->
@@ -88,7 +88,7 @@
 
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
                     Gerencie seu negócio
-                    <span class="bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
+                    <span class="bg-linear-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
               de forma simples
             </span>
                 </h1>
@@ -140,7 +140,7 @@
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
                 Tudo que você precisa para
-                <span class="bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
+                <span class="bg-linear-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
             gerir seu negócio
           </span>
             </h2>

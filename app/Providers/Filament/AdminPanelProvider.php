@@ -84,7 +84,6 @@ final class AdminPanelProvider extends PanelProvider
                 //                FinancialDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
-
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

@@ -7,7 +7,6 @@ namespace App\Filament\Widgets;
 use App\Enum\AccountsReceivable\PaymentStatusEnum;
 use App\Models\Accounts\AccountsInstallments;
 use Carbon\Carbon;
-use Filament\Support\Enums\Width;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 final class IncomeAndExpenses extends ApexChartWidget
@@ -21,10 +20,6 @@ final class IncomeAndExpenses extends ApexChartWidget
      * Widget Title
      */
     protected static ?string $heading = 'Receitas x Despesas';
-
-    protected int|string|array $columnSpan = 'full';
-
-    protected static Width|string $filterFormWidth = 'full';
 
     /**
      * Get total receivables (contas a receber)
@@ -151,11 +146,20 @@ final class IncomeAndExpenses extends ApexChartWidget
         }
 
         return [
+
             'chart' => [
                 'type' => 'bar',
                 'height' => 300,
                 'toolbar' => [
                     'show' => true,
+                ],
+            ],
+            'plotOptions' => [
+                'bar' => [
+                    'horizontal' => false,
+                    'columnWidth' => '55%',
+                    'borderRadius' => 5,
+                    'borderRadiusApplication' => 'end',
                 ],
             ],
             'series' => [

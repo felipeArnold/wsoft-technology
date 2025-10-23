@@ -102,13 +102,17 @@ final class Person extends Model
                 ->columnSpanFull()
                 ->columns(2)
                 ->grow(true),
-
             Section::make('Contato')
-                ->description('Dados de contato do cliente')
-                ->collapsible()
+                ->description('Dados de contato do fornecedor')
                 ->schema([
-                    ...Emails::getForm(),
-                    ...Phones::getForm(),
+                    Section::make('Telefones')
+                        ->icon('heroicon-o-phone')
+                        ->schema([Phones::getForm()])
+                        ->columnSpanFull(),
+                    Section::make('E-mails')
+                        ->icon('heroicon-o-envelope')
+                        ->schema([Emails::getForm()])
+                        ->columnSpanFull(),
                 ])
                 ->columnSpanFull()
                 ->columns(2)
@@ -161,13 +165,17 @@ final class Person extends Model
                 ->columnSpanFull()
                 ->columns(2)
                 ->grow(true),
-
             Section::make('Contato')
                 ->description('Dados de contato do fornecedor')
-                ->collapsible()
                 ->schema([
-                    ...Emails::getForm(),
-                    ...Phones::getForm(),
+                    Section::make('Telefones')
+                        ->icon('heroicon-o-phone')
+                        ->schema([Phones::getForm()])
+                        ->columnSpanFull(),
+                    Section::make('E-mails')
+                        ->icon('heroicon-o-envelope')
+                        ->schema([Emails::getForm()])
+                        ->columnSpanFull(),
                 ])
                 ->columnSpanFull()
                 ->columns(2)

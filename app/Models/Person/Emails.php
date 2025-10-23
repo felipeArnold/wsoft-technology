@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models\Person;
 
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Repeater\TableColumn;
 use Filament\Forms\Components\TextInput;
-use Icetalker\FilamentTableRepeater\Forms\Components\TableRepeater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,21 +31,23 @@ final class Emails extends Model
         'id' => 'integer',
     ];
 
-    public static function getForm(): array
+    public static function getForm(): Repeater
     {
-        return [
-            TableRepeater::make('emails')
-                ->relationship('emails')
-                ->label('E-mails')
-                ->schema([
-                    TextInput::make('address')
-                        ->label('E-mail')
-                        ->nullable()
-                        ->email(),
-                ])
-                ->default([])
-                ->columnSpan(1)
-                ->addActionLabel('Adicionar e-mail'),
-        ];
+        return Repeater::make('emails')
+            ->relationship('emails')
+            ->hiddenLabel()
+            ->compact(true)
+            ->table([
+                TableColumn::make('E-mail'),
+            ])
+            ->schema([
+                TextInput::make('address')
+                    ->label('E-mail')
+                    ->nullable()
+                    ->email(),
+            ])
+            ->default([])
+            ->columnSpan(1)
+            ->addActionLabel('Adicionar e-mail');
     }
 }

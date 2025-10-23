@@ -129,7 +129,6 @@
       <path value="$PROJECT_DIR$/vendor/archtechx/helpers" />
       <path value="$PROJECT_DIR$/vendor/archtechx/money" />
       <path value="$PROJECT_DIR$/vendor/pragmarx/google2fa-qrcode" />
-      <path value="$PROJECT_DIR$/vendor/icetalker/filament-table-repeater" />
       <path value="$PROJECT_DIR$/vendor/fruitcake/php-cors" />
       <path value="$PROJECT_DIR$/vendor/danharrin/livewire-rate-limiting" />
       <path value="$PROJECT_DIR$/vendor/danharrin/date-format-converter" />
@@ -244,7 +243,6 @@
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
-      <PhpStanConfiguration asDefaultInterpreter="true" tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
     </PhpStan_settings>
   </component>
   <component name="PhpStanOptionsConfiguration">
