@@ -318,7 +318,7 @@ final class AccountsPayableForm
                                     ->schema([
                                         Repeater::make('installments')
                                             ->relationship('installments')
-                                            ->label('Parcelas')
+                                            ->hiddenLabel()
                                             ->default([])
                                             ->compact(true)
                                             ->addable(false)

@@ -100,7 +100,7 @@ final class Person extends Model
                         ]),
                 ])
                 ->columnSpanFull()
-                ->columns(2)
+                ->columns(3)
                 ->grow(true),
             Section::make('Contato')
                 ->description('Dados de contato do fornecedor')
@@ -163,7 +163,7 @@ final class Person extends Model
                         ]),
                 ])
                 ->columnSpanFull()
-                ->columns(2)
+                ->columns(3)
                 ->grow(true),
             Section::make('Contato')
                 ->description('Dados de contato do fornecedor')

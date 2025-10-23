@@ -34,7 +34,6 @@ final class EnvelopeForm
                                         ->required()
                                         ->maxLength(255)
                                         ->columnSpan(2),
-
                                     DatePicker::make('deadline')
                                         ->label('Prazo para Assinatura')
                                         ->native()
@@ -43,9 +42,10 @@ final class EnvelopeForm
                                         ->default(now()->addDays(30))
                                         ->required()
                                         ->columnSpan(1),
-
                                     Select::make('status')
                                         ->label('Status')
+                                        // if form create set disabled to false
+                                        ->disabled(fn (string $context): bool => $context !== 'edit')
                                         ->options([
                                             'draft' => 'Rascunho',
                                             'sent' => 'Enviado',
@@ -57,12 +57,11 @@ final class EnvelopeForm
                                         ->required()
                                         ->native(false)
                                         ->columnSpan(1),
-
                                     FileUpload::make('documents')
                                         ->label('Documentos')
                                         ->acceptedFileTypes(['application/pdf'])
                                         ->multiple()
-                                        ->maxSize(1024 * 10) // 10MB
+                                        ->maxSize(1024 * 10)
                                         ->columnSpanFull(),
                                 ]),
                         ]),

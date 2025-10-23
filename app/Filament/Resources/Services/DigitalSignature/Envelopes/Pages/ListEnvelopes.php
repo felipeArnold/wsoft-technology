@@ -19,26 +19,27 @@ final class ListEnvelopes extends ListRecords
         return [
             'draft' => Tab::make()
                 ->label('Rascunhos')
-                ->badgeColor('secondary')
+                ->icon('heroicon-o-pencil-square')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'draft')),
             'sent' => Tab::make()
-                ->label('Enviados')
-                ->badgeColor('primary')
+                ->label('Em andamento')
+                ->icon('heroicon-o-paper-airplane')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'sent')),
             'signed' => Tab::make()
                 ->label('Assinados')
-                ->badgeColor('success')
+                ->icon('heroicon-o-check-circle')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'signed')),
             'expired' => Tab::make()
                 ->label('Expirados')
-                ->badgeColor('warning')
+                ->icon('heroicon-o-calendar')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'expired')),
             'cancelled' => Tab::make()
                 ->label('Cancelados')
-                ->badgeColor('danger')
+                ->icon('heroicon-o-x-circle')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'cancelled')),
             'all' => Tab::make()
                 ->label('Todos')
+                ->icon('heroicon-o-inbox')
                 ->badgeColor('gray')
                 ->modifyQueryUsing(fn (Builder $query) => $query),
         ];

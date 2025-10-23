@@ -127,8 +127,7 @@ final class ServiceOrder extends Model
                             $parts = FormatterHelper::toDecimal($get('parts_value') ?? 0);
 
                             $set('total_value', FormatterHelper::money($labor + $parts));
-                        })
-                        ->columnSpan(1),
+                        }),
                     PtbrMoney::make('parts_value')
                         ->label('Valor das Peças')
                         ->default(0)
@@ -143,15 +142,13 @@ final class ServiceOrder extends Model
                     PtbrMoney::make('total_value')
                         ->label('Valor Total')
                         ->default(0)
-                        ->disabled()
-                        ->columnSpan(1),
+                        ->disabled(),
                     TextInput::make('warranty_period')
                         ->label('Período de Garantia')
                         ->placeholder('Ex: 30 dias, 90 dias, 1 ano')
-                        ->maxLength(50)
-                        ->columnSpan(1),
+                        ->maxLength(50),
                 ])
-                ->columns(3)
+                ->columns(4)
                 ->columnSpanFull(),
 
             Section::make('Descrição do Serviço')
