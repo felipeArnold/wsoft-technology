@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Financial\AccountsPayables;
 
+use App\Filament\Clusters\Financial\FinancialCluster;
 use App\Filament\Resources\Financial\AccountsPayables\Pages\CreateAccountsPayable;
 use App\Filament\Resources\Financial\AccountsPayables\Pages\EditAccountsPayable;
 use App\Filament\Resources\Financial\AccountsPayables\Pages\ListAccountsPayables;
@@ -28,7 +29,7 @@ final class AccountsPayableResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Financeiro';
 
-    protected static ?string $pluralLabel = 'Contas a Pagar';
+    // protected static ?string $cluster = FinancialCluster::class;
 
     public static function form(Schema $schema): Schema
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Financial\AccountsReceivables;
 
+use App\Filament\Clusters\Financial\FinancialCluster;
 use App\Filament\Resources\Financial\AccountsReceivables\Pages\CreateAccountsReceivable;
 use App\Filament\Resources\Financial\AccountsReceivables\Pages\EditAccountsReceivable;
 use App\Filament\Resources\Financial\AccountsReceivables\Pages\ListAccountsReceivables;
@@ -30,7 +31,7 @@ final class AccountsReceivableResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Financeiro';
 
-    protected static ?string $pluralLabel = 'Contas a Receber';
+    // protected static ?string $cluster = FinancialCluster::class;
 
     public static function form(Schema $schema): Schema
     {

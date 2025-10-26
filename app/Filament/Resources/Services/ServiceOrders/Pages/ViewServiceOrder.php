@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Services\ServiceOrders\Pages;
 
 use App\Filament\Resources\Services\ServiceOrders\ServiceOrderResource;
-use App\Jobs\SendEmailFromTemplate;
+use App\Mail\SendEmailFromTemplateMail;
 use App\Models\EmailTemplate;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
@@ -13,6 +13,7 @@ use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Colors\Color;
+use Illuminate\Support\Facades\Mail;
 
 final class ViewServiceOrder extends ViewRecord
 {
@@ -24,6 +25,7 @@ final class ViewServiceOrder extends ViewRecord
             // Action: enviar email com seleção de template em modal
             Action::make('send_email')
                 ->label('Enviar por Email')
+                ->hidden()
                 ->color(Color::Emerald)
                 ->icon('heroicon-o-envelope')
                 ->modalHeading('Enviar por Email')
@@ -44,15 +46,12 @@ final class ViewServiceOrder extends ViewRecord
                 ->action(function (array $data): void {
                     $templateId = (int) ($data['email_template_id'] ?? 0);
 
-                    // Busca e-mails do cliente associado à ordem de serviço
-                    $emails = $this->record->person?->emails()
-                        ->pluck('address')
-                        ->filter()
-                        ->unique()
-                        ->values()
-                        ->all();
+                    // first email addresses from related person
+                    $email = $this->record->person?->emails()
+                        ->first()
+                        ->address ?? null;
 
-                    if (empty($emails)) {
+                    if (empty($email)) {
                         Notification::make()
                             ->title('Nenhum e-mail encontrado')
                             ->body('O cliente não possui e-mails cadastrados. Cadastre um e tente novamente.')
@@ -62,18 +61,16 @@ final class ViewServiceOrder extends ViewRecord
                         return;
                     }
 
-                    // Monta um contexto básico para o template (pode ser expandido depois)
-                    $context = [
-                        'serviceOrder' => $this->record,
-                        'person' => $this->record->person,
-                        'user' => $this->record->user,
-                    ];
+                    $template = EmailTemplate::find($templateId);
 
-                    dispatch(new SendEmailFromTemplate(
-                        emailTemplateId: $templateId,
-                        to: $emails,
-                        context: $context,
-                    ));
+                    $context = $template?->body;
+
+                    Mail::to($email)
+                        ->send(new SendEmailFromTemplateMail(
+                            emailTemplateId: $templateId,
+                            serviceOrderId: $this->record->id,
+                            context: $context,
+                        ));
 
                     Notification::make()
                         ->title('E-mail enfileirado')

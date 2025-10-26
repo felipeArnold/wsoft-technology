@@ -10,6 +10,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ViewField;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -44,7 +45,7 @@ final class EmailTemplateForm
                                     ->default(TemplateContext::ServiceOrder->value)
                                     ->native(false)
                                     ->live(),
-                                \Filament\Forms\Components\ViewField::make('variables_copy_list')
+                                ViewField::make('variables_copy_list')
                                     ->view('filament.forms.components.template-variables-list')
                                     ->viewData(function (callable $get) {
                                         $contextValue = $get('context') ?? TemplateContext::ServiceOrder->value;

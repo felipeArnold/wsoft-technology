@@ -37,8 +37,6 @@ final class Person extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $guarded = ['id'];
-
     /**
      * The attributes that should be cast to native types.
      *
@@ -215,5 +213,10 @@ final class Person extends Model
     public function servicesOrders(): HasMany
     {
         return $this->hasMany(\App\Models\ServiceOrder::class);
+    }
+
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(\App\Models\Accounts\Accounts::class);
     }
 }

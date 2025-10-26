@@ -46,6 +46,7 @@ final class ListNonPayments extends ListRecords
             Action::make('export_overdue')
                 ->label('Exportar Relatório')
                 ->icon('heroicon-o-document-arrow-down')
+                ->hidden()
                 ->color('gray')
                 ->action(function (): void {
                     // Implementar exportação de relatório de inadimplência
@@ -53,6 +54,7 @@ final class ListNonPayments extends ListRecords
             Action::make('send_bulk_reminders')
                 ->label('Enviar Lembretes')
                 ->icon('heroicon-o-envelope')
+                ->hidden()
                 ->color('primary')
                 ->requiresConfirmation()
                 ->modalHeading('Enviar Lembretes em Lote')
