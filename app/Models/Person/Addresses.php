@@ -62,10 +62,11 @@ final class Addresses extends Model
                 ->schema([
                     Cep::make('postal_code')
                         ->label('CEP')
+                        ->placeholder('00000-000')
                         ->live(onBlur: true)
                         ->viaCep(
                             mode: 'suffix',
-                            errorMessage: 'CEP inválido.',
+                            errorMessage: 'CEP inválido. Verifique e tente novamente.',
                             setFields: [
                                 'street' => 'logradouro',
                                 'number' => 'numero',
@@ -75,30 +76,54 @@ final class Addresses extends Model
                                 'state' => 'uf',
                             ]
                         )
-                        ->required(),
+                        ->required()
+                        ->columnSpan(1),
                     TextInput::make('street')
-                        ->label('Rua')
-                        ->required(),
+                        ->label('Logradouro')
+                        ->placeholder('Rua, Avenida, etc.')
+                        ->required()
+                        ->maxLength(50)
+                        ->columnSpan(2),
                     TextInput::make('number')
                         ->label('Número')
-                        ->required(),
+                        ->placeholder('Nº')
+                        ->required()
+                        ->maxLength(10)
+                        ->columnSpan(1),
                     TextInput::make('complement')
-                        ->label('Complemento'),
+                        ->label('Complemento')
+                        ->placeholder('Apto, Bloco, Sala, etc.')
+                        ->maxLength(50)
+                        ->columnSpan(2),
                     TextInput::make('district')
                         ->label('Bairro')
-                        ->required(),
+                        ->placeholder('Nome do bairro')
+                        ->required()
+                        ->maxLength(50)
+                        ->columnSpan(1),
                     TextInput::make('city')
                         ->label('Cidade')
-                        ->required(),
+                        ->placeholder('Nome da cidade')
+                        ->required()
+                        ->maxLength(50)
+                        ->columnSpan(1),
                     TextInput::make('state')
-                        ->label('Estado')
-                        ->required(),
+                        ->label('Estado (UF)')
+                        ->placeholder('Ex: SP, RJ, MG')
+                        ->required()
+                        ->maxLength(2)
+                        ->columnSpan(1),
                 ])
                 ->columns(3)
                 ->addActionLabel('Adicionar endereço')
                 ->collapsible()
                 ->cloneable()
-                ->itemLabel(fn (array $state): ?string => $state['street'].', '.$state['number']),
+                ->reorderable()
+                ->itemLabel(fn (array $state): ?string => isset($state['street'], $state['number'])
+                    ? $state['street'].', '.$state['number']
+                    : 'Novo endereço'
+                )
+                ->defaultItems(0),
         ];
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Person;
 
+use App\Filament\Components\CnpjComponent;
 use App\Models\Tenant;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
@@ -50,58 +51,55 @@ final class Person extends Model
     {
         return [
             Section::make('Dados pessoais')
-                ->description('Insira os dados pessoais do cliente')
+                ->description('Informações básicas do cliente')
+                ->icon('heroicon-o-user')
                 ->collapsible()
                 ->schema([
                     Hidden::make('is_client')->default(true),
                     TextInput::make('name')
-                        ->label('Nome')
-                        ->rules([
-                            'required',
-                            'max:50',
-                        ]),
+                        ->label('Nome completo')
+                        ->placeholder('Digite o nome completo')
+                        ->required()
+                        ->maxLength(50)
+                        ->columnSpan(2),
                     TextInput::make('surname')
-                        ->label('Apelido')
-                        ->rules([
-                            'nullable',
-                            'max:50',
-                        ]),
+                        ->label('Apelido / Nome social')
+                        ->placeholder('Como prefere ser chamado')
+                        ->maxLength(50)
+                        ->columnSpan(1),
                     Document::make('document')
                         ->label('CPF/CNPJ')
                         ->dynamic()
                         ->columnSpan(1),
                     DatePicker::make('birth_date')
                         ->label('Data de nascimento')
+                        ->placeholder('Selecione a data')
                         ->native(false)
-                        ->rules([
-                            'nullable',
-                            'date',
-                            'before:today',
-                        ]),
-                    TextInput::make('nationality')
-                        ->label('Nacionalidade')
-                        ->rules([
-                            'nullable',
-                            'max:50',
-                        ]),
-                    TextInput::make('naturalness')
-                        ->label('Naturalidade')
-                        ->rules([
-                            'nullable',
-                            'max:50',
-                        ]),
+                        ->maxDate(now())
+                        ->displayFormat('d/m/Y')
+                        ->columnSpan(1),
                     TextInput::make('profession')
                         ->label('Profissão')
-                        ->rules([
-                            'nullable',
-                            'max:50',
-                        ]),
+                        ->placeholder('Profissão ou ocupação')
+                        ->maxLength(50)
+                        ->columnSpan(1),
+                    TextInput::make('nationality')
+                        ->label('Nacionalidade')
+                        ->placeholder('Ex: Brasileira')
+                        ->maxLength(50)
+                        ->columnSpan(1),
+                    TextInput::make('naturalness')
+                        ->label('Naturalidade')
+                        ->placeholder('Cidade de nascimento')
+                        ->maxLength(50)
+                        ->columnSpan(1),
                 ])
                 ->columnSpanFull()
-                ->columns(3)
-                ->grow(true),
+                ->columns(3),
             Section::make('Contato')
-                ->description('Dados de contato do fornecedor')
+                ->description('Telefones e e-mails para contato')
+                ->icon('heroicon-o-chat-bubble-left-right')
+                ->collapsible()
                 ->schema([
                     Section::make('Telefones')
                         ->icon('heroicon-o-phone')
@@ -113,17 +111,16 @@ final class Person extends Model
                         ->columnSpanFull(),
                 ])
                 ->columnSpanFull()
-                ->columns(2)
-                ->grow(true),
+                ->columns(2),
             Section::make('Endereços')
                 ->description('Endereços do cliente')
+                ->icon('heroicon-o-map-pin')
                 ->collapsible()
                 ->schema([
                     ...Addresses::getForm(),
                 ])
                 ->columnSpanFull()
-                ->columns(1)
-                ->grow(true),
+                ->columns(1),
         ];
     }
 
@@ -131,40 +128,49 @@ final class Person extends Model
     {
         return [
             Section::make('Dados do fornecedor')
-                ->description('Insira os dados do fornecedor')
+                ->description('Informações da empresa fornecedora')
+                ->icon('heroicon-o-building-storefront')
                 ->collapsible()
                 ->schema([
                     Hidden::make('is_supplier')->default(true),
-                    Document::make('document')
-                        ->label('CNPJ')
-                        ->cnpj()
-                        ->columnSpan(1),
+                    CnpjComponent::make('document')
+                        ->required()
+                        ->columnSpan(1)
+                        ->helperText('Digite o CNPJ e pressione Tab para preencher automaticamente'),
                     TextInput::make('name')
                         ->label('Razão Social')
-                        ->rules([
-                            'required',
-                            'max:50',
-                        ]),
+                        ->placeholder('Nome empresarial registrado')
+                        ->required()
+                        ->maxLength(50)
+                        ->columnSpan(2),
                     TextInput::make('surname')
                         ->label('Nome Fantasia')
-                        ->rules([
-                            'nullable',
-                            'max:50',
-                        ]),
+                        ->placeholder('Nome comercial da empresa')
+                        ->maxLength(50)
+                        ->columnSpan(2),
                     DatePicker::make('birth_date')
                         ->label('Data de fundação')
+                        ->placeholder('Selecione a data')
                         ->native(false)
-                        ->rules([
-                            'nullable',
-                            'date',
-                            'before:today',
-                        ]),
+                        ->maxDate(now())
+                        ->displayFormat('d/m/Y')
+                        ->columnSpan(1),
                 ])
                 ->columnSpanFull()
-                ->columns(3)
-                ->grow(true),
+                ->columns(3),
+            Section::make('Representantes')
+                ->description('Representantes comerciais do fornecedor')
+                ->icon('heroicon-o-user-group')
+                ->collapsible()
+                ->schema([
+                    SupplierRepresentative::getForm(),
+                ])
+                ->columnSpanFull()
+                ->columns(1),
             Section::make('Contato')
-                ->description('Dados de contato do fornecedor')
+                ->description('Telefones e e-mails para contato')
+                ->icon('heroicon-o-chat-bubble-left-right')
+                ->collapsible()
                 ->schema([
                     Section::make('Telefones')
                         ->icon('heroicon-o-phone')
@@ -176,17 +182,16 @@ final class Person extends Model
                         ->columnSpanFull(),
                 ])
                 ->columnSpanFull()
-                ->columns(2)
-                ->grow(true),
+                ->columns(2),
             Section::make('Endereços')
-                ->description('Endereços do fornecedor')
+                ->description('Endereços da empresa')
+                ->icon('heroicon-o-map-pin')
                 ->collapsible()
                 ->schema([
                     ...Addresses::getForm(),
                 ])
                 ->columnSpanFull()
-                ->columns(1)
-                ->grow(true),
+                ->columns(1),
         ];
     }
 
@@ -218,5 +223,10 @@ final class Person extends Model
     public function accounts(): HasMany
     {
         return $this->hasMany(\App\Models\Accounts\Accounts::class);
+    }
+
+    public function supplierRepresentatives(): HasMany
+    {
+        return $this->hasMany(SupplierRepresentative::class, 'supplier_id');
     }
 }

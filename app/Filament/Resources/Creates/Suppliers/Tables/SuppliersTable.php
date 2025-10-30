@@ -12,6 +12,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
 final class SuppliersTable
@@ -23,71 +24,64 @@ final class SuppliersTable
             ->columns([
                 TextColumn::make('name')
                     ->label('Razão Social')
-                    ->description(fn ($record) => $record->document)
-                    ->searchable()
+                    ->description(fn ($record) => $record->surname ? 'Nome Fantasia: '.$record->surname : null)
+                    ->searchable(['name', 'surname'])
                     ->sortable()
+                    ->weight('medium')
                     ->toggleable(),
-                TextColumn::make('surname')
-                    ->label('Nome Fantasia')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('document')
                     ->label('CNPJ')
-                    ->sortable()
                     ->searchable()
+                    ->sortable()
+                    ->copyable()
+                    ->copyMessage('CNPJ copiado!')
+                    ->placeholder('Não informado')
                     ->toggleable(),
                 TextColumn::make('phones.number')
                     ->label('Telefone')
-                    ->getStateUsing(fn ($record) => $record->phones->pluck('number')->join(', '))
-                    ->sortable()
+                    ->icon('heroicon-m-phone')
+                    ->getStateUsing(fn ($record) => $record->phones->first()?->number ?? 'Não informado')
+                    ->url(fn ($record) => $record->phones->first() ? 'tel:'.$record->phones->first()->number : null)
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('emails.address')
                     ->label('E-mail')
-                    ->getStateUsing(fn ($record) => $record->emails->pluck('address')->join(', '))
-                    ->sortable()
+                    ->icon('heroicon-m-envelope')
+                    ->getStateUsing(fn ($record) => $record->emails->first()?->address ?? 'Não informado')
+                    ->url(fn ($record) => $record->emails->first() ? 'mailto:'.$record->emails->first()->address : null)
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('birth_date')
-                    ->label('Data de fundação')
-                    ->date()
-                    ->sortable()
-                    ->searchable()
+                    ->limit(30)
+                    ->tooltip(fn ($record) => $record->emails->first()?->address)
                     ->toggleable(),
-                TextColumn::make('addresses.street')
-                    ->label('Endereço')
-                    ->getStateUsing(fn ($record) => $record->addresses->map(fn ($address) => $address->street.', '.$address->number)->join(' | '))
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('addresses.city')
                     ->label('Cidade')
-                    ->getStateUsing(fn ($record) => $record->addresses->pluck('city')->unique()->join(', '))
-                    ->sortable()
+                    ->icon('heroicon-m-map-pin')
+                    ->getStateUsing(fn ($record) => $record->addresses->first()
+                        ? $record->addresses->first()->city.' - '.$record->addresses->first()->state
+                        : 'Não informado')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('addresses.state')
-                    ->label('Estado')
-                    ->getStateUsing(fn ($record) => $record->addresses->pluck('state')->unique()->join(', '))
+                    ->toggleable(),
+                TextColumn::make('birth_date')
+                    ->label('Fundação')
+                    ->date('d/m/Y')
                     ->sortable()
-                    ->searchable()
+                    ->placeholder('Não informado')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
-                    ->label('Criado em')
-                    ->dateTime()
+                    ->label('Cadastrado em')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
-                    ->searchable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Atualizado em')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
-                    ->searchable()
-                    ->toggleable(),
+                    ->since()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('name', 'asc')
             ->filters([
-                //
+                TrashedFilter::make(),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -101,8 +95,8 @@ final class SuppliersTable
                 FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
             ->striped()
-            ->emptyStateIcon('heroicon-o-shopping-bag')
+            ->emptyStateIcon('heroicon-o-building-storefront')
             ->emptyStateHeading('Nenhum fornecedor encontrado')
-            ->emptyStateDescription('Crie uma novo fornecedor para que ele apareça aqui.');
+            ->emptyStateDescription('Comece criando seu primeiro fornecedor clicando no botão abaixo');
     }
 }

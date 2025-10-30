@@ -24,84 +24,78 @@ final class PeopleTable
             ->columns([
                 TextColumn::make('name')
                     ->label('Nome')
-                    ->description(fn ($record) => $record->document)
-                    ->searchable()
+                    ->description(fn ($record) => $record->surname ? 'Apelido: '.$record->surname : null)
+                    ->searchable(['name', 'surname'])
                     ->sortable()
+                    ->weight('medium')
                     ->toggleable(),
-                TextColumn::make('surname')
-                    ->label('Apelido')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('document')
-                    ->label('Documento')
-                    ->sortable()
+                    ->label('CPF/CNPJ')
                     ->searchable()
+                    ->sortable()
+                    ->copyable()
+                    ->copyMessage('CPF/CNPJ copiado!')
+                    ->placeholder('Não informado')
                     ->toggleable(),
                 TextColumn::make('phones.number')
                     ->label('Telefone')
-                    ->getStateUsing(fn ($record) => $record->phones->pluck('number')->join(', '))
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('emails.address')
-                    ->label('E-mail')
-                    ->getStateUsing(fn ($record) => $record->emails->pluck('address')->join(', '))
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('birth_date')
-                    ->label('Data de nascimento')
-                    ->date()
-                    ->sortable()
+                    ->icon('heroicon-m-phone')
+                    ->getStateUsing(fn ($record) => $record->phones->first()?->number ?? 'Não informado')
+                    ->url(fn ($record) => $record->phones->first() ? 'tel:'.$record->phones->first()->number : null)
                     ->searchable()
                     ->toggleable(),
+                TextColumn::make('emails.address')
+                    ->label('E-mail')
+                    ->icon('heroicon-m-envelope')
+                    ->getStateUsing(fn ($record) => $record->emails->first()?->address ?? 'Não informado')
+                    ->url(fn ($record) => $record->emails->first() ? 'mailto:'.$record->emails->first()->address : null)
+                    ->searchable()
+                    ->limit(30)
+                    ->tooltip(fn ($record) => $record->emails->first()?->address)
+                    ->toggleable(),
+                TextColumn::make('addresses.city')
+                    ->label('Cidade')
+                    ->icon('heroicon-m-map-pin')
+                    ->getStateUsing(fn ($record) => $record->addresses->first()
+                        ? $record->addresses->first()->city.' - '.$record->addresses->first()->state
+                        : 'Não informado')
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('birth_date')
+                    ->label('Nascimento')
+                    ->date('d/m/Y')
+                    ->sortable()
+                    ->placeholder('Não informado')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('profession')
+                    ->label('Profissão')
+                    ->searchable()
+                    ->sortable()
+                    ->placeholder('Não informado')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('nationality')
                     ->label('Nacionalidade')
                     ->sortable()
-                    ->searchable()
-                    ->toggleable(),
+                    ->placeholder('Não informado')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('naturalness')
                     ->label('Naturalidade')
                     ->sortable()
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('profession')
-                    ->label('Profissão')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('addresses.street')
-                    ->label('Endereço')
-                    ->getStateUsing(fn ($record) => $record->addresses->map(fn ($address) => $address->street.', '.$address->number)->join(' | '))
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('addresses.city')
-                    ->label('Cidade')
-                    ->getStateUsing(fn ($record) => $record->addresses->pluck('city')->unique()->join(', '))
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('addresses.state')
-                    ->label('Estado')
-                    ->getStateUsing(fn ($record) => $record->addresses->pluck('state')->unique()->join(', '))
-                    ->sortable()
-                    ->searchable()
+                    ->placeholder('Não informado')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
-                    ->label('Criado em')
-                    ->dateTime()
+                    ->label('Cadastrado em')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
-                    ->searchable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Atualizado em')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
-                    ->searchable()
-                    ->toggleable(),
+                    ->since()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('name', 'asc')
             ->filters([
                 TrashedFilter::make(),
             ])
@@ -118,7 +112,7 @@ final class PeopleTable
             ])
             ->striped()
             ->emptyStateIcon('heroicon-o-users')
-            ->emptyStateHeading('Nenhuma pessoa encontrada')
-            ->emptyStateDescription('Crie uma nova pessoa clicando no botão abaixo');
+            ->emptyStateHeading('Nenhum cliente encontrado')
+            ->emptyStateDescription('Comece criando seu primeiro cliente clicando no botão abaixo');
     }
 }

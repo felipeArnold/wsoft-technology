@@ -43,11 +43,15 @@ final class Emails extends Model
             ->schema([
                 TextInput::make('address')
                     ->label('E-mail')
-                    ->nullable()
-                    ->email(),
+                    ->placeholder('email@exemplo.com.br')
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
             ])
             ->default([])
             ->columnSpan(1)
-            ->addActionLabel('Adicionar e-mail');
+            ->addActionLabel('Adicionar e-mail')
+            ->reorderable()
+            ->collapsible();
     }
 }

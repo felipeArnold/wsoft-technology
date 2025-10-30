@@ -55,11 +55,15 @@ final class Phones extends Model
             ->schema([
                 PtbrPhone::make('number')
                     ->label('Telefone')
+                    ->placeholder('(00) 00000-0000')
                     ->tel()
+                    ->required()
                     ->default(null),
             ])
             ->defaultItems(1)
             ->columnSpan(1)
-            ->addActionLabel('Adicionar telefone');
+            ->addActionLabel('Adicionar telefone')
+            ->reorderable()
+            ->collapsible();
     }
 }
