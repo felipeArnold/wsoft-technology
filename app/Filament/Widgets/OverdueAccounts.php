@@ -17,6 +17,8 @@ final class OverdueAccounts extends BaseWidget
 
     protected int|string|array $columnSpan = 'full';
 
+    protected static ?int $sort = 4;
+
     public function table(Table $table): Table
     {
         return $table
@@ -27,6 +29,19 @@ final class OverdueAccounts extends BaseWidget
                     ->orderBy('due_date', 'asc')
             )
             ->columns([
+                Tables\Columns\TextColumn::make('accounts.type')
+                    ->label('Tipo')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'receivables' => 'success',
+                        'payables' => 'danger',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'receivables' => 'A Receber',
+                        'payables' => 'A Pagar',
+                        default => $state,
+                    }),
                 Tables\Columns\TextColumn::make('accounts.numero')
                     ->label('Número')
                     ->searchable()
@@ -62,20 +77,6 @@ final class OverdueAccounts extends BaseWidget
                         return (int) Carbon::now()->diffInDays($record->due_date);
                     })
                     ->sortable(),
-
-                Tables\Columns\TextColumn::make('accounts.type')
-                    ->label('Tipo')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'receivables' => 'success',
-                        'payables' => 'danger',
-                        default => 'gray',
-                    })
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'receivables' => 'A Receber',
-                        'payables' => 'A Pagar',
-                        default => $state,
-                    }),
             ])
             ->defaultSort('due_date', 'asc')
             ->paginated([10, 25, 50]);

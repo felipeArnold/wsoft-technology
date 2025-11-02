@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Date;
 
 final class FinancialDashboardOverview extends BaseWidget
 {
+    protected static ?int $sort = 1;
+
     protected function getStats(): array
     {
         $today = Date::now();

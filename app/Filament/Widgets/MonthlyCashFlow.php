@@ -11,6 +11,8 @@ use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 final class MonthlyCashFlow extends ApexChartWidget
 {
+    protected static ?int $sort = 2;
+
     protected static ?string $chartId = 'monthlyCashFlow';
 
     protected static ?string $heading = 'Fluxo de Caixa - Últimos 12 Meses';

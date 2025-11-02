@@ -21,7 +21,7 @@ final class PaymentMethodsChart extends ApexChartWidget
      */
     protected static ?string $heading = 'Formas de Pagamento';
 
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 3;
 
     /**
      * Chart options (series, labels, types, size, animations...)

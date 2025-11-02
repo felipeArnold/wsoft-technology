@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Financial\NonPayments;
 
-use App\Filament\Clusters\Financial\FinancialCluster;
 use App\Filament\Resources\Financial\NonPayments\Pages\ListNonPayments;
 use App\Filament\Resources\Financial\NonPayments\Schemas\NonPaymentForm;
 use App\Filament\Resources\Financial\NonPayments\Tables\NonPaymentsTable;
 use App\Models\Accounts\AccountsInstallments;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -24,7 +24,7 @@ final class NonPaymentResource extends Resource
 
     protected static string|null|UnitEnum $navigationGroup = 'Financeiro';
 
-    // protected static ?string $cluster = FinancialCluster::class;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-currency-dollar';
 
     public static function form(Schema $schema): Schema
     {
