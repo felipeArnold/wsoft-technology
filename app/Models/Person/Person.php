@@ -51,51 +51,115 @@ final class Person extends Model
     {
         return [
             Section::make('Dados pessoais')
-                ->description('Informações básicas do cliente')
-                ->icon('heroicon-o-user')
+                ->description(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) === 14
+                    ? 'Informações da empresa'
+                    : 'Informações básicas do cliente')
+                ->icon(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) === 14
+                    ? 'heroicon-o-building-storefront'
+                    : 'heroicon-o-user')
                 ->collapsible()
                 ->schema([
                     Hidden::make('is_client')->default(true),
+
+                    // Campo para CNPJ - usa CnpjComponent com auto-preenchimento
+                    CnpjComponent::make('document')
+                        ->required()
+                        ->columnSpan(1)
+                        ->helperText('Digite o CNPJ e pressione Tab para preencher automaticamente')
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) === 14),
+
+                    // Campo para CPF ou inicial (antes de identificar se é CNPJ)
+                    Document::make('document')
+                        ->label('CPF/CNPJ')
+                        ->dynamic()
+                        ->reactive()
+                        ->required()
+                        ->columnSpan(1)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
+
+                    // Campos para CNPJ (Pessoa Jurídica)
+                    TextInput::make('name')
+                        ->label('Razão Social')
+                        ->placeholder('Nome empresarial registrado')
+                        ->required()
+                        ->maxLength(50)
+                        ->columnSpan(2)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) === 14),
+
+                    TextInput::make('surname')
+                        ->label('Nome Fantasia')
+                        ->placeholder('Nome comercial da empresa')
+                        ->maxLength(50)
+                        ->columnSpan(2)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) === 14),
+
+                    DatePicker::make('birth_date')
+                        ->label('Data de fundação')
+                        ->placeholder('Selecione a data')
+                        ->native(false)
+                        ->maxDate(now())
+                        ->displayFormat('d/m/Y')
+                        ->columnSpan(1)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) === 14),
+
+                    // Campos para CPF (Pessoa Física)
                     TextInput::make('name')
                         ->label('Nome completo')
                         ->placeholder('Digite o nome completo')
                         ->required()
                         ->maxLength(50)
-                        ->columnSpan(2),
+                        ->columnSpan(2)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
+
                     TextInput::make('surname')
                         ->label('Apelido / Nome social')
                         ->placeholder('Como prefere ser chamado')
                         ->maxLength(50)
-                        ->columnSpan(1),
-                    Document::make('document')
-                        ->label('CPF/CNPJ')
-                        ->dynamic()
-                        ->columnSpan(1),
+                        ->columnSpan(1)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
+
                     DatePicker::make('birth_date')
                         ->label('Data de nascimento')
                         ->placeholder('Selecione a data')
                         ->native(false)
                         ->maxDate(now())
                         ->displayFormat('d/m/Y')
-                        ->columnSpan(1),
+                        ->columnSpan(1)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
+
                     TextInput::make('profession')
                         ->label('Profissão')
                         ->placeholder('Profissão ou ocupação')
                         ->maxLength(50)
-                        ->columnSpan(1),
+                        ->columnSpan(1)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
+
                     TextInput::make('nationality')
                         ->label('Nacionalidade')
                         ->placeholder('Ex: Brasileira')
                         ->maxLength(50)
-                        ->columnSpan(1),
+                        ->columnSpan(1)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
+
                     TextInput::make('naturalness')
                         ->label('Naturalidade')
                         ->placeholder('Cidade de nascimento')
                         ->maxLength(50)
-                        ->columnSpan(1),
+                        ->columnSpan(1)
+                        ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
                 ])
                 ->columnSpanFull()
                 ->columns(3),
+            Section::make('Representantes')
+                ->description('Representantes comerciais do fornecedor')
+                ->icon('heroicon-o-user-group')
+                ->collapsible()
+                ->schema([
+                    SupplierRepresentative::getForm(),
+                ])
+                ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) === 14)
+                ->columnSpanFull()
+                ->columns(1),
             Section::make('Contato')
                 ->description('Telefones e e-mails para contato')
                 ->icon('heroicon-o-chat-bubble-left-right')
