@@ -13,6 +13,7 @@ use App\Filament\Clusters\Settings\Companies\Tables\CompaniesTable;
 use App\Filament\Clusters\Settings\SettingsCluster;
 use App\Models\Tenant;
 use BackedEnum;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -71,5 +72,16 @@ final class CompanyResource extends Resource
     public static function canCreate(): bool
     {
         return false;
+    }
+
+    public static function getNavigationUrl(): string
+    {
+        $tenant = Filament::getTenant();
+
+        if ($tenant) {
+            return self::getUrl('edit', ['record' => $tenant->id]);
+        }
+
+        return self::getUrl('index');
     }
 }

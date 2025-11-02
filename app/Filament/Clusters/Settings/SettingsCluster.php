@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Clusters\Settings;
 
+use App\Filament\Clusters\Settings\Users\UserResource;
 use BackedEnum;
 use Filament\Clusters\Cluster;
 use Filament\Support\Icons\Heroicon;
@@ -18,4 +19,9 @@ final class SettingsCluster extends Cluster
     protected static ?string $label = 'Configurações';
 
     protected static ?string $title = 'Configurações';
+
+    public static function getNavigationUrl(): string
+    {
+        return UserResource::getUrl('index');
+    }
 }

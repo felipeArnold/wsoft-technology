@@ -16,6 +16,16 @@ use Str;
  * @property string $slug
  * @property string|null $avatar
  * @property string|null $document
+ * @property string|null $email
+ * @property string|null $phone
+ * @property string|null $mobile
+ * @property string|null $zip_code
+ * @property string|null $street
+ * @property string|null $number
+ * @property string|null $complement
+ * @property string|null $neighborhood
+ * @property string|null $city
+ * @property string|null $state
  * @property string|null $website
  * @property string $type
  * @property \Illuminate\Support\Carbon|null $created_at

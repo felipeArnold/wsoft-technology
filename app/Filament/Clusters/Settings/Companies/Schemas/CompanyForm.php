@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Clusters\Settings\Companies\Schemas;
 
-use Filament\Schemas\Components\FileUpload;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\TextInput;
 use Filament\Schemas\Schema;
 use Leandrocfe\FilamentPtbrFormFields\Document;
 
@@ -16,7 +16,27 @@ final class CompanyForm
     {
         return $schema
             ->schema([
+                Section::make('Logo da Empresa')
+                    ->description('Faça upload do logotipo da sua empresa')
+                    ->schema([
+                        FileUpload::make('avatar')
+                            ->label('Logo')
+                            ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ])
+                            ->directory('tenants/avatars')
+                            ->maxSize(2048)
+                            ->columnSpanFull()
+                            ->helperText('Tamanho máximo: 2MB. Formatos aceitos: JPG, PNG, GIF'),
+                    ])
+                    ->columns(1),
+
                 Section::make('Informações Básicas')
+                    ->description('Dados principais da empresa')
                     ->schema([
                         TextInput::make('name')
                             ->label('Nome da Empresa')
@@ -48,13 +68,6 @@ final class CompanyForm
                             ->maxLength(255)
                             ->default('company')
                             ->columnSpan(1),
-
-                        FileUpload::make('avatar')
-                            ->label('Logo')
-                            ->image()
-                            ->imageEditor()
-                            ->directory('tenants/avatars')
-                            ->columnSpanFull(),
                     ])
                     ->columns(2),
             ]);
