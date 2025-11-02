@@ -28,7 +28,7 @@ final class EmailTemplateResource extends Resource
 
     protected static ?string $label = 'Templates de E-mail';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Configurações';
+    protected static string|UnitEnum|null $navigationGroup = 'Personalização';
 
     protected static ?int $navigationSort = 2;
 

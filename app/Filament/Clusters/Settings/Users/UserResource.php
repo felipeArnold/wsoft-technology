@@ -24,13 +24,13 @@ final class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $label = 'Usuário';
+    protected static ?string $label = 'Gerenciar Usuários';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Equipe';
+    protected static string|UnitEnum|null $navigationGroup = 'Empresa';
 
     protected static ?int $navigationSort = 1;
 
