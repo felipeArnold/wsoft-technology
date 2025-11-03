@@ -107,20 +107,25 @@ final class FinancialDashboardOverview extends BaseWidget
 
     private function getReceivablesTrend(): array
     {
-        $trend = [];
         $today = Date::now();
+        $startDate = (clone $today)->subDays(6)->startOfDay();
+        $endDate = (clone $today)->endOfDay();
 
+        // Otimização: Buscar todos os dados em uma única query
+        $results = AccountsInstallments::query()
+            ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
+            ->where('accounts.type', 'receivables')
+            ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
+            ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
+            ->selectRaw('date(accounts_installments.paid_at) as date, SUM(accounts_installments.amount) as total')
+            ->groupBy('date')
+            ->get()
+            ->keyBy('date');
+
+        $trend = [];
         for ($i = 6; $i >= 0; $i--) {
-            $date = (clone $today)->subDays($i);
-            $amount = AccountsInstallments::query()
-                ->whereHas('accounts', function ($q): void {
-                    $q->where('type', 'receivables');
-                })
-                ->where('status', PaymentStatusEnum::PAID)
-                ->whereDate('paid_at', $date)
-                ->sum('amount');
-
-            $trend[] = (float) $amount;
+            $date = (clone $today)->subDays($i)->format('Y-m-d');
+            $trend[] = (float) ($results->get($date)?->total ?? 0);
         }
 
         return $trend;
@@ -128,20 +133,25 @@ final class FinancialDashboardOverview extends BaseWidget
 
     private function getPayablesTrend(): array
     {
-        $trend = [];
         $today = Date::now();
+        $startDate = (clone $today)->subDays(6)->startOfDay();
+        $endDate = (clone $today)->endOfDay();
 
+        // Otimização: Buscar todos os dados em uma única query
+        $results = AccountsInstallments::query()
+            ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
+            ->where('accounts.type', 'payables')
+            ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
+            ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
+            ->selectRaw('date(accounts_installments.paid_at) as date, SUM(accounts_installments.amount) as total')
+            ->groupBy('date')
+            ->get()
+            ->keyBy('date');
+
+        $trend = [];
         for ($i = 6; $i >= 0; $i--) {
-            $date = (clone $today)->subDays($i);
-            $amount = AccountsInstallments::query()
-                ->whereHas('accounts', function ($q): void {
-                    $q->where('type', 'payables');
-                })
-                ->where('status', PaymentStatusEnum::PAID)
-                ->whereDate('paid_at', $date)
-                ->sum('amount');
-
-            $trend[] = (float) $amount;
+            $date = (clone $today)->subDays($i)->format('Y-m-d');
+            $trend[] = (float) ($results->get($date)?->total ?? 0);
         }
 
         return $trend;
@@ -149,29 +159,29 @@ final class FinancialDashboardOverview extends BaseWidget
 
     private function getMonthlyBalanceTrend(): array
     {
-        $trend = [];
         $today = Date::now();
+        $startDate = (clone $today)->subDays(6)->startOfDay();
+        $endDate = (clone $today)->endOfDay();
 
+        // Otimização: Buscar todos os dados em uma única query agrupando por tipo e data
+        $results = AccountsInstallments::query()
+            ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
+            ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
+            ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
+            ->selectRaw('date(accounts_installments.paid_at) as date, accounts.type, SUM(accounts_installments.amount) as total')
+            ->groupBy('date', 'accounts.type')
+            ->get()
+            ->groupBy('date');
+
+        $trend = [];
         for ($i = 6; $i >= 0; $i--) {
-            $date = (clone $today)->subDays($i);
+            $date = (clone $today)->subDays($i)->format('Y-m-d');
+            $dayData = $results->get($date, collect());
 
-            $received = AccountsInstallments::query()
-                ->whereHas('accounts', function ($q): void {
-                    $q->where('type', 'receivables');
-                })
-                ->where('status', PaymentStatusEnum::PAID)
-                ->whereDate('paid_at', $date)
-                ->sum('amount');
+            $received = (float) ($dayData->firstWhere('type', 'receivables')?->total ?? 0);
+            $paid = (float) ($dayData->firstWhere('type', 'payables')?->total ?? 0);
 
-            $paid = AccountsInstallments::query()
-                ->whereHas('accounts', function ($q): void {
-                    $q->where('type', 'payables');
-                })
-                ->where('status', PaymentStatusEnum::PAID)
-                ->whereDate('paid_at', $date)
-                ->sum('amount');
-
-            $trend[] = (float) ($received - $paid);
+            $trend[] = $received - $paid;
         }
 
         return $trend;
@@ -179,19 +189,23 @@ final class FinancialDashboardOverview extends BaseWidget
 
     private function getOverdueTrend(): array
     {
-        $trend = [];
         $today = Date::now();
+        $trend = [];
+
+        // Para inadimplência, precisamos calcular acumulado para cada dia
+        // Buscar todas as parcelas vencidas/não pagas uma única vez
+        $allOverdue = AccountsInstallments::query()
+            ->select('due_date', 'amount', 'status')
+            ->whereIn('status', [PaymentStatusEnum::OVERDUE, PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL])
+            ->get();
 
         for ($i = 6; $i >= 0; $i--) {
             $date = (clone $today)->subDays($i);
 
-            $overdue = AccountsInstallments::query()
-                ->where(function ($q) use ($date): void {
-                    $q->where('status', PaymentStatusEnum::OVERDUE)
-                        ->orWhere(function ($q2) use ($date): void {
-                            $q2->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL])
-                                ->whereDate('due_date', '<', $date);
-                        });
+            // Filtrar em memória as contas vencidas até esta data
+            $overdue = $allOverdue
+                ->filter(function ($item) use ($date) {
+                    return $item->due_date < $date;
                 })
                 ->sum('amount');
 

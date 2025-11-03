@@ -24,42 +24,46 @@ final class MonthlyCashFlow extends ApexChartWidget
         $expensesData = [];
         $balanceData = [];
 
-        // Gerar dados para os últimos 12 meses
+        // Calcular período dos últimos 12 meses
+        $startDate = Carbon::now()->subMonths(11)->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
+
+        // Otimização: Buscar todos os dados em uma única query
+        $results = AccountsInstallments::query()
+            ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
+            ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
+            ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
+            ->selectRaw("
+                strftime('%Y-%m', accounts_installments.paid_at) as month,
+                accounts.type,
+                SUM(accounts_installments.amount) as total
+            ")
+            ->groupBy('month', 'accounts.type')
+            ->get()
+            ->groupBy('month');
+
+        // Processar dados para os últimos 12 meses
         for ($i = 11; $i >= 0; $i--) {
             $date = Carbon::now()->subMonths($i);
-            $startOfMonth = $date->copy()->startOfMonth();
-            $endOfMonth = $date->copy()->endOfMonth();
+            $monthKey = $date->format('Y-m');
 
             // Nome do mês em português
             $months[] = mb_convert_case($date->locale('pt_BR')->isoFormat('MMM'), MB_CASE_TITLE, 'UTF-8');
 
-            // Receitas do mês
-            $income = AccountsInstallments::query()
-                ->whereHas('accounts', function ($query): void {
-                    $query->where('type', 'receivables');
-                })
-                ->where('status', PaymentStatusEnum::PAID)
-                ->whereBetween('paid_at', [$startOfMonth, $endOfMonth])
-                ->sum('amount');
+            // Obter receitas e despesas do mês dos resultados
+            $monthData = $results->get($monthKey, collect());
 
-            // Despesas do mês
-            $expenses = AccountsInstallments::query()
-                ->whereHas('accounts', function ($query): void {
-                    $query->where('type', 'payables');
-                })
-                ->where('status', PaymentStatusEnum::PAID)
-                ->whereBetween('paid_at', [$startOfMonth, $endOfMonth])
-                ->sum('amount');
+            $income = (float) $monthData->firstWhere('type', 'receivables')?->total ?? 0;
+            $expenses = (float) $monthData->firstWhere('type', 'payables')?->total ?? 0;
 
-            $incomeData[] = (float) $income;
-            $expensesData[] = (float) $expenses;
-            $balanceData[] = (float) $income - (float) $expenses;
+            $incomeData[] = $income;
+            $expensesData[] = $expenses;
+            $balanceData[] = $income - $expenses;
         }
 
         return [
             'chart' => [
                 'type' => 'area',
-                'height' => 350,
                 'toolbar' => [
                     'show' => true,
                 ],
@@ -80,6 +84,9 @@ final class MonthlyCashFlow extends ApexChartWidget
                     'data' => $balanceData,
                     'color' => '#3b82f6',
                 ],
+            ],
+            'xaxis' => [
+                'categories' => $months,
             ],
             'plotOptions' => [
                 'bar' => [

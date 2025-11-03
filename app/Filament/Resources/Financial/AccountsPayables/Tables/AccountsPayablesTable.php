@@ -13,6 +13,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -177,6 +178,43 @@ final class AccountsPayablesTable
                             'status' => 1,
                             'paid_at' => now(),
                         ]);
+
+                        $account = $record->accounts;
+
+                        if ($account && $account->recurring && $record->installment_number === $account->parcels) {
+
+                            $newDueDate = $record->due_date->copy()->addMonth();
+
+                            // Valor da nova parcela
+                            $newInstallmentAmount = $record->amount;
+
+                            // Resetar o valor da última parcela paga
+                            $record->update([
+                                'amount' => 0,
+                            ]);
+
+                            // Criar nova parcela
+                            AccountsInstallments::create([
+                                'tenant_id' => $record->tenant_id,
+                                'accounts_id' => $account->id,
+                                'installment_number' => $record->installment_number + 1,
+                                'amount' => $newInstallmentAmount,
+                                'due_date' => $newDueDate,
+                                'status' => 0,
+                            ]);
+
+                            // Atualizar parcelas e valor total da conta
+                            $account->update([
+                                'parcels' => $account->parcels + 1,
+                                'amount' => $account->amount + $newInstallmentAmount,
+                            ]);
+
+                            Notification::make()
+                                ->title('Conta recorrente criada!')
+                                ->success()
+                                ->body('Uma nova parcela foi criada para a conta recorrente.')
+                                ->send();
+                        }
                     }),
                 Action::make('mark_as_pending')
                     ->label('Marcar como Pendente')
@@ -209,6 +247,43 @@ final class AccountsPayablesTable
                                     'status' => 1,
                                     'paid_at' => now(),
                                 ]);
+
+                                $account = $record->accounts;
+
+                                if ($account && $account->recurring && $record->installment_number === $account->parcels) {
+
+                                    $newDueDate = $record->due_date->copy()->addMonth();
+
+                                    // Valor da nova parcela
+                                    $newInstallmentAmount = $record->amount;
+
+                                    // Resetar o valor da última parcela paga
+                                    $record->update([
+                                        'amount' => 0,
+                                    ]);
+
+                                    // Criar nova parcela
+                                    AccountsInstallments::query()->create([
+                                        'tenant_id' => $record->tenant_id,
+                                        'accounts_id' => $account->id,
+                                        'installment_number' => $record->installment_number + 1,
+                                        'amount' => $newInstallmentAmount,
+                                        'due_date' => $newDueDate,
+                                        'status' => 0,
+                                    ]);
+
+                                    // Atualizar parcelas e valor total da conta
+                                    $account->update([
+                                        'parcels' => $account->parcels + 1,
+                                        'amount' => $account->amount + $newInstallmentAmount,
+                                    ]);
+
+                                    Notification::make()
+                                        ->title('Conta recorrente criada!')
+                                        ->success()
+                                        ->body('Uma nova parcela foi criada para a conta recorrente.')
+                                        ->send();
+                                }
                             });
                         }),
                     Action::make('mark_all_pending')

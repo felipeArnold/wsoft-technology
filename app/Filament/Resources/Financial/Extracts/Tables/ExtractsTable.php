@@ -15,6 +15,7 @@ use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
@@ -211,7 +212,7 @@ final class ExtractsTable
                         $query->where('status', 1);
                     })
                     ->toggle(),
-            ])
+            ], layout: FiltersLayout::AboveContentCollapsible)
             ->filtersTriggerAction(
                 fn (Action $action) => $action
                     ->button()
@@ -285,6 +286,8 @@ final class ExtractsTable
                 ]),
                 FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
+            ->defaultPaginationPageOption(100)
+            ->paginated([10, 25, 50, 100, 'all'])
             ->striped()
             ->emptyStateIcon('heroicon-o-presentation-chart-bar')
             ->emptyStateHeading('Nenhum extrato encontrado')

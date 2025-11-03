@@ -29,18 +29,21 @@ final class PaymentMethodsChart extends ApexChartWidget
      */
     protected function getOptions(): array
     {
-        $paymentMethods = PaymentMethodEnum::cases();
+        // Otimização: Buscar todos os counts em uma única query com GROUP BY
+        $results = AccountsInstallments::query()
+            ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
+            ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
+            ->selectRaw('accounts.payment_method, COUNT(*) as count')
+            ->groupBy('accounts.payment_method')
+            ->get()
+            ->keyBy('payment_method');
+
         $data = [];
         $labels = [];
         $colors = [];
 
-        foreach ($paymentMethods as $method) {
-            $count = AccountsInstallments::query()
-                ->whereHas('accounts', function ($query) use ($method): void {
-                    $query->where('payment_method', $method);
-                })
-                ->where('status', PaymentStatusEnum::PAID)
-                ->count();
+        foreach (PaymentMethodEnum::cases() as $method) {
+            $count = $results->get($method->value)?->count ?? 0;
 
             if ($count > 0) {
                 $data[] = $count;

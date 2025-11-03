@@ -78,6 +78,21 @@ final class OverdueAccounts extends BaseWidget
                     })
                     ->sortable(),
             ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('type')
+                    ->label('Tipo de Conta')
+                    ->options([
+                        'receivables' => 'A Receber',
+                        'payables' => 'A Pagar',
+                    ])
+                    ->query(function ($query, array $data) {
+                        if (filled($data['value'])) {
+                            $query->whereHas('accounts', function ($q) use ($data) {
+                                $q->where('type', $data['value']);
+                            });
+                        }
+                    }),
+            ])
             ->defaultSort('due_date', 'asc')
             ->paginated([10, 25, 50]);
     }
