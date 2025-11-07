@@ -87,12 +87,12 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
-            ->userMenuItems([
-                'suggestion' => MenuItem::make()
-                    ->label('Enviar Sugestão')
-                    ->url(fn (): string => SuggestionResource::getUrl('create'))
-                    ->icon('heroicon-o-light-bulb'),
-            ])
+//            ->userMenuItems([
+//                'suggestion' => MenuItem::make()
+//                    ->label('Enviar Sugestão')
+//                    ->url(fn (): string => SuggestionResource::getUrl('create'))
+//                    ->icon('heroicon-o-light-bulb'),
+//            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
