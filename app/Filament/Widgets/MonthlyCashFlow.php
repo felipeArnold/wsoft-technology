@@ -63,7 +63,9 @@ final class MonthlyCashFlow extends ApexChartWidget
 
         return [
             'chart' => [
-                'type' => 'area',
+                'type' => 'line',
+                'height' => 350,
+                'stacked' => false,
                 'toolbar' => [
                     'show' => true,
                 ],
@@ -71,18 +73,34 @@ final class MonthlyCashFlow extends ApexChartWidget
             'series' => [
                 [
                     'name' => 'Receitas',
+                    'type' => 'column',
                     'data' => $incomeData,
-                    'color' => '#10b981',
                 ],
                 [
                     'name' => 'Despesas',
+                    'type' => 'area',
                     'data' => $expensesData,
-                    'color' => '#ef4444',
                 ],
                 [
                     'name' => 'Saldo Líquido',
+                    'type' => 'line',
                     'data' => $balanceData,
-                    'color' => '#3b82f6',
+                ],
+            ],
+
+            'stroke' => [
+                'width' => [0, 2, 3],
+                'curve' => 'smooth',
+            ],
+            'fill' => [
+                'opacity' => [0.85, 0.25, 1],
+                'gradient' => [
+                    'inverseColors' => false,
+                    'shade' => 'light',
+                    'type' => 'vertical',
+                    'opacityFrom' => 0.85,
+                    'opacityTo' => 0.55,
+                    'stops' => [0, 100, 100, 100],
                 ],
             ],
             'xaxis' => [

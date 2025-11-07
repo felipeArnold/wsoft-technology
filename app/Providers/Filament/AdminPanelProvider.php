@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\RegisterTeam;
+use App\Filament\Resources\Suggestions\SuggestionResource;
 use App\Models\Tenant;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Enums\ThemeMode;
@@ -12,6 +13,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -24,8 +26,9 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
+use Maartenpaauw\Filament\Cashier\Stripe\BillingProvider;
 
-final class AdminPanelProvider extends PanelProvider
+class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
@@ -47,7 +50,8 @@ final class AdminPanelProvider extends PanelProvider
             ->multiFactorAuthentication([
                 EmailAuthentication::make()->codeExpiryMinutes(2),
             ])
-//            ->tenantProfile(EditTeamProfile::class)
+//            ->tenantBillingProvider(new BillingProvider('default'))
+//            ->requiresTenantSubscription()
             ->navigationGroups([
                 'Cadastros',
                 'Financeiro',
@@ -81,9 +85,14 @@ final class AdminPanelProvider extends PanelProvider
             ])
             ->pages([
                 Dashboard::class,
-                //                FinancialDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->userMenuItems([
+                'suggestion' => MenuItem::make()
+                    ->label('Enviar Sugestão')
+                    ->url(fn (): string => SuggestionResource::getUrl('create'))
+                    ->icon('heroicon-o-light-bulb'),
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
