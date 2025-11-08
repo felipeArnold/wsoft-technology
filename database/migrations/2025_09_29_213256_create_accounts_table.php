@@ -58,7 +58,7 @@ return new class extends Migration
             $table->dateTime('paid_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['tenant_id', 'account_id', 'installment_number', 'due_date', 'status'], 'idx_acct_inst_composite');
+            $table->index(['tenant_id', 'accounts_id', 'installment_number', 'due_date', 'status'], 'idx_acct_inst_composite');
         });
     }
 
