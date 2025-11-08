@@ -28,6 +28,8 @@ final class EnvelopeResource extends Resource
 
     protected static ?string $label = 'Assinatura Digital';
 
+    protected static ?string $pluralLabel = 'Assinatura Digital';
+
     protected static string|UnitEnum|null $navigationGroup = 'Serviços';
 
     protected static ?int $navigationSort = 2;

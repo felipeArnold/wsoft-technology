@@ -20,6 +20,8 @@ final class NonPaymentResource extends Resource
 
     protected static ?string $label = 'Inadimplência';
 
+    protected static ?string $pluralLabel = 'Inadimplência';
+
     protected static ?string $recordTitleAttribute = 'installment_number';
 
     protected static string|null|UnitEnum $navigationGroup = 'Financeiro';

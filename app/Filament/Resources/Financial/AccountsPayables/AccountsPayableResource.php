@@ -26,6 +26,8 @@ final class AccountsPayableResource extends Resource
 
     protected static ?string $label = 'Contas a Pagar';
 
+    protected static ?string $pluralLabel = 'Contas a Pagar';
+
     protected static string|UnitEnum|null $navigationGroup = 'Financeiro';
 
     public static function form(Schema $schema): Schema
