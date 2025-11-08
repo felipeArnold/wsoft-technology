@@ -37,4 +37,9 @@ return [
         ],
     ],
 
+    'zapsign' => [
+        'url' => env('ZAPSIGN_SIGN_URL'),
+        'api_token' => env('ZAPSIGN_API_TOKEN'),
+    ],
+
 ];

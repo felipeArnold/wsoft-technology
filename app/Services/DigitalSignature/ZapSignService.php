@@ -165,6 +165,99 @@ final class ZapSignService
     }
 
     /**
+     * Atualiza o envelope e signatários com base nos dados da ZapSign
+     *
+     * @param  string  $envelopeToken  Token do envelope no ZapSign
+     * @param  Envelope  $envelope  Envelope a ser atualizado
+     * @param  array|null  $signersData  Dados dos signatários (se não fornecido, busca da API)
+     *
+     * @throws Exception
+     */
+    public function updateEnvelopeFromZapSign(string $envelopeToken, Envelope $envelope, ?array $signersData = null): void
+    {
+        try {
+            // Busca os dados do documento na ZapSign
+            $documentData = $this->getDocument($envelopeToken);
+
+            // Atualiza o envelope com os dados do ZapSign
+            $envelope->update([
+                'zapsign_token' => $documentData['token'],
+                'zapsign_open_id' => $documentData['open_id'] ?? null,
+                'zapsign_status' => $documentData['status'],
+                'zapsign_url' => $documentData['original_file'] ?? null,
+            ]);
+
+            // Se signed_file estiver disponível, atualiza também
+            if (isset($documentData['signed_file']) && ! empty($documentData['signed_file'])) {
+                $envelope->update([
+                    'zapsign_signed_file' => $documentData['signed_file'],
+                ]);
+            }
+
+            // Usa os dados dos signatários fornecidos ou busca da resposta da API
+            $signers = $signersData ?? ($documentData['signers'] ?? []);
+
+            // Atualiza os signatários com os tokens e URLs
+            if (! empty($signers)) {
+                foreach ($signers as $index => $signerData) {
+                    $signer = $envelope->signers()->skip($index)->first();
+
+                    if ($signer && isset($signerData['token'])) {
+                        $updateData = [
+                            'zapsign_token' => $signerData['token'],
+                        ];
+
+                        // Adiciona sign_url se disponível
+                        if (isset($signerData['sign_url'])) {
+                            $updateData['zapsign_sign_url'] = $signerData['sign_url'];
+                        }
+
+                        // Atualiza o status do signatário se disponível
+                        if (isset($signerData['status'])) {
+                            $updateData['status'] = $this->mapSignerStatus($signerData['status']);
+                        }
+
+                        // Atualiza a data de assinatura se disponível
+                        if (isset($signerData['signed_at']) && ! empty($signerData['signed_at'])) {
+                            $updateData['signed_at'] = $signerData['signed_at'];
+                        }
+
+                        $signer->update($updateData);
+                    }
+                }
+            }
+
+            Log::info('Envelope updated from ZapSign', [
+                'envelope_id' => $envelope->id,
+                'zapsign_token' => $envelopeToken,
+                'status' => $documentData['status'],
+            ]);
+        } catch (Exception $e) {
+            Log::error('Error updating envelope from ZapSign', [
+                'envelope_id' => $envelope->id,
+                'zapsign_token' => $envelopeToken,
+                'error' => $e->getMessage(),
+            ]);
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Mapeia o status do signatário do ZapSign para o status local
+     */
+    private function mapSignerStatus(string $zapSignStatus): string
+    {
+        return match ($zapSignStatus) {
+            'new', 'pending' => 'pending',
+            'signed', 'link-signed' => 'signed',
+            'rejected' => 'rejected',
+            'expired' => 'expired',
+            default => 'pending',
+        };
+    }
+
+    /**
      * Prepara os signatários no formato esperado pela ZApSign
      */
     private function prepareSigners(Envelope $envelope): array

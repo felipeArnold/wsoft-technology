@@ -36,6 +36,8 @@ final class Signer extends Model
         'status',
         'signed_at',
         'rejection_reason',
+        'zapsign_token',
+        'zapsign_sign_url',
     ];
 
     public static function getForm(): array

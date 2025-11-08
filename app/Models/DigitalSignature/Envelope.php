@@ -24,6 +24,12 @@ final class Envelope extends Model
         'status',
         'user_id',
         'tenant_id',
+        'zapsign_token',
+        'zapsign_open_id',
+        'zapsign_status',
+        'zapsign_url',
+        'zapsign_signed_file',
+        'zapsign_sent_at',
     ];
 
     public function user(): BelongsTo
@@ -46,6 +52,7 @@ final class Envelope extends Model
         return [
             'deadline' => 'date',
             'documents' => 'array',
+            'zapsign_sent_at' => 'datetime',
         ];
     }
 }
