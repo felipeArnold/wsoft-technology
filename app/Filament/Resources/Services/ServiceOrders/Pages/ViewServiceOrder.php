@@ -7,6 +7,7 @@ namespace App\Filament\Resources\Services\ServiceOrders\Pages;
 use App\Filament\Resources\Services\ServiceOrders\ServiceOrderResource;
 use App\Mail\SendEmailFromTemplateMail;
 use App\Models\EmailTemplate;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Forms;
@@ -78,6 +79,31 @@ final class ViewServiceOrder extends ViewRecord
                         ->success()
                         ->send();
                 }),
+
+            // Action: gerar PDF da ordem de serviço
+            Action::make('download_pdf')
+                ->label('Gerar PDF')
+                ->color(Color::Blue)
+                ->icon('heroicon-o-document-arrow-down')
+                ->action(function (): \Symfony\Component\HttpFoundation\Response {
+                    $serviceOrder = $this->record->load(['person', 'user', 'tenant']);
+
+                    $pdf = Pdf::loadView('pdf.service-order', [
+                        'serviceOrder' => $serviceOrder,
+                        'tenant' => $serviceOrder->tenant,
+                    ])
+                        ->setPaper('a4')
+                        ->setOption('margin-top', 10)
+                        ->setOption('margin-bottom', 10)
+                        ->setOption('margin-left', 10)
+                        ->setOption('margin-right', 10);
+
+                    return response()->streamDownload(
+                        fn () => print ($pdf->output()),
+                        'ordem-servico-'.$serviceOrder->number.'.pdf'
+                    );
+                }),
+
             EditAction::make()
                 ->label('Editar')
                 ->icon('heroicon-o-pencil')
