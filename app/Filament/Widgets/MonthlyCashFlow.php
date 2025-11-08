@@ -34,7 +34,7 @@ final class MonthlyCashFlow extends ApexChartWidget
             ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
             ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
             ->selectRaw("
-                strftime('%Y-%m', accounts_installments.paid_at) as month,
+                DATE_FORMAT(accounts_installments.paid_at, '%Y-%m') as month,
                 accounts.type,
                 SUM(accounts_installments.amount) as total
             ")

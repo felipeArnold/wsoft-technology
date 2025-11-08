@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GestãoPro - Sistema completo de gestão empresarial para pequenos e médios negócios. Gerencie clientes, fornecedores, ordens de serviço e finanças.">
-    <meta name="keywords" content="gestão empresarial, ERP, sistema de gestão, ordens de serviço, controle financeiro, gestão de clientes">
-    <meta property="og:title" content="GestãoPro - Sistema de Gestão Empresarial Simplificado">
-    <meta property="og:description" content="Sistema completo de gestão para pequenos e médios negócios. R$ 29,90/mês com teste grátis.">
-    <meta property="og:type" content="website">
-    <title>GestãoPro - Sistema de Gestão Empresarial Simplificado</title>
+    <meta name="description" content="Sistema profissional de gestão para oficinas mecânicas com ordens de serviço numeradas, controle de estoque SKU, financeiro com parcelamento, dashboard em tempo real e assinatura digital integrada.">
+    <title>Sistema de Gestão Profissional para Oficinas Mecânicas | WSoft Technology</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
@@ -17,664 +14,677 @@
             font-family: 'Inter', sans-serif;
         }
 
-        :root {
-            --primary: 222 47% 40%;
-            --primary-hover: 222 47% 35%;
-            --primary-foreground: 210 40% 98%;
-            --background: 0 0% 100%;
-            --foreground: 222 47% 11%;
-            --muted: 210 40% 96%;
-            --muted-foreground: 215 16% 47%;
-            --border: 214 32% 91%;
-            --accent: 210 40% 96%;
-            --card: 0 0% 100%;
-            --hero-gradient-from: 222 47% 40%;
-            --hero-gradient-to: 215 89% 55%;
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
         }
 
-        .bg-hero-gradient {
-            background: linear-gradient(135deg, hsl(var(--hero-gradient-from)), hsl(var(--hero-gradient-to)));
+        .gradient-text {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .bg-linear-to-br {
-            background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+        .card-hover {
+            transition: all 0.3s ease;
         }
 
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.2);
         }
 
-        .accordion-content.active {
-            max-height: 500px;
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            DEFAULT: 'hsl(222 47% 40%)',
-                            hover: 'hsl(222 47% 35%)',
-                            foreground: 'hsl(210 40% 98%)',
-                        },
-                        background: 'hsl(0 0% 100%)',
-                        foreground: 'hsl(222 47% 11%)',
-                        muted: {
-                            DEFAULT: 'hsl(210 40% 96%)',
-                            foreground: 'hsl(215 16% 47%)',
-                        },
-                        border: 'hsl(214 32% 91%)',
-                        accent: 'hsl(210 40% 96%)',
-                        card: 'hsl(0 0% 100%)',
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="antialiased">
-<!-- Hero Section -->
-<section class="relative overflow-hidden bg-linear-to-br from-white via-gray-50 to-white">
-    <div class="container mx-auto px-4 py-20 md:py-32">
-        <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-            <!-- Left Column - Content -->
-            <div class="space-y-8 text-center lg:text-left">
-                <div class="inline-block rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700">
-                    ✨ Simplifique sua gestão empresarial
+<body class="bg-gray-50">
+    <!-- Header/Navbar -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-tools text-3xl text-blue-600 mr-3"></i>
+                    <span class="text-2xl font-bold gradient-text">WSoft Technology</span>
                 </div>
-
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-                    Gerencie seu negócio
-                    <span class="bg-linear-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
-              de forma simples
-            </span>
-                </h1>
-
-                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
-                    Controle clientes, fornecedores, ordens de serviço e finanças em uma única plataforma.
-                    Economize tempo e tenha o controle total do seu negócio.
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <a href="#" class="inline-flex items-center justify-center rounded-md bg-blue-700 px-8 py-3 text-base font-medium text-white shadow-lg hover:bg-blue-800 transition-colors">
-                        Teste grátis por 7 dias
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#funcionalidades" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Funcionalidades</a>
+                    <a href="#planos" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Planos</a>
+                    <a href="#contato" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contato</a>
+                    <a href="/admin/login" class="text-blue-600 hover:text-blue-700 px-4 py-2 rounded-md text-sm font-medium border border-blue-600 hover:bg-blue-50">
+                        Entrar
                     </a>
-                    <a href="#" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-50 transition-colors">
-                        Ver demonstração
+                    <a href="/admin/register" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium">
+                        Cadastrar
                     </a>
                 </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#funcionalidades" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Funcionalidades</a>
+                <a href="#planos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Planos</a>
+                <a href="#contato" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contato</a>
+                <a href="/login" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50">Entrar</a>
+                <a href="/register" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Cadastrar</a>
+            </div>
+        </div>
+    </nav>
 
-                <div class="pt-4 border-t border-gray-200">
-                    <p class="text-sm text-gray-600">
-                        Plano único por
-                        <span class="text-2xl font-bold text-blue-700">R$ 29,90/mês</span>
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-white fade-in">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        Sistema de Gestão Profissional para Oficinas Mecânicas
+                    </h1>
+                    <p class="text-xl mb-8 text-blue-100">
+                        Sistema completo com ordens de serviço numeradas, controle de estoque com SKU, financeiro com parcelamento, dashboard em tempo real e assinatura digital integrada.
                     </p>
-                    <p class="text-xs text-gray-500 mt-1">
-                        Sem taxas escondidas • Cancele quando quiser
-                    </p>
-                </div>
-            </div>
-
-            <!-- Right Column - Image -->
-            <div class="relative">
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
-                    <img
-                        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
-                        alt="Dashboard de gestão empresarial"
-                        class="w-full h-auto"
-                    />
-                </div>
-                <div class="absolute -top-4 -right-4 w-72 h-72 bg-blue-100 rounded-full blur-3xl -z-10 opacity-50"></div>
-                <div class="absolute -bottom-4 -left-4 w-72 h-72 bg-purple-100 rounded-full blur-3xl -z-10 opacity-50"></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Features Section -->
-<section id="funcionalidades" class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                Tudo que você precisa para
-                <span class="bg-linear-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
-            gerir seu negócio
-          </span>
-            </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Funcionalidades completas para simplificar sua rotina empresarial
-            </p>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <!-- Feature 1 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
-                <div class="rounded-lg bg-blue-50 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Gestão de Clientes e Fornecedores</h3>
-                <p class="text-gray-600">Centralize todas as informações de seus clientes e fornecedores em um só lugar.</p>
-            </div>
-
-            <!-- Feature 2 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
-                <div class="rounded-lg bg-blue-50 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Ordens de Serviço</h3>
-                <p class="text-gray-600">Crie, acompanhe e gerencie ordens de serviço de forma rápida e organizada.</p>
-            </div>
-
-            <!-- Feature 3 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
-                <div class="rounded-lg bg-blue-50 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Contas a Pagar e Receber</h3>
-                <p class="text-gray-600">Controle seu fluxo de caixa com gestão completa de contas a pagar e receber.</p>
-            </div>
-
-            <!-- Feature 4 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
-                <div class="rounded-lg bg-blue-50 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Controle de Inadimplência</h3>
-                <p class="text-gray-600">Monitore pagamentos em atraso e mantenha seu financeiro sempre saudável.</p>
-            </div>
-
-            <!-- Feature 5 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
-                <div class="rounded-lg bg-blue-50 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Dashboard Financeiro</h3>
-                <p class="text-gray-600">Visualize seus indicadores financeiros em tempo real com gráficos intuitivos.</p>
-            </div>
-
-            <!-- Feature 6 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
-                <div class="rounded-lg bg-blue-50 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg class="h-6 w-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Segurança e Backup</h3>
-                <p class="text-gray-600">Seus dados protegidos com criptografia e backup automático na nuvem.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Benefits Section -->
-<section class="py-20 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                Por que escolher nosso sistema?
-            </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Transforme a gestão do seu negócio com eficiência e simplicidade
-            </p>
-        </div>
-
-        <div class="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
-            <!-- Benefit 1 -->
-            <div class="text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-4">
-                    <svg class="h-8 w-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Economize Tempo</h3>
-                <p class="text-gray-600">Automatize tarefas repetitivas e foque no que realmente importa: fazer seu negócio crescer.</p>
-            </div>
-
-            <!-- Benefit 2 -->
-            <div class="text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-4">
-                    <svg class="h-8 w-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Organização Total</h3>
-                <p class="text-gray-600">Centralize todas as informações do seu negócio em uma única plataforma intuitiva.</p>
-            </div>
-
-            <!-- Benefit 3 -->
-            <div class="text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-4">
-                    <svg class="h-8 w-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2 text-gray-900">Controle Financeiro</h3>
-                <p class="text-gray-600">Tenha visibilidade completa da saúde financeira da sua empresa em tempo real.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Pricing Section -->
-<section id="precos" class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                Plano simples, preço justo
-            </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Sem complicação, sem taxas escondidas. Um único plano com tudo que você precisa.
-            </p>
-        </div>
-
-        <div class="max-w-lg mx-auto">
-            <div class="bg-white rounded-lg border-2 border-blue-700 relative overflow-hidden shadow-lg">
-                <div class="absolute top-0 right-0 bg-blue-700 text-white px-4 py-1 text-sm font-medium">
-                    Mais Popular
-                </div>
-
-                <div class="text-center pb-8 pt-12 px-6">
-                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Plano Completo</h3>
-                    <div class="space-y-2">
-                        <div class="flex items-baseline justify-center gap-2">
-                            <span class="text-5xl font-bold text-blue-700">R$ 29,90</span>
-                            <span class="text-gray-600">/mês</span>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="/register" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition text-center">
+                            <i class="fas fa-rocket mr-2"></i>Começar Teste Grátis
+                        </a>
+                        <a href="#funcionalidades" class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-600 transition text-center">
+                            <i class="fas fa-play-circle mr-2"></i>Ver Como Funciona
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-6 text-sm">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                            <span>7 dias grátis</span>
                         </div>
-                        <p class="text-sm text-gray-500">
-                            Teste grátis por 7 dias • Cancele quando quiser
-                        </p>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                            <span>Sem cartão de crédito</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                            <span>Cancele quando quiser</span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="px-6 pb-6 space-y-6">
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-3">
-                            <div class="rounded-full bg-blue-50 p-1 mt-0.5">
-                                <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <span class="text-sm text-gray-700">Gestão ilimitada de clientes e fornecedores</span>
+                <div class="hidden md:block fade-in">
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 transform hover:scale-105 transition duration-300">
+                        <div class="mb-4 pb-4 border-b border-gray-200">
+                            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-clipboard-check text-blue-600 mr-2"></i>
+                                Ordens de Serviço - Hoje
+                            </h3>
                         </div>
-                        <div class="flex items-start gap-3">
-                            <div class="rounded-full bg-blue-50 p-1 mt-0.5">
-                                <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-wrench text-2xl text-yellow-600"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">OS #00234</h4>
+                                        <p class="text-sm text-gray-600">Troca de óleo - João Silva</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">Em Andamento</span>
                             </div>
-                            <span class="text-sm text-gray-700">Ordens de serviço sem limite</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="rounded-full bg-blue-50 p-1 mt-0.5">
-                                <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                            <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-2xl text-green-600"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">OS #00233</h4>
+                                        <p class="text-sm text-gray-600">Revisão 10.000km - Maria Costa</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">Concluída</span>
                             </div>
-                            <span class="text-sm text-gray-700">Controle completo de contas a pagar e receber</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="rounded-full bg-blue-50 p-1 mt-0.5">
-                                <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                            <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-exclamation-triangle text-2xl text-red-600"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">OS #00232</h4>
+                                        <p class="text-sm text-gray-600">Freios e pastilhas - Pedro Santos</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-semibold rounded-full">Urgente</span>
                             </div>
-                            <span class="text-sm text-gray-700">Dashboard financeiro em tempo real</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="rounded-full bg-blue-50 p-1 mt-0.5">
-                                <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border-l-4 border-gray-400">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-file-alt text-2xl text-gray-500"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">OS #00231</h4>
+                                        <p class="text-sm text-gray-600">Diagnóstico - Ana Oliveira</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-800 text-xs font-semibold rounded-full">Rascunho</span>
                             </div>
-                            <span class="text-sm text-gray-700">Controle de inadimplência</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="rounded-full bg-blue-50 p-1 mt-0.5">
-                                <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <span class="text-sm text-gray-700">Suporte por e-mail e chat</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="rounded-full bg-blue-50 p-1 mt-0.5">
-                                <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <span class="text-sm text-gray-700">Backup automático diário</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="rounded-full bg-blue-50 p-1 mt-0.5">
-                                <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <span class="text-sm text-gray-700">Atualizações constantes</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <a href="#" class="block w-full rounded-md bg-blue-700 px-8 py-3 text-base font-medium text-white text-center shadow-lg hover:bg-blue-800 transition-colors">
-                        Começar teste grátis
+    <!-- Funcionalidades -->
+    <section id="funcionalidades" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Funcionalidades Completas e Profissionais
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Sistema robusto desenvolvido com as melhores práticas de gestão para oficinas mecânicas e prestadores de serviços automotivos
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Ordens de Serviço -->
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-clipboard-list text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Ordens de Serviço</h3>
+                    <p class="text-gray-600 mb-4">
+                        Sistema completo de OS com numeração automática, controle de status e prioridade, valores detalhados e relatórios técnicos.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Numeração automática
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            4 status (Rascunho, Andamento, Concluída, Cancelada)
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Prioridade e prazos
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Cálculo de mão de obra e peças
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Anexos e relatório técnico
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Gestão de Estoque -->
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-boxes text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Controle de Estoque</h3>
+                    <p class="text-gray-600 mb-4">
+                        Gerencie produtos com SKU, preços de venda e custo, controle de estoque com alertas personalizados e margem de lucro.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Cadastro com SKU único
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Preço de custo e venda
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Cálculo de margem de lucro
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Alertas de estoque mínimo
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Busca rápida por nome/SKU
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Gestão Financeira -->
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-dollar-sign text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Controle Financeiro</h3>
+                    <p class="text-gray-600 mb-4">
+                        Sistema completo com contas a pagar e receber, parcelamento, controle de inadimplência, descontos, juros e multas automáticas.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Contas a pagar e receber
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Parcelamento inteligente
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Descontos, juros e multas
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Controle de inadimplência
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Pix, Cartão e Dinheiro
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cadastro de Clientes -->
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Gestão de Clientes</h3>
+                    <p class="text-gray-600 mb-4">
+                        Cadastro completo de clientes e fornecedores com busca rápida, histórico de ordens de serviço e relacionamento integrado.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Cadastro completo de dados
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Busca por nome, CPF/CNPJ
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Histórico de OS integrado
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Gerenciamento de fornecedores
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Apelidos para busca rápida
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Relatórios -->
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Relatórios e Dashboards</h3>
+                    <p class="text-gray-600 mb-4">
+                        Dashboard financeiro completo com visão geral, fluxo de caixa mensal, contas vencidas e análise por método de pagamento.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Dashboard financeiro
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Fluxo de caixa mensal
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Controle de contas vencidas
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Análise por método de pagamento
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Extratos financeiros
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Assinatura Digital -->
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-file-signature text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Assinatura Digital</h3>
+                    <p class="text-gray-600 mb-4">
+                        Sistema integrado de assinatura digital de documentos para agilizar aprovações e contratos com seus clientes.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Envelopes digitais
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Assinatura de contratos
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Validade jurídica
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Rastreamento de status
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-blue-600 mr-2"></i>
+                            Integração com OS
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Por que escolher nosso sistema?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Desenvolvido por especialistas para atender as necessidades específicas de mecânicas e oficinas
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-building text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Multi-Filial</h3>
+                    <p class="text-gray-600">Gerencie múltiplas oficinas em uma conta</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-search text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Busca Inteligente</h3>
+                    <p class="text-gray-600">Encontre clientes, produtos e OS rapidamente</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Seguro</h3>
+                    <p class="text-gray-600">Dados isolados por tenant, com backup diário</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Responsivo</h3>
+                    <p class="text-gray-600">Funciona perfeitamente em todos os dispositivos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="planos" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Planos que cabem no seu bolso
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Escolha o plano ideal para o tamanho da sua oficina
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Plano Básico -->
+                <div class="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-blue-500 transition">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Básico</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-gray-900">R$ 49</span>
+                        <span class="text-gray-600">/mês</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Até 100 ordens/mês</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">1 usuário</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Gestão de clientes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Controle financeiro básico</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Suporte por email</span>
+                        </li>
+                    </ul>
+                    <a href="/register" class="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                        Começar Teste Grátis
                     </a>
+                </div>
 
-                    <p class="text-xs text-center text-gray-500">
-                        Não é necessário cartão de crédito para o teste
-                    </p>
+                <!-- Plano Profissional -->
+                <div class="bg-white rounded-2xl shadow-2xl border-4 border-blue-600 p-8 transform scale-105 relative">
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-semibold">
+                        POPULAR
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Profissional</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold gradient-text">R$ 99</span>
+                        <span class="text-gray-600">/mês</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Ordens ilimitadas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Até 5 usuários</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Controle de estoque completo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Relatórios avançados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Agenda online</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Suporte prioritário</span>
+                        </li>
+                    </ul>
+                    <a href="/register" class="block w-full text-center btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                        Começar Teste Grátis
+                    </a>
+                </div>
+
+                <!-- Plano Empresarial -->
+                <div class="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-blue-500 transition">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Empresarial</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-gray-900">R$ 199</span>
+                        <span class="text-gray-600">/mês</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Tudo do Profissional</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Usuários ilimitados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Múltiplas filiais</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">API de integração</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Treinamento personalizado</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Suporte 24/7</span>
+                        </li>
+                    </ul>
+                    <a href="/register" class="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                        Começar Teste Grátis
+                    </a>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
 
-<!-- Testimonials Section -->
-<section id="depoimentos" class="py-20 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                O que nossos clientes dizem
+            <div class="text-center mt-12">
+                <p class="text-gray-600">
+                    <i class="fas fa-shield-alt text-blue-600 mr-2"></i>
+                    7 dias de teste grátis em todos os planos. Sem compromisso.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="gradient-bg py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                Pronto para transformar sua oficina?
             </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Empresas que já transformaram sua gestão com nossa plataforma
+            <p class="text-xl mb-8 text-blue-100">
+                Comece seu teste grátis hoje e veja como nosso sistema pode aumentar sua produtividade
             </p>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-            <!-- Testimonial 1 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
-                <div class="flex gap-1">
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                </div>
-
-                <p class="text-gray-600 italic">
-                    "O sistema revolucionou a forma como gerencio meu negócio. Agora tenho controle total sobre minhas ordens de serviço e finanças. Recomendo!"
-                </p>
-
-                <div class="flex items-center gap-3 pt-4 border-t border-gray-200">
-                    <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-semibold">
-                        MS
-                    </div>
-                    <div>
-                        <p class="font-semibold text-gray-900">Maria Silva</p>
-                        <p class="text-sm text-gray-500">Proprietária - Serviços de Limpeza</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonial 2 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
-                <div class="flex gap-1">
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                </div>
-
-                <p class="text-gray-600 italic">
-                    "Antes eu perdia muito tempo com planilhas. Agora tudo está organizado e consigo acompanhar os pagamentos em tempo real. Excelente custo-benefício!"
-                </p>
-
-                <div class="flex items-center gap-3 pt-4 border-t border-gray-200">
-                    <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-semibold">
-                        JS
-                    </div>
-                    <div>
-                        <p class="font-semibold text-gray-900">João Santos</p>
-                        <p class="text-sm text-gray-500">Gestor - Manutenção Predial</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonial 3 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
-                <div class="flex gap-1">
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <svg class="h-4 w-4 fill-blue-700 text-blue-700" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                </div>
-
-                <p class="text-gray-600 italic">
-                    "Interface simples e funcionalidades completas. Consegui implementar em menos de uma semana e minha equipe adorou. O suporte é rápido e eficiente."
-                </p>
-
-                <div class="flex items-center gap-3 pt-4 border-t border-gray-200">
-                    <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-semibold">
-                        AC
-                    </div>
-                    <div>
-                        <p class="font-semibold text-gray-900">Ana Costa</p>
-                        <p class="text-sm text-gray-500">Diretora - Consultoria Empresarial</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ Section -->
-<section id="faq" class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                Perguntas Frequentes
-            </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Tire suas dúvidas sobre nosso sistema
-            </p>
-        </div>
-
-        <div class="max-w-3xl mx-auto space-y-4">
-            <!-- FAQ Item 1 -->
-            <div class="bg-white border border-gray-200 rounded-lg">
-                <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                    <span>Como funciona o teste grátis?</span>
-                    <svg class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div class="accordion-content px-6 pb-0">
-                    <div class="pb-4 text-gray-600">
-                        Você tem 7 dias completos para testar todas as funcionalidades do sistema sem compromisso. Não é necessário fornecer cartão de crédito. Após o período, você decide se quer continuar.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 2 -->
-            <div class="bg-white border border-gray-200 rounded-lg">
-                <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                    <span>Posso cancelar a qualquer momento?</span>
-                    <svg class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div class="accordion-content px-6 pb-0">
-                    <div class="pb-4 text-gray-600">
-                        Sim! Não há fidelidade ou multa por cancelamento. Você pode cancelar sua assinatura a qualquer momento diretamente no painel de configurações, e terá acesso até o final do período pago.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 3 -->
-            <div class="bg-white border border-gray-200 rounded-lg">
-                <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                    <span>Como funciona o suporte?</span>
-                    <svg class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div class="accordion-content px-6 pb-0">
-                    <div class="pb-4 text-gray-600">
-                        Oferecemos suporte por e-mail e chat durante horário comercial (9h às 18h, dias úteis). Nossa equipe responde em até 24 horas. Também temos uma base de conhecimento completa com tutoriais e guias.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 4 -->
-            <div class="bg-white border border-gray-200 rounded-lg">
-                <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                    <span>Meus dados estão seguros?</span>
-                    <svg class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div class="accordion-content px-6 pb-0">
-                    <div class="pb-4 text-gray-600">
-                        Sim! Utilizamos criptografia de ponta a ponta e fazemos backup automático diário de todos os dados. Seus dados ficam armazenados em servidores seguros com certificação de segurança internacional.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 5 -->
-            <div class="bg-white border border-gray-200 rounded-lg">
-                <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                    <span>Preciso instalar algum software?</span>
-                    <svg class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div class="accordion-content px-6 pb-0">
-                    <div class="pb-4 text-gray-600">
-                        Não! O sistema é 100% online (cloud). Você acessa através do navegador de qualquer computador, tablet ou smartphone com internet. Não precisa instalar nada.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 6 -->
-            <div class="bg-white border border-gray-200 rounded-lg">
-                <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                    <span>Quantos usuários podem usar o sistema?</span>
-                    <svg class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div class="accordion-content px-6 pb-0">
-                    <div class="pb-4 text-gray-600">
-                        Com o plano único de R$ 29,90/mês, você pode cadastrar quantos usuários precisar, sem custo adicional. Ideal para equipes de qualquer tamanho.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="bg-gray-900 text-white py-12">
-    <div class="container mx-auto px-4">
-        <div class="grid gap-8 md:grid-cols-4">
-            <!-- Logo and Description -->
-            <div class="md:col-span-2 space-y-4">
-                <h3 class="text-2xl font-bold">GestãoPro</h3>
-                <p class="text-gray-400 max-w-md">
-                    Sistema completo de gestão empresarial para pequenos e médios negócios.
-                    Simples, eficiente e acessível.
-                </p>
-                <a href="#" class="inline-block rounded-md bg-blue-700 px-8 py-3 text-base font-medium text-white shadow-lg hover:bg-blue-800 transition-colors">
-                    Começar agora
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/register" class="bg-white text-blue-600 px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition inline-block">
+                    <i class="fas fa-rocket mr-2"></i>Começar Teste Grátis Agora
                 </a>
             </div>
+            <p class="mt-6 text-sm text-blue-100">
+                Sem cartão de crédito necessário
+            </p>
+        </div>
+    </section>
 
-            <!-- Product Links -->
-            <div>
-                <h4 class="font-semibold mb-4">Produto</h4>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="#funcionalidades" class="hover:text-white transition-colors">Funcionalidades</a></li>
-                    <li><a href="#precos" class="hover:text-white transition-colors">Preços</a></li>
-                    <li><a href="#depoimentos" class="hover:text-white transition-colors">Depoimentos</a></li>
-                    <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
-                </ul>
+    <!-- Footer -->
+    <footer id="contato" class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-tools text-2xl text-blue-400 mr-2"></i>
+                        <span class="text-xl font-bold">WSoft Technology</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Sistema completo de gestão para mecânicas e oficinas.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Produto</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#funcionalidades" class="text-gray-400 hover:text-white">Funcionalidades</a></li>
+                        <li><a href="#planos" class="text-gray-400 hover:text-white">Planos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Demonstração</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Empresa</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Sobre Nós</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contato</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            contato@wsoft.com.br
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            (11) 9999-9999
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            São Paulo, SP
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            <!-- Legal Links -->
-            <div>
-                <h4 class="font-semibold mb-4">Legal</h4>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-white transition-colors">Política de Privacidade</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Termos de Uso</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Contato</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Suporte</a></li>
-                </ul>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 WSoft Technology. Todos os direitos reservados.</p>
             </div>
         </div>
+    </footer>
 
-        <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-500 text-sm">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> GestãoPro. Todos os direitos reservados.</p>
-        </div>
-    </div>
-</footer>
-
-<script>
-    function toggleAccordion(button) {
-        const content = button.nextElementSibling;
-        const icon = button.querySelector('svg');
-        const allContents = document.querySelectorAll('.accordion-content');
-        const allIcons = document.querySelectorAll('.accordion-content').length;
-
-        // Close all other accordions
-        allContents.forEach((item) => {
-            if (item !== content) {
-                item.classList.remove('active');
-                item.previousElementSibling.querySelector('svg').style.transform = 'rotate(0deg)';
-            }
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         });
 
-        // Toggle current accordion
-        content.classList.toggle('active');
-        if (content.classList.contains('active')) {
-            icon.style.transform = 'rotate(180deg)';
-        } else {
-            icon.style.transform = 'rotate(0deg)';
-        }
-    }
-</script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

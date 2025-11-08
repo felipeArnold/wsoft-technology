@@ -57,7 +57,7 @@ final class Person extends Model
                 ->icon(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) === 14
                     ? 'heroicon-o-building-storefront'
                     : 'heroicon-o-user')
-                ->collapsible()
+
                 ->schema([
                     Hidden::make('is_client')->default(true),
 
@@ -153,7 +153,7 @@ final class Person extends Model
             Section::make('Representantes')
                 ->description('Representantes comerciais do fornecedor')
                 ->icon('heroicon-o-user-group')
-                ->collapsible()
+
                 ->schema([
                     SupplierRepresentative::getForm(),
                 ])
@@ -163,7 +163,7 @@ final class Person extends Model
             Section::make('Contato')
                 ->description('Telefones e e-mails para contato')
                 ->icon('heroicon-o-chat-bubble-left-right')
-                ->collapsible()
+
                 ->schema([
                     Section::make('Telefones')
                         ->icon('heroicon-o-phone')
@@ -179,7 +179,7 @@ final class Person extends Model
             Section::make('Endereços')
                 ->description('Endereços do cliente')
                 ->icon('heroicon-o-map-pin')
-                ->collapsible()
+
                 ->schema([
                     ...Addresses::getForm(),
                 ])
@@ -194,7 +194,7 @@ final class Person extends Model
             Section::make('Dados do fornecedor')
                 ->description('Informações da empresa fornecedora')
                 ->icon('heroicon-o-building-storefront')
-                ->collapsible()
+
                 ->schema([
                     Hidden::make('is_supplier')->default(true),
                     CnpjComponent::make('document')
@@ -225,7 +225,7 @@ final class Person extends Model
             Section::make('Representantes')
                 ->description('Representantes comerciais do fornecedor')
                 ->icon('heroicon-o-user-group')
-                ->collapsible()
+
                 ->schema([
                     SupplierRepresentative::getForm(),
                 ])
@@ -234,7 +234,7 @@ final class Person extends Model
             Section::make('Contato')
                 ->description('Telefones e e-mails para contato')
                 ->icon('heroicon-o-chat-bubble-left-right')
-                ->collapsible()
+
                 ->schema([
                     Section::make('Telefones')
                         ->icon('heroicon-o-phone')
@@ -250,7 +250,7 @@ final class Person extends Model
             Section::make('Endereços')
                 ->description('Endereços da empresa')
                 ->icon('heroicon-o-map-pin')
-                ->collapsible()
+
                 ->schema([
                     ...Addresses::getForm(),
                 ])
