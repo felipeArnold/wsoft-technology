@@ -35,7 +35,6 @@ final class AccountsPayableForm
                 Hidden::make('type')->default('payables'),
                 Tabs::make('receivable_tabs')
                     ->columnSpanFull()
-                    ->vertical()
                     ->tabs([
                         Tab::make('details')
                             ->label('Dados da Conta a pagar')

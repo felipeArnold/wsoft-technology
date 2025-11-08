@@ -34,7 +34,6 @@ final class AccountsReceivableForm
                 Hidden::make('type')->default('receivables'),
                 Tabs::make('receivable_tabs')
                     ->columnSpanFull()
-                    ->vertical()
                     ->tabs([
                         Tab::make('details')
                             ->label('Dados da Conta a Receber')
