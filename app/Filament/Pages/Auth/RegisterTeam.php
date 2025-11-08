@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages\Auth;
 
+use App\Helpers\FormatterHelper;
 use App\Models\Tenant;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Tenancy\RegisterTenant;
@@ -38,6 +39,7 @@ final class RegisterTeam extends RegisterTenant
     protected function handleRegistration(array $data): Tenant
     {
         $data['slug'] = Tenant::generateUniqueSlug($data['name']);
+        $data['document'] = FormatterHelper::onlyNumbers($data['document'] ?? '');
         $team = Tenant::query()->create($data);
 
         $team->members()->attach(auth()->user());
