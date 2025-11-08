@@ -44,7 +44,7 @@ return new class extends Migration
             $table->decimal('fine_amount', 10, 2)->default(0);
             $table->text('payment_instructions')->nullable();
             $table->timestamps();
-            $table->index(['tenant_id', 'user_id', 'person_id', 'type', 'status', 'due_date']);
+            $table->index(['tenant_id', 'user_id', 'person_id', 'type', 'status', 'due_date'], 'idx_accounts_composite');
         });
 
         Schema::create('accounts_installments', function (Blueprint $table) {
@@ -58,7 +58,7 @@ return new class extends Migration
             $table->dateTime('paid_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['tenant_id', 'account_id', 'installment_number', 'due_date', 'status']);
+            $table->index(['tenant_id', 'account_id', 'installment_number', 'due_date', 'status'], 'idx_acct_inst_composite');
         });
     }
 
