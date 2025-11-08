@@ -158,10 +158,7 @@ final class AccountsPayableForm
                                     ->schema([
                                         ToggleButtons::make('recurring')
                                             ->label('Recorrente')
-                                            ->options([
-                                                'yes' => 'Sim',
-                                                'no' => 'Não',
-                                            ])
+                                            ->boolean()
                                             ->default('no')
                                             ->inline()
                                             ->grouped()
