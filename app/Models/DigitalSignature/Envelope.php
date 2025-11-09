@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @method static \Illuminate\Database\Eloquent\Builder where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \App\Models\DigitalSignature\Envelope|null find($id, $columns = ['*'])
+ */
 final class Envelope extends Model
 {
     /** @use HasFactory<\Database\Factories\DigitalSignature\EnvelopeFactory> */

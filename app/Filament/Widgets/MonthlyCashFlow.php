@@ -7,6 +7,7 @@ namespace App\Filament\Widgets;
 use App\Enum\AccountsReceivable\PaymentStatusEnum;
 use App\Models\Accounts\AccountsInstallments;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 final class MonthlyCashFlow extends ApexChartWidget
@@ -29,12 +30,18 @@ final class MonthlyCashFlow extends ApexChartWidget
         $endDate = Carbon::now()->endOfMonth();
 
         // Otimização: Buscar todos os dados em uma única query
+        // Detectar o driver do banco de dados para usar a função correta
+        $driver = DB::getDriverName();
+        $dateFormatSql = $driver === 'sqlite'
+            ? "strftime('%Y-%m', accounts_installments.paid_at)"
+            : "DATE_FORMAT(accounts_installments.paid_at, '%Y-%m')";
+
         $results = AccountsInstallments::query()
             ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
             ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
             ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
             ->selectRaw("
-                DATE_FORMAT(accounts_installments.paid_at, '%Y-%m') as month,
+                {$dateFormatSql} as month,
                 accounts.type,
                 SUM(accounts_installments.amount) as total
             ")
