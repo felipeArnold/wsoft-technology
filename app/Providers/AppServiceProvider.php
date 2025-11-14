@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Tenant;
+use App\Policies\TenantPolicy;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 
 final class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +28,9 @@ final class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
         Model::automaticallyEagerLoadRelationships();
+        Cashier::useCustomerModel(Tenant::class);
+
+        // Register policies
+        Gate::policy(Tenant::class, TenantPolicy::class);
     }
 }

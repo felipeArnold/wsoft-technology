@@ -10,13 +10,14 @@
         "alperenersoy/filament-export": "^4.0",
         "barryvdh/laravel-dompdf": "^3.1",
         "filament/filament": "^4.0",
-        "laravel/cashier": "^16.0",
+        "laravel/cashier": "^15.0",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "leandrocfe/filament-apex-charts": "*",
         "leandrocfe/filament-ptbr-form-fields": "^4.0",
-        "marcelweidum/filament-expiration-notice": "^1.0"
+        "marcelweidum/filament-expiration-notice": "^1.0",
+        "maartenpaauw/filament-cashier-billing-provider": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",

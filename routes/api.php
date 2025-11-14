@@ -12,3 +12,5 @@ Route::get('/user', function (Request $request) {
 
 // Webhooks - Rotas públicas (sem autenticação)
 Route::post('/webhooks/zapsign', ZapSignController::class);
+
+Route::post('/stripe/webhook', App\Http\Controllers\Stripe\StripeWebhookController::class);

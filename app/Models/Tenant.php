@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Cashier\Billable;
 use Str;
 
 /**
@@ -33,6 +34,7 @@ use Str;
  */
 final class Tenant extends Model
 {
+    use Billable;
     use SoftDeletes;
 
     protected $guarded = ['id'];

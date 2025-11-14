@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Tenant;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,10 +22,5 @@ final class DatabaseSeeder extends Seeder
             'email' => 'felipe@example.com',
             'password' => bcrypt('password'),
         ]);
-
-        Tenant::query()->create([
-            'name' => 'WSoft',
-            'slug' => 'w-soft',
-        ])->users()->attach(User::find(1));
     }
 }

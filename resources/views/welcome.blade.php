@@ -76,10 +76,10 @@
                     <a href="#funcionalidades" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Funcionalidades</a>
                     <a href="#planos" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Planos</a>
                     <a href="#contato" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contato</a>
-                    <a href="/admin/login" class="text-blue-600 hover:text-blue-700 px-4 py-2 rounded-md text-sm font-medium border border-blue-600 hover:bg-blue-50">
+                    <a href="/app/login" class="text-blue-600 hover:text-blue-700 px-4 py-2 rounded-md text-sm font-medium border border-blue-600 hover:bg-blue-50">
                         Entrar
                     </a>
-                    <a href="/admin/register" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium">
+                    <a href="/app/register" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium">
                         Cadastrar
                     </a>
                 </div>
@@ -96,8 +96,8 @@
                 <a href="#funcionalidades" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Funcionalidades</a>
                 <a href="#planos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Planos</a>
                 <a href="#contato" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contato</a>
-                <a href="/login" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50">Entrar</a>
-                <a href="/register" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Cadastrar</a>
+                <a href="/app/login" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50">Entrar</a>
+                <a href="/app/register" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Cadastrar</a>
             </div>
         </div>
     </nav>
@@ -114,7 +114,7 @@
                         Sistema completo com ordens de serviço numeradas, controle de estoque com SKU, financeiro com parcelamento, dashboard em tempo real e assinatura digital integrada.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="/register" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition text-center">
+                        <a href="/app/register" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition text-center">
                             <i class="fas fa-rocket mr-2"></i>Começar Teste Grátis
                         </a>
                         <a href="#funcionalidades" class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-600 transition text-center">
@@ -496,7 +496,7 @@
                             <span class="text-gray-700">Suporte por email</span>
                         </li>
                     </ul>
-                    <a href="/register" class="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                    <a href="/app/register" class="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
                         Começar Teste Grátis
                     </a>
                 </div>
@@ -537,7 +537,7 @@
                             <span class="text-gray-700">Suporte prioritário</span>
                         </li>
                     </ul>
-                    <a href="/register" class="block w-full text-center btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                    <a href="/app/register" class="block w-full text-center btn-primary text-white px-6 py-3 rounded-lg font-semibold">
                         Começar Teste Grátis
                     </a>
                 </div>
@@ -575,7 +575,7 @@
                             <span class="text-gray-700">Suporte 24/7</span>
                         </li>
                     </ul>
-                    <a href="/register" class="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                    <a href="/app/register" class="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
                         Começar Teste Grátis
                     </a>
                 </div>
@@ -600,7 +600,7 @@
                 Comece seu teste grátis hoje e veja como nosso sistema pode aumentar sua produtividade
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/register" class="bg-white text-blue-600 px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition inline-block">
+                <a href="/app/register" class="bg-white text-blue-600 px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition inline-block">
                     <i class="fas fa-rocket mr-2"></i>Começar Teste Grátis Agora
                 </a>
             </div>

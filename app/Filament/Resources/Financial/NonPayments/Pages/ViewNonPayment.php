@@ -47,7 +47,7 @@ final class ViewNonPayment extends ViewRecord
                 ->label('Ver Conta Completa')
                 ->icon('heroicon-o-document-text')
                 ->color('gray')
-                ->url(fn () => route('filament.admin.resources.accounts-receivables.view', $this->record->accounts_id))
+                ->url(fn () => route('filament.app.resources.accounts-receivables.view', $this->record->accounts_id))
                 ->openUrlInNewTab(),
         ];
     }

@@ -42,4 +42,20 @@ return [
         'api_token' => env('ZAPSIGN_API_TOKEN'),
     ],
 
+    'payment' => [
+        'default' => env('PAYMENT_DRIVER', 'stripe'),
+        'drivers' => [
+            'stripe' => [
+                'api_key' => env('STRIPE_SECRET'),
+                'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+            ],
+        ],
+    ],
+
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
 ];
