@@ -17,7 +17,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
-class SuggestionResource extends Resource
+final class SuggestionResource extends Resource
 {
     protected static ?string $model = Suggestion::class;
 

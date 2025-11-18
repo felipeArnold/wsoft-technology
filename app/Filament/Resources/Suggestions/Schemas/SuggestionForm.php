@@ -13,7 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
-class SuggestionForm
+final class SuggestionForm
 {
     public static function configure(Schema $schema): Schema
     {

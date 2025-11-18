@@ -123,17 +123,38 @@ final class StripeWebhookController extends Controller
             return;
         }
 
-        $subscription = $tenant->subscriptions()->updateOrCreate(
-            ['stripe_id' => $stripeSubscription->id],
-            [
+        $trialEndsAt = $stripeSubscription->trial_end ? date('Y-m-d H:i:s', $stripeSubscription->trial_end) : null;
+
+        // Verificar se já existe uma subscription para este tenant com o mesmo trial_ends_at
+        $existingSubscription = $tenant->subscriptions()
+            ->where('trial_ends_at', $trialEndsAt)
+            ->first();
+
+        if ($existingSubscription) {
+            // Atualizar a subscription existente ao invés de criar duplicata
+            $subscription = $existingSubscription;
+            $subscription->update([
+                'stripe_id' => $stripeSubscription->id,
                 'type' => $stripeSubscription->items->data[0]->price->product->name ?? 'default',
                 'stripe_status' => $stripeSubscription->status,
                 'stripe_price' => $stripeSubscription->items->data[0]->price->id ?? null,
                 'quantity' => $stripeSubscription->items->data[0]->quantity ?? 1,
-                'trial_ends_at' => $stripeSubscription->trial_end ? date('Y-m-d H:i:s', $stripeSubscription->trial_end) : null,
                 'ends_at' => null,
-            ]
-        );
+            ]);
+        } else {
+            // Criar nova subscription
+            $subscription = $tenant->subscriptions()->updateOrCreate(
+                ['stripe_id' => $stripeSubscription->id],
+                [
+                    'type' => $stripeSubscription->items->data[0]->price->product->name ?? 'default',
+                    'stripe_status' => $stripeSubscription->status,
+                    'stripe_price' => $stripeSubscription->items->data[0]->price->id ?? null,
+                    'quantity' => $stripeSubscription->items->data[0]->quantity ?? 1,
+                    'trial_ends_at' => $trialEndsAt,
+                    'ends_at' => null,
+                ]
+            );
+        }
 
         // Create subscription items - CRITICAL for Laravel Cashier
         foreach ($stripeSubscription->items->data as $item) {
@@ -159,6 +180,19 @@ final class StripeWebhookController extends Controller
     {
         $subscription = Subscription::where('stripe_id', $stripeSubscription->id)->first();
 
+        // Se não encontrar por stripe_id, tentar encontrar por tenant + trial_ends_at
+        if (! $subscription) {
+            $tenant = Tenant::where('stripe_id', $stripeSubscription->customer)->first();
+
+            if ($tenant) {
+                $trialEndsAt = $stripeSubscription->trial_end ? date('Y-m-d H:i:s', $stripeSubscription->trial_end) : null;
+
+                $subscription = $tenant->subscriptions()
+                    ->where('trial_ends_at', $trialEndsAt)
+                    ->first();
+            }
+        }
+
         if (! $subscription) {
             Log::warning('Subscription not found', ['stripe_subscription_id' => $stripeSubscription->id]);
             $this->handleSubscriptionCreated($stripeSubscription);
@@ -167,6 +201,7 @@ final class StripeWebhookController extends Controller
         }
 
         $subscription->update([
+            'stripe_id' => $stripeSubscription->id,
             'stripe_status' => $stripeSubscription->status,
             'stripe_price' => $stripeSubscription->items->data[0]->price->id ?? $subscription->stripe_price,
             'quantity' => $stripeSubscription->items->data[0]->quantity ?? $subscription->quantity,

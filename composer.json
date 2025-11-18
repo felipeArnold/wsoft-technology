@@ -16,8 +16,9 @@
         "laravel/tinker": "^2.10.1",
         "leandrocfe/filament-apex-charts": "*",
         "leandrocfe/filament-ptbr-form-fields": "^4.0",
+        "maartenpaauw/filament-cashier-billing-provider": "^3.0",
         "marcelweidum/filament-expiration-notice": "^1.0",
-        "maartenpaauw/filament-cashier-billing-provider": "^3.0"
+        "resend/resend-php": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",

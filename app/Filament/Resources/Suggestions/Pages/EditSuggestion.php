@@ -8,7 +8,7 @@ use App\Filament\Resources\Suggestions\SuggestionResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditSuggestion extends EditRecord
+final class EditSuggestion extends EditRecord
 {
     protected static string $resource = SuggestionResource::class;
 

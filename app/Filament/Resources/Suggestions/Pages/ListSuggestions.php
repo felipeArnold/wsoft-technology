@@ -8,7 +8,7 @@ use App\Filament\Resources\Suggestions\SuggestionResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListSuggestions extends ListRecords
+final class ListSuggestions extends ListRecords
 {
     protected static string $resource = SuggestionResource::class;
 

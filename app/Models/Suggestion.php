@@ -7,7 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Suggestion extends Model
+final class Suggestion extends Model
 {
     protected $fillable = [
         'user_id',
