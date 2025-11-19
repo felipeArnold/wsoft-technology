@@ -13,8 +13,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
                 <a href="#hero" class="flex items-center space-x-3 text-blue-900 font-semibold">
-                    <i class="fa-solid fa-layer-group text-2xl text-blue-600"></i>
-                    <span class="text-lg">WSoft Tecnologia</span>
+                    <img src="{{ asset('images/logo-azul.webp') }}" alt="WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas" class="h-16 w-auto">
                 </a>
                 <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
                     <a href="#beneficios" class="hover:text-blue-600 transition">Benefícios</a>
