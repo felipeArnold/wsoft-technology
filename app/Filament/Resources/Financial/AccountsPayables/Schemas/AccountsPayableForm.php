@@ -23,7 +23,6 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
-use Leandrocfe\FilamentPtbrFormFields\Document;
 use Leandrocfe\FilamentPtbrFormFields\Money;
 
 final class AccountsPayableForm
@@ -87,41 +86,7 @@ final class AccountsPayableForm
                                                     ->native(false)
                                                     ->searchable()
                                                     ->preload()
-                                                    ->createOptionForm([
-                                                        Section::make('Dados do fornecedor')
-                                                            ->description('Insira os dados do fornecedor')
-                                                            ->collapsible()
-                                                            ->schema([
-                                                                Hidden::make('is_supplier')->default(true),
-                                                                Document::make('document')
-                                                                    ->label('CNPJ')
-                                                                    ->cnpj()
-                                                                    ->columnSpan(1),
-                                                                TextInput::make('name')
-                                                                    ->label('Razão Social')
-                                                                    ->rules([
-                                                                        'required',
-                                                                        'max:50',
-                                                                    ]),
-                                                                TextInput::make('surname')
-                                                                    ->label('Nome Fantasia')
-                                                                    ->rules([
-                                                                        'nullable',
-                                                                        'max:50',
-                                                                    ]),
-                                                                DatePicker::make('birth_date')
-                                                                    ->label('Data de fundação')
-                                                                    ->native(false)
-                                                                    ->rules([
-                                                                        'nullable',
-                                                                        'date',
-                                                                        'before:today',
-                                                                    ]),
-                                                            ])
-                                                            ->columnSpanFull()
-                                                            ->columns(2)
-                                                            ->grow(true),
-                                                    ])
+                                                    ->createOptionForm(Person::getFormSuppliersSimple())
                                                     ->createOptionUsing(function (array $data): int {
                                                         return Person::query()->create($data)->getKey();
                                                     })

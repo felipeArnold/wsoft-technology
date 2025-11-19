@@ -85,13 +85,7 @@ final class AccountsReceivableForm
                                                     ->options(fn () => Person::query()->where('is_client', true)->pluck('name', 'id'))
                                                     ->native(false)
                                                     ->searchable()
-                                                    ->createOptionForm([
-                                                        TextInput::make('name')
-                                                            ->label('Nome')
-                                                            ->required(),
-                                                        Hidden::make('client_or_supplier')
-                                                            ->default('person'),
-                                                    ])
+                                                    ->createOptionForm(Person::getFormSimple())
                                                     ->createOptionUsing(function (array $data): int {
                                                         return Person::query()->create($data)->getKey();
                                                     })
