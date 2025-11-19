@@ -33,6 +33,8 @@ final class SuggestionResource extends Resource
 
     protected static ?int $navigationSort = 99;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Schema $schema): Schema
     {
         return SuggestionForm::configure($schema);

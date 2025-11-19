@@ -25,6 +25,7 @@ final class OverdueAccounts extends BaseWidget
             ->query(
                 AccountsInstallments::query()
                     ->where('status', '<>', PaymentStatusEnum::PAID)
+                    ->where('due_date', '<', Carbon::today())
                     ->with(['accounts.person', 'accounts'])
                     ->orderBy('due_date', 'asc')
             )

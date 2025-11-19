@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Filament\Clusters\Settings\SettingsCluster;
 use App\Filament\Pages\Auth\RegisterTeam;
+use App\Filament\Resources\Suggestions\SuggestionResource;
 use App\Models\Tenant;
+use Filament\Actions\Action;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Enums\ThemeMode;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -52,8 +56,24 @@ final class AppPanelProvider extends PanelProvider
                 'Cadastros',
                 'Financeiro',
                 'Serviços',
-                'Configurações',
             ])
+            ->userMenuItems([
+                Action::make('settings')
+                    ->label('Configuração')
+                    ->url(fn (): string => SettingsCluster::getNavigationUrl())
+                    ->icon('heroicon-o-cog-6-tooth'),
+                Action::make('billing')
+                    ->label('Gerenciar Assinatura')
+                    ->url(fn (): string => route('filament.app.tenant.billing', [
+                        'tenant' => Filament::getTenant(),
+                    ]))
+                    ->icon('heroicon-o-credit-card'),
+                Action::make('suggestions')
+                    ->label('Sugestões')
+                    ->url(fn (): string => SuggestionResource::getUrl('index'))
+                    ->icon('heroicon-o-light-bulb'),
+            ])
+            ->tenantMenu(false)
             ->colors([
                 'danger' => Color::Red,
                 'gray' => Color::Gray,
@@ -63,7 +83,7 @@ final class AppPanelProvider extends PanelProvider
                 'warning' => Color::hex('#F59E0B'),
             ])
             ->tenantBillingProvider(new BillingProvider('default'))
-            ->requiresTenantSubscription()
+            ->requiresTenantSubscription(false)
             ->topNavigation()
             ->brandLogo(fn () => view('components.logo'))
             ->favicon(asset('images/icon.webp'))
@@ -74,7 +94,7 @@ final class AppPanelProvider extends PanelProvider
                     ? asset('images/logo-azul.webp')
                     : asset('images/logo-branco.webp')
             )
-            ->brandLogoHeight(fn (): string => Auth::check() ? '3rem' : '5rem')
+            ->brandLogoHeight(fn (): string => Auth::check() ? '4rem' : '5rem')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
