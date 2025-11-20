@@ -7,6 +7,7 @@ namespace App\Filament\Resources\Creates\People;
 use App\Filament\Resources\Creates\People\Pages\CreatePerson;
 use App\Filament\Resources\Creates\People\Pages\EditPerson;
 use App\Filament\Resources\Creates\People\Pages\ListPeople;
+use App\Filament\Resources\Creates\People\RelationManagers\AccountsReceivableRelationManager;
 use App\Filament\Resources\Creates\People\RelationManagers\ServicesOrdersRelationManager;
 use App\Filament\Resources\Creates\People\Schemas\PersonForm;
 use App\Filament\Resources\Creates\People\Tables\PeopleTable;
@@ -66,6 +67,7 @@ final class PersonResource extends Resource
     public static function getRelations(): array
     {
         return [
+            AccountsReceivableRelationManager::class,
             ServicesOrdersRelationManager::class,
         ];
     }

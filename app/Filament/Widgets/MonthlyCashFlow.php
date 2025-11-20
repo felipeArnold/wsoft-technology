@@ -7,6 +7,7 @@ namespace App\Filament\Widgets;
 use App\Enum\AccountsReceivable\PaymentStatusEnum;
 use App\Models\Accounts\AccountsInstallments;
 use Carbon\Carbon;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
@@ -36,8 +37,11 @@ final class MonthlyCashFlow extends ApexChartWidget
             ? "strftime('%Y-%m', accounts_installments.paid_at)"
             : "DATE_FORMAT(accounts_installments.paid_at, '%Y-%m')";
 
+        $tenant = Filament::getTenant();
+
         $results = AccountsInstallments::query()
             ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
+            ->where('accounts_installments.tenant_id', $tenant?->id)
             ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
             ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
             ->selectRaw("
@@ -121,8 +125,17 @@ final class MonthlyCashFlow extends ApexChartWidget
                     'borderRadiusApplication' => 'end',
                 ],
             ],
-            'colors' => ['#34c38f', '#f46a6a'],
-
+            'colors' => ['#34c38f', '#f46a6a', '#556ee6'],
+            'yaxis' => [
+                'labels' => [
+                    'formatter' => 'function (value) { return "R$ " + value.toLocaleString("pt-BR", {minimumFractionDigits: 2}); }',
+                ],
+            ],
+            'tooltip' => [
+                'y' => [
+                    'formatter' => 'function (value) { return "R$ " + value.toLocaleString("pt-BR", {minimumFractionDigits: 2}); }',
+                ],
+            ],
         ];
     }
 }

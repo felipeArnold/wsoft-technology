@@ -7,6 +7,7 @@ namespace App\Filament\Resources\Creates\Suppliers;
 use App\Filament\Resources\Creates\Suppliers\Pages\CreateSupplier;
 use App\Filament\Resources\Creates\Suppliers\Pages\EditSupplier;
 use App\Filament\Resources\Creates\Suppliers\Pages\ListSuppliers;
+use App\Filament\Resources\Creates\Suppliers\RelationManagers\AccountsPayableRelationManager;
 use App\Filament\Resources\Creates\Suppliers\RelationManagers\ServicesOrdersRelationManager;
 use App\Filament\Resources\Creates\Suppliers\Schemas\SupplierForm;
 use App\Filament\Resources\Creates\Suppliers\Tables\SuppliersTable;
@@ -65,6 +66,7 @@ final class SupplierResource extends Resource
     public static function getRelations(): array
     {
         return [
+            AccountsPayableRelationManager::class,
             ServicesOrdersRelationManager::class,
         ];
     }
