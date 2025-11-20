@@ -8,6 +8,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-MN5442GH2J');
+    </script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
     <header class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
@@ -53,7 +61,7 @@
                     O WSoft é um sistema financeiro online que combina sistema de ordem de serviço, controle financeiro, controle de inadimplência e sistema de fluxo de caixa em um ERP simples e intuitivo. Ideal para quem precisa crescer rápido sem complicação.
                 </p>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                    <a href="#oferta" class="inline-flex justify-center items-center rounded-lg bg-white text-blue-700 font-semibold px-8 py-4 shadow-sm hover:shadow-lg transition">
+                    <a href="/app/register" class="inline-flex justify-center items-center rounded-lg bg-white text-blue-700 font-semibold px-8 py-4 shadow-sm hover:shadow-lg transition">
                         Testar grátis por 7 dias
                     </a>
                     <a href="#demo" class="inline-flex justify-center items-center rounded-lg border border-white/60 text-white font-semibold px-8 py-4 hover:bg-white/10 transition">
@@ -272,7 +280,7 @@
                 Assuma o controle do seu negócio com um modelo híbrido: comece com 7 dias de teste, migre para o plano completo e mantenha o WSoft como seu sistema sem mensalidade fixa por licença vitalícia.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#hero" class="inline-flex justify-center items-center rounded-lg bg-white text-blue-700 font-semibold px-10 py-4 shadow-lg hover:-translate-y-0.5 transition">
+                <a href="/app/register" class="inline-flex justify-center items-center rounded-lg bg-white text-blue-700 font-semibold px-10 py-4 shadow-lg hover:-translate-y-0.5 transition">
                     Testar grátis por 7 dias
                 </a>
                 <a href="#contato" class="inline-flex justify-center items-center rounded-lg border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition">
@@ -354,8 +362,7 @@
                 <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Contato</h4>
                 <ul class="mt-4 space-y-2 text-sm text-slate-300">
                     <li>contato@wsoft.com.br</li>
-                    <li>(11) 99999-9999</li>
-                    <li>São Paulo - SP</li>
+                    <li>Rolante/RS</li>
                 </ul>
             </div>
             <div>
