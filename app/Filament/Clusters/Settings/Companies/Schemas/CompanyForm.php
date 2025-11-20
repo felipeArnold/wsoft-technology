@@ -16,8 +16,8 @@ final class CompanyForm
     {
         return $schema
             ->schema([
-                Section::make('Logo da Empresa')
-                    ->description('Faça upload do logotipo da sua empresa')
+                Section::make('Informações Básicas')
+                    ->description('Dados principais da empresa')
                     ->schema([
                         FileUpload::make('avatar')
                             ->label('Logo')
@@ -32,29 +32,17 @@ final class CompanyForm
                             ->maxSize(2048)
                             ->columnSpanFull()
                             ->helperText('Tamanho máximo: 2MB. Formatos aceitos: JPG, PNG, GIF'),
-                    ])
-                    ->columns(1),
 
-                Section::make('Informações Básicas')
-                    ->description('Dados principais da empresa')
-                    ->schema([
                         TextInput::make('name')
                             ->label('Nome da Empresa')
                             ->required()
                             ->maxLength(255)
-                            ->columnSpanFull(),
+                            ->columnSpan(1),
 
                         Document::make('document')
                             ->label('CNPJ')
                             ->cnpj()
                             ->required()
-                            ->columnSpan(1),
-
-                        TextInput::make('slug')
-                            ->label('Slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true)
                             ->columnSpan(1),
 
                         TextInput::make('website')
@@ -69,6 +57,7 @@ final class CompanyForm
                             ->default('company')
                             ->columnSpan(1),
                     ])
+                    ->columnSpanFull()
                     ->columns(2),
             ]);
     }

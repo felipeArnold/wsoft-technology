@@ -7,6 +7,7 @@ namespace App\Filament\Clusters\Settings\Companies;
 use App\Filament\Clusters\Settings\Companies\Pages\EditCompany;
 use App\Filament\Clusters\Settings\Companies\Pages\ListCompanies;
 use App\Filament\Clusters\Settings\Companies\Pages\ViewCompany;
+use App\Filament\Clusters\Settings\Companies\RelationManagers\SubscriptionsRelationManager;
 use App\Filament\Clusters\Settings\Companies\Schemas\CompanyForm;
 use App\Filament\Clusters\Settings\Companies\Schemas\CompanyInfolist;
 use App\Filament\Clusters\Settings\Companies\Tables\CompaniesTable;
@@ -56,7 +57,7 @@ final class CompanyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SubscriptionsRelationManager::class,
         ];
     }
 
