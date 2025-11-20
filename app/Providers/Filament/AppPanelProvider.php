@@ -61,17 +61,22 @@ final class AppPanelProvider extends PanelProvider
                 Action::make('settings')
                     ->label('Configuração')
                     ->url(fn (): string => SettingsCluster::getNavigationUrl())
-                    ->icon('heroicon-o-cog-6-tooth'),
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->visible(fn (): bool => Filament::getTenant() !== null),
                 Action::make('billing')
                     ->label('Gerenciar Assinatura')
-                    ->url(fn (): string => route('filament.app.tenant.billing', [
-                        'tenant' => Filament::getTenant(),
-                    ]))
-                    ->icon('heroicon-o-credit-card'),
+                    ->url(fn (): string => Filament::getTenant()
+                        ? route('filament.app.tenant.billing', ['tenant' => Filament::getTenant()])
+                        : '#')
+                    ->icon('heroicon-o-credit-card')
+                    ->visible(fn (): bool => Filament::getTenant() !== null),
                 Action::make('suggestions')
                     ->label('Sugestões')
-                    ->url(fn (): string => SuggestionResource::getUrl('index'))
-                    ->icon('heroicon-o-light-bulb'),
+                    ->url(fn (): string => Filament::getTenant()
+                        ? SuggestionResource::getUrl('index')
+                        : '#')
+                    ->icon('heroicon-o-light-bulb')
+                    ->visible(fn (): bool => Filament::getTenant() !== null),
             ])
             ->tenantMenu(false)
             ->colors([
@@ -83,7 +88,7 @@ final class AppPanelProvider extends PanelProvider
                 'warning' => Color::hex('#F59E0B'),
             ])
             ->tenantBillingProvider(new BillingProvider('default'))
-            ->requiresTenantSubscription(false)
+            ->requiresTenantSubscription()
             ->topNavigation()
             ->brandLogo(fn () => view('components.logo'))
             ->favicon(asset('images/icon.webp'))

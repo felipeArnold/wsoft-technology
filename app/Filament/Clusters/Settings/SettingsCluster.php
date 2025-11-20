@@ -7,6 +7,7 @@ namespace App\Filament\Clusters\Settings;
 use App\Filament\Clusters\Settings\Users\UserResource;
 use BackedEnum;
 use Filament\Clusters\Cluster;
+use Filament\Facades\Filament;
 use Filament\Support\Icons\Heroicon;
 use UnitEnum;
 
@@ -22,6 +23,10 @@ final class SettingsCluster extends Cluster
 
     public static function getNavigationUrl(): string
     {
+        if (! Filament::getTenant()) {
+            return '#';
+        }
+
         return UserResource::getUrl('index');
     }
 }

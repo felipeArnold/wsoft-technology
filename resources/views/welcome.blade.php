@@ -6,6 +6,7 @@
     <meta name="description" content="WSoft Tecnologia - Sistema de gestão para pequenas empresas com controle financeiro, ordens de serviço, cadastro de clientes e fluxo de caixa em uma única plataforma.">
     <title>WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
@@ -31,6 +32,8 @@
                     <a href="#funcionalidades" class="hover:text-blue-600 transition">Funcionalidades</a>
                     <a href="#oferta" class="hover:text-blue-600 transition">Oferta</a>
                     <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
+                    <a href="/app/login" class="hover:text-blue-600 transition">Login</a>
+                    <a href="/app/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Cadastrar</a>
                 </nav>
                 <button id="menu-button" class="md:hidden text-2xl text-slate-700" aria-label="Abrir menu">
                     <i class="fa-solid fa-bars"></i>
@@ -43,7 +46,9 @@
                     <a href="#demo" class="py-2 border-b border-slate-100">Demonstração</a>
                     <a href="#funcionalidades" class="py-2 border-b border-slate-100">Funcionalidades</a>
                     <a href="#oferta" class="py-2 border-b border-slate-100">Oferta</a>
-                    <a href="#faq" class="py-2">FAQ</a>
+                    <a href="#faq" class="py-2 border-b border-slate-100">FAQ</a>
+                    <a href="/app/login" class="py-2 border-b border-slate-100">Login</a>
+                    <a href="/app/register" class="py-2 text-blue-600">Cadastrar</a>
                 </nav>
             </div>
         </div>
@@ -69,9 +74,10 @@
                     </a>
                 </div>
                 <div class="mt-8 flex flex-wrap gap-4 text-sm text-blue-200">
-                    <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-200"></i> Sem cartão de crédito</span>
                     <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-200"></i> Controle de clientes e fornecedores</span>
                     <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-200"></i> Contas a pagar e receber</span>
+                    <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-200"></i> Movimentação de fluxo de caixa</span>
+                    <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-200"></i> Sistema de ordem de serviço (OS)</span>
                 </div>
             </div>
             <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur shadow-2xl">
