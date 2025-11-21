@@ -39,7 +39,7 @@
             <div>
                 <p class="text-sm uppercase tracking-[0.2em] text-blue-200 mb-4">Oficinas mecânicas · Auto centers · Funilarias</p>
                 <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
-                    Pare de Perder Dinheiro com Desorganização
+                    O Sistema de Gestão Completo Para Pequenas Empresas
                 </h1>
                 <p class="mt-6 text-lg text-blue-100">
                     Sistema de Gestão Empresarial que organiza seu financeiro, elimina inadimplência e aumenta seus lucros com um ERP simples voltado para oficinas. Tenha sistema de ordem de serviço, sistema de fluxo de caixa, controle de clientes e controle de produtos no mesmo painel, ideal como sistema para microempresa automotiva.
