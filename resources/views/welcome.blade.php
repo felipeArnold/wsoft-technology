@@ -397,14 +397,14 @@
                     <li>Rolante/RS</li>
                 </ul>
             </div>
-            <div>
-                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Redes</h4>
-                <div class="mt-4 flex gap-3 text-lg">
-                    <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-white"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook"></i></a>
-                </div>
-            </div>
+{{--            <div>--}}
+{{--                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Redes</h4>--}}
+{{--                <div class="mt-4 flex gap-3 text-lg">--}}
+{{--                    <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>--}}
+{{--                    <a href="#" class="hover:text-white"><i class="fa-brands fa-linkedin"></i></a>--}}
+{{--                    <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook"></i></a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
         <p class="mt-10 text-center text-xs text-slate-500">&copy; {{ now()->year }} WSoft Tecnologia. Todos os direitos reservados.</p>
     </footer>
