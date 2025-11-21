@@ -56,6 +56,7 @@ final class AppPanelProvider extends PanelProvider
                 'Cadastros',
                 'Financeiro',
                 'Serviços',
+                'Vendas',
             ])
             ->userMenuItems([
                 Action::make('settings')
