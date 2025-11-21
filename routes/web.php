@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Landing\FunilariaLeadController;
+use App\Http\Controllers\Landing\MecanicaLeadController;
 use App\Http\Controllers\Landing\OficinaLeadController;
 use App\Http\Controllers\Stripe\StripeBillingController;
 use Illuminate\Support\Facades\Route;
@@ -12,8 +14,15 @@ Route::get('/', function () {
 
 // Landing Page para Software de Oficina
 Route::get('/oficina', [OficinaLeadController::class, 'index'])->name('landing.oficina');
-
 Route::post('/oficina/lead', [OficinaLeadController::class, 'store'])->name('landing.oficina.store');
+
+// Landing Page para Sistema de Mecânica
+Route::get('/mecanica', [MecanicaLeadController::class, 'index'])->name('landing.mecanica');
+Route::post('/mecanica/lead', [MecanicaLeadController::class, 'store'])->name('landing.mecanica.store');
+
+// Landing Page para Sistema de Funilaria
+Route::get('/funilaria', [FunilariaLeadController::class, 'index'])->name('landing.funilaria');
+Route::post('/funilaria/lead', [FunilariaLeadController::class, 'store'])->name('landing.funilaria.store');
 
 // Stripe Billing Routes
 Route::middleware(['auth'])->prefix('stripe')->name('stripe.')->group(function () {

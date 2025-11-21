@@ -358,7 +358,7 @@
 
     <!-- Footer -->
     <footer id="contato" class="bg-slate-900 text-slate-100 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-10">
             <div>
                 <h3 class="text-lg font-semibold">WSoft Tecnologia</h3>
                 <p class="mt-3 text-sm text-slate-400">Sistema de gestão para pequenas empresas que une organização empresarial e crescimento previsível.</p>
@@ -369,6 +369,14 @@
                     <li><a href="#beneficios" class="hover:text-white">Benefícios</a></li>
                     <li><a href="#demo" class="hover:text-white">Demonstração</a></li>
                     <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Soluções</h4>
+                <ul class="mt-4 space-y-2 text-sm text-slate-300">
+                    <li><a href="/oficina" class="hover:text-white">Sistema para Oficina</a></li>
+                    <li><a href="/mecanica" class="hover:text-white">Sistema para Mecânica</a></li>
+                    <li><a href="/funilaria" class="hover:text-white">Sistema para Funilaria</a></li>
                 </ul>
             </div>
             <div>
