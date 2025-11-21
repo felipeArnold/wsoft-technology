@@ -33,3 +33,9 @@ Route::middleware(['auth'])->prefix('stripe')->name('stripe.')->group(function (
     Route::post('/subscription/resume/{tenant}', [StripeBillingController::class, 'resumeSubscription'])->name('subscription.resume');
     Route::get('/checkout/{tenant}', [StripeBillingController::class, 'checkout'])->name('checkout');
 });
+
+Route::get('/robots.txt', function () {
+    return response()->file(public_path('robots.txt'), [
+        'Content-Type' => 'text/plain',
+    ]);
+});

@@ -7,7 +7,18 @@
     <title>WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="distribution" content="Global">
+    <meta name="rating" content="General">
+    <meta name="language" content="pt-BR">
+    <meta name="content-language" content="pt-BR">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
     <script>
