@@ -17,6 +17,13 @@
 
         gtag('config', 'G-MN5442GH2J');
     </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-11559494036');
+    </script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
     <header class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
