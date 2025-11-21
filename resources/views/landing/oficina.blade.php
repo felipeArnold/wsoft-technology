@@ -21,6 +21,15 @@
 
         gtag('config', 'G-MN5442GH2J');
     </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11559494036"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-11559494036');
+    </script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
 
