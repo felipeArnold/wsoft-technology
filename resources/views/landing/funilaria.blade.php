@@ -7,9 +7,9 @@
     <meta property="og:title" content="WSoft Tecnologia | Sistema para Funilaria e Pintura">
     <meta property="og:description" content="Software para funilaria que organiza OS, controla orçamentos e aumenta seus lucros.">
     <title>WSoft Tecnologia | Sistema para Funilaria e Pintura Automotiva</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('js/tailwind.js') }}"></script>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
     @livewireStyles
 

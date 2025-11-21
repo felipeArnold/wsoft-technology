@@ -7,9 +7,9 @@
     <meta property="og:title" content="WSoft Tecnologia | Sistema de Gestão Empresarial para Oficinas">
     <meta property="og:description" content="Sistema financeiro online que organiza oficinas, elimina inadimplência e aumenta os lucros.">
     <title>WSoft Tecnologia | Sistema de Gestão para Oficinas Mecânicas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('js/tailwind.js') }}"></script>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
     @livewireStyles
 
