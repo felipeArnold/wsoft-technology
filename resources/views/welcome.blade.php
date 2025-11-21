@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="WSoft Tecnologia - Sistema de gestão para pequenas empresas com controle financeiro, ordens de serviço, cadastro de clientes e fluxo de caixa em uma única plataforma.">
     <title>WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('js/tailwind.js') }}"></script>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
     <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
 
