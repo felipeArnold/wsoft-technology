@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\Sales\Sales\Pages;
+namespace App\Filament\Resources\Financial\Sales\Pages;
 
-use App\Filament\Resources\Sales\Sales\SaleResource;
+use App\Filament\Resources\Financial\Sales\SaleResource;
 use App\Helpers\FormatterHelper;
 use Filament\Facades\Filament;
 use Filament\Resources\Pages\CreateRecord;

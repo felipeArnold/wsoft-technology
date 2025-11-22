@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\Sales\Sales\Tables;
+namespace App\Filament\Resources\Financial\Sales\Tables;
 
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;

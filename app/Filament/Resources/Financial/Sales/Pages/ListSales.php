@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\Sales\Sales\Pages;
+namespace App\Filament\Resources\Financial\Sales\Pages;
 
-use App\Filament\Resources\Sales\Sales\SaleResource;
-use App\Filament\Resources\Sales\Sales\Widgets\SalesOverview;
+use App\Filament\Resources\Financial\Sales\SaleResource;
+use App\Filament\Resources\Financial\Sales\Widgets\SalesOverview;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 

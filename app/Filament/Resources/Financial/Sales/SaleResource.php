@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\Sales\Sales;
+namespace App\Filament\Resources\Financial\Sales;
 
-use App\Filament\Resources\Sales\Sales\Pages\CreateSale;
-use App\Filament\Resources\Sales\Sales\Pages\EditSale;
-use App\Filament\Resources\Sales\Sales\Pages\ListSales;
-use App\Filament\Resources\Sales\Sales\Pages\ViewSale;
-use App\Filament\Resources\Sales\Sales\Schemas\SaleForm;
-use App\Filament\Resources\Sales\Sales\Schemas\SaleInfolist;
-use App\Filament\Resources\Sales\Sales\Tables\SalesTable;
+use App\Filament\Resources\Financial\Sales\Pages\CreateSale;
+use App\Filament\Resources\Financial\Sales\Pages\EditSale;
+use App\Filament\Resources\Financial\Sales\Pages\ListSales;
+use App\Filament\Resources\Financial\Sales\Pages\ViewSale;
+use App\Filament\Resources\Financial\Sales\Schemas\SaleForm;
+use App\Filament\Resources\Financial\Sales\Schemas\SaleInfolist;
+use App\Filament\Resources\Financial\Sales\Tables\SalesTable;
 use App\Models\Sale;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -29,9 +29,9 @@ final class SaleResource extends Resource
 
     protected static ?string $pluralLabel = 'Vendas';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Vendas';
+    protected static string|null|UnitEnum $navigationGroup = 'Financeiro';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {

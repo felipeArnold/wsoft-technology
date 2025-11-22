@@ -18,6 +18,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 final class AdminPanelProvider extends PanelProvider
@@ -36,10 +37,6 @@ final class AdminPanelProvider extends PanelProvider
                 'success' => Color::Emerald,
                 'warning' => Color::hex('#F59E0B'),
             ])
-            ->brandLogo(asset('images/logo-azul.webp'))
-            ->favicon(asset('images/icon.webp'))
-            ->defaultThemeMode(ThemeMode::Light)
-            ->brandLogoHeight('3rem')
             ->navigationGroups([
                 'Clientes',
                 'Financeiro',
@@ -47,6 +44,15 @@ final class AdminPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
+            ->brandLogo(fn () => view('components.logo'))
+            ->favicon(asset('images/icon.webp'))
+            ->brandLogo(asset('images/logo.png'))
+            ->defaultThemeMode(ThemeMode::Light)
+            ->darkModeBrandLogo(
+                fn (): string => Auth::check()
+                    ? asset('images/logo-white.png')
+                    : asset('images/logo.png')
+            )
             ->pages([
                 Dashboard::class,
             ])

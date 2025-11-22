@@ -36,13 +36,6 @@ final class ProductForm
                             ->maxLength(50)
                             ->columnSpan(1),
 
-                    ])
-                    ->columns(3)
-                    ->columnSpanFull(),
-
-                Section::make('Preços e Margem')
-                    ->icon('heroicon-o-currency-dollar')
-                    ->schema([
                         PtbrMoney::make('price_cost')
                             ->label('Valor de Custo')
                             ->default(0)

@@ -39,8 +39,10 @@ final class UserForm
                             ->label('Avatar')
                             ->image()
                             ->imageEditor()
-                            ->acceptedFileTypes(['image/*'])
-                            ->rules(['image', 'max:1024']),
+                            ->directory('users/avatars')
+                            ->visibility('public')
+                            ->maxSize(1024)
+                            ->helperText('Tamanho máximo: 1MB'),
 
                     ])->columns()
                     ->columnSpanFull(),

@@ -33,6 +33,7 @@ final class AccountsReceivableResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Financeiro';
 
+    protected static ?int $navigationSort = 2;
     // protected static ?string $cluster = FinancialCluster::class;
 
     public static function form(Schema $schema): Schema

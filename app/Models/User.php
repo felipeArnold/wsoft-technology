@@ -77,7 +77,12 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->avatar ? Storage::url($this->avatar) : null;
+        return $this->avatar ? Storage::providesTemporaryUrls()
+            ? Storage::temporaryUrl(
+                $this->avatar,
+                now()->addMinutes(config('filament.models.user.avatar_url_expiration', 5)),
+            )
+            : Storage::url($this->avatar) : null;
     }
 
     public function hasEmailAuthentication(): bool

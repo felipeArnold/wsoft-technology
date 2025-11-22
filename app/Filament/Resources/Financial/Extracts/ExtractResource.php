@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Financial\Extracts;
 
-use App\Filament\Clusters\Financial\FinancialCluster;
 use App\Filament\Resources\Financial\Extracts\Pages\ListExtracts;
 use App\Filament\Resources\Financial\Extracts\Schemas\ExtractForm;
 use App\Filament\Resources\Financial\Extracts\Tables\ExtractsTable;
@@ -30,7 +29,7 @@ final class ExtractResource extends Resource
 
     protected static ?string $pluralLabel = 'Movimentações Financeiras';
 
-    // protected static ?string $cluster = FinancialCluster::class;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Schema $schema): Schema
     {

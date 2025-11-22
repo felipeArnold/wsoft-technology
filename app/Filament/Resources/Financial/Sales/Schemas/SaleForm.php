@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\Sales\Sales\Schemas;
+namespace App\Filament\Resources\Financial\Sales\Schemas;
 
 use App\Filament\Components\PtbrMoney;
 use App\Helpers\FormatterHelper;
