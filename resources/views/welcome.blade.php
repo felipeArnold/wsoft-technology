@@ -48,7 +48,7 @@
                     <a href="#porque" class="hover:text-blue-600 transition">Por que WSoft</a>
                     <a href="#demo" class="hover:text-blue-600 transition">Demonstração</a>
                     <a href="#funcionalidades" class="hover:text-blue-600 transition">Funcionalidades</a>
-                    <a href="#oferta" class="hover:text-blue-600 transition">Oferta</a>
+                    <a href="#precos" class="hover:text-blue-600 transition">Preços</a>
                     <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
                     <a href="/app/login" class="hover:text-blue-600 transition">Login</a>
                     <a href="/app/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Cadastrar</a>
@@ -63,7 +63,7 @@
                     <a href="#porque" class="py-2 border-b border-slate-100">Por que WSoft</a>
                     <a href="#demo" class="py-2 border-b border-slate-100">Demonstração</a>
                     <a href="#funcionalidades" class="py-2 border-b border-slate-100">Funcionalidades</a>
-                    <a href="#oferta" class="py-2 border-b border-slate-100">Oferta</a>
+                    <a href="#precos" class="py-2 border-b border-slate-100">Preços</a>
                     <a href="#faq" class="py-2 border-b border-slate-100">FAQ</a>
                     <a href="/app/login" class="py-2 border-b border-slate-100">Login</a>
                     <a href="/app/register" class="py-2 text-blue-600">Cadastrar</a>
@@ -315,6 +315,74 @@
         </div>
     </section>
 
+    <!-- Preços -->
+    <section id="precos" class="py-20 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto">
+                <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Planos e Preços</p>
+                <h2 class="mt-4 text-3xl md:text-4xl font-bold">Investimento acessível para seu negócio crescer</h2>
+                <p class="mt-4 text-slate-600">Todas as funcionalidades que você precisa por um preço que cabe no bolso.</p>
+            </div>
+            <div class="mt-12 max-w-lg mx-auto">
+                <div class="rounded-3xl bg-white border-2 border-blue-600 shadow-xl overflow-hidden">
+                    <div class="bg-blue-600 text-white text-center py-4">
+                        <span class="text-sm font-semibold uppercase tracking-wider">Plano Completo</span>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-center">
+                            <span class="text-sm text-slate-500">A partir de</span>
+                            <div class="mt-2">
+                                <span class="text-5xl font-bold text-slate-900">R$ 29</span>
+                                <span class="text-2xl font-bold text-slate-900">,90</span>
+                                <span class="text-slate-500">/mês</span>
+                            </div>
+                        </div>
+                        <ul class="mt-8 space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-slate-700">Cadastro ilimitado de clientes e fornecedores</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-slate-700">Controle completo de produtos e estoque</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-slate-700">Contas a pagar e receber automatizadas</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-slate-700">Sistema de ordem de serviço (OS) completo</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-slate-700">Fluxo de caixa e controle financeiro</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-slate-700">Dashboard com indicadores em tempo real</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-slate-700">Controle de inadimplência e cobranças</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-slate-700">Suporte humano ilimitado</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <a href="/app/register" class="block w-full text-center rounded-lg bg-blue-600 text-white font-semibold px-8 py-4 hover:bg-blue-700 transition">
+                                Começar teste grátis de 7 dias
+                            </a>
+                        </div>
+                        <p class="mt-4 text-center text-sm text-slate-500">Sem compromisso. Cancele quando quiser.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ -->
     <section id="faq" class="py-20 bg-white">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -377,9 +445,10 @@
             <div>
                 <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Produto</h4>
                 <ul class="mt-4 space-y-2 text-sm text-slate-300">
-                    <li><a href="#beneficios" class="hover:text-white">Benefícios</a></li>
-                    <li><a href="#demo" class="hover:text-white">Demonstração</a></li>
-                    <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+                    <li><a href="/beneficios" class="hover:text-white">Benefícios</a></li>
+                    <li><a href="/demonstracao" class="hover:text-white">Demonstração</a></li>
+                    <li><a href="#precos" class="hover:text-white">Preços</a></li>
+                    <li><a href="/faq" class="hover:text-white">FAQ</a></li>
                 </ul>
             </div>
             <div>

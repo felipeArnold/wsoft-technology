@@ -12,6 +12,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Páginas informativas
+Route::get('/beneficios', function () {
+    return view('pages.beneficios');
+})->name('pages.beneficios');
+
+Route::get('/demonstracao', function () {
+    return view('pages.demonstracao');
+})->name('pages.demonstracao');
+
+Route::get('/faq', function () {
+    return view('pages.faq');
+})->name('pages.faq');
+
 // Landing Page para Software de Oficina
 Route::get('/oficina', [OficinaLeadController::class, 'index'])->name('landing.oficina');
 Route::post('/oficina/lead', [OficinaLeadController::class, 'store'])->name('landing.oficina.store');
