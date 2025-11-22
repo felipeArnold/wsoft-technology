@@ -84,7 +84,7 @@ final class AppPanelProvider extends PanelProvider
                 'danger' => Color::Red,
                 'gray' => Color::Gray,
                 'info' => Color::hex('#3B82F6'),
-                'primary' => Color::hex('#1E3A8A'),
+                'primary' => Color::hex('#1d4ed8'),
                 'success' => Color::Emerald,
                 'warning' => Color::hex('#F59E0B'),
             ])

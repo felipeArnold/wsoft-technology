@@ -2,9 +2,44 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="WSoft Tecnologia - Sistema de gestão para pequenas empresas com controle financeiro, ordens de serviço, cadastro de clientes e fluxo de caixa em uma única plataforma.">
-    <title>WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="index,follow" />
+
+    <title>Sistema de Gestão Online | WSoft Tecnologia - Financeiro, OS, Vendas e Assinatura Digital</title>
+    <meta name="description" content="WSoft - Sistema de gestão online para pequenas e médias empresas. Controle financeiro, contas a pagar e receber, ordem de serviço, estoque, vendas e assinatura digital. Teste grátis por 7 dias." />
+    <link rel="canonical" href="https://www.wsoft.dev.br/" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="WSoft Tecnologia" />
+    <meta property="og:title" content="Sistema de Gestão Online | WSoft Tecnologia" />
+    <meta property="og:description" content="Controle financeiro, ordem de serviço, vendas, estoque e assinatura digital em um único sistema. Teste grátis por 7 dias." />
+    <meta property="og:type" content="website" />
+
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WSoft - Sistema de Gestão Online" />
+    <meta name="twitter:description" content="Sistema de gestão com financeiro, OS, vendas e assinatura digital. Ideal para mecânicas e pequenas empresas." />
+
+    <!-- Structured Data (SoftwareApplication) -->
+    <script type="application/ld+json">
+        {
+          "@type": "SoftwareApplication",
+          "name": "WSoft Tecnologia",
+          "url": "https://www.wsoft.dev.br/",
+          "description": "Sistema de gestão online com financeiro, contas a pagar e receber, ordem de serviço, controle de estoque e assinatura digital.",
+          "operatingSystem": "Web",
+          "applicationCategory": "BusinessApplication",
+         "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "BRL",
+          "url": "https://www.wsoft.dev.br/app/register",
+          "description": "Teste grátis por 7 dias"
+        }
+      }
+    </script>
+
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
     <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
@@ -15,8 +50,6 @@
     <meta name="rating" content="General">
     <meta name="language" content="pt-BR">
     <meta name="content-language" content="pt-BR">
-    <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
 
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
@@ -50,7 +83,7 @@
                     <a href="#funcionalidades" class="hover:text-blue-600 transition">Funcionalidades</a>
                     <a href="#precos" class="hover:text-blue-600 transition">Preços</a>
                     <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
-                    <a href="/app/login" class="hover:text-blue-600 transition">Login</a>
+                    <a href="/app/login" class="hover:text-blue-600 transition border rounded-2xl">Login</a>
                     <a href="/app/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Cadastrar</a>
                 </nav>
                 <button id="menu-button" class="md:hidden text-2xl text-slate-700" aria-label="Abrir menu">
@@ -78,10 +111,10 @@
             <div>
                 <p class="text-sm uppercase tracking-[0.2em] text-blue-200 mb-4">Software de gestão empresarial completo</p>
                 <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
-                    Sistema de gestão para pequenas empresas com foco em organização empresarial real
+                    Sistema de Gestão Online Completo para Empresas — Financeiro, Vendas, Ordem de Serviço e Assinatura Digital
                 </h1>
                 <p class="mt-6 text-lg text-blue-100">
-                    O WSoft é um sistema financeiro online que combina sistema de ordem de serviço, controle financeiro, controle de inadimplência e sistema de fluxo de caixa em um ERP simples e intuitivo. Ideal para quem precisa crescer rápido sem complicação.
+                    Centralize clientes, fornecedores, contas a pagar e receber, estoque, ordens de serviço e assinatura digital em uma plataforma única. Reduza inadimplência, automatize cobranças e ganhe tempo operacional.
                 </p>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4">
                     <a href="/app/register" class="inline-flex justify-center items-center rounded-lg bg-white text-blue-700 font-semibold px-8 py-4 shadow-sm hover:shadow-lg transition">
@@ -102,7 +135,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm uppercase text-blue-200">Dash Financeiro</p>
-                        <h3 class="text-3xl font-bold mt-1">R$ 124.890</h3>
+                        <h3 class="text-2xl font-bold mt-1">R$ 124.890</h3>
                         <p class="text-xs text-blue-100">Receitas 30 dias</p>
                     </div>
                     <span class="text-xs px-3 py-1 rounded-full bg-white/20">Sistema para microempresa</span>
@@ -135,33 +168,128 @@
             <div class="text-center max-w-3xl mx-auto">
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Benefícios principais</p>
                 <h2 class="mt-4 text-3xl md:text-4xl font-bold">Controle total com linguagem simples e persuasiva</h2>
-                <p class="mt-4 text-slate-600">Tudo que um pequeno empreendedor precisa para dar o próximo passo com segurança.</p>
+                <p class="mt-4 text-slate-600">Tudo o que sua empresa precisa para organizar processos, reduzir custos e aumentar receita.</p>
             </div>
-            <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-semibold">Gestão financeira completa</h3>
-                    <p class="mt-3 text-slate-600">Centralize controle financeiro, relatórios e indicadores em um painel único conectado ao sistema de fluxo de caixa.</p>
+            <div class="grid gap-12 md:grid-cols-2 mt-4">
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-chart-line text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Gestão Financeira Completa</h3>
+                        <p class="mt-3 text-slate-600">Centralize entradas, saídas, projeções e limites em um único painel. Acompanhe o fluxo de caixa em tempo real e tome decisões baseadas em dados concretos.</p>
+                    </div>
                 </article>
-                <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-semibold">Cadastro de clientes, fornecedores e produtos</h3>
-                    <p class="mt-3 text-slate-600">Atualize o cadastro de clientes e fornecedores com tags, anotações e controle de produtos sem planilhas.</p>
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-users text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Cadastro de Clientes e Fornecedores</h3>
+                        <p class="mt-3 text-slate-600">Mantenha todos os dados organizados com tags, anotações e histórico completo. Nunca mais perca informações importantes sobre seus contatos.</p>
+                    </div>
                 </article>
-                <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-semibold">Contas a pagar e receber</h3>
-                    <p class="mt-3 text-slate-600">Automatize cobranças e acompanhe prazos com alertas inteligentes para manter o caixa previsível.</p>
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-file-invoice text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Contas a Pagar e Receber</h3>
+                        <p class="mt-3 text-slate-600">Automatize cobranças e acompanhe prazos com alertas inteligentes. Mantenha o caixa previsível e evite surpresas desagradáveis.</p>
+                    </div>
                 </article>
-                <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-semibold">Sistema de ordem de serviço</h3>
-                    <p class="mt-3 text-slate-600">Crie, aprove e monitore cada OS com fotos, checklist e notificações para equipes internas.</p>
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-clipboard-list text-orange-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Sistema de Ordem de Serviço</h3>
+                        <p class="mt-3 text-slate-600">Crie, aprove e monitore cada OS com fotos, checklist e notificações. Workflow completo do orçamento ao faturamento.</p>
+                    </div>
                 </article>
-                <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-semibold">Redução de inadimplência</h3>
-                    <p class="mt-3 text-slate-600">Configure régua automática para controle de inadimplência com lembretes por e-mail e WhatsApp.</p>
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Redução de Inadimplência</h3>
+                        <p class="mt-3 text-slate-600">Configure régua automática com lembretes por e-mail e WhatsApp. Segmente devedores e acompanhe negociações diretamente do painel.</p>
+                    </div>
                 </article>
-                <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-semibold">Fluxo de caixa simples</h3>
-                    <p class="mt-3 text-slate-600">Visualize previsões, metas e simulações em um painel de sistema financeiro online acessível.</p>
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-box text-teal-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Controle de Produtos, Estoque e Vendas</h3>
+                        <p class="mt-3 text-slate-600">Gerencie estoque com lote, alertas de mínimo e preços atualizados, além de integrar vendas diretamente com ordens de serviço.</p>
+                    </div>
                 </article>
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-gauge-high text-indigo-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Dashboard Inteligente</h3>
+                        <p class="mt-3 text-slate-600">Indicadores visuais sobre faturamento, inadimplência e performance comercial. Visualize o que importa em um único lugar.</p>
+                    </div>
+                </article>
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-signature text-pink-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Assinatura Digital Integrada</h3>
+                        <p class="mt-3 text-slate-600">Envie contratos e documentos para assinatura digital diretamente pelo sistema, garantindo segurança jurídica e agilidade nos processos.</p>
+                    </div>
+                </article>
+                <article class="flex gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-headset text-yellow-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">Suporte Humanizado</h3>
+                        <p class="mt-3 text-slate-600">Equipe especializada em pequenos negócios pronta para ajudar. Implantação em dias, não em meses.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="mt-8 bg-gradient-to-b from-slate-50  bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">Benefícios que geram resultado</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Transforme a gestão do seu negócio com ferramentas que realmente fazem a diferença</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-blue-200">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Reduza inadimplência</h3>
+                    <p class="text-slate-600 leading-relaxed">Automatize cobranças por WhatsApp e e-mail e transforme sua recuperação de recebíveis.</p>
+                </div>
+                <div class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-blue-200">
+                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-600 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-green-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Acelere o fluxo de trabalho</h3>
+                    <p class="text-slate-600 leading-relaxed">Menos retrabalho com processos centralizados e integrados — aumente a produtividade da equipe.</p>
+                </div>
+                <div class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-blue-200">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-600 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-purple-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Decisões baseadas em dados</h3>
+                    <p class="text-slate-600 leading-relaxed">Relatórios e dashboards para tomada de decisão rápida e segura.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -224,44 +352,85 @@
     </section>
 
     <!-- Funcionalidades detalhadas -->
-    <section id="funcionalidades" class="py-20 bg-white">
+    <section id="funcionalidades" class="py-20 bg-gradient-to-b from-white to-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Funcionalidades detalhadas</p>
-                <h2 class="mt-4 text-3xl font-bold">Tudo o que você precisa para crescer</h2>
+                <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Tudo o que você precisa para crescer</h2>
+                <p class="mt-4 text-lg text-slate-600">Ferramentas completas e integradas para otimizar cada área do seu negócio</p>
             </div>
-            <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                <article class="rounded-2xl border border-slate-100 p-6 shadow-sm">
-                    <h3 class="text-xl font-semibold">Clientes</h3>
-                    <p class="mt-3 text-slate-600">Controle de clientes com histórico, anotações, contratos e anexos em um só painel.</p>
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Gestão de Clientes</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Sistema de <b>gestão de clientes</b> ideal para empresas que precisam aumentar produtividade e reduzir erros no atendimento.</p>
                 </article>
-                <article class="rounded-2xl border border-slate-100 p-6 shadow-sm">
-                    <h3 class="text-xl font-semibold">Fornecedores</h3>
-                    <p class="mt-3 text-slate-600">Gestão completa de fornecedores, condições comerciais e documentos fiscais.</p>
+                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-green-200 transition-all duration-300">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-green-600 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-green-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Gestão de Fornecedores</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Organize contratos, contatos e documentos com um cadastro de fornecedores seguro e integrado ao financeiro.</p>
                 </article>
-                <article class="rounded-2xl border border-slate-100 p-6 shadow-sm">
-                    <h3 class="text-xl font-semibold">Produtos</h3>
-                    <p class="mt-3 text-slate-600">Controle de produtos com lote, estoque mínimo e preços sempre atualizados.</p>
+                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300">
+                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-red-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Controle de inadimplência</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Reduza perdas financeiras com ferramentas avançadas para <b>controle de inadimplência</b>.</p>
                 </article>
-                <article class="rounded-2xl border border-slate-100 p-6 shadow-sm">
-                    <h3 class="text-xl font-semibold">Contas a pagar e receber</h3>
-                    <p class="mt-3 text-slate-600">Fluxos automatizados, conciliações e alertas inteligentes contra atrasos.</p>
+                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-purple-200 transition-all duration-300">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-purple-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Contas a Pagar e Receber</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Ganhe visibilidade total do seu <b>fluxo de caixa</b> com um sistema completo de <b>contas a pagar</b>.</p>
                 </article>
-                <article class="rounded-2xl border border-slate-100 p-6 shadow-sm">
-                    <h3 class="text-xl font-semibold">Financeiro completo</h3>
-                    <p class="mt-3 text-slate-600">Simule cenários, controle metas e gerencie o caixa diário com um clique.</p>
+                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-amber-200 transition-all duration-300">
+                    <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-600 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-amber-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Controle de estoque e Vendas</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Gerencie seu estoque com precisão usando um controle de produtos integrado às vendas.</p>
                 </article>
-                <article class="rounded-2xl border border-slate-100 p-6 shadow-sm">
-                    <h3 class="text-xl font-semibold">Dashboard</h3>
-                    <p class="mt-3 text-slate-600">Indicadores visuais sobre faturamento, inadimplência e performance comercial.</p>
+                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-cyan-200 transition-all duration-300">
+                    <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-cyan-600 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-cyan-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Movimentação Financeira</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Acompanhe toda a movimentação financeira da empresa em painéis simples e intuitivos.</p>
                 </article>
-                <article class="rounded-2xl border border-slate-100 p-6 shadow-sm">
-                    <h3 class="text-xl font-semibold">OS</h3>
-                    <p class="mt-3 text-slate-600">Workflow completo para abertura, execução, aprovação e faturamento de OS.</p>
+                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-indigo-200 transition-all duration-300">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Sistema de ordem de serviço</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Automatize processos e elimine papeladas com um sistema de ordem de serviço online.</p>
                 </article>
-                <article class="rounded-2xl border border-slate-100 p-6 shadow-sm">
-                    <h3 class="text-xl font-semibold">Inadimplência</h3>
-                    <p class="mt-3 text-slate-600">Segmentação de devedores, régua automática e exportação de relatórios.</p>
+                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all duration-300">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Assinatura digital</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Assine contratos e documentos com segurança utilizando assinatura digital integrada ao sistema.</p>
                 </article>
             </div>
         </div>
@@ -272,24 +441,24 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto">
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Prova social</p>
-                <h2 class="mt-4 text-3xl font-bold">Histórias reais de pequenos empreendedores</h2>
-                <p class="mt-4 text-slate-600">Edite os depoimentos abaixo com clientes atuais.</p>
+                <h2 class="mt-4 text-3xl font-bold">O que nossos clientes dizem</h2>
+                <p class="mt-4 text-slate-600">Depoimentos reais de quem já transformou a gestão do negócio com o WSoft.</p>
             </div>
             <div class="mt-12 grid gap-6 md:grid-cols-3">
                 <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <p class="text-sm text-slate-600 italic">“Resultado do cliente 01. Troque este texto por depoimentos reais.”</p>
-                    <div class="mt-4 font-semibold">Nome do Cliente</div>
-                    <div class="text-sm text-slate-500">Empresa / Cidade</div>
+                    <p class="text-sm text-slate-600 italic">“A WSoft transformou nossa rotina. Agora controlamos estoque, financeiro e as OS com muito mais eficiência.”</p>
+                    <div class="mt-4 font-semibold">Mêcanica Fischer</div>
+                    <div class="text-sm text-slate-500">Rolante/RS</div>
                 </article>
                 <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <p class="text-sm text-slate-600 italic">“Resultado do cliente 02. Troque este texto por depoimentos reais.”</p>
-                    <div class="mt-4 font-semibold">Nome do Cliente</div>
-                    <div class="text-sm text-slate-500">Empresa / Cidade</div>
+                    <p class="text-sm text-slate-600 italic">“Redução de inadimplência significativa desde que começamos a usar o sistema.”</p>
+                    <div class="mt-4 font-semibold">Oficina AutoPlus</div>
+                    <div class="text-sm text-slate-500">São Paulo/SP</div>
                 </article>
                 <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <p class="text-sm text-slate-600 italic">“Resultado do cliente 03. Troque este texto por depoimentos reais.”</p>
-                    <div class="mt-4 font-semibold">Nome do Cliente</div>
-                    <div class="text-sm text-slate-500">Empresa / Cidade</div>
+                    <p class="text-sm text-slate-600 italic">“Assinaturas digitais fáceis e com validade jurídica — muito prático.”</p>
+                    <div class="mt-4 font-semibold">Consulta Fipe</div>
+                    <div class="text-sm text-slate-500">Porto Alegre/RS</div>
                 </article>
             </div>
         </div>
