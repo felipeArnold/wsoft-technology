@@ -131,7 +131,7 @@
                     <a href="#demo" class="hover:text-blue-600 transition">Demonstração</a>
                     <a href="#funcionalidades" class="hover:text-blue-600 transition">Funcionalidades</a>
                     <a href="#precos" class="text-red-600 font-bold hover:text-red-700 transition">Oferta Especial 🔥</a>
-                    <a href="#oferta-especial" class="hover:text-blue-600 transition">Blog</a>
+                    <a href="/blog" class="hover:text-blue-600 transition">Blog</a>
                     <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
                     <a href="/app/login" class="hover:text-blue-600 transition border rounded-2xl">Login</a>
                     <a href="/app/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">Cadastrar</a>
