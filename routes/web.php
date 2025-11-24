@@ -55,8 +55,11 @@ Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('/{slug}', [BlogController::class, 'show'])->name('show');
 });
 
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/feed', [App\Http\Controllers\FeedController::class, 'index'])->name('feed');
+
 Route::get('/robots.txt', function () {
-    return response()->file(public_path('robots.txt'), [
-        'Content-Type' => 'text/plain',
-    ]);
+    return response()->view('seo.robots')->header('Content-Type', 'text/plain');
 });
+
+Route::view('/oferta-especial', 'landing.sales')->name('landing.sales');

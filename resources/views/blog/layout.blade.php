@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
     <title>@yield('title', 'Blog') | WSoft Tecnologia</title>
     <meta name="description" content="@yield('meta_description', 'Blog da WSoft Tecnologia - Dicas e conteúdos sobre gestão empresarial, controle financeiro, ordem de serviço e muito mais.')" />
@@ -14,6 +14,7 @@
     @endif
 
     <!-- Open Graph -->
+    <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="WSoft Tecnologia" />
     <meta property="og:title" content="@yield('og_title', 'Blog | WSoft Tecnologia')" />
     <meta property="og:description" content="@yield('og_description', 'Blog da WSoft Tecnologia - Dicas e conteúdos sobre gestão empresarial.')" />
@@ -21,13 +22,43 @@
     <meta property="og:url" content="{{ url()->current() }}" />
     @if(View::hasSection('og_image'))
     <meta property="og:image" content="@yield('og_image')" />
+    <meta property="og:image:alt" content="@yield('og_title', 'Blog WSoft Tecnologia')" />
+    @else
+    <meta property="og:image" content="{{ asset('images/og-default.jpg') }}" />
     @endif
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="@yield('twitter_title', 'Blog | WSoft Tecnologia')" />
     <meta name="twitter:description" content="@yield('twitter_description', 'Blog da WSoft Tecnologia - Dicas e conteúdos sobre gestão empresarial.')" />
+    @if(View::hasSection('og_image'))
+    <meta name="twitter:image" content="@yield('og_image')" />
+    @else
+    <meta name="twitter:image" content="{{ asset('images/og-default.jpg') }}" />
+    @endif
 
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
+        "name": "WSoft Tecnologia",
+        "url": "{{ url('/') }}",
+        "logo": "{{ asset('images/logo.png') }}",
+        "sameAs": [
+            "https://www.facebook.com/wsoft.tecnologia",
+            "https://www.instagram.com/wsoft.tecnologia",
+            "https://www.linkedin.com/company/wsoft-tecnologia"
+        ],
+        "contactPoint": {
+            "@@type": "ContactPoint",
+            "telephone": "+55-51-99999-9999",
+            "contactType": "customer service",
+            "areaServed": "BR",
+            "availableLanguage": "Portuguese"
+        }
+    }
+    </script>
     @yield('structured_data')
 
     <script src="{{ asset('js/tailwind.js') }}"></script>
@@ -50,6 +81,9 @@
         gtag('js', new Date());
         gtag('config', 'G-MN5442GH2J');
     </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1979897360190795"
+     crossorigin="anonymous"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
     <header class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">

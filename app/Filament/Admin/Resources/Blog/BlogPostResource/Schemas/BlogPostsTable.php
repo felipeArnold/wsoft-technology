@@ -69,7 +69,8 @@ final class BlogPostsTable
                     ->label('Views')
                     ->sortable()
                     ->numeric()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->icon('heroicon-o-eye')
+                    ->color('gray'),
 
                 TextColumn::make('published_at')
                     ->label('Publicado em')

@@ -204,199 +204,225 @@
 </style>
 @endpush
 
-{{--@section('structured_data')--}}
-{{--<script type="application/ld+json">--}}
-{{--{--}}
-{{--    "@context": "https://schema.org",--}}
-{{--    "@type": "BlogPosting",--}}
-{{--    "headline": "{{ $post->title }}",--}}
-{{--    "description": "{{ $post->effective_meta_description }}",--}}
-{{--    "url": "{{ route('blog.show', $post->slug) }}",--}}
-{{--    "datePublished": "{{ $post->published_at->toIso8601String() }}",--}}
-{{--    "dateModified": "{{ $post->updated_at->toIso8601String() }}",--}}
-{{--    @if($post->effective_og_image)--}}
-{{--    "image": "{{ Storage::url($post->effective_og_image) }}",--}}
-{{--    @endif--}}
-{{--    "author": {--}}
-{{--        "@type": "Person",--}}
-{{--        "name": "{{ $post->author?->name ?? 'WSoft Tecnologia' }}"--}}
-{{--    },--}}
-{{--    "publisher": {--}}
-{{--        "@type": "Organization",--}}
-{{--        "name": "WSoft Tecnologia",--}}
-{{--        "logo": {--}}
-{{--            "@type": "ImageObject",--}}
-{{--            "url": "{{ asset('images/logo.png') }}"--}}
-{{--        }--}}
-{{--    },--}}
-{{--    "mainEntityOfPage": {--}}
-{{--        "@type": "WebPage",--}}
-{{--        "@id": "{{ route('blog.show', $post->slug) }}"--}}
-{{--    }--}}
-{{--    @if($post->category)--}}
-{{--    ,"articleSection": "{{ $post->category->name }}"--}}
-{{--    @endif--}}
-{{--}--}}
-{{--</script>--}}
-{{--@endsection--}}
+@section('structured_data')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BlogPosting",
+    "headline": "{{ $post->title }}",
+    "description": "{{ $post->effective_meta_description }}",
+    "url": "{{ route('blog.show', $post->slug) }}",
+    "datePublished": "{{ $post->published_at->toIso8601String() }}",
+    "dateModified": "{{ $post->updated_at->toIso8601String() }}",
+    @if($post->effective_og_image)
+    "image": "{{ Storage::url($post->effective_og_image) }}",
+    @endif
+    "author": {
+        "@@type": "Person",
+        "name": "{{ $post->author?->name ?? 'WSoft Tecnologia' }}"
+    },
+    "publisher": {
+        "@@type": "Organization",
+        "name": "WSoft Tecnologia",
+        "logo": {
+            "@@type": "ImageObject",
+            "url": "{{ asset('images/logo.png') }}"
+        }
+    },
+    "mainEntityOfPage": {
+        "@@type": "WebPage",
+        "@@id": "{{ route('blog.show', $post->slug) }}"
+    }
+    @if($post->category)
+    ,"articleSection": "{{ $post->category->name }}"
+    @endif
+}
+</script>
 
-{{--@section('structured_data')--}}
-
-<!-- BreadcrumbList -->
-{{--<script type="application/ld+json">--}}
-{{--{--}}
-{{--    "@context": "https://schema.org",--}}
-{{--    "@type": "BreadcrumbList",--}}
-{{--    "itemListElement": [--}}
-{{--        {--}}
-{{--            "@type": "ListItem",--}}
-{{--            "position": 1,--}}
-{{--            "name": "Home",--}}
-{{--            "item": "{{ url('/') }}"--}}
-{{--        },--}}
-{{--        {--}}
-{{--            "@type": "ListItem",--}}
-{{--            "position": 2,--}}
-{{--            "name": "Blog",--}}
-{{--            "item": "{{ route('blog.index') }}"--}}
-{{--        }--}}
-{{--        @if($post->category)--}}
-{{--        ,{--}}
-{{--            "@type": "ListItem",--}}
-{{--            "position": 3,--}}
-{{--            "name": "{{ $post->category->name }}",--}}
-{{--            "item": "{{ route('blog.category', $post->category->slug) }}"--}}
-{{--        },--}}
-{{--        {--}}
-{{--            "@type": "ListItem",--}}
-{{--            "position": 4,--}}
-{{--            "name": "{{ $post->title }}"--}}
-{{--        }--}}
-{{--        @else--}}
-{{--        ,{--}}
-{{--            "@type": "ListItem",--}}
-{{--            "position": 3,--}}
-{{--            "name": "{{ $post->title }}"--}}
-{{--        }--}}
-{{--        @endif--}}
-{{--    ]--}}
-{{--}--}}
-{{--</script>--}}
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ url('/') }}"
+        },
+        {
+            "@@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "{{ route('blog.index') }}"
+        }
+        @if($post->category)
+        ,{
+            "@@type": "ListItem",
+            "position": 3,
+            "name": "{{ $post->category->name }}",
+            "item": "{{ route('blog.category', $post->category->slug) }}"
+        },
+        {
+            "@@type": "ListItem",
+            "position": 4,
+            "name": "{{ $post->title }}"
+        }
+        @else
+        ,{
+            "@@type": "ListItem",
+            "position": 3,
+            "name": "{{ $post->title }}"
+        }
+        @endif
+    ]
+}
+</script>
+@endsection
 
 
 
 
 @section('content')
     <!-- Breadcrumb -->
-    <section class="bg-slate-100 py-4">
+    <section class="bg-white border-b border-slate-100 py-4">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav class="text-sm text-slate-600">
+            <nav class="text-sm text-slate-500">
                 <ol class="flex items-center space-x-2">
-                    <li><a href="/" class="hover:text-blue-600">Home</a></li>
-                    <li><span class="text-slate-400">/</span></li>
-                    <li><a href="{{ route('blog.index') }}" class="hover:text-blue-600">Blog</a></li>
+                    <li><a href="/" class="hover:text-blue-600 transition-colors">Home</a></li>
+                    <li><span class="text-slate-300">/</span></li>
+                    <li><a href="{{ route('blog.index') }}" class="hover:text-blue-600 transition-colors">Blog</a></li>
                     @if($post->category)
-                    <li><span class="text-slate-400">/</span></li>
-                    <li><a href="{{ route('blog.category', $post->category->slug) }}" class="hover:text-blue-600">{{ $post->category->name }}</a></li>
+                    <li><span class="text-slate-300">/</span></li>
+                    <li><a href="{{ route('blog.category', $post->category->slug) }}" class="hover:text-blue-600 transition-colors">{{ $post->category->name }}</a></li>
                     @endif
-                    <li><span class="text-slate-400">/</span></li>
-                    <li class="text-slate-900 font-medium truncate">{{ Str::limit($post->title, 30) }}</li>
+                    <li><span class="text-slate-300">/</span></li>
+                    <li class="text-slate-900 font-medium truncate max-w-[200px] md:max-w-none">{{ Str::limit($post->title, 40) }}</li>
                 </ol>
             </nav>
         </div>
     </section>
 
     <!-- Artigo -->
-    <article class="py-12">
+    <article class="py-12 md:py-16 bg-slate-50/30">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header do Post -->
-            <header class="mb-8">
+            <header class="mb-10 text-center md:text-left">
                 @if($post->category)
                 <a href="{{ route('blog.category', $post->category->slug) }}"
-                    class="inline-block px-4 py-1 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full mb-4 hover:bg-blue-100 transition">
+                    class="inline-block px-4 py-1.5 text-sm font-semibold text-blue-700 bg-blue-50 rounded-full mb-6 hover:bg-blue-100 transition-colors">
                     {{ $post->category->name }}
                 </a>
                 @endif
 
-                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight mb-8">
                     {{ $post->title }}
                 </h1>
 
-                <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-slate-600">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-6 text-sm text-slate-600 border-y border-slate-100 py-6">
                     @if($post->author)
-                    <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                            <span class="text-blue-600 font-semibold text-xs">{{ substr($post->author->name, 0, 1) }}</span>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md shadow-blue-500/20 text-white font-bold text-lg">
+                            {{ substr($post->author->name, 0, 1) }}
                         </div>
-                        <span>{{ $post->author->name }}</span>
+                        <div class="flex flex-col text-left">
+                            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Autor</span>
+                            <span class="font-semibold text-slate-900">{{ $post->author->name }}</span>
+                        </div>
                     </div>
                     @endif
-                    <span class="flex items-center gap-1">
-                        <i class="fa-regular fa-calendar"></i>
-                        {{ $post->published_at->format('d/m/Y') }}
-                    </span>
-                    <span class="flex items-center gap-1">
-                        <i class="fa-regular fa-clock"></i>
-                        {{ $post->reading_time }} min de leitura
-                    </span>
-                    <span class="flex items-center gap-1">
-                        <i class="fa-regular fa-eye"></i>
-                        {{ number_format($post->view_count) }} visualizações
-                    </span>
+                    
+                    <div class="hidden md:block w-px h-10 bg-slate-200"></div>
+
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                            <i class="fa-regular fa-calendar"></i>
+                        </div>
+                        <div class="flex flex-col text-left">
+                            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Publicado em</span>
+                            <span class="font-semibold text-slate-900">{{ $post->published_at->format('d M, Y') }}</span>
+                        </div>
+                    </div>
+
+                    <div class="hidden md:block w-px h-10 bg-slate-200"></div>
+
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <div class="flex flex-col text-left">
+                            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Leitura</span>
+                            <span class="font-semibold text-slate-900">{{ $post->reading_time }} min</span>
+                        </div>
+                    </div>
                 </div>
             </header>
 
             <!-- Imagem Destaque -->
             @if($post->featured_image)
-            <figure class="mb-8">
+            <figure class="mb-12 relative group">
+                <div class="absolute inset-0 bg-blue-600/5 rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
                 <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}"
-                    class="w-full rounded-2xl shadow-lg">
+                    class="relative w-full rounded-3xl shadow-2xl shadow-slate-200/50">
             </figure>
             @endif
 
             <!-- Conteúdo -->
-            <div class="blog-content max-w-none">
+            <div class="blog-content max-w-none prose prose-lg prose-slate prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-2xl prose-img:shadow-lg">
                 {!! $post->content !!}
             </div>
 
             <!-- CTA Inline -->
-            <div class="mt-12 mb-10 p-8 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl">
-                <div class="flex flex-col md:flex-row items-center gap-6">
-                    <div class="flex-shrink-0">
-                        <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-rocket text-2xl text-white"></i>
+            <div class="mt-16 mb-12 p-8 md:p-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl text-white shadow-xl shadow-blue-600/20 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-colors duration-500"></div>
+                <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl"></div>
+                
+                <div class="relative flex flex-col md:flex-row items-center gap-8">
+                    <div class="flex-shrink-0 relative">
+                        <div class="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-inner border border-white/20">
+                            <i class="fa-solid fa-tags text-4xl text-white"></i>
+                        </div>
+                        <div class="absolute -top-3 -right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-bounce">
+                            OFERTA
                         </div>
                     </div>
                     <div class="flex-1 text-center md:text-left">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">
-                            Coloque em prática o que você aprendeu!
+                        <h3 class="text-2xl font-bold mb-2">
+                            Organize sua empresa hoje mesmo!
                         </h3>
-                        <p class="text-slate-600">
-                            Experimente o WSoft gratuitamente por 7 dias e organize sua empresa de forma simples e eficiente.
+                        <p class="text-blue-100 text-lg leading-relaxed mb-4">
+                            Tenha controle total do seu negócio com o WSoft.
                         </p>
+                        <div class="flex items-center justify-center md:justify-start gap-3">
+                            <span class="text-blue-200 line-through text-lg">de R$ 47,00</span>
+                            <span class="text-white font-extrabold text-3xl">por R$ 29,90</span>
+                            <span class="text-xs font-medium bg-white/20 px-2 py-1 rounded text-blue-50">/mês</span>
+                        </div>
                     </div>
                     <div class="flex-shrink-0">
                         <a href="/app/register"
-                            class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg">
-                            Começar Grátis
+                            class="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition shadow-lg active:scale-95 transform hover:-translate-y-1">
+                            Aproveitar Oferta
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
+                        <p class="mt-3 text-xs text-center text-blue-200">Teste grátis por 7 dias</p>
                     </div>
                 </div>
             </div>
 
             <!-- Tags/Keywords -->
             @if($post->meta_keywords)
-            <div class="mt-10 pt-8 border-t border-slate-200">
+            <div class="mt-12 pt-8 border-t border-slate-200">
                 <div class="flex items-center gap-2 mb-4">
                     <i class="fa-solid fa-tags text-blue-500"></i>
-                    <h3 class="text-sm font-semibold text-slate-700 uppercase tracking-wide">Tags</h3>
+                    <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide">Tópicos Relacionados</h3>
                 </div>
-                <div class="flex flex-wrap gap-3">
+                <div class="flex flex-wrap gap-2">
                     @foreach(explode(',', $post->meta_keywords) as $keyword)
-                    <span class="inline-flex items-center px-4 py-2 text-sm font-medium bg-slate-100 text-slate-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-default">
+                    <a href="{{ route('blog.index', ['busca' => trim($keyword)]) }}" 
+                       class="inline-flex items-center px-4 py-2 text-sm font-medium bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm">
                         {{ trim($keyword) }}
-                    </span>
+                    </a>
                     @endforeach
                 </div>
             </div>
@@ -404,28 +430,30 @@
 
             <!-- Compartilhar -->
             <div class="mt-8 pt-8 border-t border-slate-200">
-                <h3 class="text-sm font-semibold text-slate-700 mb-3">Compartilhar:</h3>
-                <div class="flex gap-3">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('blog.show', $post->slug)) }}"
-                        target="_blank" rel="noopener noreferrer"
-                        class="w-10 h-10 flex items-center justify-center bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('blog.show', $post->slug)) }}&text={{ urlencode($post->title) }}"
-                        target="_blank" rel="noopener noreferrer"
-                        class="w-10 h-10 flex items-center justify-center bg-sky-500 text-white rounded-full hover:bg-sky-600 transition">
-                        <i class="fa-brands fa-twitter"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(route('blog.show', $post->slug)) }}&title={{ urlencode($post->title) }}"
-                        target="_blank" rel="noopener noreferrer"
-                        class="w-10 h-10 flex items-center justify-center bg-blue-700 text-white rounded-full hover:bg-blue-800 transition">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://api.whatsapp.com/send?text={{ urlencode($post->title . ' - ' . route('blog.show', $post->slug)) }}"
-                        target="_blank" rel="noopener noreferrer"
-                        class="w-10 h-10 flex items-center justify-center bg-green-500 text-white rounded-full hover:bg-green-600 transition">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <h3 class="text-base font-bold text-slate-900">Gostou do artigo? Compartilhe:</h3>
+                    <div class="flex gap-3">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('blog.show', $post->slug)) }}"
+                            target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 flex items-center justify-center bg-[#1877F2] text-white rounded-full hover:scale-110 transition-transform shadow-md" aria-label="Compartilhar no Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('blog.show', $post->slug)) }}&text={{ urlencode($post->title) }}"
+                            target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 flex items-center justify-center bg-[#1DA1F2] text-white rounded-full hover:scale-110 transition-transform shadow-md" aria-label="Compartilhar no Twitter">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(route('blog.show', $post->slug)) }}&title={{ urlencode($post->title) }}"
+                            target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 flex items-center justify-center bg-[#0A66C2] text-white rounded-full hover:scale-110 transition-transform shadow-md" aria-label="Compartilhar no LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?text={{ urlencode($post->title . ' - ' . route('blog.show', $post->slug)) }}"
+                            target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 flex items-center justify-center bg-[#25D366] text-white rounded-full hover:scale-110 transition-transform shadow-md" aria-label="Compartilhar no WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -433,31 +461,33 @@
 
     <!-- Posts Relacionados -->
     @if($relatedPosts->count() > 0)
-    <section class="py-12 bg-slate-50">
+    <section class="py-16 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-slate-900 mb-8">Posts Relacionados</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center">Continue Lendo</h2>
             <div class="grid gap-8 md:grid-cols-3">
                 @foreach($relatedPosts as $relatedPost)
-                <article class="group bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition">
+                <article class="group flex flex-col bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     @if($relatedPost->featured_image)
-                    <a href="{{ route('blog.show', $relatedPost->slug) }}">
+                    <a href="{{ route('blog.show', $relatedPost->slug) }}" class="relative overflow-hidden aspect-video">
+                        <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors z-10"></div>
                         <img src="{{ Storage::url($relatedPost->featured_image) }}" alt="{{ $relatedPost->title }}"
-                            class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
                     </a>
                     @else
-                    <div class="w-full h-48 bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center">
+                    <div class="w-full aspect-video bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center">
                         <i class="fa-solid fa-file-lines text-4xl text-slate-300"></i>
                     </div>
                     @endif
-                    <div class="p-6">
-                        <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition">
+                    <div class="flex-1 p-6 flex flex-col">
+                        <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                             <a href="{{ route('blog.show', $relatedPost->slug) }}">{{ $relatedPost->title }}</a>
                         </h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">
+                        <p class="text-sm text-slate-600 line-clamp-3 mb-4 flex-1">
                             {{ $relatedPost->excerpt ?: Str::limit(strip_tags($relatedPost->content), 100) }}
                         </p>
-                        <div class="mt-4 text-xs text-slate-500">
-                            {{ $relatedPost->published_at->format('d/m/Y') }}
+                        <div class="pt-4 border-t border-slate-50 text-xs font-medium text-slate-500 flex items-center gap-2">
+                            <i class="fa-regular fa-calendar"></i>
+                            {{ $relatedPost->published_at->format('d M, Y') }}
                         </div>
                     </div>
                 </article>
@@ -467,16 +497,23 @@
     </section>
     @endif
 
-    <!-- CTA -->
-    <section class="py-16 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-4">Pronto para organizar sua empresa?</h2>
-            <p class="text-lg text-blue-100 mb-8">
-                Teste o WSoft gratuitamente por 7 dias e veja como podemos ajudar seu negócio a crescer.
+    <!-- CTA Final -->
+    <section class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-5"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900 to-blue-900/20"></div>
+        
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 tracking-tight">Pronto para transformar sua gestão?</h2>
+            <p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
+                Junte-se a milhares de empreendedores que usam o WSoft para crescer.
             </p>
-            <a href="/app/register" class="inline-block bg-white text-blue-600 font-semibold px-8 py-4 rounded-lg hover:bg-blue-50 transition shadow-lg">
+            <a href="/app/register" class="inline-flex items-center gap-2 bg-blue-600 text-white font-bold px-10 py-4 rounded-xl hover:bg-blue-500 transition shadow-lg shadow-blue-600/20 active:scale-95 text-lg">
                 Começar Teste Grátis
+                <i class="fa-solid fa-arrow-right"></i>
             </a>
+            <p class="mt-6 text-sm text-slate-500">
+                Teste grátis de 7 dias • Sem compromisso
+            </p>
         </div>
     </section>
 @endsection
