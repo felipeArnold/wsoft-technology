@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Landing\FunilariaLeadController;
 use App\Http\Controllers\Landing\MecanicaLeadController;
 use App\Http\Controllers\Landing\OficinaLeadController;
@@ -45,6 +46,13 @@ Route::middleware(['auth'])->prefix('stripe')->name('stripe.')->group(function (
     Route::post('/subscription/cancel/{tenant}', [StripeBillingController::class, 'cancelSubscription'])->name('subscription.cancel');
     Route::post('/subscription/resume/{tenant}', [StripeBillingController::class, 'resumeSubscription'])->name('subscription.resume');
     Route::get('/checkout/{tenant}', [StripeBillingController::class, 'checkout'])->name('checkout');
+});
+
+// Blog Routes
+Route::prefix('blog')->name('blog.')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('index');
+    Route::get('/categoria/{slug}', [BlogController::class, 'category'])->name('category');
+    Route::get('/{slug}', [BlogController::class, 'show'])->name('show');
 });
 
 Route::get('/robots.txt', function () {
