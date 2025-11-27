@@ -5,10 +5,18 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Creates\Products\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use App\Filament\Components\PtbrMoney;
+use App\Helpers\FormatterHelper;
+use App\Models\Product;
+use App\Models\StockMovement;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Facades\Filament;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
@@ -90,14 +98,134 @@ final class ProductsTable
                     ),
             ])
             ->recordActions([
-                ViewAction::make()
-                    ->label('Ver'),
+                ViewAction::make()->label('Ver'),
                 EditAction::make(),
+                Action::make('stock_in')
+                    ->label('Entrada')
+                    ->icon('heroicon-o-arrow-down-circle')
+                    ->color('success')
+                    ->form([
+                        TextInput::make('quantity')
+                            ->label('Quantidade')
+                            ->numeric()
+                            ->required()
+                            ->minValue(1)
+                            ->default(1),
+                        PtbrMoney::make('unit_cost')
+                            ->label('Custo Unitário')
+                            ->required(),
+                        Select::make('reason')
+                            ->label('Motivo')
+                            ->options([
+                                'Compra' => 'Compra',
+                                'Devolução' => 'Devolução',
+                                'Transferência' => 'Transferência',
+                                'Outro' => 'Outro',
+                            ])
+                            ->default('Compra')
+                            ->required(),
+                        Textarea::make('notes')
+                            ->label('Observações')
+                            ->rows(3),
+                    ])
+                    ->action(function (Product $record, array $data): void {
+                        $stockBefore = $record->stock;
+                        $stockAfter = $stockBefore + $data['quantity'];
+                        $unitCost = FormatterHelper::toDecimal($data['unit_cost']);
+
+                        // Cria a movimentação
+                        StockMovement::create([
+                            'tenant_id' => Filament::getTenant()->id,
+                            'product_id' => $record->id,
+                            'user_id' => auth()->id(),
+                            'type' => 'in',
+                            'quantity' => $data['quantity'],
+                            'stock_before' => $stockBefore,
+                            'stock_after' => $stockAfter,
+                            'unit_cost' => $unitCost,
+                            'reason' => $data['reason'],
+                            'notes' => $data['notes'] ?? null,
+                        ]);
+
+                        // Atualiza estoque
+                        $record->update(['stock' => $stockAfter]);
+
+                        // Atualiza custo médio
+                        $currentAverage = $record->average_cost ?? 0;
+                        $totalCost = ($stockBefore * $currentAverage) + ($data['quantity'] * $unitCost);
+                        $newAverageCost = $stockAfter > 0 ? $totalCost / $stockAfter : 0;
+                        $record->update(['average_cost' => $newAverageCost]);
+
+                        Notification::make()
+                            ->success()
+                            ->title('Entrada registrada!')
+                            ->body("Adicionadas {$data['quantity']} unidades ao estoque.")
+                            ->send();
+                    }),
+                Action::make('stock_out')
+                    ->label('Saída')
+                    ->icon('heroicon-o-arrow-up-circle')
+                    ->color('danger')
+                    ->form([
+                        TextInput::make('quantity')
+                            ->label('Quantidade')
+                            ->numeric()
+                            ->required()
+                            ->minValue(1)
+                            ->default(1),
+                        Select::make('reason')
+                            ->label('Motivo')
+                            ->options([
+                                'Venda' => 'Venda',
+                                'Perda' => 'Perda',
+                                'Transferência' => 'Transferência',
+                                'Outro' => 'Outro',
+                            ])
+                            ->default('Venda')
+                            ->required(),
+                        Textarea::make('notes')
+                            ->label('Observações')
+                            ->rows(3),
+                    ])
+                    ->action(function (Product $record, array $data): void {
+                        $stockBefore = $record->stock;
+                        $stockAfter = $stockBefore - $data['quantity'];
+
+                        if ($stockAfter < 0) {
+                            Notification::make()
+                                ->danger()
+                                ->title('Estoque insuficiente!')
+                                ->body("Estoque atual: {$stockBefore}. Não é possível retirar {$data['quantity']} unidades.")
+                                ->send();
+
+                            return;
+                        }
+
+                        // Cria a movimentação
+                        StockMovement::create([
+                            'tenant_id' => Filament::getTenant()->id,
+                            'product_id' => $record->id,
+                            'user_id' => auth()->id(),
+                            'type' => 'out',
+                            'quantity' => $data['quantity'],
+                            'stock_before' => $stockBefore,
+                            'stock_after' => $stockAfter,
+                            'reason' => $data['reason'],
+                            'notes' => $data['notes'] ?? null,
+                        ]);
+
+                        // Atualiza estoque
+                        $record->update(['stock' => $stockAfter]);
+
+                        Notification::make()
+                            ->success()
+                            ->title('Saída registrada!')
+                            ->body("Removidas {$data['quantity']} unidades do estoque.")
+                            ->send();
+                    }),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+
                 FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
             ->striped()

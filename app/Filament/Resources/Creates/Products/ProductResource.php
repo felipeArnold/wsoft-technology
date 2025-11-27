@@ -8,6 +8,7 @@ use App\Filament\Resources\Creates\Products\Pages\CreateProduct;
 use App\Filament\Resources\Creates\Products\Pages\EditProduct;
 use App\Filament\Resources\Creates\Products\Pages\ListProducts;
 use App\Filament\Resources\Creates\Products\Pages\ViewProduct;
+use App\Filament\Resources\Creates\Products\RelationManagers\StockMovementsRelationManager;
 use App\Filament\Resources\Creates\Products\Schemas\ProductForm;
 use App\Filament\Resources\Creates\Products\Schemas\ProductInfolist;
 use App\Filament\Resources\Creates\Products\Tables\ProductsTable;
@@ -70,7 +71,7 @@ final class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            StockMovementsRelationManager::class,
         ];
     }
 

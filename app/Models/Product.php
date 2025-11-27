@@ -8,6 +8,7 @@ use App\Models\Person\Person;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class Product extends Model
@@ -20,7 +21,9 @@ final class Product extends Model
     protected $casts = [
         'price_sale' => 'float',
         'price_cost' => 'float',
+        'average_cost' => 'float',
         'net_profit' => 'float',
+        'profit_margin' => 'float',
         'stock' => 'integer',
         'stock_alert' => 'integer',
         'attachment' => 'array',
@@ -34,5 +37,15 @@ final class Product extends Model
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class, 'person_id');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function stockMovements(): HasMany
+    {
+        return $this->hasMany(StockMovement::class);
     }
 }

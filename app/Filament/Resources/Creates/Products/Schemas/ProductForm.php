@@ -6,11 +6,14 @@ namespace App\Filament\Resources\Creates\Products\Schemas;
 
 use App\Filament\Components\PtbrMoney;
 use App\Helpers\FormatterHelper;
+use App\Models\Category;
 use App\Models\Person\Person;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -30,23 +33,77 @@ final class ProductForm
                             ->placeholder('Nome do produto')
                             ->maxLength(255)
                             ->columnSpan(2),
+                        Select::make('category_id')
+                            ->label('Categoria')
+                            ->relationship('category', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nome da Categoria')
+                                    ->required()
+                                    ->maxLength(255),
+                                Textarea::make('description')
+                                    ->label('Descrição')
+                                    ->maxLength(500),
+                                ColorPicker::make('color')
+                                    ->label('Cor'),
+                            ])
+                            ->createOptionUsing(function (array $data): int {
+                                $category = Category::create([
+                                    'tenant_id' => Filament::getTenant()->id,
+                                    'name' => $data['name'],
+                                    'description' => $data['description'] ?? null,
+                                    'color' => $data['color'] ?? null,
+                                ]);
+
+                                return $category->id;
+                            })
+                            ->columnSpan(1),
                         TextInput::make('sku')
                             ->label('Código SKU')
                             ->placeholder('Código SKU')
                             ->maxLength(50)
                             ->columnSpan(1),
+                        TextInput::make('barcode')
+                            ->label('Código de Barras')
+                            ->placeholder('Código de barras (EAN, UPC, etc.)')
+                            ->maxLength(255)
+                            ->columnSpan(1),
+                        RichEditor::make('description')
+                            ->label('Descrição')
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(3)
+                    ->columnSpanFull(),
 
+                Section::make('Precificação')
+                    ->icon('heroicon-o-currency-dollar')
+                    ->schema([
                         PtbrMoney::make('price_cost')
                             ->label('Valor de Custo')
                             ->default(0)
                             ->required()
                             ->reactive()
                             ->afterStateUpdated(function ($state, callable $set, callable $get): void {
-                                $labor = FormatterHelper::toDecimal($state);
-                                $parts = FormatterHelper::toDecimal($get('price_sale') ?? 0);
+                                $cost = FormatterHelper::toDecimal($state);
+                                $sale = FormatterHelper::toDecimal($get('price_sale') ?? 0);
 
-                                $set('net_profit', FormatterHelper::money($parts - $labor));
+                                $profit = $sale - $cost;
+                                $set('net_profit', FormatterHelper::money($profit));
+
+                                // Calcula margem de lucro em %
+                                if ($sale > 0) {
+                                    $margin = ($profit / $sale) * 100;
+                                    $set('profit_margin', number_format($margin, 2, '.', ''));
+                                }
                             })
+                            ->columnSpan(1),
+                        PtbrMoney::make('average_cost')
+                            ->label('Custo Médio')
+                            ->default(0)
+                            ->disabled()
+                            ->helperText('Calculado automaticamente com base nas movimentações de estoque')
                             ->columnSpan(1),
                         PtbrMoney::make('price_sale')
                             ->label('Valor de Venda')
@@ -54,16 +111,29 @@ final class ProductForm
                             ->required()
                             ->reactive()
                             ->afterStateUpdated(function ($state, callable $set, callable $get): void {
-                                $parts = FormatterHelper::toDecimal($state);
-                                $labor = FormatterHelper::toDecimal($get('price_cost') ?? 0);
+                                $sale = FormatterHelper::toDecimal($state);
+                                $cost = FormatterHelper::toDecimal($get('price_cost') ?? 0);
 
-                                $set('net_profit', FormatterHelper::money($parts - $labor));
+                                $profit = $sale - $cost;
+                                $set('net_profit', FormatterHelper::money($profit));
+
+                                // Calcula margem de lucro em %
+                                if ($sale > 0) {
+                                    $margin = ($profit / $sale) * 100;
+                                    $set('profit_margin', number_format($margin, 2, '.', ''));
+                                }
                             })
                             ->columnSpan(1),
                         PtbrMoney::make('net_profit')
                             ->label('Lucro Líquido')
                             ->default(0)
                             ->disabled()
+                            ->columnSpan(1),
+                        TextInput::make('profit_margin')
+                            ->label('Margem de Lucro (%)')
+                            ->numeric()
+                            ->disabled()
+                            ->suffix('%')
                             ->columnSpan(1),
                     ])
                     ->columns(3)
@@ -112,16 +182,13 @@ final class ProductForm
                             ->required()
                             ->columnSpan(1),
                         TextInput::make('stock_alert')
-                            ->label('Alerta de Estoque')
+                            ->label('Alerta de Estoque Mínimo')
                             ->numeric()
                             ->minValue(0)
                             ->default(0)
                             ->required()
                             ->helperText('Quantidade mínima para alerta de estoque baixo')
                             ->columnSpan(1),
-                        RichEditor::make('description')
-                            ->label('Descrição')
-                            ->columnSpanFull(),
                     ])
                     ->columns(3)
                     ->columnSpanFull(),
