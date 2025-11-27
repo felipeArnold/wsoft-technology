@@ -67,6 +67,12 @@ final class ProductsTable
                     ->sortable()
                     ->placeholder('N/A')
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('categories.name')
+                    ->label('Etiquetas')
+                    ->badge()
+                    ->separator(',')
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->label('Criado em')
                     ->dateTime('d/m/Y H:i')
@@ -83,6 +89,12 @@ final class ProductsTable
                     ->label('Fornecedor')
                     ->relationship('person', 'name')
                     ->searchable()
+                    ->preload(),
+                SelectFilter::make('categories')
+                    ->label('Etiquetas')
+                    ->relationship('categories', 'name')
+                    ->searchable()
+                    ->multiple()
                     ->preload(),
                 TernaryFilter::make('low_stock')
                     ->label('Estoque Baixo')

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Creates\Activities\Schemas;
 
+use App\Models\Category;
 use App\Models\Person\Person;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
@@ -149,6 +151,24 @@ final class ActivityForm
                             ->label('Notas Adicionais')
                             ->placeholder('Adicione observações ou notas importantes...')
                             ->rows(4)
+                            ->columnSpanFull(),
+                    ])
+                    ->collapsible()
+                    ->collapsed()
+                    ->columnSpanFull(),
+
+                Section::make('Etiquetas')
+                    ->icon('heroicon-o-tag')
+                    ->description('Classifique esta atividade com etiquetas')
+                    ->schema([
+                        CheckboxList::make('categories')
+                            ->label('Etiquetas')
+                            ->relationship('categories', 'name')
+                            ->options(fn () => Category::query()->pluck('name', 'id'))
+                            ->searchable()
+                            ->bulkToggleable()
+                            ->gridDirection('row')
+                            ->columns(3)
                             ->columnSpanFull(),
                     ])
                     ->collapsible()

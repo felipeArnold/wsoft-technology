@@ -16,7 +16,7 @@ final class ListCategories extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Nova Categoria')
+                ->label('Nova Etiqueta')
                 ->icon('heroicon-o-plus'),
         ];
     }

@@ -9,6 +9,7 @@ use App\Helpers\FormatterHelper;
 use App\Models\Category;
 use App\Models\Person\Person;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -72,6 +73,15 @@ final class ProductForm
                             ->columnSpan(1),
                         RichEditor::make('description')
                             ->label('Descrição')
+                            ->columnSpanFull(),
+                        CheckboxList::make('categories')
+                            ->label('Etiquetas')
+                            ->relationship('categories', 'name')
+                            ->options(fn () => Category::query()->pluck('name', 'id'))
+                            ->searchable()
+                            ->bulkToggleable()
+                            ->gridDirection('row')
+                            ->columns(3)
                             ->columnSpanFull(),
                     ])
                     ->columns(3)

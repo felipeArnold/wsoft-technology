@@ -24,6 +24,10 @@ final class CategoriesTable
                 TextColumn::make('name')
                     ->label('Nome')
                     ->searchable(),
+                TextColumn::make('purpose')
+                    ->label('Propósito')
+                    ->badge()
+                    ->searchable(),
                 ColorColumn::make('color')
                     ->label('Cor')
                     ->searchable(),

@@ -40,6 +40,12 @@ final class ServiceOrdersTable
                         'high' => 'Alta',
                         'urgent' => 'Urgente',
                     ]),
+                SelectFilter::make('categories')
+                    ->label('Etiquetas')
+                    ->relationship('categories', 'name')
+                    ->searchable()
+                    ->multiple()
+                    ->preload(),
             ])
             ->recordActions([
                 ViewAction::make(),

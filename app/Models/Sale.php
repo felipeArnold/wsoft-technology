@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\Categorizable;
 use App\Models\Person\Person;
 use App\Observers\SaleObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 #[ObservedBy(SaleObserver::class)]
 final class Sale extends Model
 {
+    use Categorizable;
     use HasFactory;
     use SoftDeletes;
 

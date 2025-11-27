@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\Categorizable;
 use Illuminate\Database\Eloquent\Model;
 
 final class Lead extends Model
 {
+    use Categorizable;
+
     protected $fillable = [
         // Campos principais (genéricos)
         'name',

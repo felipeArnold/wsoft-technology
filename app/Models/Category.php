@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class Category extends Model
@@ -18,6 +19,7 @@ final class Category extends Model
     protected $fillable = [
         'tenant_id',
         'name',
+        'purpose',
         'description',
         'color',
     ];
@@ -30,5 +32,10 @@ final class Category extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function categorizables(string $type): MorphToMany
+    {
+        return $this->morphedByMany($type, 'categorizable');
     }
 }

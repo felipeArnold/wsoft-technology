@@ -6,8 +6,10 @@ namespace App\Models;
 
 use App\Filament\Components\PtbrMoney;
 use App\Helpers\FormatterHelper;
+use App\Models\Concerns\Categorizable;
 use App\Models\Person\Person;
 use App\Observers\ServiceOrderObserver;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -25,6 +27,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class ServiceOrder extends Model
 {
     /** @use HasFactory<\Database\Factories\ServiceOrderFactory> */
+    use Categorizable;
+
     use HasFactory;
 
     protected $casts = [
@@ -179,6 +183,22 @@ final class ServiceOrder extends Model
                         ->columnSpanFull(),
                 ])
                 ->columnSpanFull(),
+
+            Section::make('Etiquetas')
+                ->icon('heroicon-o-tag')
+                ->description('Classifique esta ordem de serviço com etiquetas')
+                ->schema([
+                    CheckboxList::make('categories')
+                        ->label('Etiquetas')
+                        ->relationship('categories', 'name')
+                        ->options(fn () => Category::query()->pluck('name', 'id'))
+                        ->searchable()
+                        ->bulkToggleable()
+                        ->gridDirection('row')
+                        ->columns(3)
+                        ->columnSpanFull(),
+                ])
+                ->columnSpanFull(),
         ];
     }
 
@@ -238,6 +258,12 @@ final class ServiceOrder extends Model
             TextColumn::make('user.name')
                 ->label('Responsável')
                 ->searchable(),
+            TextColumn::make('categories.name')
+                ->label('Etiquetas')
+                ->badge()
+                ->separator(',')
+                ->searchable()
+                ->toggleable(),
         ];
     }
 

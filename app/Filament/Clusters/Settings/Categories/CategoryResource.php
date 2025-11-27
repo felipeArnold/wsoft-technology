@@ -27,9 +27,9 @@ final class CategoryResource extends Resource
 
     protected static ?string $cluster = SettingsCluster::class;
 
-    protected static ?string $label = 'Categorias';
+    protected static ?string $label = 'Etiqueta';
 
-    protected static ?string $recordTitleAttribute = 'Categoria';
+    protected static ?string $recordTitleAttribute = 'Etiqueta';
 
     protected static string|UnitEnum|null $navigationGroup = 'Personalização';
 

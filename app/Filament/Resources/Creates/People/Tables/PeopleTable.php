@@ -12,6 +12,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
@@ -83,6 +84,12 @@ final class PeopleTable
                     ->sortable()
                     ->placeholder('Não informado')
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('categories.name')
+                    ->label('Etiquetas')
+                    ->badge()
+                    ->separator(',')
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->label('Cadastrado em')
                     ->dateTime('d/m/Y H:i')
@@ -98,6 +105,12 @@ final class PeopleTable
             ->defaultSort('name', 'asc')
             ->filters([
                 TrashedFilter::make(),
+                SelectFilter::make('categories')
+                    ->label('Etiquetas')
+                    ->relationship('categories', 'name')
+                    ->searchable()
+                    ->multiple()
+                    ->preload(),
             ])
             ->recordActions([
                 EditAction::make(),

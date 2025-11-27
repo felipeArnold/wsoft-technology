@@ -97,6 +97,12 @@ final class SalesTable
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('categories.name')
+                    ->label('Etiquetas')
+                    ->badge()
+                    ->separator(',')
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->label('Data')
                     ->dateTime('d/m/Y H:i')
@@ -118,6 +124,12 @@ final class SalesTable
                         'pix' => 'PIX',
                         'installments' => 'Parcelado',
                     ]),
+                SelectFilter::make('categories')
+                    ->label('Etiquetas')
+                    ->relationship('categories', 'name')
+                    ->searchable()
+                    ->multiple()
+                    ->preload(),
             ])
             ->recordActions([
                 ViewAction::make(),

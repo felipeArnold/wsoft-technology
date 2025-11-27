@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Person;
 
 use App\Filament\Components\CnpjComponent;
+use App\Models\Concerns\Categorizable;
 use App\Models\Tenant;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
@@ -35,6 +36,7 @@ use Leandrocfe\FilamentPtbrFormFields\Document;
  */
 final class Person extends Model
 {
+    use Categorizable;
     use HasFactory;
     use SoftDeletes;
 

@@ -6,9 +6,11 @@ namespace App\Filament\Resources\Financial\Sales\Schemas;
 
 use App\Filament\Components\PtbrMoney;
 use App\Helpers\FormatterHelper;
+use App\Models\Category;
 use App\Models\Person\Person;
 use App\Models\Product;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
@@ -187,6 +189,21 @@ final class SaleForm
                                                 $set('subtotal', FormatterHelper::money($subtotal));
                                                 $set('total', FormatterHelper::money($total));
                                             })
+                                            ->columnSpanFull(),
+                                    ]),
+
+                                Section::make('Etiquetas')
+                                    ->description('Classifique esta venda com etiquetas')
+                                    ->icon('heroicon-o-tag')
+                                    ->schema([
+                                        CheckboxList::make('categories')
+                                            ->label('Etiquetas')
+                                            ->relationship('categories', 'name')
+                                            ->options(fn () => Category::query()->pluck('name', 'id'))
+                                            ->searchable()
+                                            ->bulkToggleable()
+                                            ->gridDirection('row')
+                                            ->columns(3)
                                             ->columnSpanFull(),
                                     ]),
                             ]),

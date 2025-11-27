@@ -100,6 +100,12 @@ final class ActivitiesTable
                     ->sortable()
                     ->color(fn ($record): string => $record->due_date && $record->due_date->isPast() && $record->status !== 'completed' ? 'danger' : 'gray')
                     ->placeholder('N/A'),
+                TextColumn::make('categories.name')
+                    ->label('Etiquetas')
+                    ->badge()
+                    ->separator(',')
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->label('Criado em')
                     ->dateTime('d/m/Y H:i')
@@ -147,6 +153,12 @@ final class ActivitiesTable
                     ->label('Responsável')
                     ->relationship('assignedTo', 'name')
                     ->searchable()
+                    ->preload(),
+                SelectFilter::make('categories')
+                    ->label('Etiquetas')
+                    ->relationship('categories', 'name')
+                    ->searchable()
+                    ->multiple()
                     ->preload(),
             ])
             ->recordActions([

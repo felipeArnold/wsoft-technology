@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\Categorizable;
 use App\Models\Person\Person;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,8 +15,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 final class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
-    use HasFactory;
+    use Categorizable;
 
+    use HasFactory;
     use SoftDeletes;
 
     protected $casts = [
