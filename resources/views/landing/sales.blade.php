@@ -18,6 +18,16 @@
         gtag('js', new Date());
         gtag('config', 'G-MN5442GH2J');
     </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11559494036"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-11559494036');
+    </script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
     <!-- Urgency Banner -->
@@ -155,16 +165,17 @@
                 <p class="text-xl text-blue-200">Tudo o que você precisa para crescer, por um preço irrecusável.</p>
             </div>
 
-            <div class="bg-white text-slate-900 rounded-3xl shadow-2xl overflow-hidden border-4 border-yellow-400 relative">
-                <!-- Badge -->
-                <div class="absolute top-0 right-0 bg-yellow-400 text-blue-900 font-bold px-6 py-2 rounded-bl-2xl shadow-md z-10">
-                    DESCONTO DE 36%
-                </div>
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                <!-- Left Column: Benefits & Price -->
+                <div class="bg-white text-slate-900 rounded-3xl shadow-xl overflow-hidden border-4 border-yellow-400 relative h-full flex flex-col">
+                    <!-- Badge -->
+                    <div class="absolute top-0 right-0 bg-yellow-400 text-blue-900 font-bold px-6 py-2 rounded-bl-2xl shadow-md z-10">
+                        DESCONTO DE 36%
+                    </div>
 
-                <div class="grid md:grid-cols-2">
-                    <div class="p-8 md:p-12 bg-slate-50 border-r border-slate-100">
+                    <div class="p-8 md:p-10 flex-grow">
                         <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-6">Você vai levar:</h3>
-                        <ul class="space-y-4">
+                        <ul class="space-y-4 mb-8">
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
                                 <span class="font-medium">Sistema de Gestão Completo</span>
@@ -190,27 +201,28 @@
                                 <span class="font-medium">Acesso Mobile</span>
                             </li>
                         </ul>
-                    </div>
-                    <div class="p-8 md:p-12 flex flex-col justify-center text-center bg-white relative">
-                        <p class="text-slate-500 text-lg mb-2">De <span class="line-through text-red-400">R$ 47,00</span> por apenas:</p>
-                        <div class="flex items-center justify-center gap-1 mb-6">
-                            <span class="text-3xl font-bold text-slate-700">R$</span>
-                            <span class="text-7xl font-extrabold text-blue-600">29</span>
-                            <div class="flex flex-col items-start">
-                                <span class="text-3xl font-bold text-blue-600">,90</span>
-                                <span class="text-sm text-slate-500 font-medium">/mês</span>
+
+                        <div class="pt-8 border-t border-slate-100 text-center">
+                            <p class="text-slate-500 text-lg mb-2">De <span class="line-through text-red-400">R$ 47,00</span> por apenas:</p>
+                            <div class="flex items-center justify-center gap-1 mb-2">
+                                <span class="text-3xl font-bold text-slate-700">R$</span>
+                                <span class="text-7xl font-extrabold text-blue-600">29</span>
+                                <div class="flex flex-col items-start">
+                                    <span class="text-3xl font-bold text-blue-600">,90</span>
+                                    <span class="text-sm text-slate-500 font-medium">/mês</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-center gap-2 text-sm text-slate-500">
+                                <i class="fa-solid fa-shield-halved text-green-500"></i>
+                                <span>7 dias de garantia incondicional</span>
                             </div>
                         </div>
-                        
-                        <a href="/app/register" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-xl py-4 rounded-xl shadow-lg shadow-green-500/30 transform hover:-translate-y-1 transition duration-200 mb-4">
-                            GARANTIR MEU ACESSO
-                        </a>
-                        
-                        <div class="flex items-center justify-center gap-2 text-sm text-slate-500">
-                            <i class="fa-solid fa-shield-halved text-green-500"></i>
-                            <span>7 dias de garantia incondicional</span>
-                        </div>
                     </div>
+                </div>
+
+                <!-- Right Column: Registration Form -->
+                <div class="relative">
+                    <livewire:landing-register-form />
                 </div>
             </div>
             
