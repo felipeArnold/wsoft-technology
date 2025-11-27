@@ -38,6 +38,41 @@ Route::post('/mecanica/lead', [MecanicaLeadController::class, 'store'])->name('l
 Route::get('/funilaria', [FunilariaLeadController::class, 'index'])->name('landing.funilaria');
 Route::post('/funilaria/lead', [FunilariaLeadController::class, 'store'])->name('landing.funilaria.store');
 
+// Landing Page para Sistema de Gestão de Clientes
+Route::get('/sistema-para-gestao-de-clientes', function () {
+    return view('site.gestao-clientes');
+})->name('landing.gestao-clientes');
+
+// Landing Page para Sistema de Gestão de Fornecedores
+Route::get('/sistema-para-gestao-de-fornecedores', function () {
+    return view('site.gestao-fornecedores');
+})->name('landing.gestao-fornecedores');
+
+// Landing Page para Sistema de Gestão de Estoque
+Route::get('/sistema-para-gestao-de-estoque', function () {
+    return view('site.gestao-estoque');
+})->name('landing.gestao-estoque');
+
+// Landing Page para Sistema de Contas a Pagar
+Route::get('/sistema-para-contas-a-pagar', function () {
+    return view('site.contas-pagar');
+})->name('landing.contas-pagar');
+
+// Landing Page para Sistema de Contas a Receber
+Route::get('/sistema-para-contas-a-receber', function () {
+    return view('site.contas-receber');
+})->name('landing.contas-receber');
+
+// Landing Page para Sistema de Controle de Inadimplência
+Route::get('/sistema-para-controle-de-inadimplencia', function () {
+    return view('site.controle-inadimplencia');
+})->name('landing.controle-inadimplencia');
+
+// Landing Page para Sistema de Fluxo de Caixa
+Route::get('/sistema-para-fluxo-de-caixa', function () {
+    return view('site.movimentacao-financeira');
+})->name('landing.movimentacao-financeira');
+
 // Stripe Billing Routes
 Route::middleware(['auth'])->prefix('stripe')->name('stripe.')->group(function () {
     Route::get('/billing-portal/{tenant}', [StripeBillingController::class, 'billingPortal'])->name('billing-portal');

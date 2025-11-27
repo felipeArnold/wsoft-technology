@@ -207,7 +207,7 @@
             <p class="mt-4 text-lg text-white/90">Teste o sistema gratuitamente por 7 dias e tire suas dúvidas na prática.</p>
             <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-lg bg-white text-blue-700 font-semibold px-10 py-4 shadow-lg hover:-translate-y-0.5 transition">
-                    Testar grátis por 7 dias
+                    Testar por 7 Dias
                 </a>
                 <a href="mailto:contato@wsoft.com.br" class="inline-flex justify-center items-center rounded-lg border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition">
                     Falar com suporte

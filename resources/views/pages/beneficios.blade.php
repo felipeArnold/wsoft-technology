@@ -136,7 +136,7 @@
             <p class="mt-4 text-lg text-white/90">Comece hoje mesmo com 7 dias de teste grátis e veja a diferença na prática.</p>
             <div class="mt-8">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-lg bg-white text-blue-700 font-semibold px-10 py-4 shadow-lg hover:-translate-y-0.5 transition">
-                    Testar grátis por 7 dias
+                    Testar por 7 Dias
                 </a>
             </div>
         </div>

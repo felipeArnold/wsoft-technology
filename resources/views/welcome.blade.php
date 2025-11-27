@@ -1,159 +1,86 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="robots" content="index,follow" />
-
-    <title>Sistema de Gestão Financeira para Pequenas Empresas | WSoft</title>
-    <meta name="description" content="WSoft - Sistema de gestão financeira simples para pequenas empresas e MEI. Controle contas a pagar, receber, estoque, OS e emita notas fiscais. Teste grátis!" />
-    <meta name="keywords" content="sistema de gestão financeira, pequenas empresas, MEI, controle financeiro, ordem de serviço, emissão de notas, WSoft" />
-    <link rel="canonical" href="https://www.wsoft.dev.br/" />
-
-    <!-- Open Graph -->
-    <meta property="og:site_name" content="WSoft Tecnologia" />
-    <meta property="og:title" content="Sistema de Gestão Financeira para Pequenas Empresas | WSoft" />
-    <meta property="og:description" content="Controle financeiro, ordem de serviço, vendas, estoque e assinatura digital em um único sistema simples e eficiente. Teste grátis por 7 dias." />
-    <meta property="og:type" content="website" />
-
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="WSoft - Sistema de Gestão Online" />
-    <meta name="twitter:description" content="Sistema de gestão com financeiro, OS, vendas e assinatura digital. Ideal para mecânicas e pequenas empresas." />
-
-    <!-- Structured Data (SoftwareApplication + FAQPage) -->
-    <script type="application/ld+json">
+@php
+$structuredData = [
     [
-        {
-          "@type": "SoftwareApplication",
-          "name": "WSoft Tecnologia",
-          "url": "https://www.wsoft.dev.br/",
-          "description": "Sistema de gestão online com financeiro, contas a pagar e receber, ordem de serviço, controle de estoque e assinatura digital.",
-          "operatingSystem": "Web",
-          "applicationCategory": "BusinessApplication",
-          "offers": {
-            "@type": "Offer",
-            "price": "0.00",
-            "priceCurrency": "BRL",
-            "url": "https://www.wsoft.dev.br/app/register",
-            "description": "Teste grátis por 7 dias"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "124"
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [{
-            "@type": "Question",
-            "name": "Como o WSoft ajuda no controle financeiro diário?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "O painel unifica entradas, saídas, projeções e limites para que você acompanhe o sistema de fluxo de caixa em tempo real."
-            }
-          }, {
-            "@type": "Question",
-            "name": "Posso controlar ordens de serviço e estoque?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sim, o sistema de ordem de serviço integra peças, mão de obra e controle de produtos para evitar erros e retrabalhos."
-            }
-          }, {
-            "@type": "Question",
-            "name": "Há recursos de contas a pagar e receber automáticos?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Alertas, conciliações e integrações bancárias reduzem esquecimentos e mantêm o financeiro organizado."
-            }
-          }, {
-            "@type": "Question",
-            "name": "O que muda para quem precisa de controle de inadimplência?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Você segmenta devedores, dispara lembretes e acompanha negociações diretamente do painel."
-            }
-          }, {
-            "@type": "Question",
-            "name": "Preciso de equipe grande para usar o sistema?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Não. O layout foi desenhado para pequenas empresas que querem profissionalizar processos sem burocracia."
-            }
-          }]
-        }
+        '@context' => 'https://schema.org',
+        '@type' => 'SoftwareApplication',
+        'name' => 'WSoft Tecnologia',
+        'url' => 'https://www.wsoft.dev.br/',
+        'description' => 'Sistema de gestão online com financeiro, contas a pagar e receber, ordem de serviço, controle de estoque e assinatura digital.',
+        'operatingSystem' => 'Web',
+        'applicationCategory' => 'BusinessApplication',
+        'offers' => [
+            '@type' => 'Offer',
+            'price' => '0.00',
+            'priceCurrency' => 'BRL',
+            'url' => 'https://www.wsoft.dev.br/app/register',
+            'description' => 'Teste grátis por 7 dias'
+        ],
+        'aggregateRating' => [
+            '@type' => 'AggregateRating',
+            'ratingValue' => '4.8',
+            'ratingCount' => '124'
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            [
+                '@type' => 'Question',
+                'name' => 'Como o WSoft ajuda no controle financeiro diário?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'O painel unifica entradas, saídas, projeções e limites para que você acompanhe o sistema de fluxo de caixa em tempo real.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Posso controlar ordens de serviço e estoque?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Sim, o sistema de ordem de serviço integra peças, mão de obra e controle de produtos para evitar erros e retrabalhos.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Há recursos de contas a pagar e receber automáticos?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Alertas, conciliações e integrações bancárias reduzem esquecimentos e mantêm o financeiro organizado.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'O que muda para quem precisa de controle de inadimplência?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Você segmenta devedores, dispara lembretes e acompanha negociações diretamente do painel.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Preciso de equipe grande para usar o sistema?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Não. O layout foi desenhado para pequenas empresas que querem profissionalizar processos sem burocracia.'
+                ]
+            ]
+        ]
     ]
-    </script>
+];
+@endphp
 
-    <script src="{{ asset('js/tailwind.js') }}"></script>
-    <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
-    <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="distribution" content="Global">
-    <meta name="rating" content="General">
-    <meta name="language" content="pt-BR">
-    <meta name="content-language" content="pt-BR">
-
-
-    <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-MN5442GH2J');
-    </script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'AW-11559494036');
-    </script>
-</head>
-<body class="bg-slate-50 text-slate-900 font-sans pt-10">
-    
-
-    <header class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <a href="#hero" class="flex items-center space-x-3 text-blue-900 font-semibold">
-                    <img src="{{ asset('images/logo.png') }}" alt="WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas" class="h-16 w-auto">
-                </a>
-                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
-                    <a href="#beneficios" class="hover:text-blue-600 transition">Benefícios</a>
-                    <a href="#porque" class="hover:text-blue-600 transition">Por que WSoft</a>
-                    <a href="#demo" class="hover:text-blue-600 transition">Demonstração</a>
-                    <a href="#funcionalidades" class="hover:text-blue-600 transition">Funcionalidades</a>
-                    <a href="#precos" class="text-red-600 font-bold hover:text-red-700 transition">Oferta Especial 🔥</a>
-                    <a href="/blog" class="hover:text-blue-600 transition">Blog</a>
-                    <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
-                    <a href="/app/login" class="hover:text-blue-600 transition border rounded-2xl">Login</a>
-                    <a href="/app/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">Cadastrar</a>
-                </nav>
-                <button id="menu-button" class="md:hidden text-2xl text-slate-700" aria-label="Abrir menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-            <div id="mobile-nav" class="md:hidden hidden pb-4">
-                <nav class="flex flex-col space-y-2 text-sm font-semibold text-slate-700">
-                    <a href="#beneficios" class="py-2 border-b border-slate-100">Benefícios</a>
-                    <a href="#porque" class="py-2 border-b border-slate-100">Por que WSoft</a>
-                    <a href="#demo" class="py-2 border-b border-slate-100">Demonstração</a>
-                    <a href="#funcionalidades" class="py-2 border-b border-slate-100">Funcionalidades</a>
-                    <a href="#precos" class="py-2 border-b border-slate-100">Preços</a>
-                    <a href="#faq" class="py-2 border-b border-slate-100">FAQ</a>
-                    <a href="/app/login" class="py-2 border-b border-slate-100">Login</a>
-                    <a href="/app/register" class="py-2 text-blue-600">Cadastrar</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+<x-site-layout
+    :title="'Sistema de Gestão Financeira para Pequenas Empresas | WSoft'"
+    :description="'WSoft - Sistema de gestão financeira simples para pequenas empresas e MEI. Controle contas a pagar, receber, estoque, OS e emita notas fiscais. Teste grátis!'"
+    :keywords="'sistema de gestão financeira, pequenas empresas, MEI, controle financeiro, ordem de serviço, emissão de notas, WSoft'"
+    :canonical="'https://www.wsoft.dev.br/'"
+    :ogTitle="'Sistema de Gestão Financeira para Pequenas Empresas | WSoft'"
+    :ogDescription="'Controle financeiro, ordem de serviço, vendas, estoque e assinatura digital em um único sistema simples e eficiente. Teste grátis por 7 dias.'"
+    :twitterTitle="'WSoft - Sistema de Gestão Online'"
+    :twitterDescription="'Sistema de gestão com financeiro, OS, vendas e assinatura digital. Ideal para mecânicas e pequenas empresas.'"
+    :structuredData="$structuredData"
+>
 
     <!-- Hero -->
     <section id="hero" class="pt-32 pb-24 bg-gradient-to-b from-blue-950 via-blue-900 to-blue-800 text-white overflow-hidden relative">
@@ -302,6 +229,7 @@
                 </div>
             </div>
         </div>
+    </section>
 
     <!-- Benefícios principais -->
     <section id="beneficios" class="py-20">
@@ -587,17 +515,17 @@
             </div>
             <div class="mt-12 grid gap-6 md:grid-cols-3">
                 <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <p class="text-sm text-slate-600 italic">“A WSoft transformou nossa rotina. Agora controlamos estoque, financeiro e as OS com muito mais eficiência.”</p>
+                    <p class="text-sm text-slate-600 italic">"A WSoft transformou nossa rotina. Agora controlamos estoque, financeiro e as OS com muito mais eficiência."</p>
                     <div class="mt-4 font-semibold">Mêcanica Fischer</div>
                     <div class="text-sm text-slate-500">Rolante/RS</div>
                 </article>
                 <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <p class="text-sm text-slate-600 italic">“Redução de inadimplência significativa desde que começamos a usar o sistema.”</p>
+                    <p class="text-sm text-slate-600 italic">"Redução de inadimplência significativa desde que começamos a usar o sistema."</p>
                     <div class="mt-4 font-semibold">Oficina AutoPlus</div>
                     <div class="text-sm text-slate-500">São Paulo/SP</div>
                 </article>
                 <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                    <p class="text-sm text-slate-600 italic">“Assinaturas digitais fáceis e com validade jurídica — muito prático.”</p>
+                    <p class="text-sm text-slate-600 italic">"Assinaturas digitais fáceis e com validade jurídica — muito prático."</p>
                     <div class="mt-4 font-semibold">Consulta Fipe</div>
                     <div class="text-sm text-slate-500">Porto Alegre/RS</div>
                 </article>
@@ -615,7 +543,7 @@
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-lg bg-white text-blue-700 font-semibold px-10 py-4 shadow-lg hover:-translate-y-0.5 transition">
-                    Testar grátis por 7 dias
+                    Testar por 7 Dias
                 </a>
                 <a href="#contato" class="inline-flex justify-center items-center rounded-lg border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition">
                     Quero organizar minha empresa
@@ -638,7 +566,7 @@
                 <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg z-10 animate-bounce">
                     RESTAM POUCAS VAGAS
                 </div>
-                
+
                 <div class="rounded-3xl bg-white border-2 border-blue-600 shadow-2xl overflow-hidden relative">
                     <div class="bg-blue-600 text-white text-center py-4 relative overflow-hidden">
                         <div class="absolute inset-0 bg-white/10 transform -skew-x-12"></div>
@@ -759,58 +687,4 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contato" class="bg-slate-900 text-slate-100 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-10">
-            <div>
-                <h3 class="text-lg font-semibold">WSoft Tecnologia</h3>
-                <p class="mt-3 text-sm text-slate-400">Sistema de gestão para pequenas empresas que une organização empresarial e crescimento previsível.</p>
-            </div>
-            <div>
-                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Produto</h4>
-                <ul class="mt-4 space-y-2 text-sm text-slate-300">
-                    <li><a href="/beneficios" class="hover:text-white">Benefícios</a></li>
-                    <li><a href="/demonstracao" class="hover:text-white">Demonstração</a></li>
-                    <li><a href="#precos" class="hover:text-white">Preços</a></li>
-                    <li><a href="/faq" class="hover:text-white">FAQ</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Soluções</h4>
-                <ul class="mt-4 space-y-2 text-sm text-slate-300">
-                    <li><a href="/oficina" class="hover:text-white">Sistema para Oficina</a></li>
-                    <li><a href="/mecanica" class="hover:text-white">Sistema para Mecânica</a></li>
-                    <li><a href="/funilaria" class="hover:text-white">Sistema para Funilaria</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Contato</h4>
-                <ul class="mt-4 space-y-2 text-sm text-slate-300">
-                    <li>contato@wsoft.com.br</li>
-                    <li>Rolante/RS</li>
-                </ul>
-            </div>
-{{--            <div>--}}
-{{--                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Redes</h4>--}}
-{{--                <div class="mt-4 flex gap-3 text-lg">--}}
-{{--                    <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>--}}
-{{--                    <a href="#" class="hover:text-white"><i class="fa-brands fa-linkedin"></i></a>--}}
-{{--                    <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook"></i></a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-        </div>
-        <p class="mt-10 text-center text-xs text-slate-500">&copy; {{ now()->year }} WSoft Tecnologia. Todos os direitos reservados.</p>
-    </footer>
-
-    <script>
-        const button = document.getElementById('menu-button');
-        const mobileNav = document.getElementById('mobile-nav');
-        if (button) {
-            button.addEventListener('click', () => {
-                mobileNav.classList.toggle('hidden');
-            });
-        }
-    </script>
-</body>
-</html>
-
+</x-site-layout>
