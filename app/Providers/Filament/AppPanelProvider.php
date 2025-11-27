@@ -20,6 +20,7 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Width;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -88,6 +89,7 @@ final class AppPanelProvider extends PanelProvider
                 'success' => Color::Emerald,
                 'warning' => Color::hex('#F59E0B'),
             ])
+            ->maxContentWidth(Width::Full)
             ->tenantBillingProvider(new BillingProvider('default'))
             ->requiresTenantSubscription()
             ->topNavigation()
