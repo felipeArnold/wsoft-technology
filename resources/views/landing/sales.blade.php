@@ -28,6 +28,12 @@
 
     gtag('config', 'AW-11559494036');
     </script>
+
+    <!-- Event snippet for Inscrição conversion page -->
+    <script>
+        gtag('event', 'conversion', {'send_to': 'AW-11559494036/-uoWCOCWoIQaEJTD_4cr'});
+    </script>
+
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
     <!-- Urgency Banner -->
