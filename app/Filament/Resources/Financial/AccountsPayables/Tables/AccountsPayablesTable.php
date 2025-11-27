@@ -12,12 +12,15 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -67,7 +70,7 @@ final class AccountsPayablesTable
                     ->badge()
                     ->formatStateUsing(function ($state, $record) {
                         if ($state->value) {
-                            return 'Recebido';
+                            return 'Pago';
                         }
                         if ($record->due_date->isPast()) {
                             return 'Vencido';
@@ -106,7 +109,7 @@ final class AccountsPayablesTable
                     ->sortable()
                     ->placeholder('—'),
                 TextColumn::make('paid_at')
-                    ->label('Recebido em')
+                    ->label('Pago em')
                     ->date('d/m/Y H:i')
                     ->sortable()
                     ->placeholder('—'),
@@ -121,7 +124,6 @@ final class AccountsPayablesTable
                             ->prefixIcon('heroicon-m-calendar')
                             ->type('month')
                             ->default(Carbon::now()->format('Y-m'))
-                            ->required()
                             ->reactive(),
                     ])
                     ->query(function ($query, array $data): void {
@@ -131,33 +133,244 @@ final class AccountsPayablesTable
                             $year = $carbon->year;
                             $query->whereMonth('due_date', $month)->whereYear('due_date', $year);
                         }
+                    })
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! filled($data['month'])) {
+                            return null;
+                        }
+
+                        return 'Mês: '.Carbon::parse($data['month'])->translatedFormat('F/Y');
                     }),
+
+                Filter::make('date_range')
+                    ->label('Período')
+                    ->form([
+                        DatePicker::make('date_from')
+                            ->label('De')
+                            ->placeholder('Data inicial')
+                            ->native(false)
+                            ->displayFormat('d/m/Y')
+                            ->closeOnDateSelection()
+                            ->maxDate(fn (callable $get) => $get('date_until') ?: now()->addYear()),
+                        DatePicker::make('date_until')
+                            ->label('Até')
+                            ->placeholder('Data final')
+                            ->native(false)
+                            ->displayFormat('d/m/Y')
+                            ->closeOnDateSelection()
+                            ->minDate(fn (callable $get) => $get('date_from'))
+                            ->maxDate(now()->addYear()),
+                    ])
+                    ->columns(2)
+                    ->query(function ($query, array $data): void {
+                        $query
+                            ->when(filled($data['date_from']), fn ($q) => $q->whereDate('due_date', '>=', $data['date_from']))
+                            ->when(filled($data['date_until']), fn ($q) => $q->whereDate('due_date', '<=', $data['date_until']));
+                    })
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! filled($data['date_from']) && ! filled($data['date_until'])) {
+                            return null;
+                        }
+
+                        $from = filled($data['date_from']) ? Carbon::parse($data['date_from'])->format('d/m/Y') : '...';
+                        $until = filled($data['date_until']) ? Carbon::parse($data['date_until'])->format('d/m/Y') : '...';
+
+                        return "Período: {$from} até {$until}";
+                    }),
+
                 SelectFilter::make('status')
                     ->label('Status')
                     ->options([
                         0 => 'Pendente',
-                        1 => 'Recebido',
+                        1 => 'Pago',
                     ])
                     ->query(function ($query, array $data): void {
                         if (filled($data['value'])) {
                             $query->where('status', $data['value']);
                         }
+                    })
+                    ->native(false)
+                    ->placeholder('Todos os status')
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! filled($data['value'])) {
+                            return null;
+                        }
+
+                        return 'Status: '.($data['value'] ? 'Pago' : 'Pendente');
                     }),
-                Filter::make('overdue')
+
+                SelectFilter::make('supplier')
+                    ->label('Fornecedor')
+                    ->relationship('accounts.person', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->native(false)
+                    ->placeholder('Todos os fornecedores')
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! filled($data['value'])) {
+                            return null;
+                        }
+
+                        $person = \App\Models\Person\Person::find($data['value']);
+
+                        return $person ? 'Fornecedor: '.$person->name : null;
+                    }),
+
+                SelectFilter::make('payment_method')
+                    ->label('Forma de Pagamento')
+                    ->options(\App\Enum\AccountsReceivable\PaymentMethodEnum::class)
+                    ->query(function ($query, array $data): void {
+                        if (filled($data['value'])) {
+                            $query->whereHas('accounts', fn ($q) => $q->where('payment_method', $data['value']));
+                        }
+                    })
+                    ->native(false)
+                    ->placeholder('Todas as formas')
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! filled($data['value'])) {
+                            return null;
+                        }
+
+                        $paymentMethod = \App\Enum\AccountsReceivable\PaymentMethodEnum::tryFrom($data['value']);
+
+                        return $paymentMethod ? 'Forma: '.$paymentMethod->getLabel() : null;
+                    }),
+
+                SelectFilter::make('category')
+                    ->label('Categoria')
+                    ->options(function (): array {
+                        return \App\Models\Accounts\Accounts::query()
+                            ->where('type', 'payables')
+                            ->whereNotNull('category')
+                            ->distinct()
+                            ->pluck('category', 'category')
+                            ->toArray();
+                    })
+                    ->query(function ($query, array $data): void {
+                        if (filled($data['value'])) {
+                            $query->whereHas('accounts', fn ($q) => $q->where('category', $data['value']));
+                        }
+                    })
+                    ->searchable()
+                    ->native(false)
+                    ->placeholder('Todas as categorias')
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! filled($data['value'])) {
+                            return null;
+                        }
+
+                        return 'Categoria: '.$data['value'];
+                    }),
+
+                Filter::make('amount_range')
+                    ->label('Faixa de Valor')
+                    ->form([
+                        TextInput::make('amount_from')
+                            ->label('Valor mínimo')
+                            ->placeholder('R$ 0,00')
+                            ->numeric()
+                            ->prefix('R$')
+                            ->minValue(0),
+                        TextInput::make('amount_until')
+                            ->label('Valor máximo')
+                            ->placeholder('R$ 999.999,99')
+                            ->numeric()
+                            ->prefix('R$')
+                            ->minValue(0),
+                    ])
+                    ->columns(2)
+                    ->query(function ($query, array $data): void {
+                        $query
+                            ->when(filled($data['amount_from']), fn ($q) => $q->where('amount', '>=', $data['amount_from']))
+                            ->when(filled($data['amount_until']), fn ($q) => $q->where('amount', '<=', $data['amount_until']));
+                    })
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! filled($data['amount_from']) && ! filled($data['amount_until'])) {
+                            return null;
+                        }
+
+                        $from = filled($data['amount_from']) ? 'R$ '.number_format($data['amount_from'], 2, ',', '.') : 'R$ 0,00';
+                        $until = filled($data['amount_until']) ? 'R$ '.number_format($data['amount_until'], 2, ',', '.') : '∞';
+
+                        return "Valor: {$from} até {$until}";
+                    }),
+
+                TernaryFilter::make('overdue')
                     ->label('Vencidas')
-                    ->query(function ($query): void {
-                        $query->where('due_date', '<', now())
-                            ->where('status', 0);
-                    })
-                    ->toggle(),
-                Filter::make('due_today')
+                    ->placeholder('Todas')
+                    ->trueLabel('Apenas vencidas')
+                    ->falseLabel('Não vencidas')
+                    ->queries(
+                        true: fn ($query) => $query->where('due_date', '<', now())->where('status', 0),
+                        false: fn ($query) => $query->where(fn ($q) => $q->where('due_date', '>=', now())->orWhere('status', 1)),
+                    )
+                    ->native(false)
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! isset($data['value']) || $data['value'] === null) {
+                            return null;
+                        }
+
+                        return $data['value'] ? 'Apenas vencidas' : 'Não vencidas';
+                    }),
+
+                TernaryFilter::make('due_today')
                     ->label('Vence Hoje')
-                    ->query(function ($query): void {
-                        $query->whereDate('due_date', now())
-                            ->where('status', 0);
+                    ->placeholder('Todas')
+                    ->trueLabel('Sim')
+                    ->falseLabel('Não')
+                    ->queries(
+                        true: fn ($query) => $query->whereDate('due_date', now())->where('status', 0),
+                        false: fn ($query) => $query->where(fn ($q) => $q->whereDate('due_date', '!=', now())->orWhere('status', 1)),
+                    )
+                    ->native(false)
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! isset($data['value']) || $data['value'] === null) {
+                            return null;
+                        }
+
+                        return $data['value'] ? 'Vence hoje' : 'Não vence hoje';
+                    }),
+
+                SelectFilter::make('due_period')
+                    ->label('Vencimento')
+                    ->options([
+                        'next_7' => 'Próximos 7 dias',
+                        'next_15' => 'Próximos 15 dias',
+                        'next_30' => 'Próximos 30 dias',
+                        'current_month' => 'Mês atual',
+                        'next_month' => 'Próximo mês',
+                    ])
+                    ->query(function ($query, array $data): void {
+                        if (! filled($data['value'])) {
+                            return;
+                        }
+
+                        match ($data['value']) {
+                            'next_7' => $query->whereBetween('due_date', [now(), now()->addDays(7)])->where('status', 0),
+                            'next_15' => $query->whereBetween('due_date', [now(), now()->addDays(15)])->where('status', 0),
+                            'next_30' => $query->whereBetween('due_date', [now(), now()->addDays(30)])->where('status', 0),
+                            'current_month' => $query->whereMonth('due_date', now()->month)->whereYear('due_date', now()->year)->where('status', 0),
+                            'next_month' => $query->whereMonth('due_date', now()->addMonth()->month)->whereYear('due_date', now()->addMonth()->year)->where('status', 0),
+                            default => null,
+                        };
                     })
-                    ->toggle(),
-            ])
+                    ->native(false)
+                    ->placeholder('Todos os períodos')
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! filled($data['value'])) {
+                            return null;
+                        }
+
+                        return match ($data['value']) {
+                            'next_7' => 'Vencimento: Próximos 7 dias',
+                            'next_15' => 'Vencimento: Próximos 15 dias',
+                            'next_30' => 'Vencimento: Próximos 30 dias',
+                            'current_month' => 'Vencimento: Mês atual',
+                            'next_month' => 'Vencimento: Próximo mês',
+                            default => null,
+                        };
+                    }),
+            ], layout: FiltersLayout::AboveContentCollapsible)
             ->filtersTriggerAction(
                 fn (Action $action) => $action
                     ->button()
@@ -168,7 +381,7 @@ final class AccountsPayablesTable
                 ViewAction::make(),
                 EditAction::make(),
                 Action::make('mark_as_received')
-                    ->label('Marcar como Recebido')
+                    ->label('Marcar como Pago')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->visible(fn ($record) => ! $record->status->value)
@@ -237,7 +450,7 @@ final class AccountsPayablesTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     Action::make('mark_all_received')
-                        ->label('Marcar como Recebido')
+                        ->label('Marcar como Pago')
                         ->icon('heroicon-o-check-circle')
                         ->color('success')
                         ->requiresConfirmation()
