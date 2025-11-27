@@ -17,6 +17,8 @@ final class Activity extends Model
 
     protected $casts = [
         'due_date' => 'date',
+        'start_date' => 'datetime',
+        'completion_date' => 'datetime',
         'completed_at' => 'datetime',
     ];
 

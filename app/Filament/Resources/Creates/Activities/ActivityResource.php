@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Creates\Activities;
 
-use App\Filament\Resources\Creates\Activities\Pages\CreateActivity;
-use App\Filament\Resources\Creates\Activities\Pages\EditActivity;
 use App\Filament\Resources\Creates\Activities\Pages\ListActivities;
 use App\Filament\Resources\Creates\Activities\Schemas\ActivityForm;
 use App\Filament\Resources\Creates\Activities\Tables\ActivitiesTable;
@@ -30,7 +28,7 @@ final class ActivityResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Cadastros';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 1;
 
     public static function getGloballySearchableAttributes(): array
     {
@@ -82,8 +80,6 @@ final class ActivityResource extends Resource
     {
         return [
             'index' => ListActivities::route('/'),
-            'create' => CreateActivity::route('/create'),
-            'edit' => EditActivity::route('/{record}/edit'),
         ];
     }
 }

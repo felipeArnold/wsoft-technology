@@ -7,6 +7,7 @@ namespace App\Filament\Resources\Creates\Activities\Schemas;
 use App\Models\Person\Person;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -71,6 +72,18 @@ final class ActivityForm
                         DatePicker::make('due_date')
                             ->label('Data de Vencimento')
                             ->displayFormat('d/m/Y')
+                            ->native(false)
+                            ->columnSpan(1),
+                        DateTimePicker::make('start_date')
+                            ->label('Data e Hora de Início')
+                            ->displayFormat('d/m/Y H:i')
+                            ->seconds(false)
+                            ->native(false)
+                            ->columnSpan(1),
+                        DateTimePicker::make('completion_date')
+                            ->label('Data e Hora de Conclusão')
+                            ->displayFormat('d/m/Y H:i')
+                            ->seconds(false)
                             ->native(false)
                             ->columnSpan(1),
                         RichEditor::make('description')
