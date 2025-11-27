@@ -44,6 +44,48 @@
         <priority>0.9</priority>
     </url>
 
+    <url>
+        <loc>{{ route('landing.gestao-clientes') }}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>{{ route('landing.gestao-fornecedores') }}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>{{ route('landing.gestao-estoque') }}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>{{ route('landing.contas-pagar') }}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>{{ route('landing.contas-receber') }}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>{{ route('landing.controle-inadimplencia') }}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>{{ route('landing.movimentacao-financeira') }}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Categories -->
     @foreach($categories as $category)
     <url>
