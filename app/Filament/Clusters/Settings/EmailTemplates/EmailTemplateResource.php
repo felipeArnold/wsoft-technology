@@ -24,7 +24,7 @@ final class EmailTemplateResource extends Resource
 {
     protected static ?string $model = EmailTemplate::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Envelope;
 
     protected static ?string $label = 'Templates de E-mail';
 
