@@ -72,7 +72,7 @@
                 </a>
                 @else
                 <div class="w-full aspect-video bg-gradient-to-br from-blue-50 to-slate-50 flex items-center justify-center">
-                    <i class="fa-solid fa-newspaper text-4xl text-blue-200"></i>
+                    <img src="{{ asset('images/logo.png') }}" alt="WSoft Logo" class="h-20 object-contain">
                 </div>
                 @endif
                 <div class="flex-1 p-6 flex flex-col">
@@ -133,9 +133,9 @@
                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </a>
                         @else
-                        <div class="w-full aspect-[16/9] bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center">
-                            <i class="fa-solid fa-file-lines text-4xl text-slate-300"></i>
-                        </div>
+                            <div class="w-full aspect-video bg-gradient-to-br from-blue-50 to-slate-50 flex items-center justify-center">
+                                <img src="{{ asset('images/logo.png') }}" alt="WSoft Logo" class="h-20 object-contain">
+                            </div>
                         @endif
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-3">
