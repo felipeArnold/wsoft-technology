@@ -41,17 +41,28 @@
 
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-MN5442GH2J');
     </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11559494036"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
+
         gtag('config', 'AW-11559494036');
+    </script>
+
+    <!-- Event snippet for Inscrição conversion page -->
+    <script>
+        gtag('event', 'conversion', {'send_to': 'AW-11559494036/-uoWCOCWoIQaEJTD_4cr'});
     </script>
 
     {{ $head ?? '' }}
