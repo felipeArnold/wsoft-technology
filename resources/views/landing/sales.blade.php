@@ -50,28 +50,28 @@
         <div class="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
         
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-block mb-6 px-4 py-1.5 rounded-full bg-green-500/20 border border-green-500/50 text-green-300 text-sm font-bold uppercase tracking-wider">
-                Oferta Exclusiva Liberada
+            <div class="inline-block mb-6 px-4 py-1.5 rounded-full bg-green-500/20 border border-green-500/50 text-green-300 text-sm font-bold uppercase tracking-wider animate-bounce">
+                🔥 Oferta Exclusiva: Acesso Imediato
             </div>
             
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8">
-                Organize sua empresa e elimine <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">as planilhas manuais</span>
+                Transforme seu Negócio em uma <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Máquina de Lucros</span>
             </h1>
             
             <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-12 leading-relaxed">
-                O sistema completo que organiza seu financeiro, emite notas e cobra seus clientes no automático. <br>
-                <span class="text-white font-bold">Por menos de R$ 1,00 por dia.</span>
+                Abandone as planilhas confusas. Tenha controle total do seu financeiro, vendas e estoque em um único lugar. 
+                <span class="text-white font-bold block mt-2">Simples, Rápido e Automático.</span>
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <a href="#oferta" class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white text-lg font-bold px-10 py-5 rounded-xl shadow-lg shadow-green-500/30 transform hover:-translate-y-1 transition duration-200 flex items-center justify-center gap-3">
-                    QUERO APROVEITAR AGORA
+                    QUERO VENDER MAIS AGORA
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
                 <div class="flex items-center gap-2 text-sm text-blue-200">
-                    <i class="fa-solid fa-lock"></i>
-                    <span>Compra 100% Segura</span>
+                    <i class="fa-solid fa-bolt text-yellow-400"></i>
+                    <span>Instalação em 30 segundos</span>
                 </div>
             </div>
         </div>
@@ -81,31 +81,31 @@
     <section class="py-20 bg-white">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Você se identifica com isso?</h2>
-                <p class="text-lg text-slate-600">Se você passa por uma dessas situações, o WSoft é para você.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">O que está impedindo seu crescimento?</h2>
+                <p class="text-lg text-slate-600">Se você enfrenta esses problemas, você está <span class="text-red-600 font-bold">perdendo dinheiro</span> todos os dias.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-red-50 p-8 rounded-3xl border border-red-100">
+                <div class="bg-red-50 p-8 rounded-3xl border border-red-100 hover:shadow-lg transition duration-300">
                     <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6 text-red-600 text-2xl">
-                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                        <i class="fa-solid fa-money-bill-wave"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Não sabe quem deve</h3>
-                    <p class="text-slate-600">Vende fiado ou a prazo e perde o controle de quem pagou e quem está devendo.</p>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Inadimplência Alta</h3>
+                    <p class="text-slate-600">Vender fiado e esquecer de cobrar é o caminho mais rápido para a falência. Recupere o que é seu.</p>
                 </div>
-                <div class="bg-red-50 p-8 rounded-3xl border border-red-100">
+                <div class="bg-red-50 p-8 rounded-3xl border border-red-100 hover:shadow-lg transition duration-300">
                     <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6 text-red-600 text-2xl">
-                        <i class="fa-solid fa-calculator"></i>
+                        <i class="fa-solid fa-chart-line-down"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Mistura as contas</h3>
-                    <p class="text-slate-600">Usa o dinheiro da empresa para pagar contas pessoais e nunca vê a cor do lucro.</p>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Lucro Invisível</h3>
+                    <p class="text-slate-600">Você vende, vende, vende, mas no final do mês não sobra nada? O problema está na sua gestão.</p>
                 </div>
-                <div class="bg-red-50 p-8 rounded-3xl border border-red-100">
+                <div class="bg-red-50 p-8 rounded-3xl border border-red-100 hover:shadow-lg transition duration-300">
                     <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6 text-red-600 text-2xl">
-                        <i class="fa-solid fa-clock"></i>
+                        <i class="fa-solid fa-hourglass-half"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Perde tempo</h3>
-                    <p class="text-slate-600">Passa horas preenchendo planilhas ou cadernos que não te dão nenhuma informação útil.</p>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Escravo do Negócio</h3>
+                    <p class="text-slate-600">Se você precisa estar na empresa para ela funcionar, você não tem um negócio, tem um emprego.</p>
                 </div>
             </div>
         </div>
@@ -117,10 +117,10 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-                        A solução completa para organizar sua empresa
+                        A Ferramenta Secreta das Empresas de Sucesso
                     </h2>
                     <p class="text-lg text-slate-600 mb-8">
-                        O WSoft foi desenvolvido para pequenos empreendedores que precisam de agilidade. Sem complicação, sem termos difíceis.
+                        O WSoft não é apenas um sistema, é o seu parceiro de crescimento. Automatize o chato e foque no que importa: vender.
                     </p>
                     
                     <div class="space-y-6">
@@ -161,6 +161,38 @@
         </div>
     </section>
 
+    <!-- Bonuses (Desire) -->
+    <section class="py-20 bg-blue-600 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Bônus Exclusivos para Novos Assinantes</h2>
+                <p class="text-xl text-blue-100">Assinando HOJE, você leva totalmente de graça:</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20">
+                    <div class="text-yellow-400 text-4xl mb-4"><i class="fa-solid fa-headset"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Suporte VIP Prioritário</h3>
+                    <p class="text-blue-100 text-sm mb-4">Atendimento preferencial no WhatsApp para tirar todas as suas dúvidas.</p>
+                    <p class="text-sm font-bold text-yellow-400">Valor: R$ 97,00 (Grátis)</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20">
+                    <div class="text-yellow-400 text-4xl mb-4"><i class="fa-solid fa-rocket"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Onboarding Guiado</h3>
+                    <p class="text-blue-100 text-sm mb-4">Nossa equipe te ajuda a configurar o sistema para o seu negócio.</p>
+                    <p class="text-sm font-bold text-yellow-400">Valor: R$ 150,00 (Grátis)</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20">
+                    <div class="text-yellow-400 text-4xl mb-4"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h3 class="text-xl font-bold mb-2">App Mobile</h3>
+                    <p class="text-blue-100 text-sm mb-4">Acesse sua empresa de qualquer lugar, pelo celular ou tablet.</p>
+                    <p class="text-sm font-bold text-yellow-400">Valor: Inestimável (Grátis)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- The Offer (Stack) -->
     <section id="oferta" class="py-24 bg-blue-900 text-white relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-5"></div>
@@ -175,7 +207,7 @@
                 <!-- Left Column: Benefits & Price -->
                 <div class="bg-white text-slate-900 rounded-3xl shadow-xl overflow-hidden border-4 border-yellow-400 relative h-full flex flex-col">
                     <!-- Badge -->
-                    <div class="absolute top-0 right-0 bg-yellow-400 text-blue-900 font-bold px-6 py-2 rounded-bl-2xl shadow-md z-10">
+                    <div class="absolute top-0 right-0 bg-yellow-400 text-blue-900 font-bold px-6 py-2 rounded-bl-2xl shadow-md z-10 animate-pulse">
                         DESCONTO DE 36%
                     </div>
 
@@ -184,35 +216,27 @@
                         <ul class="space-y-4 mb-8">
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Gest!ao de contas a pagar e receber</span>
+                                <span class="font-medium">Sistema Completo de Gestão</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Gestão de clientes</span>
+                                <span class="font-medium">Contas a Pagar, Receber, Extrato e Movimentação</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Controle Financeiro</span>
+                                <span class="font-medium">Cobrança Automática</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Gestão de produtos</span>
+                                <span class="font-medium">Gestão de Estoque</span>
                             </li>
                             <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Gestão de fornecedores</span>
+                                <i class="fa-solid fa-plus text-blue-500 text-xl"></i>
+                                <span class="font-bold text-blue-600">BÔNUS: Suporte VIP</span>
                             </li>
                             <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Controle de estoque</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Gestão de orçamentos e vendas</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Ordens de serviço</span>
+                                <i class="fa-solid fa-plus text-blue-500 text-xl"></i>
+                                <span class="font-bold text-blue-600">BÔNUS: App Mobile</span>
                             </li>
                         </ul>
 
@@ -226,9 +250,9 @@
                                     <span class="text-sm text-slate-500 font-medium">/mês</span>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-center gap-2 text-sm text-slate-500">
+                            <div class="flex items-center justify-center gap-2 text-sm text-slate-500 bg-green-50 py-2 rounded-lg mt-4">
                                 <i class="fa-solid fa-shield-halved text-green-500"></i>
-                                <span>7 dias de garantia incondicional</span>
+                                <span class="font-bold text-green-700">Garantia Blindada de 7 Dias</span>
                             </div>
                         </div>
                     </div>
@@ -239,30 +263,30 @@
                     <livewire:landing-register-form />
                 </div>
             </div>
-            
-            <div class="mt-8 text-center">
-                <img src="{{ asset('images/payment-methods.png') }}" alt="Formas de Pagamento" class="h-8 mx-auto opacity-70">
-            </div>
         </div>
     </section>
 
     <!-- FAQ -->
     <section class="py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-12">Perguntas Frequentes</h2>
+            <h2 class="text-3xl font-bold text-center mb-12">Dúvidas Frequentes</h2>
             
             <div class="space-y-6">
-                <div class="border border-slate-200 rounded-xl p-6">
-                    <h3 class="font-bold text-lg mb-2">Tem fidelidade?</h3>
-                    <p class="text-slate-600">Não! Você pode cancelar a qualquer momento sem multa.</p>
+                <div class="border border-slate-200 rounded-xl p-6 hover:border-blue-300 transition duration-300">
+                    <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-circle-question text-blue-500"></i> É difícil de usar?</h3>
+                    <p class="text-slate-600">Não! O WSoft foi feito para quem não tem tempo a perder. É intuitivo e fácil. Se você sabe usar o WhatsApp, sabe usar o WSoft.</p>
                 </div>
-                <div class="border border-slate-200 rounded-xl p-6">
-                    <h3 class="font-bold text-lg mb-2">Preciso instalar algo?</h3>
-                    <p class="text-slate-600">Não, o sistema é 100% online. Você acessa pelo navegador do computador ou celular.</p>
+                <div class="border border-slate-200 rounded-xl p-6 hover:border-blue-300 transition duration-300">
+                    <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-circle-question text-blue-500"></i> Preciso de um computador potente?</h3>
+                    <p class="text-slate-600">Não. O sistema roda direto no navegador, em qualquer computador, tablet ou celular com internet.</p>
                 </div>
-                <div class="border border-slate-200 rounded-xl p-6">
-                    <h3 class="font-bold text-lg mb-2">Como funciona o suporte?</h3>
-                    <p class="text-slate-600">Temos uma equipe pronta para te ajudar via WhatsApp e E-mail em horário comercial.</p>
+                <div class="border border-slate-200 rounded-xl p-6 hover:border-blue-300 transition duration-300">
+                    <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-circle-question text-blue-500"></i> E se eu não gostar?</h3>
+                    <p class="text-slate-600">Você tem 7 dias para testar. Se achar que não é para você, devolvemos 100% do seu dinheiro. Sem perguntas.</p>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-6 hover:border-blue-300 transition duration-300">
+                    <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-circle-question text-blue-500"></i> Tem fidelidade?</h3>
+                    <p class="text-slate-600">Nenhuma. Você é livre para cancelar quando quiser.</p>
                 </div>
             </div>
         </div>

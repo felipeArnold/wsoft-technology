@@ -5,8 +5,8 @@
 
     <div class="relative z-10">
         <div class="text-center mb-8">
-            <h3 class="text-3xl font-bold text-white tracking-tight">Comece agora</h3>
-            <p class="text-blue-100 mt-2 font-light">Teste grátis por 7 dias, sem cartão de crédito</p>
+            <h3 class="text-3xl font-bold text-white tracking-tight">Garanta sua Vaga</h3>
+            <p class="text-blue-100 mt-2 font-light">Preencha para liberar seu acesso imediato.</p>
         </div>
 
         <form wire:submit="register" class="space-y-5">
@@ -78,7 +78,7 @@
                 wire:loading.attr="disabled"
                 wire:loading.class="opacity-75 cursor-wait"
             >
-                <span wire:loading.remove>Criar conta grátis</span>
+                <span wire:loading.remove>Ativar Meu Desconto Agora</span>
                 <span wire:loading class="flex items-center gap-2">
                     <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
