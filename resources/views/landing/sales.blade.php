@@ -184,11 +184,11 @@
                         <ul class="space-y-4 mb-8">
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Sistema de Gestão Completo</span>
+                                <span class="font-medium">Gest!ao de contas a pagar e receber</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Emissão de Notas Fiscais</span>
+                                <span class="font-medium">Gestão de clientes</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
@@ -196,15 +196,23 @@
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Suporte via WhatsApp</span>
+                                <span class="font-medium">Gestão de produtos</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Atualizações Gratuitas</span>
+                                <span class="font-medium">Gestão de fornecedores</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                                <span class="font-medium">Acesso Mobile</span>
+                                <span class="font-medium">Controle de estoque</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                                <span class="font-medium">Gestão de orçamentos e vendas</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                                <span class="font-medium">Ordens de serviço</span>
                             </li>
                         </ul>
 
