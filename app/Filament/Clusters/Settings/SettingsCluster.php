@@ -21,6 +21,8 @@ final class SettingsCluster extends Cluster
 
     protected static ?string $title = 'Configurações';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function getNavigationUrl(): string
     {
         if (! Filament::getTenant()) {

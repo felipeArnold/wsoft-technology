@@ -264,7 +264,8 @@
     <footer class="bg-slate-900 text-slate-400 py-12 text-center text-sm">
         <div class="max-w-7xl mx-auto px-4">
             <p>&copy; {{ date('Y') }} WSoft Tecnologia. Todos os direitos reservados.</p>
-            <p class="mt-2">CNPJ: 00.000.000/0000-00</p>
+            <p class="mt-2">CNPJ: 58.622.735/0001-37</p>
+            <p class="mt-2">contato@wsoft.com.br</p>
             <div class="mt-4 flex justify-center gap-4">
                 <a href="#" class="hover:text-white">Termos de Uso</a>
                 <a href="#" class="hover:text-white">Política de Privacidade</a>
