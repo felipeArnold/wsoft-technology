@@ -98,3 +98,6 @@ Route::get('/robots.txt', function () {
 });
 
 Route::view('/oferta-especial', 'landing.sales')->name('landing.sales');
+
+// Landing Page para CRM e Gestão Empresarial
+Route::view('/crm-gestao-empresarial', 'landing.crm-gestao')->name('landing.crm-gestao');
