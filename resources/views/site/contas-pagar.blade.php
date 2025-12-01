@@ -65,7 +65,7 @@ $structuredData = [
 <x-site-layout
     :title="'Sistema de Contas a Pagar | Controle Financeiro | WSoft'"
     :description="'Organize suas despesas e nunca mais pague juros. Sistema de contas a pagar simples e eficiente para pequenas empresas. Teste grátis!'"
-    :keywords="'contas a pagar, controle de despesas, gestão financeira, software financeiro, contas a pagar e receber, planilha de gastos, controle de pagamentos'"
+    :keywords="'contas a pagar, controle de despesas, gestão financeira, software financeiro, contas a pagar e receber, planilha de gastos, controle de pagamentos, contas a pagar planilha, planilha de contas a pagar e receber, planilha de contas a pagar para imprimir, sistema financeiro empresa, planilha contas a pagar mensal, contas a pagar excel'"
     :canonical="'https://www.wsoft.dev.br/sistema-para-contas-a-pagar'"
     :ogTitle="'Sistema de Contas a Pagar e Despesas | WSoft'"
     :ogDescription="'Evite juros e multas. Organize suas contas a pagar, controle vencimentos e tenha previsão de caixa com o WSoft.'"
@@ -352,6 +352,141 @@ $structuredData = [
     </div>
 </section>
 
+<!-- Planilha vs Sistema (New SEO Section) -->
+<section class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-emerald-600 font-bold tracking-wider uppercase text-sm">Evolua sua gestão</span>
+            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Por que abandonar a planilha de contas a pagar?</h2>
+            <p class="mt-4 text-lg text-slate-600">
+                Ainda usa <strong>contas a pagar excel</strong> ou procura uma <strong>planilha de contas a pagar para imprimir</strong>? 
+                Veja por que um sistema financeiro é superior.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Planilha -->
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="text-xl font-bold text-slate-700 mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-file-excel text-green-600"></i> Planilha de Contas a Pagar
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3 text-slate-600">
+                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                        <span>Não avisa vencimentos (risco de juros)</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-slate-600">
+                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                        <span>Difícil de usar no celular</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-slate-600">
+                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                        <span>Erros de fórmula são comuns</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-slate-600">
+                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                        <span>Sem backup automático</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Sistema -->
+            <div class="bg-emerald-900 p-8 rounded-3xl border border-emerald-800 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl">RECOMENDADO</div>
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-rocket text-emerald-400"></i> Sistema Financeiro WSoft
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3 text-emerald-100">
+                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <span>Alertas automáticos de vencimento</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-emerald-100">
+                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <span>Acesso de qualquer lugar (PC e Celular)</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-emerald-100">
+                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <span>Cálculos automáticos e precisos</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-emerald-100">
+                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <span>Backup seguro na nuvem</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-16 text-center">
+            <div class="inline-block p-1 rounded-2xl bg-gradient-to-r from-emerald-500 to-blue-500">
+                <div class="bg-white rounded-xl px-8 py-10 max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Procurando uma Planilha de Contas a Pagar e Receber?</h3>
+                    <p class="text-lg text-slate-600 mb-8">
+                        Não perca tempo preenchendo células manualmente e corrigindo fórmulas quebradas. 
+                        O WSoft automatiza tudo para você e garante que suas contas estejam sempre em dia.
+                    </p>
+                    <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-emerald-600 text-white font-bold px-8 py-4 shadow-lg shadow-emerald-200 hover:bg-emerald-700 hover:-translate-y-1 transition transform duration-200">
+                        Quero algo melhor que uma Planilha
+                        <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <p class="mt-4 text-sm text-slate-500">Teste grátis por 7 dias</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sistema Financeiro Completo (New SEO Section) -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <span class="text-blue-600 font-bold tracking-wider uppercase text-sm">Muito mais que o básico</span>
+                <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Um Sistema Financeiro para Empresa Completo</h2>
+                <p class="mt-6 text-lg text-slate-600">
+                    Não se limite a uma <strong>planilha contas a pagar mensal</strong>. O WSoft oferece uma gestão 360º para o seu negócio crescer.
+                </p>
+                
+                <div class="mt-8 space-y-6">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-chart-line text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900">Relatórios Gerenciais</h4>
+                            <p class="text-slate-600">Vá além do "pagar e receber". Analise DRE, fluxo de caixa e lucratividade em tempo real.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-file-invoice text-indigo-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900">Emissão de Boletos e Notas</h4>
+                            <p class="text-slate-600">Integre suas contas a receber com emissão de boletos e notas fiscais em poucos cliques.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-users text-emerald-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900">Gestão de Clientes</h4>
+                            <p class="text-slate-600">Mantenha o histórico financeiro de cada cliente organizado e acessível.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur-3xl opacity-20"></div>
+                <img src="/images/crm/dashboard-preview.png" alt="Sistema Financeiro Completo" class="relative rounded-2xl shadow-2xl border border-slate-200">
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="py-20 bg-gradient-to-br from-emerald-600 to-blue-600 text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
@@ -405,6 +540,16 @@ $structuredData = [
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
                 <p class="mt-3 text-slate-600">Sim! Ao lançar uma despesa, você pode informar o número de parcelas e o sistema gera os lançamentos futuros automaticamente.</p>
+            </details>
+            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                    Vocês fornecem uma planilha de contas a pagar?
+                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                </summary>
+                <p class="mt-3 text-slate-600">
+                    Embora planilhas sejam úteis, elas têm limitações. O WSoft é uma evolução da <strong>planilha de contas a pagar e receber</strong>, oferecendo automação, segurança e acesso online que o Excel não consegue entregar. Teste grátis e veja a diferença!
+                </p>
             </details>
         </div>
     </div>

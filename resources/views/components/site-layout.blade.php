@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="author" content="WSoft Tecnologia" />
+    <meta name="copyright" content="WSoft Tecnologia" />
+    <meta name="application-name" content="WSoft" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="WSoft" />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="BR-RS" />
+    <meta name="geo.placename" content="Rolante" />
+    <meta name="geo.position" content="-29.65056;-50.57583" />
+    <meta name="ICBM" content="-29.65056, -50.57583" />
+
+    <link rel="alternate" href="{{ url()->current() }}" hreflang="pt-br" />
+    <link rel="alternate" href="{{ url()->current() }}" hreflang="x-default" />
+    <meta property="og:locale" content="pt_BR" />
 
     <title>{{ $title ?? 'Sistema de Gestão para Pequenas Empresas | WSoft' }}</title>
     <meta name="description" content="{{ $description ?? 'WSoft - Sistema de gestão completo para pequenas empresas e MEI. Controle financeiro, clientes, estoque e OS. Teste grátis!' }}" />
