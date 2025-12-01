@@ -47,6 +47,7 @@ final class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('components.logo'))
             ->favicon(asset('images/icon.webp'))
             ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight(fn (): string => Auth::check() ? '4rem' : '5rem')
             ->defaultThemeMode(ThemeMode::Light)
             ->darkModeBrandLogo(
                 fn (): string => Auth::check()

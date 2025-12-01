@@ -1,0 +1,337 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\AI;
+
+use App\Models\Blog\BlogCategory;
+use App\Models\Blog\BlogPost;
+use App\Models\User;
+use Exception;
+use Illuminate\Support\Str;
+
+final class BlogPostGenerator
+{
+    private int $maxRetries = 3;
+
+    private int $retryDelaySeconds = 2;
+
+    public function generatePost(
+        string $topic,
+        ?BlogCategory $category = null,
+        ?User $author = null,
+        string $tone = 'profissional',
+        int $wordCount = 1000,
+    ): array {
+        $prompt = $this->buildPrompt($topic, $tone, $wordCount, $category);
+
+        $response = $this->makeOpenAIRequest(
+            messages: [
+                [
+                    'role' => 'system',
+                    'content' => 'Você é um assistente especializado em criar conteúdo de blog de alta qualidade em português brasileiro. Você deve gerar posts bem estruturados, informativos e otimizados para SEO.',
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $prompt,
+                ],
+            ],
+            maxTokens: 3000,
+        );
+
+        $content = $response->choices[0]->message->content;
+
+        return $this->parseResponse($content, $topic, $category, $author);
+    }
+
+    public function generateMultiplePosts(
+        array $topics,
+        ?BlogCategory $category = null,
+        ?User $author = null,
+        string $tone = 'profissional',
+        int $wordCount = 1000,
+    ): array {
+        $posts = [];
+
+        foreach ($topics as $index => $topic) {
+            $posts[] = $this->generatePost($topic, $category, $author, $tone, $wordCount);
+
+            // Adiciona delay entre requisições para evitar rate limit (exceto no último)
+            if ($index < count($topics) - 1) {
+                sleep($this->retryDelaySeconds);
+            }
+        }
+
+        return $posts;
+    }
+
+    public function improveExistingPost(BlogPost $post): array
+    {
+        $prompt = <<<PROMPT
+Analise e melhore o seguinte post de blog. Mantenha o mesmo tema e estrutura, mas:
+1. Melhore a qualidade do texto
+2. Adicione mais detalhes e exemplos relevantes
+3. Otimize para SEO
+4. Torne o conteúdo mais envolvente
+
+Título atual: {$post->title}
+Conteúdo atual: {$post->content}
+
+Forneça uma versão melhorada no formato:
+TÍTULO: [novo título]
+EXCERPT: [novo resumo]
+CONTEÚDO: [novo conteúdo em HTML]
+META_TITLE: [título SEO]
+META_DESCRIPTION: [descrição SEO]
+PROMPT;
+
+        $response = $this->makeOpenAIRequest(
+            messages: [
+                [
+                    'role' => 'system',
+                    'content' => 'Você é um editor profissional especializado em melhorar conteúdo de blog em português brasileiro.',
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $prompt,
+                ],
+            ],
+            maxTokens: 3000,
+        );
+
+        $content = $response->choices[0]->message->content;
+
+        return $this->parseResponse($content, $post->title, $post->category, $post->author);
+    }
+
+    public function generateSEOMetadata(string $title, string $content): array
+    {
+        $prompt = <<<PROMPT
+Gere metadados SEO otimizados para o seguinte post de blog:
+
+Título: {$title}
+Conteúdo: {$content}
+
+Forneça no formato:
+META_TITLE: [título SEO otimizado com até 60 caracteres]
+META_DESCRIPTION: [descrição SEO otimizada com até 160 caracteres]
+OG_IMAGE_SUGGESTION: [sugestão de tipo de imagem que funcionaria bem para compartilhamento]
+KEYWORDS: [5-10 palavras-chave relevantes separadas por vírgula]
+PROMPT;
+
+        $response = $this->makeOpenAIRequest(
+            messages: [
+                [
+                    'role' => 'system',
+                    'content' => 'Você é um especialista em SEO que cria metadados otimizados para blogs.',
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $prompt,
+                ],
+            ],
+            maxTokens: 500,
+            temperature: 0.5,
+        );
+
+        $content = $response->choices[0]->message->content;
+
+        return $this->parseSEOMetadata($content);
+    }
+
+    private function makeOpenAIRequest(
+        array $messages,
+        int $maxTokens = 3000,
+        float $temperature = 0.7,
+    ): mixed {
+        // Aumenta o tempo de execução para 3 minutos
+        $originalTimeLimit = ini_get('max_execution_time');
+        set_time_limit(180);
+
+        $attempt = 0;
+
+        try {
+            while ($attempt < $this->maxRetries) {
+                try {
+                    return \OpenAI\Laravel\Facades\OpenAI::chat()->create([
+                        'model' => 'gpt-4o-mini',
+                        'messages' => $messages,
+                        'temperature' => $temperature,
+                        'max_completion_tokens' => $maxTokens,
+                    ]);
+                } catch (Exception $e) {
+                    $attempt++;
+
+                    if (str_contains($e->getMessage(), 'rate limit') || str_contains($e->getMessage(), 'Rate limit')) {
+                        if ($attempt < $this->maxRetries) {
+                            $delaySeconds = $this->retryDelaySeconds * $attempt;
+                            sleep($delaySeconds);
+
+                            continue;
+                        }
+
+                        throw new Exception(
+                            'Limite de requisições da OpenAI excedido. Por favor, aguarde alguns minutos e tente novamente. Se o problema persistir, verifique sua cota em https://platform.openai.com/usage'
+                        );
+                    }
+
+                    throw $e;
+                }
+            }
+
+            throw new Exception('Falha ao se comunicar com a API da OpenAI após múltiplas tentativas.');
+        } finally {
+            // Restaura o tempo de execução original
+            if ($originalTimeLimit !== false) {
+                set_time_limit((int) $originalTimeLimit);
+            }
+        }
+    }
+
+    private function buildPrompt(
+        string $topic,
+        string $tone,
+        int $wordCount,
+        ?BlogCategory $category,
+    ): string {
+        $categoryContext = $category ? "Categoria: {$category->name}\n" : '';
+
+        return <<<PROMPT
+Crie um post de blog completo e de alta qualidade sobre o seguinte tópico:
+
+TÓPICO: {$topic}
+{$categoryContext}TOM: {$tone}
+EXTENSÃO: Aproximadamente {$wordCount} palavras
+
+O post deve incluir:
+1. Um título atraente e otimizado para SEO
+2. Um resumo/excerpt convincente (2-3 frases)
+3. Conteúdo principal bem estruturado em HTML com:
+   - Introdução engajadora
+   - Subtítulos (h2, h3) para organizar o conteúdo
+   - Parágrafos bem escritos
+   - Listas quando apropriado
+   - Conclusão impactante
+4. Meta título para SEO (máximo 60 caracteres)
+5. Meta descrição para SEO (máximo 160 caracteres)
+
+Forneça a resposta no seguinte formato:
+TÍTULO: [título do post]
+EXCERPT: [resumo do post]
+CONTEÚDO: [conteúdo completo em HTML]
+META_TITLE: [título SEO]
+META_DESCRIPTION: [descrição SEO]
+PROMPT;
+    }
+
+    private function parseResponse(
+        string $content,
+        string $fallbackTitle,
+        ?BlogCategory $category,
+        ?User $author,
+    ): array {
+        $lines = explode("\n", $content);
+        $data = [
+            'title' => '',
+            'excerpt' => '',
+            'content' => '',
+            'meta_title' => '',
+            'meta_description' => '',
+            'category_id' => $category?->id,
+            'author_id' => $author?->id ?? auth()->id(),
+            'status' => 'draft',
+        ];
+
+        $currentSection = null;
+        $contentLines = [];
+
+        foreach ($lines as $line) {
+            $line = mb_trim($line);
+
+            if (str_starts_with($line, 'TÍTULO:')) {
+                $data['title'] = mb_trim(mb_substr($line, 7));
+
+                continue;
+            }
+
+            if (str_starts_with($line, 'EXCERPT:')) {
+                $data['excerpt'] = mb_trim(mb_substr($line, 8));
+
+                continue;
+            }
+
+            if (str_starts_with($line, 'CONTEÚDO:')) {
+                $currentSection = 'content';
+                $contentLines = [];
+
+                continue;
+            }
+
+            if (str_starts_with($line, 'META_TITLE:')) {
+                $data['meta_title'] = mb_trim(mb_substr($line, 11));
+                $currentSection = null;
+
+                continue;
+            }
+
+            if (str_starts_with($line, 'META_DESCRIPTION:')) {
+                $data['meta_description'] = mb_trim(mb_substr($line, 17));
+                $currentSection = null;
+
+                continue;
+            }
+
+            if ($currentSection === 'content' && $line !== '') {
+                $contentLines[] = $line;
+            }
+        }
+
+        $data['content'] = implode("\n", $contentLines);
+
+        if (empty($data['title'])) {
+            $data['title'] = $fallbackTitle;
+        }
+
+        $data['slug'] = BlogPost::generateUniqueSlug($data['title']);
+
+        if (empty($data['meta_title'])) {
+            $data['meta_title'] = Str::limit($data['title'], 60);
+        }
+
+        if (empty($data['meta_description'])) {
+            $data['meta_description'] = Str::limit(
+                strip_tags($data['excerpt'] ?: $data['content']),
+                160
+            );
+        }
+
+        return $data;
+    }
+
+    private function parseSEOMetadata(string $content): array
+    {
+        $lines = explode("\n", $content);
+        $data = [
+            'meta_title' => '',
+            'meta_description' => '',
+            'og_image_suggestion' => '',
+            'keywords' => '',
+        ];
+
+        foreach ($lines as $line) {
+            $line = mb_trim($line);
+
+            if (str_starts_with($line, 'META_TITLE:')) {
+                $data['meta_title'] = mb_trim(mb_substr($line, 11));
+            } elseif (str_starts_with($line, 'META_DESCRIPTION:')) {
+                $data['meta_description'] = mb_trim(mb_substr($line, 17));
+            } elseif (str_starts_with($line, 'OG_IMAGE_SUGGESTION:')) {
+                $data['og_image_suggestion'] = mb_trim(mb_substr($line, 20));
+            } elseif (str_starts_with($line, 'KEYWORDS:')) {
+                $data['keywords'] = mb_trim(mb_substr($line, 9));
+            }
+        }
+
+        return $data;
+    }
+}
