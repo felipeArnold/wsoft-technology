@@ -73,8 +73,18 @@ Route::get('/sistema-para-fluxo-de-caixa', function () {
     return view('site.movimentacao-financeira');
 })->name('landing.movimentacao-financeira');
 
+// Landing Page para Sistema de Ordem de Serviço
+Route::get('/sistema-ordem-servico', function () {
+    return view('site.ordem-servico');
+})->name('landing.ordem-servico');
+
+// Landing Page para Assinatura Digital
+Route::get('/assinatura-digital', function () {
+    return view('site.assinatura-digital');
+})->name('landing.assinatura-digital');
+
 // Stripe Billing Routes
-Route::middleware(['auth'])->prefix('stripe')->name('stripe.')->group(function () {
+Route::middleware(['auth'])->prefix('stripe')->name('stripe.')->group(function (): void {
     Route::get('/billing-portal/{tenant}', [StripeBillingController::class, 'billingPortal'])->name('billing-portal');
     Route::get('/invoices/{tenant}', [StripeBillingController::class, 'invoices'])->name('invoices');
     Route::get('/invoices/{tenant}/{invoiceId}/download', [StripeBillingController::class, 'downloadInvoice'])->name('invoice.download');
@@ -84,7 +94,7 @@ Route::middleware(['auth'])->prefix('stripe')->name('stripe.')->group(function (
 });
 
 // Blog Routes
-Route::prefix('blog')->name('blog.')->group(function () {
+Route::prefix('blog')->name('blog.')->group(function (): void {
     Route::get('/', [BlogController::class, 'index'])->name('index');
     Route::get('/categoria/{slug}', [BlogController::class, 'category'])->name('category');
     Route::get('/{slug}', [BlogController::class, 'show'])->name('show');
