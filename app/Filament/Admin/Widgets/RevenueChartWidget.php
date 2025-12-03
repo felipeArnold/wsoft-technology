@@ -27,7 +27,7 @@ final class RevenueChartWidget extends ChartWidget
             $months[] = $date->format('M/Y');
 
             // Calcula MRR para aquele mês (empresas com assinatura ativa criadas até aquela data)
-            $count = Tenant::whereHas('subscriptions', function ($query) use ($date) {
+            $count = Tenant::whereHas('subscriptions', function ($query) use ($date): void {
                 $query->where('stripe_status', 'active')
                     ->where('created_at', '<=', $date->endOfMonth());
             })->count();

@@ -19,14 +19,14 @@ final class BlogController extends Controller
             ->orderBy('published_at', 'desc');
 
         if ($request->filled('categoria')) {
-            $query->whereHas('category', function ($q) use ($request) {
+            $query->whereHas('category', function ($q) use ($request): void {
                 $q->where('slug', $request->get('categoria'));
             });
         }
 
         if ($request->filled('busca')) {
             $search = $request->get('busca');
-            $query->where(function ($q) use ($search) {
+            $query->where(function ($q) use ($search): void {
                 $q->where('title', 'like', "%{$search}%")
                     ->orWhere('excerpt', 'like', "%{$search}%")
                     ->orWhere('content', 'like', "%{$search}%");
@@ -35,7 +35,7 @@ final class BlogController extends Controller
 
         $posts = $query->paginate(9);
         $categories = BlogCategory::where('is_active', true)
-            ->withCount(['posts' => function ($q) {
+            ->withCount(['posts' => function ($q): void {
                 $q->published();
             }])
             ->orderBy('name')
@@ -65,7 +65,7 @@ final class BlogController extends Controller
         $relatedPosts = BlogPost::query()
             ->published()
             ->where('id', '!=', $post->id)
-            ->when($post->category_id, function ($q) use ($post) {
+            ->when($post->category_id, function ($q) use ($post): void {
                 $q->where('category_id', $post->category_id);
             })
             ->orderBy('published_at', 'desc')
@@ -89,7 +89,7 @@ final class BlogController extends Controller
             ->paginate(9);
 
         $categories = BlogCategory::where('is_active', true)
-            ->withCount(['posts' => function ($q) {
+            ->withCount(['posts' => function ($q): void {
                 $q->published();
             }])
             ->orderBy('name')

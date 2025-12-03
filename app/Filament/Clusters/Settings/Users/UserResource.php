@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Clusters\Settings\Users;
 
 use App\Filament\Clusters\Settings\SettingsCluster;
-use App\Filament\Clusters\Settings\Users\Pages\CreateUser;
-use App\Filament\Clusters\Settings\Users\Pages\EditUser;
 use App\Filament\Clusters\Settings\Users\Pages\ListUsers;
-use App\Filament\Clusters\Settings\Users\Pages\ViewUser;
 use App\Filament\Clusters\Settings\Users\Schemas\UserForm;
 use App\Filament\Clusters\Settings\Users\Schemas\UserInfolist;
 use App\Filament\Clusters\Settings\Users\Tables\UsersTable;
@@ -62,9 +59,6 @@ final class UserResource extends Resource
     {
         return [
             'index' => ListUsers::route('/'),
-            //            'create' => CreateUser::route('/create'),
-            //            'view' => ViewUser::route('/{record}'),
-            //            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
 }

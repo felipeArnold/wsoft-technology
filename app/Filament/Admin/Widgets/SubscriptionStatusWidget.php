@@ -18,19 +18,19 @@ final class SubscriptionStatusWidget extends ChartWidget
 
     protected function getData(): array
     {
-        $active = Tenant::whereHas('subscriptions', function ($query) {
+        $active = Tenant::whereHas('subscriptions', function ($query): void {
             $query->where('stripe_status', 'active');
         })->count();
 
-        $trialing = Tenant::whereHas('subscriptions', function ($query) {
+        $trialing = Tenant::whereHas('subscriptions', function ($query): void {
             $query->where('stripe_status', 'trialing');
         })->count();
 
-        $canceled = Tenant::whereHas('subscriptions', function ($query) {
+        $canceled = Tenant::whereHas('subscriptions', function ($query): void {
             $query->where('stripe_status', 'canceled');
         })->count();
 
-        $pastDue = Tenant::whereHas('subscriptions', function ($query) {
+        $pastDue = Tenant::whereHas('subscriptions', function ($query): void {
             $query->where('stripe_status', 'past_due');
         })->count();
 

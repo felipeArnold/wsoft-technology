@@ -235,7 +235,7 @@ $structuredData = [
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/clientes/cadastro.png') }}" alt="Tela de Cadastro de Clientes" class="w-full h-auto transform group-hover:scale-105 transition duration-700">
+                        <img src="{{ asset('images/sistema/clientes/cadastro.png') }}" alt="Tela de Cadastro de Clientes" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
@@ -291,7 +291,7 @@ $structuredData = [
                 <div class="order-2">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="/images/crm/history.png" alt="Tela de Histórico do Cliente" class="w-full h-auto transform group-hover:scale-105 transition duration-700">
+                        <img src="/images/crm/history.png" alt="Tela de Histórico do Cliente" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -301,7 +301,7 @@ $structuredData = [
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="/images/crm/reports.png" alt="Relatórios de Gestão" class="w-full h-auto transform group-hover:scale-105 transition duration-700">
+                        <img src="/images/crm/reports.png" alt="Relatórios de Gestão" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">

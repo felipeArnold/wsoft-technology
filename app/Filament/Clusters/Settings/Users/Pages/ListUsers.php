@@ -24,7 +24,7 @@ final class ListUsers extends ListRecords
                 ->visible(function (): bool {
                     return Filament::getTenant()->members()->count() < 3;
                 })
-                ->before(function () {
+                ->before(function (): void {
                     $memberCount = Filament::getTenant()->members()->count();
 
                     if ($memberCount >= 3) {

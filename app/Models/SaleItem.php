@@ -36,7 +36,7 @@ final class SaleItem extends Model
 
     protected static function booted(): void
     {
-        self::saving(function (SaleItem $item) {
+        self::saving(function (SaleItem $item): void {
             $item->total = ($item->unit_price * $item->quantity) - $item->discount;
         });
     }

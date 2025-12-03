@@ -23,7 +23,7 @@ final class EditStockInventory extends EditRecord
                 ->color('warning')
                 ->requiresConfirmation()
                 ->visible(fn () => $this->record->status === 'draft')
-                ->action(function () {
+                ->action(function (): void {
                     $this->record->update([
                         'status' => 'in_progress',
                         'started_at' => now(),
@@ -42,7 +42,7 @@ final class EditStockInventory extends EditRecord
                 ->requiresConfirmation()
                 ->modalDescription('Ao concluir o inventário, as diferenças serão registradas como movimentações de ajuste de estoque. Esta ação não pode ser desfeita.')
                 ->visible(fn () => $this->record->status === 'in_progress')
-                ->action(function () {
+                ->action(function (): void {
                     $this->processInventoryCompletion();
 
                     Notification::make()
@@ -58,7 +58,7 @@ final class EditStockInventory extends EditRecord
                 ->color('danger')
                 ->requiresConfirmation()
                 ->visible(fn () => in_array($this->record->status, ['draft', 'in_progress']))
-                ->action(function () {
+                ->action(function (): void {
                     $this->record->update([
                         'status' => 'cancelled',
                     ]);

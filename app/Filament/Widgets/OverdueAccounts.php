@@ -86,9 +86,9 @@ final class OverdueAccounts extends BaseWidget
                         'receivables' => 'A Receber',
                         'payables' => 'A Pagar',
                     ])
-                    ->query(function ($query, array $data) {
+                    ->query(function ($query, array $data): void {
                         if (filled($data['value'])) {
-                            $query->whereHas('accounts', function ($q) use ($data) {
+                            $query->whereHas('accounts', function ($q) use ($data): void {
                                 $q->where('type', $data['value']);
                             });
                         }

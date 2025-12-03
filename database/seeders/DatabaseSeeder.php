@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\Tenant;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 final class DatabaseSeeder extends Seeder
@@ -15,12 +15,38 @@ final class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Criar tenant
+        $tenant = Tenant::create([
+            'name' => 'WSoft Technology',
+            'slug' => Tenant::generateUniqueSlug('WSoft Technology'),
+            'stripe_id' => 'cus_test_'.uniqid(),
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
+        // Criar usuário
+        $user = User::factory()->create([
+            'name' => 'Felipe Wustar',
             'email' => 'felipe@example.com',
             'password' => bcrypt('password'),
+        ]);
+
+        // Associar usuário ao tenant
+        $tenant->users()->attach($user);
+
+        // Criar subscription fixa
+        $tenant->subscriptions()->create([
+            'type' => 'default',
+            'stripe_id' => 'sub_test_'.uniqid(),
+            'stripe_status' => 'active',
+            'stripe_price' => 'price_test',
+            'quantity' => 1,
+            'trial_ends_at' => null,
+            'ends_at' => null,
+        ]);
+
+        // Chamar seeders
+        $this->call([
+            SourceSeeder::class,
+            LossReasonSeeder::class,
         ]);
     }
 }

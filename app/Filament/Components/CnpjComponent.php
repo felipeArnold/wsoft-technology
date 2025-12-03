@@ -44,7 +44,7 @@ final class CnpjComponent extends TextInput
                     </svg>
                 </div>
             '))
-            ->afterStateUpdated(function (?string $state, callable $set) {
+            ->afterStateUpdated(function (?string $state, callable $set): void {
                 if (empty($state)) {
                     return;
                 }
@@ -160,7 +160,7 @@ final class CnpjComponent extends TextInput
                 'required',
                 'string',
                 function () {
-                    return function (string $attribute, $value, $fail) {
+                    return function (string $attribute, $value, $fail): void {
                         // Remove caracteres não numéricos
                         $digits = preg_replace('/\D/', '', $value);
 

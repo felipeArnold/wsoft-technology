@@ -39,7 +39,7 @@ final class StockInventoryItemsRelationManager extends RelationManager
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->reactive()
-                    ->afterStateUpdated(function ($state, callable $set) {
+                    ->afterStateUpdated(function ($state, callable $set): void {
                         if ($state) {
                             $product = \App\Models\Product::find($state);
                             if ($product) {
@@ -64,7 +64,7 @@ final class StockInventoryItemsRelationManager extends RelationManager
                     ->numeric()
                     ->minValue(0)
                     ->reactive()
-                    ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                    ->afterStateUpdated(function ($state, callable $get, callable $set): void {
                         $systemQty = (int) $get('system_quantity') ?? 0;
                         $countedQty = (int) $state ?? 0;
                         $difference = $countedQty - $systemQty;

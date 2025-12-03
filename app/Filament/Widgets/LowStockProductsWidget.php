@@ -105,7 +105,7 @@ final class LowStockProductsWidget extends BaseWidget
                         'critical' => 'Crítico (≤5)',
                         'low' => 'Baixo (≤10)',
                     ])
-                    ->query(function ($query, array $data) {
+                    ->query(function ($query, array $data): void {
                         if (filled($data['value'])) {
                             match ($data['value']) {
                                 'out' => $query->where('stock', 0),

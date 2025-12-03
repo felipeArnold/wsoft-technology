@@ -43,6 +43,7 @@ final class UsersTable
             ->filters([
                 //
             ])
+            ->paginated(false)
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),

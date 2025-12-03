@@ -28,7 +28,7 @@ final class StockMovementForm
                             ->preload()
                             ->required()
                             ->reactive()
-                            ->afterStateUpdated(function ($state, callable $set) {
+                            ->afterStateUpdated(function ($state, callable $set): void {
                                 if ($state) {
                                     $product = \App\Models\Product::find($state);
                                     if ($product) {
@@ -56,7 +56,7 @@ final class StockMovementForm
                             ->required()
                             ->minValue(1)
                             ->reactive()
-                            ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                            ->afterStateUpdated(function ($state, callable $get, callable $set): void {
                                 $stockBefore = (int) $get('stock_before') ?? 0;
                                 $quantity = (int) $state ?? 0;
                                 $type = $get('type');

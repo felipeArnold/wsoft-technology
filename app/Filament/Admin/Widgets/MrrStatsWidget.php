@@ -13,13 +13,13 @@ final class MrrStatsWidget extends BaseWidget
     protected function getStats(): array
     {
         // Total de empresas ativas com assinatura
-        $activeSubscriptions = Tenant::whereHas('subscriptions', function ($query) {
+        $activeSubscriptions = Tenant::whereHas('subscriptions', function ($query): void {
             $query->where('stripe_status', 'active')
                 ->orWhere('stripe_status', 'trialing');
         })->count();
 
         // MRR (Monthly Recurring Revenue)
-        $mrr = Tenant::whereHas('subscriptions', function ($query) {
+        $mrr = Tenant::whereHas('subscriptions', function ($query): void {
             $query->where('stripe_status', 'active');
         })->count() * 99; // Assumindo R$ 99/mês
 
@@ -27,7 +27,7 @@ final class MrrStatsWidget extends BaseWidget
         $totalTenants = Tenant::count();
 
         // Empresas em período de teste
-        $trialTenants = Tenant::whereHas('subscriptions', function ($query) {
+        $trialTenants = Tenant::whereHas('subscriptions', function ($query): void {
             $query->where('stripe_status', 'trialing');
         })->count();
 
@@ -37,7 +37,7 @@ final class MrrStatsWidget extends BaseWidget
             : 0;
 
         // Crescimento MRR mês anterior
-        $lastMonthMrr = Tenant::whereHas('subscriptions', function ($query) {
+        $lastMonthMrr = Tenant::whereHas('subscriptions', function ($query): void {
             $query->where('stripe_status', 'active')
                 ->where('created_at', '<', now()->subMonth());
         })->count() * 99;

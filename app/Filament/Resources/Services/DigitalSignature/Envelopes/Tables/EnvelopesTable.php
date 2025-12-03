@@ -254,9 +254,9 @@ final class EnvelopesTable
                         'rejected' => 'Rejeitado',
                         'expired' => 'Expirado',
                     ])
-                    ->query(function ($query, array $data) {
+                    ->query(function ($query, array $data): void {
                         if (! empty($data['value'])) {
-                            $query->whereHas('signers', function ($q) use ($data) {
+                            $query->whereHas('signers', function ($q) use ($data): void {
                                 $q->where('status', $data['value']);
                             });
                         }

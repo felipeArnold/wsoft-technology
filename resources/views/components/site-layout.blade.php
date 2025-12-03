@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="author" content="WSoft Tecnologia" />
     <meta name="copyright" content="WSoft Tecnologia" />
@@ -45,9 +46,34 @@
         </script>
     @endif
 
-    <script src="{{ asset('js/tailwind.js') }}"></script>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
-    <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <!-- Preload critical images -->
+    <link rel="preload" href="{{ asset('images/logo.png') }}" as="image" fetchpriority="high">
+    <link rel="preload" href="{{ asset('images/logo-white.png') }}" as="image">
+
+    <!-- Critical CSS inline -->
+    <style>
+        body{margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background-color:#f8fafc;color:#0f172a}
+        header{position:fixed;top:0;left:0;right:0;z-index:50;background-color:rgba(255,255,255,0.9);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0}
+        img{max-width:100%;height:auto}
+        .container{max-width:1280px;margin:0 auto;padding:0 1rem}
+        @font-face{font-display:swap}
+    </style>
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="{{ asset('css/site/index.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('css/site/index.css') }}"></noscript>
+
+    <!-- Load Tailwind asynchronously -->
+    <script defer src="{{ asset('js/tailwind.js') }}"></script>
+
+    <!-- Performance monitoring -->
+    <script defer src="{{ asset('js/performance.js') }}"></script>
+
+    <!-- Lazy Loader for components -->
+    <script defer src="{{ asset('js/lazy-loader.js') }}"></script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,30 +82,49 @@
     <meta name="language" content="pt-BR">
     <meta name="content-language" content="pt-BR">
 
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <!-- Prefetch important pages -->
+    <link rel="prefetch" href="/app/register" as="document">
+    <link rel="prefetch" href="/app/login" as="document">
+
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
+    <!-- Google Analytics - Lazy loaded for better performance -->
     <script>
+        // Initialize dataLayer
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-MN5442GH2J');
-    </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11559494036"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+        // Lazy load analytics after user interaction or 3 seconds
+        let analyticsLoaded = false;
 
-        gtag('config', 'AW-11559494036');
-    </script>
+        function loadAnalytics() {
+            if (analyticsLoaded) return;
+            analyticsLoaded = true;
 
-    <!-- Event snippet for Inscrição conversion page -->
-    <script>
-        gtag('event', 'conversion', {'send_to': 'AW-11559494036/-uoWCOCWoIQaEJTD_4cr'});
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J';
+            document.head.appendChild(script);
+
+            script.onload = function() {
+                gtag('js', new Date());
+                gtag('config', 'G-MN5442GH2J');
+                gtag('config', 'AW-11559494036');
+                gtag('event', 'conversion', {'send_to': 'AW-11559494036/-uoWCOCWoIQaEJTD_4cr'});
+            };
+        }
+
+        // Load on first user interaction
+        ['scroll', 'mousedown', 'touchstart', 'keydown'].forEach(event => {
+            window.addEventListener(event, loadAnalytics, { once: true, passive: true });
+        });
+
+        // Fallback: load after 3 seconds if no interaction
+        setTimeout(loadAnalytics, 3000);
     </script>
 
     {{ $head ?? '' }}
@@ -90,7 +135,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
                 <a href="/" class="flex items-center space-x-3 text-blue-900 font-semibold">
-                    <img src="{{ asset('images/logo.png') }}" alt="WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas" class="h-16 w-auto" loading="lazy">
+                    <img src="{{ asset('images/logo.png') }}" alt="WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas" class="h-16 w-auto" fetchpriority="high">
                 </a>
                 <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
                     <a href="/#beneficios" class="hover:text-blue-600 transition">Benefícios</a>
@@ -167,13 +212,56 @@
     </footer>
 
     <script>
+        // Mobile menu toggle - Critical, inline
         const button = document.getElementById('menu-button');
         const mobileNav = document.getElementById('mobile-nav');
         if (button) {
             button.addEventListener('click', () => {
                 mobileNav.classList.toggle('hidden');
+            }, { passive: true });
+        }
+
+        // Lazy load Service Worker registration
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.log('SW failed:', err));
+            }
+        }
+
+        // Register SW after page load
+        if (document.readyState === 'complete') {
+            setTimeout(registerServiceWorker, 2000);
+        } else {
+            window.addEventListener('load', () => {
+                setTimeout(registerServiceWorker, 2000);
             });
         }
+
+        // Predictive prefetching for likely navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            // Prefetch register page on hover over CTA buttons
+            const ctaButtons = document.querySelectorAll('a[href*="register"]');
+            ctaButtons.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    if (window.ResourceHints) {
+                        window.ResourceHints.prefetch('/app/register');
+                    }
+                }, { once: true, passive: true });
+            });
+
+            // Load analytics component when user scrolls
+            let analyticsComponentLoaded = false;
+            window.addEventListener('scroll', () => {
+                if (!analyticsComponentLoaded && window.scrollY > 100) {
+                    analyticsComponentLoaded = true;
+                    if (window.loadComponent) {
+                        window.loadComponent('analytics').catch(() => {});
+                    }
+                }
+            }, { once: true, passive: true });
+        });
     </script>
 
     {{ $scripts ?? '' }}

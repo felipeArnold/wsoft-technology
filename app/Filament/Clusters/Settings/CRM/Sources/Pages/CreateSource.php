@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Filament\Clusters\Settings\CRM\Sources\Pages;
+
+use App\Filament\Clusters\Settings\CRM\Sources\SourceResource;
+use Filament\Facades\Filament;
+use Filament\Resources\Pages\CreateRecord;
+
+final class CreateSource extends CreateRecord
+{
+    protected static string $resource = SourceResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['tenant_id'] = Filament::getTenant()->id;
+        $data['is_default'] = false;
+
+        return $data;
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+}

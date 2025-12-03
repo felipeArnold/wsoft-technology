@@ -94,7 +94,7 @@ final class SaleForm
                                                     ->searchable()
                                                     ->required()
                                                     ->reactive()
-                                                    ->afterStateUpdated(function ($state, $set) {
+                                                    ->afterStateUpdated(function ($state, $set): void {
                                                         if ($state) {
                                                             $product = Product::find($state);
                                                             if ($product) {
@@ -114,7 +114,7 @@ final class SaleForm
                                                     ->minValue(1)
                                                     ->required()
                                                     ->reactive()
-                                                    ->afterStateUpdated(function ($state, $get, $set) {
+                                                    ->afterStateUpdated(function ($state, $get, $set): void {
                                                         $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
                                                         $discount = FormatterHelper::toDecimal($get('discount'));
                                                         $total = ($unitPrice * (int) $state) - $discount;
@@ -126,7 +126,7 @@ final class SaleForm
                                                     ->default('0,00')
                                                     ->required()
                                                     ->reactive()
-                                                    ->afterStateUpdated(function ($state, $get, $set) {
+                                                    ->afterStateUpdated(function ($state, $get, $set): void {
                                                         $unitPrice = FormatterHelper::toDecimal($state);
                                                         $quantity = (int) $get('quantity');
                                                         $discount = FormatterHelper::toDecimal($get('discount'));
@@ -138,7 +138,7 @@ final class SaleForm
                                                     ->label('Desconto')
                                                     ->default('0,00')
                                                     ->reactive()
-                                                    ->afterStateUpdated(function ($state, $get, $set) {
+                                                    ->afterStateUpdated(function ($state, $get, $set): void {
                                                         $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
                                                         $quantity = (int) $get('quantity');
                                                         $discount = FormatterHelper::toDecimal($state);
@@ -176,7 +176,7 @@ final class SaleForm
                                             ->cloneable()
                                             ->defaultItems(1)
                                             ->live()
-                                            ->afterStateUpdated(function ($get, $set) {
+                                            ->afterStateUpdated(function ($get, $set): void {
                                                 $items = $get('items') ?? [];
                                                 $subtotal = 0;
                                                 foreach ($items as $item) {
@@ -224,7 +224,7 @@ final class SaleForm
                                             ->label('Desconto Geral')
                                             ->default('0,00')
                                             ->reactive()
-                                            ->afterStateUpdated(function ($state, $get, $set) {
+                                            ->afterStateUpdated(function ($state, $get, $set): void {
                                                 $subtotal = FormatterHelper::toDecimal($get('subtotal'));
                                                 $discount = FormatterHelper::toDecimal($state);
                                                 $total = $subtotal - $discount;
