@@ -400,7 +400,7 @@
                         </div>
                     </div>
                     <div class="flex-shrink-0">
-                        <a href="https://bit.ly/3KwTDo3"
+                        <a href="/app/register"
                             class="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition shadow-lg active:scale-95 transform hover:-translate-y-1">
                             Aproveitar Oferta
                             <i class="fa-solid fa-arrow-right"></i>

@@ -90,7 +90,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
                 <a href="/" class="flex items-center space-x-3 text-blue-900 font-semibold">
-                    <img src="{{ asset('images/logo.png') }}" alt="WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas" class="h-16 w-auto">
+                    <img src="{{ asset('images/logo.png') }}" alt="WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas" class="h-16 w-auto" loading="lazy">
                 </a>
                 <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
                     <a href="/#beneficios" class="hover:text-blue-600 transition">Benefícios</a>
@@ -125,6 +125,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-10">
             <div>
                 <h3 class="text-lg font-semibold">WSoft Tecnologia</h3>
+
+                <img src="{{ asset('images/logo-white.png') }}" alt="WSoft Tecnologia" class="mt-6 h-10 w-auto" loading="lazy">
                 <p class="mt-3 text-sm text-slate-400">Sistema de gestão para pequenas empresas que une organização empresarial e crescimento previsível.</p>
             </div>
             <div>
@@ -148,6 +150,8 @@
                     <li><a href="{{ route('landing.contas-receber') }}" class="hover:text-white">Sistema de Contas a Receber</a></li>
                     <li><a href="{{ route('landing.controle-inadimplencia') }}" class="hover:text-white">Controle de Inadimplência</a></li>
                     <li><a href="{{ route('landing.movimentacao-financeira') }}" class="hover:text-white">Fluxo de Caixa</a></li>
+                    <li><a href="{{ route('landing.ordem-servico') }}" class="hover:text-white">Sistema de Ordem de Serviço</a></li>
+                    <li><a href="{{ route('landing.assinatura-digital') }}" class="hover:text-white">Assinatura Digital</a></li>
                 </ul>
             </div>
             <div>
@@ -159,6 +163,7 @@
             </div>
         </div>
         <p class="mt-10 text-center text-xs text-slate-500">&copy; {{ now()->year }} WSoft Tecnologia. Todos os direitos reservados.</p>
+        <p class="mt-2 text-center text-xs text-slate-500">CNPJ: 58.622.735/0001-37</p>
     </footer>
 
     <script>
