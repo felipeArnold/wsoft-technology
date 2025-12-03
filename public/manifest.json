@@ -1,0 +1,26 @@
+{
+  "name": "WSoft - Sistema de Gestão",
+  "short_name": "WSoft",
+  "description": "Sistema de gestão online com financeiro, contas a pagar e receber, ordem de serviço, controle de estoque e assinatura digital.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/icon.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    },
+    {
+      "src": "/images/icon.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "finance"],
+  "lang": "pt-BR",
+  "dir": "ltr"
+}
