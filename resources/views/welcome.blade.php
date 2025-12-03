@@ -100,7 +100,7 @@ $structuredData = [
                     Abandone as planilhas complicadas. Centralize financeiro, vendas, estoque e OS em uma plataforma feita para quem quer crescer de verdade.
                 </p>
                 <div class="mt-10 flex flex-col sm:flex-row gap-4">
-                    <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
+                    <a href="/app/register" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
                         Teste Grátis 7 Dias
                         <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
@@ -232,7 +232,7 @@ $structuredData = [
             </div>
 
             <div class="flex align-center justify-center mt-12">
-                <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
+                <a href="/app/register" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
                     Comece seu teste grátis agora
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
@@ -333,7 +333,7 @@ $structuredData = [
             </div>
 
             <div class="flex align-center justify-center mt-12">
-                <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
+                <a href="/app/register" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
                     Experimente grátis por 7 dias
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
@@ -398,7 +398,7 @@ $structuredData = [
                 </ul>
 
                 <div class="mt-8">
-                    <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
+                    <a href="/app/register" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
                         Comece seu teste grátis agora
                         <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
@@ -437,7 +437,7 @@ $structuredData = [
             </p>
             <div class="mt-10 rounded-3xl border border-white/20 bg-gradient-to-r from-blue-800 to-blue-600 p-4 md:p-10 shadow-2xl">
                 <div class="rounded-2xl border border-white/30 bg-white/5 overflow-hidden shadow-2xl">
-                    <img src="{{ asset('images/dashboard-screenshot.png') }}" alt="Dashboard WSoft - Sistema de Gestão" class="w-full h-auto transform hover:scale-105 transition duration-700">
+                    <img loading="lazy" src="{{ asset('images/dashboard-screenshot.png') }}" alt="Dashboard WSoft - Sistema de Gestão" class="w-full h-auto transform hover:scale-105 transition duration-700">
                 </div>
             </div>
         </div>
@@ -542,28 +542,40 @@ $structuredData = [
                         </svg>
                     </div>
                 </a>
-                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-indigo-200 transition-all duration-300">
+                <a href="{{ route('landing.ordem-servico') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-indigo-200 transition-all duration-300 cursor-pointer">
                     <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Sistema de ordem de serviço</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Automatize processos e elimine papeladas com um sistema de ordem de serviço online.</p>
-                </article>
-                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all duration-300">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors duration-300">Sistema de ordem de serviço</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">Automatize processos e elimine papeladas com um sistema de ordem de serviço online.</p>
+                    <div class="flex items-center text-indigo-600 text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="{{ route('landing.assinatura-digital') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all duration-300 cursor-pointer">
                     <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Assinatura digital</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Assine contratos e documentos com segurança utilizando assinatura digital integrada ao sistema.</p>
-                </article>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors duration-300">Assinatura digital</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">Assine contratos e documentos com segurança utilizando assinatura digital integrada ao sistema.</p>
+                    <div class="flex items-center text-emerald-600 text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
             </div>
 
             <div class="mt-8">
-                <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
+                <a href="/app/register" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
                     Experimente grátis por 7 dias
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
