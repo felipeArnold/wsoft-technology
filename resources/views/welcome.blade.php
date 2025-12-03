@@ -94,14 +94,14 @@ $structuredData = [
                     Sistema Online para Pequenas Empresas
                 </div>
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                    Gestão Financeira <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Simples e Poderosa</span> para o seu Negócio
+                    Gestão Financeira <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Simples</span> para o seu Negócio
                 </h1>
                 <p class="mt-6 text-lg md:text-xl text-blue-100 leading-relaxed max-w-lg">
                     Abandone as planilhas complicadas. Centralize financeiro, vendas, estoque e OS em uma plataforma feita para quem quer crescer de verdade.
                 </p>
                 <div class="mt-10 flex flex-col sm:flex-row gap-4">
-                    <a href="#precos" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
-                        Quero Aproveitar a Oferta
+                    <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
+                        Teste Grátis 7 Dias
                         <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
                     <a href="#demo" class="inline-flex justify-center items-center rounded-xl border border-white/30 text-white font-semibold px-8 py-4 hover:bg-white/10 transition backdrop-blur-sm">
@@ -116,6 +116,8 @@ $structuredData = [
                         <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Pequenas Oficinas</span>
                         <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Comércio e Varejo</span>
                         <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Prestadores de Serviço</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Lojas de Manutenção</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">E muito mais...</span>
                     </div>
                 </div>
             </div>
@@ -228,6 +230,13 @@ $structuredData = [
                     </ul>
                 </div>
             </div>
+
+            <div class="flex align-center justify-center mt-12">
+                <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
+                    Comece seu teste grátis agora
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -322,6 +331,13 @@ $structuredData = [
                     </div>
                 </article>
             </div>
+
+            <div class="flex align-center justify-center mt-12">
+                <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
+                    Experimente grátis por 7 dias
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -380,6 +396,13 @@ $structuredData = [
                     <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-green-500 mt-1"></i> Suporte humano especializado em pequenos negócios.</li>
                     <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-green-500 mt-1"></i> Treinamentos rápidos para equipes administrativas e técnicas.</li>
                 </ul>
+
+                <div class="mt-8">
+                    <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
+                        Comece seu teste grátis agora
+                        <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
             </div>
             <div class="rounded-3xl bg-gradient-to-br from-blue-100 via-white to-emerald-100 p-8 shadow-xl border border-slate-100">
                 <div class="grid grid-cols-2 gap-6 text-center">
@@ -429,60 +452,96 @@ $structuredData = [
                 <p class="mt-4 text-lg text-slate-600">Ferramentas completas e integradas para otimizar cada área do seu negócio</p>
             </div>
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300">
+                <a href="{{ route('landing.gestao-clientes') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300 cursor-pointer">
                     <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Gestão de Clientes</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Sistema de <b>gestão de clientes</b> ideal para empresas que precisam aumentar produtividade e reduzir erros no atendimento.</p>
-                </article>
-                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-green-200 transition-all duration-300">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">Gestão de Clientes</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">Sistema de <b>gestão de clientes</b> ideal para empresas que precisam aumentar produtividade e reduzir erros no atendimento.</p>
+                    <div class="flex items-center text-blue-600 text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="{{ route('landing.gestao-fornecedores') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-green-200 transition-all duration-300 cursor-pointer">
                     <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-green-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-green-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Gestão de Fornecedores</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Organize contratos, contatos e documentos com um cadastro de fornecedores seguro e integrado ao financeiro.</p>
-                </article>
-                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-green-600 transition-colors duration-300">Gestão de Fornecedores</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">Organize contratos, contatos e documentos com um cadastro de fornecedores seguro e integrado ao financeiro.</p>
+                    <div class="flex items-center text-green-600 text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="{{ route('landing.controle-inadimplencia') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300 cursor-pointer">
                     <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-red-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Controle de inadimplência</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Reduza perdas financeiras com ferramentas avançadas para <b>controle de inadimplência</b>.</p>
-                </article>
-                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-purple-200 transition-all duration-300">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-red-600 transition-colors duration-300">Controle de inadimplência</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">Reduza perdas financeiras com ferramentas avançadas para <b>controle de inadimplência</b>.</p>
+                    <div class="flex items-center text-red-600 text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="{{ route('landing.contas-pagar') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-purple-200 transition-all duration-300 cursor-pointer">
                     <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-purple-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Contas a Pagar e Receber</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Ganhe visibilidade total do seu <b>fluxo de caixa</b> com um sistema completo de <b>contas a pagar</b>.</p>
-                </article>
-                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-amber-200 transition-all duration-300">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-purple-600 transition-colors duration-300">Contas a Pagar e Receber</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">Ganhe visibilidade total do seu <b>fluxo de caixa</b> com um sistema completo de <b>contas a pagar</b>.</p>
+                    <div class="flex items-center text-purple-600 text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="{{ route('landing.gestao-estoque') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-amber-200 transition-all duration-300 cursor-pointer">
                     <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-amber-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Controle de estoque e Vendas</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Gerencie seu estoque com precisão usando um controle de produtos integrado às vendas.</p>
-                </article>
-                <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-cyan-200 transition-all duration-300">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors duration-300">Controle de estoque e Vendas</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">Gerencie seu estoque com precisão usando um controle de produtos integrado às vendas.</p>
+                    <div class="flex items-center text-amber-600 text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="{{ route('landing.movimentacao-financeira') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-cyan-200 transition-all duration-300 cursor-pointer">
                     <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-cyan-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-cyan-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Movimentação Financeira</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Acompanhe toda a movimentação financeira da empresa em painéis simples e intuitivos.</p>
-                </article>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-cyan-600 transition-colors duration-300">Movimentação Financeira</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">Acompanhe toda a movimentação financeira da empresa em painéis simples e intuitivos.</p>
+                    <div class="flex items-center text-cyan-600 text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
                 <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-indigo-200 transition-all duration-300">
                     <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors duration-300">
                         <svg aria-hidden="true" class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -501,6 +560,13 @@ $structuredData = [
                     <h3 class="text-lg font-bold text-slate-900 mb-2">Assinatura digital</h3>
                     <p class="text-sm text-slate-600 leading-relaxed">Assine contratos e documentos com segurança utilizando assinatura digital integrada ao sistema.</p>
                 </article>
+            </div>
+
+            <div class="mt-8">
+                <a href="https://bit.ly/3MDiwix" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-blue-500 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition transform duration-200">
+                    Experimente grátis por 7 dias
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
             </div>
         </div>
     </section>

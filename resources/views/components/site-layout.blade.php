@@ -97,10 +97,7 @@
                     <a href="/#porque" class="hover:text-blue-600 transition">Por que WSoft</a>
                     <a href="/#demo" class="hover:text-blue-600 transition">Demonstração</a>
                     <a href="/#funcionalidades" class="hover:text-blue-600 transition">Funcionalidades</a>
-                    <a href="/#precos" class="text-red-600 font-bold hover:text-red-700 transition">Oferta Especial 🔥</a>
-                    <a href="/blog" class="hover:text-blue-600 transition">Blog</a>
-                    <a href="/#faq" class="hover:text-blue-600 transition">FAQ</a>
-                    <a href="/app/login" class="hover:text-blue-600 transition border rounded-2xl">Login</a>
+                    <a href="/app/login" class="bg-transparent text-blue-600 border px-4 py-2 rounded-lg hover:bg-blue-50 transition shadow-lg shadow-blue-600/10">Login</a>
                     <a href="/app/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">Cadastrar</a>
                 </nav>
                 <button id="menu-button" class="md:hidden text-2xl text-slate-700" aria-label="Abrir menu">
@@ -137,6 +134,7 @@
                     <li><a href="/demonstracao" class="hover:text-white">Demonstração</a></li>
                     <li><a href="/#precos" class="hover:text-white">Preços</a></li>
                     <li><a href="/faq" class="hover:text-white">FAQ</a></li>
+                    <li><a href="{{ route('blog.index') }}" class="hover:text-white">Blog</a></li>
                 </ul>
             </div>
             <div>

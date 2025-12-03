@@ -212,7 +212,7 @@
                     <p class="text-sm text-blue-100 mb-6 leading-relaxed">
                         Experimente o WSoft gratuitamente e transforme a administração da sua empresa.
                     </p>
-                    <a href="/app/register" class="block w-full bg-white text-blue-600 font-bold py-3 rounded-xl hover:bg-blue-50 transition shadow-md active:scale-95">
+                    <a href="https://bit.ly/3KwTDo3" class="block w-full bg-white text-blue-600 font-bold py-3 rounded-xl hover:bg-blue-50 transition shadow-md active:scale-95">
                         Começar Teste Grátis
                     </a>
                     <p class="mt-4 text-xs text-blue-200/80">
