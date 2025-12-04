@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('funnel_id')->nullable()->after('tenant_id')->constrained()->nullOnDelete();
+            $table->foreignId('funnel_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
