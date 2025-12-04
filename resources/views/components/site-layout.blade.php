@@ -62,18 +62,17 @@
         @font-face{font-display:swap}
     </style>
 
-    <!-- Preload critical resources -->
-    <link rel="preload" href="{{ asset('css/site/index.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('css/site/index.css') }}"></noscript>
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
 
-    <!-- Load Tailwind asynchronously -->
-    <script defer src="{{ asset('js/tailwind.js') }}"></script>
+    <!-- Load Tailwind -->
+    <script src="{{ asset('js/tailwind.js') }}"></script>
 
     <!-- Performance monitoring -->
-    <script defer src="{{ asset('js/performance.js') }}"></script>
+    <script src="{{ asset('js/performance.js') }}"></script>
 
     <!-- Lazy Loader for components -->
-    <script defer src="{{ asset('js/lazy-loader.js') }}"></script>
+    <script src="{{ asset('js/lazy-loader.js') }}"></script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
