@@ -78,6 +78,11 @@ Route::get('/sistema-ordem-servico', function () {
     return view('site.ordem-servico');
 })->name('landing.ordem-servico');
 
+// Landing Page para Sistema para Barbearia
+Route::get('/sistema-para-barbearia', function () {
+    return view('site.barbearia');
+})->name('landing.barbearia');
+
 // Landing Page para Assinatura Digital
 Route::get('/assinatura-digital', function () {
     return view('site.assinatura-digital');

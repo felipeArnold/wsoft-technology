@@ -3,9 +3,9 @@ $structuredData = [
     [
         '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
-        'name' => 'WSoft - Sistema para Mecânica',
-        'url' => 'https://www.wsoft.dev.br/landing/mecanica',
-        'description' => 'Sistema de gestão completo para oficina mecânica. Controle de OS, financeiro, estoque e cadastro de clientes.',
+        'name' => 'WSoft - Sistema para Barbearia',
+        'url' => 'https://www.wsoft.dev.br/sistema-para-barbearia',
+        'description' => 'Sistema completo para gestão de barbearias. Agendamento, comissões, financeiro e controle total do seu negócio.',
         'operatingSystem' => 'Web',
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
@@ -17,26 +17,8 @@ $structuredData = [
         ],
         'aggregateRating' => [
             '@type' => 'AggregateRating',
-            'ratingValue' => '4.8',
-            'ratingCount' => '112'
-        ]
-    ],
-    [
-        '@context' => 'https://schema.org',
-        '@type' => 'AutoRepair',
-        'name' => 'WSoft Tecnologia - Sistema para Mecânica',
-        'image' => 'https://www.wsoft.dev.br/images/logo.png',
-        'description' => 'Sistema de gestão completo para mecânicas e auto centers. Controle financeiro, estoque e OS.',
-        'url' => 'https://www.wsoft.dev.br/landing/mecanica',
-        'priceRange' => '$$',
-        'address' => [
-            '@type' => 'PostalAddress',
-            'addressCountry' => 'BR'
-        ],
-        'aggregateRating' => [
-            '@type' => 'AggregateRating',
-            'ratingValue' => '4.8',
-            'ratingCount' => '112'
+            'ratingValue' => '4.9',
+            'ratingCount' => '87'
         ]
     ],
     [
@@ -45,42 +27,42 @@ $structuredData = [
         'mainEntity' => [
             [
                 '@type' => 'Question',
-                'name' => 'O sistema serve para oficina mecânica?',
+                'name' => 'O sistema calcula comissão dos barbeiros?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim! O WSoft é ideal para mecânicas, permitindo criar OS detalhadas, controlar peças e mão de obra.'
+                    'text' => 'Sim! O WSoft calcula automaticamente as comissões de cada barbeiro, permitindo configurar porcentagens diferentes por profissional ou serviço.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Consigo controlar o financeiro da mecânica?',
+                'name' => 'Posso controlar o agendamento de clientes?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Com certeza. O sistema possui controle de contas a pagar, receber e fluxo de caixa completo.'
+                    'text' => 'Com certeza. O sistema possui uma agenda completa e intuitiva para organizar os horários de todos os profissionais da barbearia.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'O sistema baixa o estoque sozinho?',
+                'name' => 'O sistema emite comprovante para o cliente?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim, ao adicionar peças na Ordem de Serviço, o sistema já dá baixa no estoque automaticamente.'
+                    'text' => 'Sim, você pode emitir e enviar comprovantes de serviços e vendas diretamente pelo WhatsApp para seus clientes.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Posso enviar orçamento pelo WhatsApp?',
+                'name' => 'Consigo controlar o estoque de produtos?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim, gere orçamentos em PDF ou link e envie direto para o WhatsApp do seu cliente.'
+                    'text' => 'Sim! Controle o estoque de produtos para venda (pomadas, shampoos) e também o consumo interno da barbearia.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Quanto custa o sistema para mecânica?',
+                'name' => 'Quanto custa o sistema para barbearia?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem fidelidade.'
+                    'text' => 'O WSoft custa apenas R$ 29,90 por mês com todas as funcionalidades incluídas: agenda, comissões, financeiro e estoque. Teste grátis por 7 dias.'
                 ]
             ]
         ]
@@ -89,12 +71,12 @@ $structuredData = [
 @endphp
 
 <x-site-layout
-    :title="'Sistema para Mecânica | Gestão de Oficina e OS | WSoft'"
-    :description="'Sistema completo para oficina mecânica. Emissão de OS, controle de estoque, financeiro e histórico de veículos. Teste grátis!'"
-    :keywords="'sistema para mecanica, software mecanica, sistema oficina mecanica, gestão de mecanica, programa para mecanica, ordem de serviço mecanica'"
-    :canonical="'https://www.wsoft.dev.br/landing/mecanica'"
-    :ogTitle="'Sistema de Gestão para Mecânicas | WSoft'"
-    :ogDescription="'Organize sua mecânica, controle OS e aumente seus lucros com o sistema mais simples do mercado.'"
+    :title="'Sistema para Barbearia | Gestão e Agenda | WSoft'"
+    :description="'Sistema completo de gestão para barbearias. Agenda, cálculo de comissões, financeiro e estoque. Teste grátis por 7 dias!'"
+    :keywords="'sistema para barbearia, software barbearia, agenda barbearia, gestão barbearia, programa para barbearia, sistema barbeiro, controle comissão barbearia'"
+    :canonical="'https://www.wsoft.dev.br/sistema-para-barbearia'"
+    :ogTitle="'Sistema de Gestão para Barbearias | WSoft'"
+    :ogDescription="'Organize sua barbearia, controle comissões e fidelize clientes com o sistema mais simples e completo do mercado.'"
     :structuredData="$structuredData"
 >
 
@@ -105,17 +87,17 @@ $structuredData = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-700/50 border border-slate-600 text-slate-200 text-xs font-semibold uppercase tracking-wider mb-6">
-                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                Sistema para Mecânica
+                <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                Sistema para Barbearia
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Gestão Profissional para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-200">Mecânica</span>
+                Gestão Profissional para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-200">Barbearia</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-lg">
-                Gerencie ordens de serviço, estoque de peças e financeiro em uma plataforma feita para quem quer crescer.
+                Agenda organizada, comissões automáticas e financeiro em dia. O sistema ideal para barbeiros que querem crescer.
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
-                <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-blue-600 text-white font-bold px-8 py-4 shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:-translate-y-1 transition transform duration-200">
+                <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-orange-500 text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:-translate-y-1 transition transform duration-200">
                     Testar por 7 Dias
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
@@ -127,46 +109,46 @@ $structuredData = [
             <div class="mt-10 pt-8 border-t border-white/10">
                 <p class="text-sm text-slate-400 mb-4">Ideal para:</p>
                 <div class="flex flex-wrap gap-3 text-sm font-medium text-white">
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Mecânicas</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Auto Centers</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Oficinas de Motos</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Troca de Óleo</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Barbearias</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Salões Masculinos</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Barbeiros Autônomos</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Studios</span>
                 </div>
             </div>
         </div>
         <div class="relative">
-            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+            <div class="absolute -inset-4 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
             <div class="bg-slate-800/50 border border-slate-700/50 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
                 <div class="flex items-center justify-between mb-6">
                     <div>
                         <p class="text-sm uppercase text-slate-400 font-semibold tracking-wider">Faturamento Hoje</p>
-                        <h3 class="text-3xl font-bold mt-1 text-white">R$ 2.950,00</h3>
+                        <h3 class="text-3xl font-bold mt-1 text-white">R$ 1.250,00</h3>
                         <div class="flex items-center gap-2 mt-2">
-                            <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">+18% vs ontem</span>
+                            <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">+15% vs ontem</span>
                         </div>
                     </div>
-                    <div class="h-12 w-12 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-400/30">
-                        <i class="fa-solid fa-wrench text-blue-400 text-xl"></i>
+                    <div class="h-12 w-12 rounded-full bg-orange-500/20 flex items-center justify-center border border-orange-400/30">
+                        <i class="fa-solid fa-scissors text-orange-400 text-xl"></i>
                     </div>
                 </div>
                 <div class="space-y-4">
                     <div class="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
                         <div class="flex items-center justify-between mb-2">
-                            <p class="text-xs text-slate-300">Meta Mensal</p>
-                            <span class="text-sm font-bold text-blue-400">92% Atingida</span>
+                            <p class="text-xs text-slate-300">Agenda do Dia</p>
+                            <span class="text-sm font-bold text-orange-400">85% Ocupada</span>
                         </div>
                         <div class="h-2 bg-slate-900 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-500 w-[92%] rounded-full"></div>
+                            <div class="h-full bg-gradient-to-r from-orange-500 to-amber-500 w-[85%] rounded-full"></div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
-                            <p class="text-xs text-slate-300">OS Abertas</p>
-                            <p class="text-2xl font-bold mt-1 text-white">8</p>
+                            <p class="text-xs text-slate-300">Atendimentos</p>
+                            <p class="text-2xl font-bold mt-1 text-white">24</p>
                         </div>
                         <div class="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
                             <p class="text-xs text-slate-300">Ticket Médio</p>
-                            <p class="text-2xl font-bold mt-1 text-white">R$ 380</p>
+                            <p class="text-2xl font-bold mt-1 text-white">R$ 52</p>
                         </div>
                     </div>
                 </div>
@@ -180,7 +162,7 @@ $structuredData = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema da agenda de papel</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Sua mecânica está perdendo dinheiro?</h2>
+            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Sua barbearia está perdendo dinheiro?</h2>
             <p class="mt-4 text-lg text-slate-600">A falta de organização pode estar custando caro para o seu negócio. Veja a diferença:</p>
         </div>
         <div class="grid md:grid-cols-2 gap-8">
@@ -193,19 +175,19 @@ $structuredData = [
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3 text-slate-700">
                         <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>OS de papel que somem ou rasgam</span>
+                        <span>Agenda bagunçada e horários duplicados</span>
                     </li>
                     <li class="flex items-start gap-3 text-slate-700">
                         <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Esquece de cobrar peças usadas</span>
+                        <span>Erros no cálculo de comissões</span>
                     </li>
                     <li class="flex items-start gap-3 text-slate-700">
                         <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Não sabe o lucro real do mês</span>
+                        <span>Não sabe quanto lucrou no mês</span>
                     </li>
                     <li class="flex items-start gap-3 text-slate-700">
                         <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Cliente desconfia dos orçamentos</span>
+                        <span>Esquece de avisar clientes e leva "bolo"</span>
                     </li>
                 </ul>
             </div>
@@ -213,16 +195,16 @@ $structuredData = [
             <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
                 <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
                 <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Mecânica Organizada
+                    <i class="fa-solid fa-circle-check"></i> Barbearia Organizada
                 </h3>
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3 text-slate-700">
                         <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>OS digital enviada no WhatsApp</span>
+                        <span>Agenda digital simples e organizada</span>
                     </li>
                     <li class="flex items-start gap-3 text-slate-700">
                         <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Controle automático de estoque</span>
+                        <span>Cálculo automático de comissões</span>
                     </li>
                     <li class="flex items-start gap-3 text-slate-700">
                         <i class="fa-solid fa-check text-green-600 mt-1"></i>
@@ -230,7 +212,7 @@ $structuredData = [
                     </li>
                     <li class="flex items-start gap-3 text-slate-700">
                         <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Histórico completo do veículo</span>
+                        <span>Histórico de cortes de cada cliente</span>
                     </li>
                 </ul>
             </div>
@@ -242,9 +224,9 @@ $structuredData = [
 <section id="como-funciona" class="py-24 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-20">
-            <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Passo a Passo</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Como funciona o Sistema na Prática</h2>
-            <p class="mt-4 text-lg text-slate-600">Simples de usar, feito para o dia a dia da oficina mecânica.</p>
+            <p class="text-sm font-semibold text-orange-600 uppercase tracking-[0.3em]">Passo a Passo</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Como funciona o Sistema para Barbearia</h2>
+            <p class="mt-4 text-lg text-slate-600">Simples de usar, feito para o dia a dia corrido da barbearia.</p>
         </div>
 
         <div class="space-y-24">
@@ -252,30 +234,30 @@ $structuredData = [
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
-                        <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/os/os-digital.png') }}" alt="Tela de OS" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-orange-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="{{ asset('images/sistema/clientes/cadastro.png') }}" alt="Tela de Agenda" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-700 font-bold text-xl">1</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Abra a Ordem de Serviço</h3>
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-orange-700 font-bold text-xl">1</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Organize a Agenda</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Registre a entrada do veículo, informe o cliente e o defeito relatado. Tudo rápido e simples.
+                        Adeus papel e caneta. Tenha uma visão clara de todos os horários, encaixes e profissionais disponíveis.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Cadastro rápido</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Agenda por profissional</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Checklist de entrada</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Status do agendamento (Confirmado, Pendente)</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Fotos do veículo</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Fácil de remarcar</span>
                         </li>
                     </ul>
                 </div>
@@ -285,31 +267,31 @@ $structuredData = [
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-1">
                     <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-700 font-bold text-xl">2</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Adicione Peças e Mão de Obra</h3>
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-orange-700 font-bold text-xl">2</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Controle Comissões</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Lance o que foi utilizado no serviço. O sistema já calcula o valor total e baixa do estoque automaticamente.
+                        Defina a porcentagem de comissão para cada barbeiro e deixe o sistema calcular tudo automaticamente. Fechamento de caixa sem dor de cabeça.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Controle de estoque automático</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Comissão por serviço ou produto</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Valor de peças e serviços separados</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Relatório de pagamentos</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Orçamento claro</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Transparência para a equipe</span>
                         </li>
                     </ul>
                 </div>
                 <div class="order-2">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
-                        <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/financeiro/faturamento.png') }}" alt="Tela de Financeiro" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-orange-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="/images/crm/history.png" alt="Tela de Financeiro" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -318,30 +300,30 @@ $structuredData = [
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
-                        <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/os/whatsapp-share.png') }}" alt="Envio WhatsApp" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-orange-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="/images/crm/reports.png" alt="Relatórios de Gestão" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-700 font-bold text-xl">3</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Finalize e Receba</h3>
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-orange-700 font-bold text-xl">3</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Fidelize Clientes</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Envie para o cliente pelo WhatsApp, receba o pagamento e emita a garantia. Simples assim.
+                        Saiba quem são seus melhores clientes, a frequência de corte e ofereça um atendimento personalizado.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Compartilhamento via WhatsApp</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Histórico de serviços</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Financeiro integrado</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Lembretes de retorno</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Cliente satisfeito</span>
+                            <i class="fa-solid fa-check text-orange-500"></i>
+                            <span>Cadastro completo</span>
                         </li>
                     </ul>
                 </div>
@@ -354,63 +336,63 @@ $structuredData = [
 <section id="beneficios" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Vantagens</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Por que usar o WSoft na sua mecânica?</h2>
-            <p class="mt-4 text-lg text-slate-600">Ferramentas pensadas para organizar e lucrar mais</p>
+            <p class="text-sm font-semibold text-orange-600 uppercase tracking-[0.3em]">Vantagens</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Por que usar o WSoft na sua barbearia?</h2>
+            <p class="mt-4 text-lg text-slate-600">Ferramentas pensadas para facilitar a vida do barbeiro e do gestor</p>
         </div>
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-file-invoice text-blue-600 text-xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold">OS Completa</h3>
-                    <p class="mt-3 text-slate-600">Descrições, peças, serviços, fotos e observações. Tudo registrado.</p>
-                </div>
-            </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-coins text-green-600 text-xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Financeiro Real</h3>
-                    <p class="mt-3 text-slate-600">Saiba o lucro de cada OS e o resultado geral da mecânica no mês.</p>
-                </div>
-            </article>
-            <article class="flex gap-6">
                 <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-boxes-stacked text-orange-600 text-xl"></i>
+                    <i class="fa-solid fa-calendar-check text-orange-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold">Estoque Seguro</h3>
-                    <p class="mt-3 text-slate-600">Evite sumiço de peças e saiba a hora certa de comprar.</p>
+                    <h3 class="text-xl font-semibold">Agenda Simples</h3>
+                    <p class="mt-3 text-slate-600">Visualize e gerencie horários com facilidade. Evite conflitos e organize o dia.</p>
+                </div>
+            </article>
+            <article class="flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-money-bill-trend-up text-blue-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold">Controle Financeiro</h3>
+                    <p class="mt-3 text-slate-600">Saiba exatamente quanto entrou e saiu. Fluxo de caixa, contas a pagar e receber.</p>
                 </div>
             </article>
             <article class="flex gap-6">
                 <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-car-side text-purple-600 text-xl"></i>
+                    <i class="fa-solid fa-users text-purple-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold">Cadastro de Veículos</h3>
-                    <p class="mt-3 text-slate-600">Busque pela placa e veja todo o histórico de manutenção.</p>
+                    <h3 class="text-xl font-semibold">Gestão de Equipe</h3>
+                    <p class="mt-3 text-slate-600">Controle de comissões e desempenho individual de cada barbeiro.</p>
                 </div>
             </article>
             <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-brands fa-whatsapp text-teal-600 text-xl"></i>
+                <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                    <i class="fa-brands fa-whatsapp text-green-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold">Comunicação Fácil</h3>
-                    <p class="mt-3 text-slate-600">Envie tudo para o cliente pelo Zap. Orçamentos, avisos e cobranças.</p>
+                    <h3 class="text-xl font-semibold">Comunicação</h3>
+                    <p class="mt-3 text-slate-600">Envie comprovantes e lembretes para seus clientes via WhatsApp.</p>
                 </div>
             </article>
             <article class="flex gap-6">
                 <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-chart-line text-red-600 text-xl"></i>
+                    <i class="fa-solid fa-box-open text-red-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold">Métricas</h3>
-                    <p class="mt-3 text-slate-600">Acompanhe o crescimento da sua mecânica com relatórios fáceis.</p>
+                    <h3 class="text-xl font-semibold">Controle de Estoque</h3>
+                    <p class="mt-3 text-slate-600">Gerencie produtos de venda e consumo interno. Evite faltar material.</p>
+                </div>
+            </article>
+            <article class="flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-mobile-screen text-teal-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold">Acesso de Qualquer Lugar</h3>
+                    <p class="mt-3 text-slate-600">Acesse o sistema pelo celular, tablet ou computador. Seus dados sempre à mão.</p>
                 </div>
             </article>
         </div>
@@ -420,12 +402,12 @@ $structuredData = [
 <!-- CTA Section -->
 <section class="py-20 bg-gradient-to-br from-slate-800 to-slate-900 text-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">Profissionalize sua Mecânica</h2>
+        <h2 class="text-3xl md:text-4xl font-bold">Profissionalize sua Barbearia</h2>
         <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
-            Comece agora com 7 dias de teste grátis. Aproveite a oferta vitalícia.
+            Comece agora com 7 dias de teste grátis. Sem cartão de crédito, sem compromisso.
         </p>
         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-blue-600 text-white font-bold px-10 py-4 shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:-translate-y-1 transition transform duration-200">
+            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-orange-500 text-white font-bold px-10 py-4 shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:-translate-y-1 transition transform duration-200">
                 Testar por 7 Dias
                 <i class="fa-solid fa-arrow-right ml-2"></i>
             </a>
@@ -433,7 +415,7 @@ $structuredData = [
                 Ver Planos e Preços
             </a>
         </div>
-        <p class="mt-6 text-sm text-slate-400">Junte-se a centenas de mecânicas que usam WSoft</p>
+        <p class="mt-6 text-sm text-slate-400">Junte-se a centenas de barbearias que usam WSoft</p>
     </div>
 </section>
 
@@ -441,59 +423,59 @@ $structuredData = [
 <section id="faq" class="py-20 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-12">
-            <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Dúvidas</p>
+            <p class="text-sm font-semibold text-orange-600 uppercase tracking-[0.3em]">Dúvidas</p>
             <h2 class="mt-4 text-3xl font-bold">Perguntas Frequentes</h2>
         </div>
         <div class="space-y-4">
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    O sistema serve para oficina mecânica?
+                    O sistema calcula comissão dos barbeiros?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim! O WSoft é ideal para mecânicas, permitindo criar OS detalhadas, controlar peças e mão de obra.</p>
+                <p class="mt-3 text-slate-600">Sim! O WSoft calcula automaticamente as comissões de cada barbeiro, permitindo configurar porcentagens diferentes por profissional ou serviço.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Consigo controlar o financeiro da mecânica?
+                    Posso controlar o agendamento de clientes?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Com certeza. O sistema possui controle de contas a pagar, receber e fluxo de caixa completo.</p>
+                <p class="mt-3 text-slate-600">Com certeza. O sistema possui uma agenda completa e intuitiva para organizar os horários de todos os profissionais da barbearia.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    O sistema baixa o estoque sozinho?
+                    O sistema emite comprovante para o cliente?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim, ao adicionar peças na Ordem de Serviço, o sistema já dá baixa no estoque automaticamente.</p>
+                <p class="mt-3 text-slate-600">Sim, você pode emitir e enviar comprovantes de serviços e vendas diretamente pelo WhatsApp para seus clientes.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Posso enviar orçamento pelo WhatsApp?
+                    Consigo controlar o estoque de produtos?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim, gere orçamentos em PDF ou link e envie direto para o WhatsApp do seu cliente.</p>
+                <p class="mt-3 text-slate-600">Sim! Controle o estoque de produtos para venda (pomadas, shampoos) e também o consumo interno da barbearia.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Quanto custa o sistema para mecânica?
+                    Quanto custa o sistema para barbearia?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem fidelidade.</p>
+                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês com todas as funcionalidades incluídas: agenda, comissões, financeiro e estoque. Teste grátis por 7 dias.</p>
             </details>
         </div>
     </div>
 </section>
 
-<!-- Social Proof -->
+<!-- Prova Social -->
 <section class="py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-12">
-            <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Depoimentos</p>
+            <p class="text-sm font-semibold text-orange-600 uppercase tracking-[0.3em]">Depoimentos</p>
             <h2 class="mt-4 text-3xl font-bold">Quem usa aprova</h2>
         </div>
         <div class="grid gap-6 md:grid-cols-3">
@@ -505,9 +487,9 @@ $structuredData = [
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-slate-600 italic">"Muito prático. Cadastro o carro, abro a OS e já mando pro cliente. A mecânica ficou muito mais organizada."</p>
-                <div class="mt-4 font-semibold">Fernando Costa</div>
-                <div class="text-sm text-slate-500">Mecânica do Nando</div>
+                <p class="text-sm text-slate-600 italic">"O controle de comissões facilitou muito o fechamento do mês. Antes era uma dor de cabeça, agora é automático."</p>
+                <div class="mt-4 font-semibold">Carlos Eduardo</div>
+                <div class="text-sm text-slate-500">Barbearia Vintage</div>
             </article>
             <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex gap-1 text-yellow-400 mb-4">
@@ -517,9 +499,9 @@ $structuredData = [
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-slate-600 italic">"O controle de peças me salvou. Parou de sumir material e sei exatamente o que tenho que comprar."</p>
-                <div class="mt-4 font-semibold">Carlos Souza</div>
-                <div class="text-sm text-slate-500">Auto Center Souza</div>
+                <p class="text-sm text-slate-600 italic">"Sistema simples e direto. Consigo ver minha agenda pelo celular e já deixar tudo organizado para o dia seguinte."</p>
+                <div class="mt-4 font-semibold">Rafael Santos</div>
+                <div class="text-sm text-slate-500">Barbeiro Autônomo</div>
             </article>
             <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex gap-1 text-yellow-400 mb-4">
@@ -529,9 +511,9 @@ $structuredData = [
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-slate-600 italic">"Melhor investimento. Barato e tem tudo que a gente precisa na oficina. Recomendo demais."</p>
-                <div class="mt-4 font-semibold">Roberto Lima</div>
-                <div class="text-sm text-slate-500">Oficina Real</div>
+                <p class="text-sm text-slate-600 italic">"Melhor custo-benefício. Tem tudo que preciso: agenda, financeiro e estoque. Recomendo!"</p>
+                <div class="mt-4 font-semibold">André Oliveira</div>
+                <div class="text-sm text-slate-500">The Barber Club</div>
             </article>
         </div>
     </div>

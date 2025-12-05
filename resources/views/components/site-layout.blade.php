@@ -186,7 +186,7 @@
             <div>
                 <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Soluções</h4>
                 <ul class="mt-4 space-y-2 text-sm text-slate-300">
-                    <li><a href="{{ route('landing.crm-gestao') }}" class="hover:text-white">Crm para gestão e fiannceiro</a></li>
+                    <li><a href="{{ route('landing.crm-gestao') }}" class="hover:text-white">Crm para gestão e financeiro</a></li>
                     <li><a href="{{ route('landing.gestao-clientes') }}" class="hover:text-white">Sistema de Gestão de Clientes</a></li>
                     <li><a href="{{ route('landing.gestao-fornecedores') }}" class="hover:text-white">Sistema de Gestão de Fornecedores</a></li>
                     <li><a href="{{ route('landing.gestao-estoque') }}" class="hover:text-white">Sistema de Gestão de Estoque</a></li>
@@ -196,6 +196,10 @@
                     <li><a href="{{ route('landing.movimentacao-financeira') }}" class="hover:text-white">Fluxo de Caixa</a></li>
                     <li><a href="{{ route('landing.ordem-servico') }}" class="hover:text-white">Sistema de Ordem de Serviço</a></li>
                     <li><a href="{{ route('landing.assinatura-digital') }}" class="hover:text-white">Assinatura Digital</a></li>
+                    <li><a href="{{ route('landing.oficina') }}" class="hover:text-white">Sistema para Oficina</a></li>
+                    <li><a href="{{ route('landing.mecanica') }}" class="hover:text-white">Sistema para Mecânica</a></li>
+                    <li><a href="{{ route('landing.funilaria') }}" class="hover:text-white">Sistema para Funilaria</a></li>
+                    <li><a href="{{ route('landing.barbearia') }}" class="hover:text-white">Sistema para Barbearia</a></li>
                 </ul>
             </div>
             <div>
