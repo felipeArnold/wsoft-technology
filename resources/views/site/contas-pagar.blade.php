@@ -72,145 +72,79 @@ $structuredData = [
     :structuredData="$structuredData"
 >
 
-<!-- Hero -->
-<section id="hero" class="pt-32 pb-24 bg-gradient-to-b from-blue-950 via-blue-900 to-blue-800 text-white overflow-hidden relative">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
-        <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-xs font-semibold uppercase tracking-wider mb-6">
-                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                Controle de Contas a Pagar
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Contas a Pagar</span> sob Controle
-            </h1>
-            <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
-                Chega de pagar juros por esquecimento. Centralize suas despesas, receba alertas de vencimento e tenha previsibilidade financeira.
-            </p>
-            <div class="mt-10 flex flex-col sm:flex-row gap-4">
-                <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                    Testar por 7 Dias
-                    <i class="fa-solid fa-arrow-right ml-2"></i>
-                </a>
-                <a href="#como-funciona" class="inline-flex justify-center items-center rounded-xl border border-white/30 text-white font-semibold px-8 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                    <i class="fa-solid fa-play mr-2"></i>
-                    Como Funciona
-                </a>
-            </div>
-            <div class="mt-10 pt-8 border-t border-white/10">
-                <p class="text-sm text-emerald-200 mb-4">Ideal para:</p>
-                <div class="flex flex-wrap gap-3 text-sm font-medium text-white">
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Pequenas Empresas</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">MEI</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Prestadores de Serviço</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Comércio</span>
-                </div>
-            </div>
-        </div>
-        <div class="relative">
-            <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-            <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
-                <div class="flex items-center justify-between mb-6">
-                    <div>
-                        <p class="text-sm uppercase text-emerald-200 font-semibold tracking-wider">A Pagar Hoje</p>
-                        <h3 class="text-3xl font-bold mt-1">R$ 1.250,00</h3>
-                        <div class="flex items-center gap-2 mt-2">
-                            <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">3 contas vencendo</span>
-                        </div>
-                    </div>
-                    <div class="h-12 w-12 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-400/30">
-                        <i class="fa-solid fa-file-invoice-dollar text-emerald-300 text-xl"></i>
+<x-site.hero
+    badge="Controle de Contas a Pagar"
+    highlight="Contas a Pagar"
+    title="sob Controle"
+    description="Chega de pagar juros por esquecimento. Centralize suas despesas, receba alertas de vencimento e tenha previsibilidade financeira."
+    :idealFor="['Pequenas Empresas', 'MEI', 'Prestadores de Serviço', 'Comércio']"
+>
+    <div class="relative">
+        <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <p class="text-sm uppercase text-emerald-200 font-semibold tracking-wider">A Pagar Hoje</p>
+                    <h3 class="text-3xl font-bold mt-1">R$ 1.250,00</h3>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">3 contas vencendo</span>
                     </div>
                 </div>
-                <div class="space-y-4">
+                <div class="h-12 w-12 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-400/30">
+                    <i class="fa-solid fa-file-invoice-dollar text-emerald-300 text-xl"></i>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="flex items-center justify-between mb-2">
+                        <p class="text-xs text-emerald-200">Total no Mês</p>
+                        <span class="text-sm font-bold text-emerald-300">R$ 12.450,00</span>
+                    </div>
+                    <div class="h-2 bg-emerald-950/50 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 w-[65%] rounded-full"></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
                     <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                        <div class="flex items-center justify-between mb-2">
-                            <p class="text-xs text-emerald-200">Total no Mês</p>
-                            <span class="text-sm font-bold text-emerald-300">R$ 12.450,00</span>
-                        </div>
-                        <div class="h-2 bg-emerald-950/50 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 w-[65%] rounded-full"></div>
-                        </div>
+                        <p class="text-xs text-emerald-200">Em Atraso</p>
+                        <p class="text-2xl font-bold mt-1 text-red-400">0</p>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                            <p class="text-xs text-emerald-200">Em Atraso</p>
-                            <p class="text-2xl font-bold mt-1 text-red-400">0</p>
-                        </div>
-                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                            <p class="text-xs text-emerald-200">Pago</p>
-                            <p class="text-2xl font-bold mt-1 text-green-400">R$ 8k</p>
-                        </div>
+                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                        <p class="text-xs text-emerald-200">Pago</p>
+                        <p class="text-2xl font-bold mt-1 text-green-400">R$ 8k</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</x-site.hero>
 
 <!-- Pain vs Gain -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema da desorganização</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Você paga juros por esquecimento?</h2>
-            <p class="mt-4 text-lg text-slate-600">A falta de controle nas contas a pagar corrói o lucro da sua empresa. Veja a diferença:</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pain -->
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 relative overflow-hidden group hover:shadow-lg transition">
-                <div class="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl">SEM SISTEMA</div>
-                <h3 class="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-xmark"></i> Financeiro Caótico
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Perde boletos e paga juros abusivos</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Não sabe quanto precisa pagar na semana</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Mistura contas pessoais com as da empresa</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Fica sem caixa por falta de previsão</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Gain -->
-            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
-                <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Contas em Dia
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Alertas de vencimento automáticos</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Visão clara do fluxo de caixa futuro</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Categorização de despesas (água, luz, fornecedor)</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Controle de parcelamentos e recorrentes</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<x-site.comparison
+    title="Você paga juros por esquecimento?"
+    subtitle="Controle de Contas a Pagar"
+    description="A falta de controle nas contas a pagar corrói o lucro da sua empresa. Veja a diferença:"
+    painTitle="Financeiro Caótico"
+    :painItems="[
+    'Perde boletos e paga juros abusivos',
+    'Não sabe quanto precisa pagar na semana',
+    'Mistura contas pessoais com as da empresa',
+    'Fica sem caixa por falta de previsão'
+]"
+        gainTitle="Contas em Dia"
+        :gainItems="[
+    'Alertas de vencimento automáticos',
+    'Visão clara do fluxo de caixa futuro',
+    'Categorização de despesas (água, luz, fornecedor)',
+    'Controle de parcelamentos e recorrentes'
+]"
+        gainCardBg="bg-blue-900"
+        gainCardBorder="border-blue-800"
+        gainTitleColor="text-emerald-400"
+        gainCheckColor="text-emerald-400"
+        gainBadgeBg="bg-blue-500"
+        gainBadgeText="COM WSOFT"
+/>
 
 <!-- How it Works (New Section) -->
 <section id="como-funciona" class="py-24 bg-slate-50">
@@ -218,25 +152,52 @@ $structuredData = [
         <div class="text-center max-w-3xl mx-auto mb-20">
             <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Passo a Passo</p>
             <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Como funciona o Contas a Pagar</h2>
-            <p class="mt-4 text-lg text-slate-600">Organização financeira simplificada para sua tranquilidade.</p>
+            <p class="mt-4 text-lg text-slate-600">Sistema completo de gestão financeira para sua empresa.</p>
         </div>
 
         <div class="space-y-24">
-            <!-- Step 1 -->
+            <!-- Step 1 - Cadastro de Fornecedores -->
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="/images/crm/registration.png" alt="Lançamento de Despesas" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <img src="/images/crm/registration.png" alt="Cadastro de Fornecedores" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
                         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">1</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Lance suas Despesas</h3>
+                        <h3 class="text-2xl font-bold text-slate-900">Cadastre seus Fornecedores</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Registre contas de luz, água, aluguel e boletos de fornecedores. Configure repetições mensais para não precisar lançar todo mês.
+                        Organize todos os fornecedores em um único lugar. Tenha acesso rápido a contatos, dados bancários e histórico de pagamentos.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Dados completos: CNPJ, telefone, e-mail</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Informações bancárias para pagamento</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Histórico de relacionamento comercial</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 2 - Contas a Pagar -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">2</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Lance suas Contas a Pagar</h3>
+                    </div>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Registre todas as despesas: luz, água, aluguel, fornecedores, impostos. Configure repetições mensais para contas fixas.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
@@ -245,21 +206,41 @@ $structuredData = [
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Anexo de comprovantes e boletos</span>
+                            <span>Anexo de boletos e comprovantes</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Parcelamento e contas recorrentes</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Categorização por tipo de despesa</span>
                         </li>
                     </ul>
                 </div>
+                <div class="order-2">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
+                        <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="/images/crm/history.png" alt="Cadastro de Contas a Pagar" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                    </div>
+                </div>
             </div>
 
-            <!-- Step 2 -->
+            <!-- Step 3 - Vencimentos -->
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="order-1">
+                <div class="order-2 lg:order-1">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
+                        <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="/images/crm/reports.png" alt="Calendário de Vencimentos" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">2</span>
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">3</span>
                         <h3 class="text-2xl font-bold text-slate-900">Acompanhe Vencimentos</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Veja no calendário o que precisa ser pago. O sistema destaca o que está vencendo hoje e o que está atrasado.
+                        Visualize no calendário tudo que precisa ser pago. Alertas automáticos evitam esquecimentos e juros desnecessários.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
@@ -268,19 +249,58 @@ $structuredData = [
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Notificações de vencimento</span>
+                            <span>Notificações de vencimento automáticas</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Destaque para contas em atraso</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Projeção de pagamentos futuros</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 4 - Movimentação Financeira -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">4</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Controle a Movimentação Financeira</h3>
+                    </div>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Dê baixa nos pagamentos realizados e acompanhe o saldo em cada conta bancária. Tenha controle total do fluxo de caixa.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Baixa de pagamentos por conta bancária</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Controle de saldo de caixa e bancos</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Histórico completo de movimentações</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Transferências entre contas</span>
                         </li>
                     </ul>
                 </div>
                 <div class="order-2">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="/images/crm/history.png" alt="Calendário de Pagamentos" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <img src="/images/crm/dashboard-preview.png" alt="Movimentação Financeira" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
 
-            <!-- Step 3 -->
+            <!-- Step 5 - Relatórios -->
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
@@ -290,20 +310,28 @@ $structuredData = [
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">3</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Controle o Fluxo</h3>
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">5</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Analise com Relatórios</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Dê baixa nos pagamentos realizados e veja relatórios de despesas por categoria. Saiba para onde está indo seu dinheiro.
+                        Relatórios completos mostram para onde está indo seu dinheiro. Identifique oportunidades de economia e melhore resultados.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Relatórios de despesas por categoria</span>
+                            <span>Despesas por categoria e fornecedor</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Conciliação bancária simples</span>
+                            <span>Fluxo de caixa projetado e realizado</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Comparativo entre períodos</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Exportação para Excel e PDF</span>
                         </li>
                     </ul>
                 </div>
@@ -312,7 +340,6 @@ $structuredData = [
     </div>
 </section>
 
-<!-- Benefícios -->
 <section id="beneficios" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
@@ -348,6 +375,33 @@ $structuredData = [
                     <p class="mt-3 text-slate-600">Saiba exatamente quanto precisará ter em caixa na próxima semana ou mês.</p>
                 </div>
             </article>
+            <article class="flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-users text-orange-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold">Gestão de Fornecedores</h3>
+                    <p class="mt-3 text-slate-600">Organize todos os fornecedores em um só lugar. Histórico completo de pagamentos e dados bancários.</p>
+                </div>
+            </article>
+            <article class="flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-money-bill-trend-up text-red-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold">Fluxo de Caixa</h3>
+                    <p class="mt-3 text-slate-600">Controle completo de entradas e saídas. Movimentação financeira organizada por conta bancária.</p>
+                </div>
+            </article>
+            <article class="flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-file-invoice-dollar text-teal-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold">Controle de Despesas</h3>
+                    <p class="mt-3 text-slate-600">Categorize todas as despesas: aluguel, luz, água, impostos. Relatórios detalhados por categoria.</p>
+                </div>
+            </article>
         </div>
     </div>
 </section>
@@ -355,83 +409,15 @@ $structuredData = [
 <!-- Planilha vs Sistema (New SEO Section) -->
 <section class="py-24 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-emerald-600 font-bold tracking-wider uppercase text-sm">Evolua sua gestão</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Por que abandonar a planilha de contas a pagar?</h2>
-            <p class="mt-4 text-lg text-slate-600">
-                Ainda usa <strong>contas a pagar excel</strong> ou procura uma <strong>planilha de contas a pagar para imprimir</strong>? 
-                Veja por que um sistema financeiro é superior.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Planilha -->
-            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
-                <h3 class="text-xl font-bold text-slate-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-file-excel text-green-600"></i> Planilha de Contas a Pagar
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-600">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Não avisa vencimentos (risco de juros)</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-600">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Difícil de usar no celular</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-600">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Erros de fórmula são comuns</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-600">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Sem backup automático</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Sistema -->
-            <div class="bg-emerald-900 p-8 rounded-3xl border border-emerald-800 shadow-xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl">RECOMENDADO</div>
-                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-rocket text-emerald-400"></i> Sistema Financeiro WSoft
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-emerald-100">
-                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
-                        <span>Alertas automáticos de vencimento</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-emerald-100">
-                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
-                        <span>Acesso de qualquer lugar (PC e Celular)</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-emerald-100">
-                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
-                        <span>Cálculos automáticos e precisos</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-emerald-100">
-                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
-                        <span>Backup seguro na nuvem</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
         <div class="mt-16 text-center">
-            <div class="inline-block p-1 rounded-2xl bg-gradient-to-r from-emerald-500 to-blue-500">
-                <div class="bg-white rounded-xl px-8 py-10 max-w-3xl mx-auto">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Procurando uma Planilha de Contas a Pagar e Receber?</h3>
-                    <p class="text-lg text-slate-600 mb-8">
-                        Não perca tempo preenchendo células manualmente e corrigindo fórmulas quebradas. 
-                        O WSoft automatiza tudo para você e garante que suas contas estejam sempre em dia.
-                    </p>
-                    <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-emerald-600 text-white font-bold px-8 py-4 shadow-lg shadow-emerald-200 hover:bg-emerald-700 hover:-translate-y-1 transition transform duration-200">
-                        Quero algo melhor que uma Planilha
-                        <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </a>
-                    <p class="mt-4 text-sm text-slate-500">Teste grátis por 7 dias</p>
-                </div>
-            </div>
+            <x-site.cta-inline
+                title="Migre da Planilha de Contas a Pagar para um Sistema Profissional"
+                description="Elimine erros manuais, fórmulas quebradas e retrabalho. Com o WSoft, automatize o controle de contas a pagar, receba alertas de vencimento e mantenha seu fluxo de caixa sempre organizado."
+                buttonText="Testar Sistema Gratuitamente"
+                buttonUrl="/app/register"
+                gradient="from-blue-900 to-blue-700"
+                icon="fa-solid fa-file-excel"
+            />
         </div>
     </div>
 </section>
@@ -488,71 +474,60 @@ $structuredData = [
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-emerald-600 to-blue-600 text-white relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold uppercase tracking-wider mb-6">
-            <i class="fa-solid fa-tag text-yellow-300"></i>
-            Oferta Especial
-        </div>
-        <h2 class="text-3xl md:text-5xl font-bold leading-tight">
-            Tenha controle total por apenas <br>
-            <span class="text-yellow-300">R$ 29,90/mês</span>
-        </h2>
-        <p class="mt-6 text-lg md:text-xl text-emerald-50 max-w-2xl mx-auto">
-            Menos de R$ 1,00 por dia para organizar o financeiro da sua empresa e nunca mais pagar juros.
-        </p>
-        
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="group inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-10 py-5 text-lg shadow-xl shadow-emerald-900/20 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                Quero Organizar Minha Empresa
-                <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-            </a>
-        </div>
-        <p class="mt-6 text-sm text-emerald-100 flex items-center justify-center gap-6">
-            <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-emerald-300"></i> 7 dias grátis</span>
-            <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-emerald-300"></i> Sem fidelidade</span>
-            <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-emerald-300"></i> Cancelamento fácil</span>
-        </p>
-    </div>
-</section>
+<x-site.cta-final
+    :title="'Escolha um sistema completo para gestão de contas a pagar'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de contas a pagar</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de empresas que usam WSoft'"
+    :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
+    :textColor="'text-blue-50'"
+    :highlightColor="'text-yellow-300'"
+/>
 
-<!-- FAQ -->
-<section id="faq" class="py-20 bg-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">FAQ</p>
-            <h2 class="mt-4 text-3xl font-bold">Dúvidas Frequentes</h2>
-        </div>
-        <div class="space-y-4">
-            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Posso anexar o boleto na conta?
-                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                </summary>
-                <p class="mt-3 text-slate-600">Sim! Você pode anexar arquivos (PDF, imagens) em cada lançamento para manter tudo organizado.</p>
-            </details>
-            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Consigo lançar compras parceladas?
-                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                </summary>
-                <p class="mt-3 text-slate-600">Sim! Ao lançar uma despesa, você pode informar o número de parcelas e o sistema gera os lançamentos futuros automaticamente.</p>
-            </details>
-            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Vocês fornecem uma planilha de contas a pagar?
-                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                </summary>
-                <p class="mt-3 text-slate-600">
-                    Embora planilhas sejam úteis, elas têm limitações. O WSoft é uma evolução da <strong>planilha de contas a pagar e receber</strong>, oferecendo automação, segurança e acesso online que o Excel não consegue entregar. Teste grátis e veja a diferença!
-                </p>
-            </details>
-        </div>
-    </div>
-</section>
+@livewire('landing-registration-form', [
+    'source' => 'site_contas_pagar',
+    'title' => 'Comece agora gratuitamente',
+    'subtitle' => 'Junte-se a centenas de empresas que já eliminaram multas e juros por atraso com o WSoft.',
+    'gradient' => 'from-blue-900 to-blue-700',
+    'buttonText' => 'Testar por 7 Dias Grátis',
+    'buttonColor' => 'blue',
+    'focusColor' => 'blue'
+])
+
+
+<x-site.faq
+    title="Perguntas Frequentes sobre Sistema de Contas a Pagar"
+    subtitle="FAQ"
+    subtitleColor="text-blue-600"
+    :questions="[
+        [
+            'question' => 'Como funciona o controle de contas a pagar no WSoft?',
+            'answer' => 'O <strong>sistema de contas a pagar</strong> do WSoft permite cadastrar todas as suas despesas, definir datas de vencimento, categorizar por fornecedor e receber <strong>alertas automáticos de vencimento</strong> por e-mail e WhatsApp. Você também pode anexar boletos e notas fiscais em cada lançamento para manter toda a documentação organizada em um só lugar.'
+        ],
+        [
+            'question' => 'Posso parcelar despesas e controlar compras a prazo?',
+            'answer' => 'Sim! O <strong>sistema para gerenciar contas a pagar</strong> permite lançar <strong>compras parceladas</strong> automaticamente. Ao cadastrar uma despesa, você informa o número de parcelas e o sistema gera todos os lançamentos futuros com as datas corretas, facilitando o <strong>controle financeiro</strong> e a <strong>previsão de caixa</strong>.'
+        ],
+        [
+            'question' => 'O sistema substitui planilhas de contas a pagar Excel?',
+            'answer' => 'Sim! O WSoft é a evolução da tradicional <strong>planilha de contas a pagar e receber</strong>. Diferente do Excel, oferece <strong>automação de processos</strong>, alertas inteligentes de vencimento, relatórios financeiros automáticos, acesso em nuvem de qualquer lugar, backup automático e segurança de dados. Sem fórmulas quebradas ou erros manuais.'
+        ],
+        [
+            'question' => 'Como evitar multas e juros por atraso de pagamento?',
+            'answer' => 'O WSoft envia <strong>notificações automáticas de vencimento</strong> por e-mail e WhatsApp antes das datas de pagamento. Você também pode visualizar o <strong>dashboard de contas a pagar</strong> com todas as obrigações do dia, da semana e do mês, garantindo que nenhuma conta seja esquecida. Ideal para pequenas empresas que querem evitar custos extras com multas.'
+        ],
+        [
+            'question' => 'Posso integrar contas a pagar com fluxo de caixa?',
+            'answer' => 'Sim! O <strong>módulo de contas a pagar</strong> está integrado ao <strong>fluxo de caixa</strong> do WSoft. Todas as despesas lançadas impactam automaticamente o saldo disponível, permitindo uma <strong>gestão financeira completa</strong> e <strong>previsibilidade de caixa</strong> para sua empresa.'
+        ],
+        [
+            'question' => 'É possível categorizar fornecedores e tipos de despesa?',
+            'answer' => 'Sim! O sistema permite criar categorias personalizadas de despesas (aluguel, fornecedores, impostos, salários, etc.) e vincular cada <strong>conta a pagar</strong> ao fornecedor correspondente. Isso facilita a geração de <strong>relatórios gerenciais</strong> e a análise de custos por categoria.'
+        ],
+        [
+            'question' => 'Quanto custa um sistema de contas a pagar?',
+            'answer' => 'O WSoft oferece um plano completo de <strong>gestão de contas a pagar</strong> a partir de <strong>R$ 29,90/mês</strong>, com <strong>7 dias de teste grátis</strong> e sem necessidade de cartão de crédito. Inclui contas a pagar e receber, fluxo de caixa, relatórios financeiros, alertas automáticos e suporte técnico.'
+        ]
+    ]"
+/>
 
 </x-site-layout>

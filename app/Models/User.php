@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string|null $avatar
  * @property string $name
  * @property string $email
+ * @property string|null $phone
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property mixed $password
  * @property string $role
@@ -39,6 +40,20 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'password',
+        'avatar',
+        'has_email_authentication',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
