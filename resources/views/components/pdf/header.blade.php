@@ -5,12 +5,10 @@
         <tr>
             <td style="width: 25%; vertical-align: middle; text-align: left;">
                 <!-- Logo -->
-                @if($tenant->avatar)
+                @if($tenant->avatar && Storage::exists($tenant->avatar))
                     <img src="{{ Storage::path($tenant->avatar) }}" alt="Logo" style="width: 80px; height: 80px; object-fit: contain; border-radius: 10px;">
-                @elseif($tenant->name)
-                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%); border-radius: 10px; text-align: center; padding-top: 22px;">
-                        <span style="color: white; font-size: 32px; font-weight: bold;">{{ strtoupper(substr($tenant->name, 0, 1)) }}</span>
-                    </div>
+                @else
+                    <img src="{{ public_path('images/logo.png') }}" alt="Logo WSoft" style="width: 80px; height: 80px; object-fit: contain; border-radius: 10px;">
                 @endif
             </td>
             <td style="width: 50%; vertical-align: middle; text-align: center;">
