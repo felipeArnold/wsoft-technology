@@ -8,6 +8,7 @@ use App\Filament\Clusters\Settings\SettingsCluster;
 use App\Filament\Pages\Auth\RegisterTeam;
 use App\Filament\Resources\Suggestions\SuggestionResource;
 use App\Models\Tenant;
+use Asmit\ResizedColumn\ResizedColumnPlugin;
 use Filament\Actions\Action;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Enums\ThemeMode;
@@ -58,6 +59,7 @@ final class AppPanelProvider extends PanelProvider
                 'Financeiro',
                 'Serviços',
                 'Vendas',
+                'Estoque',
             ])
             ->userMenuItems([
                 Action::make('settings')
@@ -93,6 +95,10 @@ final class AppPanelProvider extends PanelProvider
             ->tenantBillingProvider(new BillingProvider('default'))
             ->requiresTenantSubscription()
             ->topNavigation()
+            ->errorNotifications(false)
+            ->databaseNotifications()
+            ->sidebarCollapsibleOnDesktop()
+            ->breadcrumbs(false)
             ->brandLogo(fn () => view('components.logo'))
             ->favicon(asset('images/icon.webp'))
             ->brandLogo(asset('images/logo.png'))
@@ -108,6 +114,7 @@ final class AppPanelProvider extends PanelProvider
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->plugins([
                 FilamentApexChartsPlugin::make(),
+                ResizedColumnPlugin::make()->preserveOnDB(),
             ])
             ->pages([
                 Dashboard::class,

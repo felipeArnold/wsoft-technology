@@ -9,7 +9,9 @@ use App\Filament\Components\PtbrMoney;
 use App\Helpers\FormatterHelper;
 use App\Models\Product;
 use App\Models\StockMovement;
+use BladeUI\Icons\Components\Icon;
 use Filament\Actions\Action;
+use Filament\Actions\CreateAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Facades\Filament;
@@ -17,6 +19,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
+use Filament\Schemas\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
@@ -117,28 +120,35 @@ final class ProductsTable
                     ->icon('heroicon-o-arrow-down-circle')
                     ->color('success')
                     ->form([
-                        TextInput::make('quantity')
-                            ->label('Quantidade')
-                            ->numeric()
-                            ->required()
-                            ->minValue(1)
-                            ->default(1),
-                        PtbrMoney::make('unit_cost')
-                            ->label('Custo Unitário')
-                            ->required(),
-                        Select::make('reason')
-                            ->label('Motivo')
-                            ->options([
-                                'Compra' => 'Compra',
-                                'Devolução' => 'Devolução',
-                                'Transferência' => 'Transferência',
-                                'Outro' => 'Outro',
-                            ])
-                            ->default('Compra')
-                            ->required(),
-                        Textarea::make('notes')
-                            ->label('Observações')
-                            ->rows(3),
+                        Section::make('Detalhes da Entrada')
+                            ->icon('heroicon-o-inbox-arrow-down')
+                            ->description('Registre uma entrada de estoque para este produto.')
+                            ->schema([
+                                TextInput::make('quantity')
+                                    ->label('Quantidade')
+                                    ->numeric()
+                                    ->required()
+                                    ->minValue(1)
+                                    ->default(1),
+                                PtbrMoney::make('unit_cost')
+                                    ->label('Custo Unitário')
+                                    ->required(),
+                                Select::make('reason')
+                                    ->label('Motivo')
+                                    ->options([
+                                        'Compra' => 'Compra',
+                                        'Devolução' => 'Devolução',
+                                        'Transferência' => 'Transferência',
+                                        'Outro' => 'Outro',
+                                    ])
+                                    ->native(false)
+                                    ->default('Compra')
+                                    ->required(),
+                                Textarea::make('notes')
+                                    ->label('Observações')
+                                    ->rows(3)
+                                    ->columnSpan(3),
+                            ])->columns(3),
                     ])
                     ->action(function (Product $record, array $data): void {
                         $stockBefore = $record->stock;
@@ -179,25 +189,32 @@ final class ProductsTable
                     ->icon('heroicon-o-arrow-up-circle')
                     ->color('danger')
                     ->form([
-                        TextInput::make('quantity')
-                            ->label('Quantidade')
-                            ->numeric()
-                            ->required()
-                            ->minValue(1)
-                            ->default(1),
-                        Select::make('reason')
-                            ->label('Motivo')
-                            ->options([
-                                'Venda' => 'Venda',
-                                'Perda' => 'Perda',
-                                'Transferência' => 'Transferência',
-                                'Outro' => 'Outro',
-                            ])
-                            ->default('Venda')
-                            ->required(),
-                        Textarea::make('notes')
-                            ->label('Observações')
-                            ->rows(3),
+                        Section::make('Detalhes da Saída')
+                            ->icon('heroicon-o-arrow-up')
+                            ->description('Registre uma saída de estoque para este produto.')
+                            ->schema([
+                                TextInput::make('quantity')
+                                    ->label('Quantidade')
+                                    ->numeric()
+                                    ->required()
+                                    ->minValue(1)
+                                    ->default(1),
+                                Select::make('reason')
+                                    ->label('Motivo')
+                                    ->options([
+                                        'Venda' => 'Venda',
+                                        'Perda' => 'Perda',
+                                        'Transferência' => 'Transferência',
+                                        'Outro' => 'Outro',
+                                    ])
+                                    ->native(false)
+                                    ->default('Venda')
+                                    ->required(),
+                                Textarea::make('notes')
+                                    ->label('Observações')
+                                    ->rows(3)
+                                    ->columnSpan(2),
+                            ])->columns(2),
                     ])
                     ->action(function (Product $record, array $data): void {
                         $stockBefore = $record->stock;
@@ -244,6 +261,11 @@ final class ProductsTable
             ->emptyStateIcon('heroicon-o-inbox')
             ->emptyStateHeading('Nenhum produto encontrado')
             ->emptyStateDescription('Crie seu primeiro produto para começar a gerenciar seu inventário.')
+            ->emptyStateActions([
+                CreateAction::make()
+                    ->icon('heroicon-s-plus')
+                    ->label('Novo Produto'),
+            ])
             ->defaultPaginationPageOption(50);
     }
 }

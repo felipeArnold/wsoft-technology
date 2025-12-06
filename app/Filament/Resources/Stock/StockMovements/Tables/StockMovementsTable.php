@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Stock\StockMovements\Tables;
 
+use Filament\Actions\Action;
+use Filament\Actions\CreateAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms;
 use Filament\Tables;
@@ -118,6 +120,15 @@ final class StockMovementsTable
                 ViewAction::make(),
             ])
             ->defaultSort('created_at', 'desc')
+            ->striped()
+            ->emptyStateIcon('heroicon-o-clipboard-document-list')
+            ->emptyStateHeading('Nenhuma movimentação de estoque encontrada')
+            ->emptyStateDescription('Crie novas movimentações de estoque para que elas apareçam aqui.')
+            ->emptyStateActions([
+                CreateAction::make()
+                    ->icon('heroicon-s-plus')
+                    ->label('Nova Movimentação')
+            ])
             ->paginated([10, 25, 50, 100]);
     }
 }

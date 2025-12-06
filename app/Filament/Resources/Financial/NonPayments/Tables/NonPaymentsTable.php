@@ -37,9 +37,7 @@ final class NonPaymentsTable
                     ->label('Cliente')
                     ->searchable()
                     ->sortable()
-                    ->toggleable()
-                    ->weight('medium')
-                    ->description(fn ($record) => $record->accounts?->person?->type === 'customer' ? 'Cliente' : 'Fornecedor'),
+                    ->toggleable(),
                 TextColumn::make('installment_number')
                     ->label('Parcela')
                     ->formatStateUsing(function ($state, $record) {
@@ -57,7 +55,6 @@ final class NonPaymentsTable
                 TextColumn::make('amount')
                     ->label('Valor')
                     ->money('BRL')
-                    ->weight('bold')
                     ->color('danger')
                     ->toggleable()
                     ->summarize([
@@ -70,7 +67,7 @@ final class NonPaymentsTable
                     ->sortable()
                     ->toggleable()
                     ->color('danger')
-                    ->weight('bold')->description(function ($record) {
+                    ->tooltip(function ($record) {
                         $daysOverdue = (int) $record->due_date->diffInDays(now());
 
                         return "{$daysOverdue} dias em atraso";

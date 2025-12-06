@@ -174,6 +174,16 @@ final class StockInventoryItemsRelationManager extends RelationManager
                 ]),
             ])
             ->defaultSort('product.name')
+            ->striped()
+            ->emptyStateIcon('heroicon-o-inbox')
+            ->emptyStateHeading('Nenhum item de inventário encontrado')
+            ->emptyStateDescription('Adicione itens ao inventário de estoque para começar a gerenciá-los.')
+            ->emptyStateActions([
+                CreateAction::make()
+                    ->icon('heroicon-s-plus')
+                    ->label('Novo Item')
+                    ->disabled(fn () => $this->getOwnerRecord()->status === 'completed'),
+            ])
             ->paginated([10, 25, 50, 100]);
     }
 }

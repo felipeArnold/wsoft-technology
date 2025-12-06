@@ -52,7 +52,6 @@ final class AccountsReceivablesTable
                 TextColumn::make('amount')
                     ->label('Valor')
                     ->money('BRL')
-                    ->weight('bold')
                     ->color('success')
                     ->sortable()
                     ->summarize([
@@ -63,7 +62,6 @@ final class AccountsReceivablesTable
                     ->date('d/m/Y')
                     ->sortable()
                     ->color(fn ($record) => $record->due_date->isPast() && ! $record->status->value ? 'danger' : 'gray')
-                    ->weight(fn ($record) => $record->due_date->isPast() && ! $record->status->value ? 'bold' : 'normal')
                     ->icon(fn ($record) => $record->due_date->isPast() && ! $record->status->value ? 'heroicon-o-exclamation-triangle' : 'heroicon-o-calendar'),
                 TextColumn::make('status')
                     ->label('Status')

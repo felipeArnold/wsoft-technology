@@ -19,6 +19,7 @@ final class StockMovementForm
             ->columns(3)
             ->components([
                 Section::make('Informações da Movimentação')
+                    ->description('Registre uma nova movimentação de estoque para um produto específico.')
                     ->icon('heroicon-o-arrows-right-left')
                     ->schema([
                         Select::make('product_id')
@@ -36,7 +37,7 @@ final class StockMovementForm
                                     }
                                 }
                             })
-                            ->columnSpan(2),
+                            ->columnSpan(1),
 
                         Select::make('type')
                             ->label('Tipo de Movimentação')
@@ -48,6 +49,20 @@ final class StockMovementForm
                             ->required()
                             ->native(false)
                             ->reactive()
+                            ->columnSpan(1),
+
+                        Select::make('reason')
+                            ->label('Motivo')
+                            ->options([
+                                'Compra' => 'Compra',
+                                'Venda' => 'Venda',
+                                'Devolução' => 'Devolução',
+                                'Ajuste de inventário' => 'Ajuste de inventário',
+                                'Perda' => 'Perda',
+                                'Transferência' => 'Transferência',
+                                'Outro' => 'Outro',
+                            ])
+                            ->searchable()
                             ->columnSpan(1),
 
                         TextInput::make('quantity')
@@ -93,26 +108,6 @@ final class StockMovementForm
                             ->helperText('Apenas para entradas de estoque')
                             ->visible(fn (callable $get) => $get('type') === 'in')
                             ->columnSpan(1),
-                    ])
-                    ->columns(3)
-                    ->columnSpanFull(),
-
-                Section::make('Detalhes')
-                    ->icon('heroicon-o-document-text')
-                    ->schema([
-                        Select::make('reason')
-                            ->label('Motivo')
-                            ->options([
-                                'Compra' => 'Compra',
-                                'Venda' => 'Venda',
-                                'Devolução' => 'Devolução',
-                                'Ajuste de inventário' => 'Ajuste de inventário',
-                                'Perda' => 'Perda',
-                                'Transferência' => 'Transferência',
-                                'Outro' => 'Outro',
-                            ])
-                            ->searchable()
-                            ->columnSpan(1),
 
                         Textarea::make('notes')
                             ->label('Observações')
@@ -121,6 +116,7 @@ final class StockMovementForm
                     ])
                     ->columns(3)
                     ->columnSpanFull(),
+
             ]);
     }
 }

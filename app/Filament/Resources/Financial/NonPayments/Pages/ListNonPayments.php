@@ -6,10 +6,17 @@ namespace App\Filament\Resources\Financial\NonPayments\Pages;
 
 use App\Filament\Resources\Financial\NonPayments\NonPaymentResource;
 use App\Models\Accounts\AccountsInstallments;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
+use Filament\Forms\Components\DatePicker;
+use Filament\Schemas\Components\Section;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Support\Colors\Color;
 use Illuminate\Database\Eloquent\Builder;
+use Symfony\Component\HttpFoundation\Response;
 
 final class ListNonPayments extends ListRecords
 {
@@ -44,12 +51,85 @@ final class ListNonPayments extends ListRecords
     {
         return [
             Action::make('export_overdue')
-                ->label('Exportar Relatório')
+                ->label('Exportar PDF')
                 ->icon('heroicon-o-document-arrow-down')
-                ->hidden()
-                ->color('gray')
-                ->action(function (): void {
-                    // Implementar exportação de relatório de inadimplência
+                ->color(Color::Gray)
+                ->form([
+                    Section::make('Período de Exportação')
+                        ->description('Selecione o período para exportar o relatório de inadimplência.')
+                        ->icon('heroicon-o-calendar')
+                        ->schema([
+                            DatePicker::make('start_date')
+                                ->label('Data Inicial')
+                                ->default(now()->startOfMonth())
+                                ->required(),
+                            DatePicker::make('end_date')
+                                ->label('Data Final')
+                                ->default(now()->endOfMonth())
+                                ->required(),
+                        ])
+                        ->columns(2),
+                ])
+                ->action(function (array $data): Response {
+                    $tenant = Filament::getTenant();
+                    $startDate = Carbon::parse($data['start_date'])->startOfDay();
+                    $endDate = Carbon::parse($data['end_date'])->endOfDay();
+
+                    $query = $this->getFilteredTableQuery()
+                        ->with(['accounts.person', 'accounts.user'])
+                        ->whereBetween('due_date', [$startDate, $endDate]);
+
+                    $installments = $query->orderBy('due_date', 'asc')->get();
+
+                    // Análise por gravidade
+                    $critical = $installments->filter(fn ($i) => $i->due_date <= now()->subDays(90));
+                    $overdue = $installments->filter(fn ($i) => $i->due_date > now()->subDays(90) && $i->due_date <= now()->subDays(30));
+                    $recent = $installments->filter(fn ($i) => $i->due_date > now()->subDays(30));
+
+                    // Cálculos
+                    $totalOverdue = $installments->sum('amount');
+                    $totalCritical = $critical->sum('amount');
+                    $totalOverdueRange = $overdue->sum('amount');
+                    $totalRecent = $recent->sum('amount');
+
+                    // Top devedores
+                    $topDebtors = $installments
+                        ->groupBy('accounts.person.id')
+                        ->map(function ($group) {
+                            return (object) [
+                                'person_name' => $group->first()->accounts->person->name ?? 'N/A',
+                                'total' => $group->sum('amount'),
+                                'count' => $group->count(),
+                            ];
+                        })
+                        ->sortByDesc('total')
+                        ->take(10)
+                        ->values();
+
+                    $pdf = Pdf::loadView('pdf.non-payments', [
+                        'tenant' => $tenant,
+                        'startDate' => $startDate,
+                        'endDate' => $endDate,
+                        'installments' => $installments,
+                        'critical' => $critical,
+                        'overdue' => $overdue,
+                        'recent' => $recent,
+                        'totalOverdue' => $totalOverdue,
+                        'totalCritical' => $totalCritical,
+                        'totalOverdueRange' => $totalOverdueRange,
+                        'totalRecent' => $totalRecent,
+                        'topDebtors' => $topDebtors,
+                    ])
+                        ->setPaper('a4', 'landscape')
+                        ->setOption('margin-top', 10)
+                        ->setOption('margin-bottom', 10)
+                        ->setOption('margin-left', 10)
+                        ->setOption('margin-right', 10);
+
+                    return response()->streamDownload(
+                        fn () => print ($pdf->output()),
+                        'inadimplencia-'.now()->format('Y-m-d').'.pdf'
+                    );
                 }),
             Action::make('send_bulk_reminders')
                 ->label('Enviar Lembretes')

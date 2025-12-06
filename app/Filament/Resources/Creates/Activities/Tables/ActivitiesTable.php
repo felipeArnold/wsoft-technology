@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Creates\Activities\Tables;
 
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use App\Filament\Exports\ActivityExporter;
+use App\Filament\Exports\ActivityExportExporter;
+use App\Filament\Imports\ActivitiesImporter;
+use App\Filament\Imports\ProductImporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -166,9 +171,12 @@ final class ActivitiesTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    ExportAction::make()
+                        ->icon(Heroicon::OutlinedArrowDownTray)
+                        ->exporter(ActivityExporter::class)
+                        ->label('Exportar'),
                     DeleteBulkAction::make(),
                 ]),
-                FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
             ->striped()
             ->defaultSort('due_date', 'asc')

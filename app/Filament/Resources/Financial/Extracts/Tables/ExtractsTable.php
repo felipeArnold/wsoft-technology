@@ -50,9 +50,7 @@ final class ExtractsTable
                     ->label('Cliente/Fornecedor')
                     ->searchable()
                     ->sortable()
-                    ->toggleable()
-                    ->weight('medium')
-                    ->description(fn ($record) => $record->accounts?->person?->type === 'customer' ? 'Cliente' : 'Fornecedor'),
+                    ->toggleable(),
                 TextColumn::make('installment_number')
                     ->label('Parcela')
                     ->formatStateUsing(function ($state, $record) {
@@ -70,21 +68,33 @@ final class ExtractsTable
                 TextColumn::make('amount')
                     ->label('Valor')
                     ->money('BRL')
-                    ->weight('bold')
                     ->color(fn ($record) => $record->accounts->type === 'receivables' ? 'success' : 'danger')
+                    ->alignEnd()
                     ->toggleable()
                     ->summarize([
                         Sum::make()
-                            ->label('Total')
-                            ->money('BRL'),
+                            ->label('Total Receitas')
+                            ->money('BRL')
+                            ->using(fn ($query) => $query->whereHas('accounts', fn ($q) => $q->where('type', 'receivables'))->sum('amount')),
+                        Sum::make()
+                            ->label('Total Despesas')
+                            ->money('BRL')
+                            ->using(fn ($query) => $query->whereHas('accounts', fn ($q) => $q->where('type', 'payables'))->sum('amount')),
+                        Sum::make()
+                            ->label('Saldo')
+                            ->money('BRL')
+                            ->using(function ($query) {
+                                $receitas = $query->whereHas('accounts', fn ($q) => $q->where('type', 'receivables'))->sum('amount');
+                                $despesas = $query->whereHas('accounts', fn ($q) => $q->where('type', 'payables'))->sum('amount');
+                                return $receitas - $despesas;
+                            }),
                     ]),
                 TextColumn::make('due_date')
                     ->label('Vencimento')
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable()
-                    ->color(fn ($record) => $record->due_date->isPast() && ! $record->status->value ? 'danger' : 'gray')
-                    ->weight(fn ($record) => $record->due_date->isPast() && ! $record->status->value ? 'bold' : 'normal'),
+                    ->color(fn ($record) => $record->due_date->isPast() && ! $record->status->value ? 'danger' : 'gray'),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
@@ -227,10 +237,11 @@ final class ExtractsTable
                 Group::make('due_date')->label('Mês de Vencimento')->collapsible(),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->hiddenLabel()->tooltip('Visualizar Detalhes'),
+                EditAction::make()->hiddenLabel()->tooltip('Editar Extrato'),
                 Action::make('mark_as_paid')
-                    ->label('Marcar como Pago')
+                    ->hiddenLabel()
+                    ->tooltip('Marcar como Pago')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->visible(fn ($record) => ! $record->status->value)
@@ -242,7 +253,8 @@ final class ExtractsTable
                         ]);
                     }),
                 Action::make('mark_as_unpaid')
-                    ->label('Marcar como Pendente')
+                    ->hiddenLabel()
+                    ->tooltip('Marcar como Pendente')
                     ->icon('heroicon-o-x-circle')
                     ->color('warning')
                     ->visible(fn ($record) => $record->status->value)

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Stock\StockInventories\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms;
@@ -113,6 +114,15 @@ final class StockInventoriesTable
                 ]),
             ])
             ->defaultSort('created_at', 'desc')
+            ->striped()
+            ->emptyStateIcon('heroicon-o-inbox')
+            ->emptyStateHeading('Nenhum inventário de estoque encontrado')
+            ->emptyStateDescription('Crie um novo inventário para começar a gerenciar seu estoque.')
+            ->emptyStateActions([
+                CreateAction::make()
+                    ->icon('heroicon-s-plus')
+                    ->label('Nova Movimentação')
+            ])
             ->paginated([10, 25, 50, 100]);
     }
 }

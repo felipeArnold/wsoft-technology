@@ -16,6 +16,7 @@ final class ListStockMovements extends ListRecords
     {
         return [
             Actions\CreateAction::make()
+                ->icon('heroicon-s-plus')
                 ->label('Nova Movimentação'),
         ];
     }
