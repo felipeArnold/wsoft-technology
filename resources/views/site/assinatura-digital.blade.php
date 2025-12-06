@@ -142,67 +142,31 @@ $structuredData = [
 </section>
 
 <!-- Pain vs Gain -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema da burocracia</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Ainda imprime, assina e escaneia documentos?</h2>
-            <p class="mt-4 text-lg text-slate-600">Empresas que ainda usam papel perdem tempo e oportunidades. Veja a diferença:</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pain -->
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 relative overflow-hidden group hover:shadow-lg transition">
-                <div class="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl">SEM ASSINATURA DIGITAL</div>
-                <h3 class="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-xmark"></i> Processo Lento e Burocrático
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Imprime, envia para assinatura e aguarda retorno</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Perde negócios por demora na formalização</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Documentos extraviados ou perdidos</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Custo com impressão, correio e armazenamento</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Gain -->
-            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
-                <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> 100% Digital e Rápido
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Cliente assina em minutos pelo celular</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Feche negócios 10x mais rápido</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Tudo organizado e armazenado na nuvem</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Economia total: zero papel, zero correio</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<x-site.comparison
+    title="Ainda imprime, assina e escaneia documentos?"
+    subtitle="O problema da burocracia"
+    description="Empresas que ainda usam papel perdem tempo e oportunidades. Veja a diferença:"
+    painTitle="Processo Lento e Burocrático"
+    :painItems="[
+        'Imprime, envia para assinatura e aguarda retorno',
+        'Perde negócios por demora na formalização',
+        'Documentos extraviados ou perdidos',
+        'Custo com impressão, correio e armazenamento'
+    ]"
+    gainTitle="100% Digital e Rápido"
+    :gainItems="[
+        'Cliente assina em minutos pelo celular',
+        'Feche negócios 10x mais rápido',
+        'Tudo organizado e armazenado na nuvem',
+        'Economia total: zero papel, zero correio'
+    ]"
+    gainCardBg="bg-emerald-900"
+    gainCardBorder="border-emerald-800"
+    gainTitleColor="text-emerald-400"
+    gainCheckColor="text-emerald-400"
+    gainBadgeBg="bg-emerald-500"
+    gainBadgeText="COM WSOFT"
+/>
 
 <!-- How it Works -->
 <section id="como-funciona" class="py-24 bg-slate-50">
@@ -381,24 +345,15 @@ $structuredData = [
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-emerald-600 to-green-600 text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">Elimine papel e feche negócios mais rápido</h2>
-        <p class="mt-4 text-lg text-white/90 max-w-2xl mx-auto">
-            Comece agora com 7 dias de teste grátis. Sem cartão de crédito, sem compromisso.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-10 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                Testar por 7 Dias
-                <i class="fa-solid fa-arrow-right ml-2"></i>
-            </a>
-            <a href="/#precos" class="inline-flex justify-center items-center rounded-xl border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                Ver Planos e Preços
-            </a>
-        </div>
-        <p class="mt-6 text-sm text-white/80">Mais de 500 empresas já usam assinatura digital no WSoft</p>
-    </div>
-</section>
+<x-site.cta-final
+    :title="'Escolha um sistema completo para assinatura digital de documentos'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema com assinatura eletrônica integrada</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de empresas que usam WSoft'"
+    :gradient="'bg-gradient-to-br from-emerald-600 to-green-600'"
+    :textColor="'text-emerald-50'"
+    :highlightColor="'text-yellow-300'"
+/>
+
 
 <!-- FAQ -->
 <section id="faq" class="py-20 bg-white">

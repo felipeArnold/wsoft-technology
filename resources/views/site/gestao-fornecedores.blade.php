@@ -150,67 +150,31 @@ $structuredData = [
 </section>
 
 <!-- Pain vs Gain -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema da desorganização</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Você perde dinheiro comprando mal?</h2>
-            <p class="mt-4 text-lg text-slate-600">Empresas sem um <strong>sistema de gestão de fornecedores</strong> pagam mais caro e sofrem com atrasos. Veja a diferença:</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pain -->
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 relative overflow-hidden group hover:shadow-lg transition">
-                <div class="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl">SEM SISTEMA</div>
-                <h3 class="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-xmark"></i> Compras Desorganizadas
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Contatos de fornecedores perdidos em agendas</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Não lembra o último preço pago</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Esquece de cobrar entregas atrasadas</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Paga mais caro por falta de cotação</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Gain -->
-            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
-                <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Compras Inteligentes
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Cadastro completo de fornecedores e produtos</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Histórico de preços e últimas compras</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Controle de prazos de entrega e pagamento</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Melhor negociação com dados em mãos</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<x-site.comparison
+    title="Você perde dinheiro comprando mal?"
+    subtitle="O problema da desorganização"
+    description="Empresas sem um <strong>sistema de gestão de fornecedores</strong> pagam mais caro e sofrem com atrasos. Veja a diferença:"
+    painTitle="Compras Desorganizadas"
+    :painItems="[
+        'Contatos de fornecedores perdidos em agendas',
+        'Não lembra o último preço pago',
+        'Esquece de cobrar entregas atrasadas',
+        'Paga mais caro por falta de cotação'
+    ]"
+    gainTitle="Compras Inteligentes"
+    :gainItems="[
+        'Cadastro completo de fornecedores e produtos',
+        'Histórico de preços e últimas compras',
+        'Controle de prazos de entrega e pagamento',
+        'Melhor negociação com dados em mãos'
+    ]"
+    gainCardBg="bg-blue-900"
+    gainCardBorder="border-blue-800"
+    gainTitleColor="text-emerald-400"
+    gainCheckColor="text-emerald-400"
+    gainBadgeBg="bg-blue-500"
+    gainBadgeText="COM WSOFT"
+/>
 
 <!-- How it Works (New Section) -->
 <section id="como-funciona" class="py-24 bg-slate-50">
@@ -353,23 +317,15 @@ $structuredData = [
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-emerald-600 to-blue-600 text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">Comece a comprar melhor hoje mesmo</h2>
-        <p class="mt-4 text-lg text-white/90 max-w-2xl mx-auto">
-            Teste o sistema de gestão de fornecedores gratuitamente por 7 dias.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-10 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                Testar por 7 Dias
-                <i class="fa-solid fa-arrow-right ml-2"></i>
-            </a>
-            <a href="/#precos" class="inline-flex justify-center items-center rounded-xl border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                Ver Planos e Preços
-            </a>
-        </div>
-    </div>
-</section>
+<x-site.cta-final
+    :title="'Escolha um sistema completo para gestão de fornecedores'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de compras e fornecedores</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de empresas que usam WSoft'"
+    :gradient="'bg-gradient-to-br from-emerald-600 to-blue-600'"
+    :textColor="'text-emerald-50'"
+    :highlightColor="'text-yellow-300'"
+/>
+
 
 <!-- FAQ -->
 <section id="faq" class="py-20 bg-white">

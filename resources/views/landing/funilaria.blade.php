@@ -5,7 +5,7 @@ $structuredData = [
         '@type' => 'SoftwareApplication',
         'name' => 'WSoft - Sistema para Funilaria e Pintura',
         'url' => 'https://www.wsoft.dev.br/landing/funilaria',
-        'description' => 'Sistema de gestão completo para funilarias e oficinas de pintura. Orçamentos com fotos, controle de OS e financeiro.',
+        'description' => 'Sistema de gestão completo para funilarias e pintura. Controle de OS, financeiro, estoque e cadastro de clientes.',
         'operatingSystem' => 'Web',
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
@@ -18,15 +18,15 @@ $structuredData = [
         'aggregateRating' => [
             '@type' => 'AggregateRating',
             'ratingValue' => '4.9',
-            'ratingCount' => '85'
+            'ratingCount' => '145'
         ]
     ],
     [
         '@context' => 'https://schema.org',
-        '@type' => 'AutoBodyShop',
-        'name' => 'WSoft Tecnologia - Sistema para Funilaria',
+        '@type' => 'AutoRepair',
+        'name' => 'WSoft Tecnologia - Sistema de Gestão para Funilarias',
         'image' => 'https://www.wsoft.dev.br/images/logo.png',
-        'description' => 'Sistema de gestão completo para funilaria e pintura. Orçamentos com fotos, controle de OS e financeiro.',
+        'description' => 'Sistema de gestão completo para oficinas mecânicas e auto centers. Controle financeiro, estoque e OS.',
         'url' => 'https://www.wsoft.dev.br/landing/funilaria',
         'priceRange' => '$$',
         'address' => [
@@ -36,7 +36,7 @@ $structuredData = [
         'aggregateRating' => [
             '@type' => 'AggregateRating',
             'ratingValue' => '4.9',
-            'ratingCount' => '85'
+            'ratingCount' => '145'
         ]
     ],
     [
@@ -45,42 +45,42 @@ $structuredData = [
         'mainEntity' => [
             [
                 '@type' => 'Question',
-                'name' => 'Consigo fazer orçamento com fotos?',
+                'name' => 'O sistema emite Ordem de Serviço (OS)?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim! O WSoft permite criar orçamentos detalhados com fotos do veículo para aprovação do cliente ou seguradora.'
+                    'text' => 'Sim! O WSoft permite criar ordens de serviço completas, com cadastro de peças, mão de obra, fotos e status de acompanhamento.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Tem controle de etapas da funilaria?',
+                'name' => 'Consigo controlar o financeiro da oficina?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim, você pode controlar cada fase: desmontagem, funilaria, preparação, pintura e montagem.'
+                    'text' => 'Com certeza. O sistema possui controle completo de contas a pagar e receber, fluxo de caixa e relatórios de lucratividade.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'O sistema controla o financeiro?',
+                'name' => 'Tem controle de estoque de peças?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Completo. Contas a pagar, receber, fluxo de caixa e relatórios de lucro por serviço.'
+                    'text' => 'Sim, você pode controlar o estoque de peças, definir estoque mínimo e vincular produtos diretamente nas Ordens de Serviço.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Posso controlar o estoque de tintas?',
+                'name' => 'O sistema envia mensagens para clientes?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim, controle o estoque de todos os materiais (lixas, massas, tintas) e lance o custo na OS.'
+                    'text' => 'Sim, você pode enviar orçamentos e avisos sobre o status da OS diretamente pelo WhatsApp para seus clientes.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Quanto custa o sistema para funilaria?',
+                'name' => 'Quanto custa o sistema para oficina?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem cobranças extras.'
+                    'text' => 'O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem taxa de adesão e com todas as funcionalidades liberadas.'
                 ]
             ]
         ]
@@ -89,34 +89,34 @@ $structuredData = [
 @endphp
 
 <x-site-layout
-    :title="'Sistema para Funilaria e Pintura | Orçamentos e OS | WSoft'"
-    :description="'Sistema completo para funilaria e pintura automotiva. Orçamentos com fotos, OS por etapas, financeiro e estoque. Teste grátis!'"
-    :keywords="'sistema para funilaria, software funilaria, orcamento funilaria, gestão funilaria, oficina pintura software, sistema estética automotiva'"
+    :title="'Sistema para Funilaria e Pintura | Gestão e OS | WSoft'"
+    :description="'Sistema de gestão para oficinas mecânicas com OS digital, controle financeiro, fluxo de caixa e cadastro de clientes e fornecedores.'"
+    :keywords="'sistema oficina mecanica, software oficina, ordem de serviço oficina, gestão oficina, programa para oficina, controle financeiro oficina, sistema para auto center'"
     :canonical="'https://www.wsoft.dev.br/landing/funilaria'"
-    :ogTitle="'Sistema de Gestão para Funilaria e Pintura | WSoft'"
-    :ogDescription="'Crie orçamentos profissionais com fotos e organize sua funilaria com o sistema mais completo do mercado.'"
+    :ogTitle="'Sistema de Gestão para Oficinas Mecânicas | WSoft'"
+    :ogDescription="'Organize sua oficina, controle OS e aumente seus lucros com o sistema mais simples e completo do mercado.'"
     :structuredData="$structuredData"
 >
 
 <!-- Hero -->
-<section id="hero" class="pt-32 pb-24 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden relative">
+<section id="hero" class="pt-32 pb-24 bg-gradient-to-b from-blue-950 via-blue-900 to-blue-800 text-white overflow-hidden relative">
     <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-700/50 border border-slate-600 text-slate-200 text-xs font-semibold uppercase tracking-wider mb-6">
-                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-xs font-semibold uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                 Sistema para Funilaria
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Gestão Profissional para <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-200">Funilaria e Pintura</span>
+                Gestão Profissional para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Funilaria e Pintura</span>
             </h1>
-            <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-lg">
-                Orçamentos com fotos, controle de etapas e financeiro. O sistema ideal para funilarias e estética automotiva.
+            <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
+                Ordem de serviço digital, controle financeiro e estoque de peças. O sistema ideal para mecânicas e auto centers.
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
-                <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-blue-600 text-white font-bold px-8 py-4 shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:-translate-y-1 transition transform duration-200">
-                    Testar por 7 Dias
+                <a href="#cadastro" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
+                    Começar Agora
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
                 <a href="#como-funciona" class="inline-flex justify-center items-center rounded-xl border border-white/30 text-white font-semibold px-8 py-4 hover:bg-white/10 transition backdrop-blur-sm">
@@ -125,48 +125,48 @@ $structuredData = [
                 </a>
             </div>
             <div class="mt-10 pt-8 border-t border-white/10">
-                <p class="text-sm text-slate-400 mb-4">Ideal para:</p>
+                <p class="text-sm text-emerald-200 mb-4">Ideal para:</p>
                 <div class="flex flex-wrap gap-3 text-sm font-medium text-white">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Oficinas Mecânicas</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Auto Centers</span>
                     <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Funilarias</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Oficinas de Pintura</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Estética Automotiva</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Martelinho de Ouro</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Troca de Óleo</span>
                 </div>
             </div>
         </div>
         <div class="relative">
-            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-            <div class="bg-slate-800/50 border border-slate-700/50 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+            <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
                 <div class="flex items-center justify-between mb-6">
                     <div>
-                        <p class="text-sm uppercase text-slate-400 font-semibold tracking-wider">Faturamento Hoje</p>
-                        <h3 class="text-3xl font-bold mt-1 text-white">R$ 5.200,00</h3>
+                        <p class="text-sm uppercase text-emerald-200 font-semibold tracking-wider">Faturamento Hoje</p>
+                        <h3 class="text-3xl font-bold mt-1">R$ 3.850,00</h3>
                         <div class="flex items-center gap-2 mt-2">
-                            <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">+12% vs ontem</span>
+                            <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">+22% vs ontem</span>
                         </div>
                     </div>
-                    <div class="h-12 w-12 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-400/30">
-                        <i class="fa-solid fa-spray-can text-blue-400 text-xl"></i>
+                    <div class="h-12 w-12 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-400/30">
+                        <i class="fa-solid fa-wrench text-emerald-300 text-xl"></i>
                     </div>
                 </div>
                 <div class="space-y-4">
-                    <div class="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
+                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
                         <div class="flex items-center justify-between mb-2">
-                            <p class="text-xs text-slate-300">Orçamentos Aprovados</p>
-                            <span class="text-sm font-bold text-blue-400">5 de 6</span>
+                            <p class="text-xs text-emerald-200">Meta Mensal</p>
+                            <span class="text-sm font-bold text-emerald-300">88% Atingida</span>
                         </div>
-                        <div class="h-2 bg-slate-900 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-500 w-[83%] rounded-full"></div>
+                        <div class="h-2 bg-emerald-950/50 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 w-[88%] rounded-full"></div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
-                            <p class="text-xs text-slate-300">Em Produção</p>
-                            <p class="text-2xl font-bold mt-1 text-white">8 Carros</p>
+                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                            <p class="text-xs text-emerald-200">OS Abertas</p>
+                            <p class="text-2xl font-bold mt-1">12</p>
                         </div>
-                        <div class="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
-                            <p class="text-xs text-slate-300">Ticket Médio</p>
-                            <p class="text-2xl font-bold mt-1 text-white">R$ 1.1k</p>
+                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                            <p class="text-xs text-emerald-200">Ticket Médio</p>
+                            <p class="text-2xl font-bold mt-1">R$ 420</p>
                         </div>
                     </div>
                 </div>
@@ -176,75 +176,39 @@ $structuredData = [
 </section>
 
 <!-- Pain vs Gain -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema da desorganização</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Sua funilaria perde dinheiro em orçamentos?</h2>
-            <p class="mt-4 text-lg text-slate-600">Erros na avaliação e demora no orçamento podem custar o serviço. Veja a diferença:</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pain -->
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 relative overflow-hidden group hover:shadow-lg transition">
-                <div class="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl">SEM SISTEMA</div>
-                <h3 class="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-xmark"></i> Gestão Manual
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Orçamentos sem fotos ou detalhes</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Prejuízo com material desperdiçado</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Demora para enviar o preço (cliente desiste)</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Não sabe onde o dinheiro foi parar</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Gain -->
-            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
-                <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Funilaria Organizada
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Orçamento com fotos em minutos</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Controle de custo de material por OS</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Acompanhamento por etapas (cliente feliz)</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Financeiro na ponta do lápis</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<x-site.comparison
+    title="Sua oficina está perdendo dinheiro?"
+    subtitle="O problema da desorganização"
+    description="A falta de gestão pode estar custando caro para o seu negócio. Veja a diferença:"
+    painTitle="Gestão Manual"
+    :painItems="[
+        'OS de papel que somem ou rasgam',
+        'Esquece de cobrar peças usadas na OS',
+        'Não sabe quem deve (Inadimplência alta)',
+        'Mistura dinheiro da oficina com pessoal'
+    ]"
+    gainTitle="Oficina Organizada"
+    :gainItems="[
+        'OS digital profissional e organizada',
+        'Controle automático de estoque de peças',
+        'Controle financeiro e cobrança automática',
+        'Histórico completo do veículo (confiança)'
+    ]"
+    gainCardBg="bg-blue-900"
+    gainCardBorder="border-blue-800"
+    gainTitleColor="text-emerald-400"
+    gainCheckColor="text-emerald-400"
+    gainBadgeBg="bg-blue-500"
+    gainBadgeText="COM WSOFT"
+/>
 
 <!-- How it Works -->
 <section id="como-funciona" class="py-24 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-20">
-            <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Passo a Passo</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Como funciona o Sistema na Prática</h2>
-            <p class="mt-4 text-lg text-slate-600">Simples de usar, feito para o dia a dia da funilaria e pintura.</p>
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Passo a Passo</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Como funciona o Sistema para Oficina</h2>
+            <p class="mt-4 text-lg text-slate-600">Simples de usar, feito para o dia a dia corrido da mecânica.</p>
         </div>
 
         <div class="space-y-24">
@@ -252,30 +216,30 @@ $structuredData = [
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
-                        <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/os/os-digital.png') }}" alt="Tela de Orçamento" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="{{ asset('images/sistema/os/os-digital.png') }}" alt="Tela de Ordem de Serviço" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-700 font-bold text-xl">1</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Faça o Orçamento com Fotos</h3>
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">1</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Crie a Ordem de Serviço</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Registre o veículo, tire fotos dos danos pelo celular e monte o orçamento na hora. Envie para o cliente aprovar.
+                        Registre a entrada do veículo, adicione fotos do estado inicial, relate o defeito e inicie o atendimento com profissionalismo.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Fotos ilimitadas</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
+                            <i class="fa-solid fa-check text-emerald-500"></i>
                             <span>Checklist de entrada</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Aprovação online</span>
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Fotos ilimitadas</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Cadastro rápido de cliente e veículo</span>
                         </li>
                     </ul>
                 </div>
@@ -285,30 +249,30 @@ $structuredData = [
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-1">
                     <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-700 font-bold text-xl">2</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Acompanhe as Etapas</h3>
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">2</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Adicione Peças e Serviços</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Controle o progresso do serviço: Desmontagem, Funilaria, Preparação, Pintura, Polimento e Montagem.
+                        Lance as peças utilizadas (com baixa automática no estoque) e a mão de obra. O sistema calcula o total na hora.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Status personalizados</span>
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Controle de estoque de peças</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Controle de materiais usados</span>
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Cadastro de serviços padrão</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Gestão da equipe</span>
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Valor de custo e venda</span>
                         </li>
                     </ul>
                 </div>
                 <div class="order-2">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
-                        <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
                         <img src="{{ asset('images/sistema/financeiro/faturamento.png') }}" alt="Tela de Financeiro" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
@@ -318,30 +282,30 @@ $structuredData = [
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
-                        <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/os/whatsapp-share.png') }}" alt="Envio WhatsApp" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="{{ asset('images/sistema/os/whatsapp-share.png') }}" alt="Envio via WhatsApp" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-700 font-bold text-xl">3</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Entregue e Fidelize</h3>
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">3</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Receba e Fidelize</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Avise que o carro está pronto, envie a fatura e garanta a satisfação do cliente com um serviço profissional.
+                        Envie a OS pronta pelo WhatsApp, receba o pagamento e mantenha o histórico do cliente para futuras revisões.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Aviso automático</span>
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Envio PDF no WhatsApp</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Fotos do "Depois"</span>
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Controle de garantia</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
-                            <i class="fa-solid fa-check text-blue-500"></i>
-                            <span>Financeiro integrado</span>
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Lembretes de revisão</span>
                         </li>
                     </ul>
                 </div>
@@ -350,140 +314,272 @@ $structuredData = [
     </div>
 </section>
 
-<!-- Benefícios -->
-<section id="beneficios" class="py-20 bg-white">
+<!-- Funcionalidades Completas -->
+<section id="funcionalidades" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Vantagens</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Por que usar o WSoft na sua funilaria?</h2>
-            <p class="mt-4 text-lg text-slate-600">Ferramentas pensadas para organizar e aumentar o lucro</p>
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Funcionalidades</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Tudo que sua oficina precisa</h2>
+            <p class="mt-4 text-lg text-slate-600">Da OS ao financeiro, controle total do seu negócio automotivo</p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors duration-300">
+                    <i class="fa-solid fa-file-invoice text-emerald-600 group-hover:text-white text-xl transition-colors duration-300"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Ordem de Serviço</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Crie OS completas com placa, modelo, peças, serviços, defeito e solução. Imprima ou envie PDF.</p>
+            </article>
+            <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors duration-300">
+                    <i class="fa-solid fa-wrench text-blue-600 group-hover:text-white text-xl transition-colors duration-300"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Controle de Estoque</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Cadastro de peças com preço de compra e venda. Baixa automática ao inserir na OS.</p>
+            </article>
+            <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-purple-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors duration-300">
+                    <i class="fa-solid fa-money-bill-transfer text-purple-600 group-hover:text-white text-xl transition-colors duration-300"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Gestão Financeira</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Contas a pagar e receber, fluxo de caixa diário e mensal. Saiba onde vai cada centavo.</p>
+            </article>
+            <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-orange-600 transition-colors duration-300">
+                    <i class="fa-solid fa-car text-orange-600 group-hover:text-white text-xl transition-colors duration-300"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Cadastro de Veículos</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Histórico completo por placa. Saiba todas as revisões que o veículo já fez na sua oficina.</p>
+            </article>
+            <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors duration-300">
+                    <i class="fa-brands fa-whatsapp text-red-600 group-hover:text-white text-xl transition-colors duration-300"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Avisos no WhatsApp</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Notifique seu cliente quando o carro estiver pronto ou envie orçamentos com um clique.</p>
+            </article>
+            <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-teal-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-600 transition-colors duration-300">
+                    <i class="fa-solid fa-calendar-check text-teal-600 group-hover:text-white text-xl transition-colors duration-300"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Agenda de Serviços</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Organize e agende os serviços. Evite filas e melhore o atendimento na sua oficina.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Benefícios -->
+<section id="vantagens" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Vantagens</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Por que escolher o WSoft?</h2>
+            <p class="mt-4 text-lg text-slate-600">Simples, prático e eficiente</p>
         </div>
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-camera text-blue-600 text-xl"></i>
+                <div class="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-check-circle text-emerald-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold">Orçamentos com Fotos</h3>
-                    <p class="mt-3 text-slate-600">Documente os danos e justifique o valor do serviço. Transparência total.</p>
+                    <h3 class="text-xl font-semibold">Fácil de Usar</h3>
+                    <p class="mt-3 text-slate-600">Interface intuitiva, sem complicações. Você aprende a usar em minutos.</p>
                 </div>
             </article>
             <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-hand-holding-dollar text-green-600 text-xl"></i>
+                <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-cloud text-blue-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold">Gestão Financeira</h3>
-                    <p class="mt-3 text-slate-600">Saiba o lucro real de cada serviço descontando material e comissão.</p>
+                    <h3 class="text-xl font-semibold">100% Online</h3>
+                    <p class="mt-3 text-slate-600">Acesse de onde estiver: computador, celular ou tablet. Seus dados sempre seguros.</p>
                 </div>
             </article>
             <article class="flex gap-6">
                 <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-spray-can text-orange-600 text-xl"></i>
+                    <i class="fa-solid fa-headset text-orange-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold">Controle de Materiais</h3>
-                    <p class="mt-3 text-slate-600">Controle o uso de tintas e insumos. Evite desperdícios.</p>
+                    <h3 class="text-xl font-semibold">Suporte Humanizado</h3>
+                    <p class="mt-3 text-slate-600">Equipe pronta para te ajudar via WhatsApp. Nada de robôs, fale com gente.</p>
                 </div>
             </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-list-check text-purple-600 text-xl"></i>
+        </div>
+    </div>
+</section>
+
+<!-- Price Section -->
+<section id="precos" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Planos</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Preço justo para sua oficina</h2>
+            <p class="mt-4 text-lg text-slate-600">Comece grátis, sem cartão de crédito.</p>
+        </div>
+
+        <div class="max-w-md mx-auto">
+            <div class="rounded-3xl bg-white border-2 border-emerald-500 shadow-2xl p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-4 py-1 rounded-bl-xl">MAIS POPULAR</div>
+                <h3 class="text-2xl font-bold text-slate-900">{{ $product_name ?? 'Plano Profissional' }}</h3>
+                <p class="mt-2 text-slate-500">{{ $product_description ?? 'Acesso completo a todas as ferramentas' }}</p>
+
+                <div class="my-6">
+                    <div class="flex items-baseline justify-center">
+                        <span class="text-5xl font-extrabold text-slate-900">R$ {{ $price_formatted ?? '29,90' }}</span>
+                        <span class="text-slate-500 ml-2">/{{ $interval_label ?? 'mês' }}</span>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Controle de Etapas</h3>
-                    <p class="mt-3 text-slate-600">Organize o pátio. Saiba em que fase está cada veículo.</p>
+
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-emerald-500"></i>
+                        <span>Emissão de OS Ilimitada</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-emerald-500"></i>
+                        <span>Controle de Estoque e Financeiro</span>
+                    </li>
+                     <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-emerald-500"></i>
+                        <span>Cadastro de Clientes e Veículos</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-emerald-500"></i>
+                        <span>Envio via WhatsApp</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-emerald-500"></i>
+                        <span>Suporte Prioritário</span>
+                    </li>
+                </ul>
+
+                <a href="#cadastro" class="block w-full py-4 px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-center rounded-xl transition duration-200">
+                    Começar Teste Grátis
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Cadastro (Form Section) -->
+<section id="cadastro" class="py-20 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="grid md:grid-cols-2">
+                <div class="p-10 bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-4">Crie sua conta grátis</h3>
+                    <p class="mb-6 opacity-90">Junte-se a mais de 500 oficinas que já modernizaram sua gestão com o WSoft.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check"></i> 7 dias grátis</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check"></i> Sem cartão de crédito</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check"></i> Cancelamento fácil</li>
+                    </ul>
                 </div>
-            </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-brands fa-whatsapp text-teal-600 text-xl"></i>
+                <div class="p-10">
+                    @if(session('success'))
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                            <span class="block sm:inline">{{ session('success') }}</span>
+                        </div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                            <ul class="list-disc list-inside">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('landing.funilaria.store') }}" method="POST" class="space-y-4">
+                        @csrf
+                        <input type="hidden" name="source" value="landing_funilaria">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Seu Nome</label>
+                            <input type="text" name="name" id="name" required class="w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="Ex: João Silva" value="{{ old('name') }}">
+                        </div>
+                        <div>
+                            <label for="company_name" class="block text-sm font-medium text-slate-700 mb-1">Nome da Oficina</label>
+                            <input type="text" name="company_name" id="company_name" required class="w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="Ex: Auto Center Silva" value="{{ old('company_name') }}">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">E-mail</label>
+                            <input type="email" name="email" id="email" required class="w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="seu@email.com" value="{{ old('email') }}">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-slate-700 mb-1">WhatsApp</label>
+                            <input type="tel" name="phone" id="phone" required class="w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="(11) 99999-9999" value="{{ old('phone') }}">
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl transition duration-200">
+                            Cadastrar Grátis
+                        </button>
+                    </form>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Tudo no WhatsApp</h3>
-                    <p class="mt-3 text-slate-600">Envie orçamentos e fotos do andamento direto para o cliente.</p>
-                </div>
-            </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-chart-line text-red-600 text-xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Relatórios</h3>
-                    <p class="mt-3 text-slate-600">Acompanhe seu faturamento e quantos orçamentos foram aprovados.</p>
-                </div>
-            </article>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-slate-800 to-slate-900 text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">Profissionalize sua Funilaria</h2>
-        <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
-            Comece agora com 7 dias de teste grátis. Aproveite a oferta vitalícia.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-blue-600 text-white font-bold px-10 py-4 shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:-translate-y-1 transition transform duration-200">
-                Testar por 7 Dias
-                <i class="fa-solid fa-arrow-right ml-2"></i>
-            </a>
-            <a href="/#precos" class="inline-flex justify-center items-center rounded-xl border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                Ver Planos e Preços
-            </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-400">Junte-se a centenas de funilarias que usam WSoft</p>
-    </div>
-</section>
+<x-site.cta-final
+    :title="'Escolha um sistema completo para gestão de funilaria e pintura'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para funilaria e pintura</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de funilarias que usam WSoft'"
+    :gradient="'bg-gradient-to-br from-emerald-600 to-blue-600'"
+    :textColor="'text-emerald-50'"
+    :highlightColor="'text-yellow-300'"
+/>
+
 
 <!-- FAQ -->
-<section id="faq" class="py-20 bg-white">
+<section id="faq_section" class="py-20 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-12">
-            <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Dúvidas</p>
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Dúvidas</p>
             <h2 class="mt-4 text-3xl font-bold">Perguntas Frequentes</h2>
         </div>
         <div class="space-y-4">
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Consigo fazer orçamento com fotos?
+                    O sistema emite Ordem de Serviço (OS)?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim! O WSoft permite criar orçamentos detalhados com fotos do veículo para aprovação do cliente ou seguradora.</p>
+                <p class="mt-3 text-slate-600">Sim! O WSoft permite criar ordens de serviço completas, com cadastro de peças, mão de obra, fotos e status de acompanhamento.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Tem controle de etapas da funilaria?
+                    Consigo controlar o financeiro da oficina?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim, você pode controlar cada fase: desmontagem, funilaria, preparação, pintura e montagem.</p>
+                <p class="mt-3 text-slate-600">Com certeza. O sistema possui controle completo de contas a pagar e receber, fluxo de caixa e relatórios de lucratividade.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    O sistema controla o financeiro?
+                    Tem controle de estoque de peças?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Completo. Contas a pagar, receber, fluxo de caixa e relatórios de lucro por serviço.</p>
+                <p class="mt-3 text-slate-600">Sim, você pode controlar o estoque de peças, definir estoque mínimo e vincular produtos diretamente nas Ordens de Serviço.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Posso controlar o estoque de tintas?
+                    O sistema envia mensagens para clientes?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim, controle o estoque de todos os materiais (lixas, massas, tintas) e lance o custo na OS.</p>
+                <p class="mt-3 text-slate-600">Sim, você pode enviar orçamentos e avisos sobre o status da OS diretamente pelo WhatsApp para seus clientes.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Quanto custa o sistema para funilaria?
+                    Quanto custa o sistema para oficina?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem cobranças extras.</p>
+                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem taxa de adesão e com todas as funcionalidades liberadas.</p>
             </details>
         </div>
     </div>
@@ -493,7 +589,7 @@ $structuredData = [
 <section class="py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-12">
-            <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Depoimentos</p>
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Depoimentos</p>
             <h2 class="mt-4 text-3xl font-bold">Quem usa aprova</h2>
         </div>
         <div class="grid gap-6 md:grid-cols-3">
@@ -505,9 +601,9 @@ $structuredData = [
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-slate-600 italic">"Os orçamentos com foto mudaram tudo. O cliente aprova muito mais rápido quando vê a foto do detalhe."</p>
-                <div class="mt-4 font-semibold">Andre Martines</div>
-                <div class="text-sm text-slate-500">Funilaria São Jorge</div>
+                <p class="text-sm text-slate-600 italic">"Organizou minha oficina. Antes eu perdia muito papel, agora tenho tudo no sistema e ainda ganho tempo."</p>
+                <div class="mt-4 font-semibold">José Almeida</div>
+                <div class="text-sm text-slate-500">Mecânica Almeida</div>
             </article>
             <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex gap-1 text-yellow-400 mb-4">
@@ -517,9 +613,9 @@ $structuredData = [
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-slate-600 italic">"Consigo controlar o que meus funileiros estão gastando de material. Acabou o desperdício."</p>
-                <div class="mt-4 font-semibold">Marcelo Vieira</div>
-                <div class="text-sm text-slate-500">Pintura & Cia</div>
+                <p class="text-sm text-slate-600 italic">"O controle financeiro é excelente. Consigo ver exatamente onde estou ganhando e onde estou gastando."</p>
+                <div class="mt-4 font-semibold">Marcos Silva</div>
+                <div class="text-sm text-slate-500">Auto Center Silva</div>
             </article>
             <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex gap-1 text-yellow-400 mb-4">
@@ -529,9 +625,9 @@ $structuredData = [
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-slate-600 italic">"Simples e direto. Faço tudo pelo celular enquanto acompanho o serviço no pátio."</p>
-                <div class="mt-4 font-semibold">Paulo Rocha</div>
-                <div class="text-sm text-slate-500">Oficina Rocha</div>
+                <p class="text-sm text-slate-600 italic">"Gosto muito do cadastro de veículos e do envio pelo WhatsApp. Passa muito profissionalismo para o cliente."</p>
+                <div class="mt-4 font-semibold">Ricardo Oliveira</div>
+                <div class="text-sm text-slate-500">Oficina Prime</div>
             </article>
         </div>
     </div>

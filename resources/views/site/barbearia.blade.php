@@ -71,12 +71,12 @@ $structuredData = [
 @endphp
 
 <x-site-layout
-    :title="'Sistema para Barbearia | Gestão e Agenda | WSoft'"
-    :description="'Sistema completo de gestão para barbearias. Agenda, cálculo de comissões, financeiro e estoque. Teste grátis por 7 dias!'"
-    :keywords="'sistema para barbearia, software barbearia, agenda barbearia, gestão barbearia, programa para barbearia, sistema barbeiro, controle comissão barbearia'"
+    :title="'Sistema para Barbearia por Assinatura | Gestão Completa | WSoft'"
+    :description="'Escolha um sistema completo para gestão de barbearia. Agenda, comissões, financeiro e estoque. Sistema para barbearia por assinatura com 7 dias grátis!'"
+    :keywords="'sistema para barbearia por assinatura, sistema para barbearia, software barbearia, agenda barbearia, gestão barbearia, programa para barbearia, sistema barbeiro, controle comissão barbearia, sistema para salão masculino, software para barbearia e estética, agenda para studio, sistema de gestão para barbearia'"
     :canonical="'https://www.wsoft.dev.br/sistema-para-barbearia'"
-    :ogTitle="'Sistema de Gestão para Barbearias | WSoft'"
-    :ogDescription="'Organize sua barbearia, controle comissões e fidelize clientes com o sistema mais simples e completo do mercado.'"
+    :ogTitle="'Sistema para Barbearia por Assinatura | WSoft'"
+    :ogDescription="'Escolha um sistema completo para gestão de barbearia. Organize sua agenda, controle comissões e fidelize clientes.'"
     :structuredData="$structuredData"
 >
 
@@ -88,17 +88,17 @@ $structuredData = [
         <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-700/50 border border-slate-600 text-slate-200 text-xs font-semibold uppercase tracking-wider mb-6">
                 <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-                Sistema para Barbearia
+                Sistema para Barbearia por Assinatura
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Gestão Profissional para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-200">Barbearia</span>
+                Escolha um sistema completo para <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-200">Gestão de Barbearia</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-lg">
-                Agenda organizada, comissões automáticas e financeiro em dia. O sistema ideal para barbeiros que querem crescer.
+                Agenda organizada, comissões automáticas e financeiro em dia. O melhor <strong>sistema para barbearia por assinatura</strong> do mercado. <span class="text-orange-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-orange-500 text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:-translate-y-1 transition transform duration-200">
-                    Testar por 7 Dias
+                    Começar Teste Grátis
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
                 <a href="#como-funciona" class="inline-flex justify-center items-center rounded-xl border border-white/30 text-white font-semibold px-8 py-4 hover:bg-white/10 transition backdrop-blur-sm">
@@ -113,6 +113,7 @@ $structuredData = [
                     <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Salões Masculinos</span>
                     <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Barbeiros Autônomos</span>
                     <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Studios</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Estética Masculina</span>
                 </div>
             </div>
         </div>
@@ -122,7 +123,7 @@ $structuredData = [
                 <div class="flex items-center justify-between mb-6">
                     <div>
                         <p class="text-sm uppercase text-slate-400 font-semibold tracking-wider">Faturamento Hoje</p>
-                        <h3 class="text-3xl font-bold mt-1 text-white">R$ 1.250,00</h3>
+                        <p class="text-3xl font-bold mt-1 text-white">R$ 1.250,00</p>
                         <div class="flex items-center gap-2 mt-2">
                             <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">+15% vs ontem</span>
                         </div>
@@ -158,67 +159,30 @@ $structuredData = [
 </section>
 
 <!-- Pain vs Gain -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema da agenda de papel</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Sua barbearia está perdendo dinheiro?</h2>
-            <p class="mt-4 text-lg text-slate-600">A falta de organização pode estar custando caro para o seu negócio. Veja a diferença:</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pain -->
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 relative overflow-hidden group hover:shadow-lg transition">
-                <div class="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl">SEM SISTEMA</div>
-                <h3 class="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-xmark"></i> Gestão Manual
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Agenda bagunçada e horários duplicados</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Erros no cálculo de comissões</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Não sabe quanto lucrou no mês</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Esquece de avisar clientes e leva "bolo"</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Gain -->
-            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
-                <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Barbearia Organizada
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Agenda digital simples e organizada</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Cálculo automático de comissões</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Controle financeiro completo</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Histórico de cortes de cada cliente</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<x-site.comparison
+    :subtitle="'O problema da agenda de papel'"
+    :title="'Sua barbearia está perdendo dinheiro?'"
+    :description="'A falta de organização pode estar custando caro para o seu negócio. Veja a diferença:'"
+    :painTitle="'Gestão Manual'"
+    :painItems="[
+        'Agenda bagunçada e horários duplicados',
+        'Erros no cálculo de comissões',
+        'Não sabe quanto lucrou no mês',
+        'Esquece de avisar clientes e leva \'bolo\''
+    ]"
+    :gainTitle="'Barbearia Organizada'"
+    :gainItems="[
+        'Agenda digital simples e organizada',
+        'Cálculo automático de comissões',
+        'Controle financeiro completo',
+        'Histórico de cortes de cada cliente'
+    ]"
+    :gainCardBg="'bg-orange-900'"
+    :gainCardBorder="'border-orange-800'"
+    :gainTitleColor="'text-orange-400'"
+    :gainCheckColor="'text-orange-400'"
+    :gainBadgeBg="'bg-orange-500'"
+/>
 
 <!-- How it Works -->
 <section id="como-funciona" class="py-24 bg-slate-50">
@@ -332,92 +296,116 @@ $structuredData = [
     </div>
 </section>
 
-<!-- Benefícios -->
-<section id="beneficios" class="py-20 bg-white">
+<!-- Funcionalidades Completas -->
+<section id="funcionalidades" class="py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="text-sm font-semibold text-orange-600 uppercase tracking-[0.3em]">Vantagens</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Por que usar o WSoft na sua barbearia?</h2>
-            <p class="mt-4 text-lg text-slate-600">Ferramentas pensadas para facilitar a vida do barbeiro e do gestor</p>
+            <p class="text-sm font-semibold text-orange-600 uppercase tracking-[0.3em]">Funcionalidades Completas</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Tudo que você precisa em um <strong>sistema para barbearia com planos</strong> flexíveis</h2>
+            <p class="mt-4 text-lg text-slate-600">Agenda, comissões, vendas e muito mais em uma única plataforma</p>
         </div>
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-calendar-check text-orange-600 text-xl"></i>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-orange-600 transition-colors duration-300">
+                    <i class="fa-solid fa-calendar-check text-orange-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Agenda Simples</h3>
-                    <p class="mt-3 text-slate-600">Visualize e gerencie horários com facilidade. Evite conflitos e organize o dia.</p>
-                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Agenda Inteligente</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Visualize horários, encaixes e bloqueios. Envie lembretes automáticos e reduza o não comparecimento.</p>
             </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-money-bill-trend-up text-blue-600 text-xl"></i>
+            <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors duration-300">
+                    <i class="fa-solid fa-calculator text-blue-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Controle Financeiro</h3>
-                    <p class="mt-3 text-slate-600">Saiba exatamente quanto entrou e saiu. Fluxo de caixa, contas a pagar e receber.</p>
-                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Comissões Automáticas</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Defina porcentagens por barbeiro, serviço ou produto. O sistema calcula tudo na hora do fechamento.</p>
             </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-users text-purple-600 text-xl"></i>
+            <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors duration-300">
+                    <i class="fa-solid fa-sack-dollar text-emerald-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Gestão de Equipe</h3>
-                    <p class="mt-3 text-slate-600">Controle de comissões e desempenho individual de cada barbeiro.</p>
-                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Financeiro Completo</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Fluxo de caixa, contas a pagar e receber. Saiba exatamente quanto sua barbearia está lucrando.</p>
             </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-brands fa-whatsapp text-green-600 text-xl"></i>
+            <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-purple-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors duration-300">
+                    <i class="fa-solid fa-users text-purple-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Comunicação</h3>
-                    <p class="mt-3 text-slate-600">Envie comprovantes e lembretes para seus clientes via WhatsApp.</p>
-                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Histórico e CRM</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Saiba quem são seus melhores clientes, frequência de corte e histórico de serviços. Fidelize mais.</p>
             </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-box-open text-red-600 text-xl"></i>
+            <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors duration-300">
+                    <i class="fa-solid fa-box-open text-red-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Controle de Estoque</h3>
-                    <p class="mt-3 text-slate-600">Gerencie produtos de venda e consumo interno. Evite faltar material.</p>
-                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Controle de Estoque</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Gerencie produtos de venda (pomadas, shampoos) e uso interno. Receba alertas de estoque baixo.</p>
             </article>
-            <article class="flex gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-mobile-screen text-teal-600 text-xl"></i>
+            <article class="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-teal-200 transition-all duration-300">
+                <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-600 transition-colors duration-300">
+                    <i class="fa-brands fa-whatsapp text-teal-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold">Acesso de Qualquer Lugar</h3>
-                    <p class="mt-3 text-slate-600">Acesse o sistema pelo celular, tablet ou computador. Seus dados sempre à mão.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Comunicação e Recibos</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Envie comprovantes e lembretes direto pelo WhatsApp. Profissionalize sua comunicação.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Prova Social (Depoimentos) -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <p class="text-sm font-semibold text-orange-600 uppercase tracking-[0.3em]">Depoimentos</p>
+            <h2 class="mt-4 text-3xl font-bold">O que nossos parceiros dizem</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+            <article class="rounded-2xl bg-slate-50 p-6 shadow-sm border border-slate-100">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
                 </div>
+                <p class="text-sm text-slate-600 italic">"Organizou totalmente minha barbearia. Antes era tudo no papel, agora sei exatamente quanto cada barbeiro tem a receber. O suporte é excelente!"</p>
+                <div class="mt-4 font-semibold">Carlos Eduardo</div>
+                <div class="text-sm text-slate-500">Barbearia Old School</div>
+            </article>
+            <article class="rounded-2xl bg-slate-50 p-6 shadow-sm border border-slate-100">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-sm text-slate-600 italic">"Gastei muito tempo procurando um sistema simples e barato. O WSoft caiu como uma luva. O controle de estoque e comissões é perfeito."</p>
+                <div class="mt-4 font-semibold">Marcelo Santos</div>
+                <div class="text-sm text-slate-500">Barber Shop Santos</div>
+            </article>
+            <article class="rounded-2xl bg-slate-50 p-6 shadow-sm border border-slate-100">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-sm text-slate-600 italic">"O sistema para barbearia por assinatura da WSoft revolucionou nosso atendimento. Clientes adoram receber o comprovante no Zap."</p>
+                <div class="mt-4 font-semibold">Rafael Lima</div>
+                <div class="text-sm text-slate-500">Lima Cortes</div>
             </article>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-slate-800 to-slate-900 text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">Profissionalize sua Barbearia</h2>
-        <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
-            Comece agora com 7 dias de teste grátis. Sem cartão de crédito, sem compromisso.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-orange-500 text-white font-bold px-10 py-4 shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:-translate-y-1 transition transform duration-200">
-                Testar por 7 Dias
-                <i class="fa-solid fa-arrow-right ml-2"></i>
-            </a>
-            <a href="/#precos" class="inline-flex justify-center items-center rounded-xl border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                Ver Planos e Preços
-            </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-400">Junte-se a centenas de barbearias que usam WSoft</p>
-    </div>
-</section>
+<x-site.cta-final
+    :title="'Escolha um sistema completo para gestão de barbearia'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para barbearia por assinatura</strong> por apenas <span class=\'text-orange-400 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de barbearias que usam WSoft'"
+/>
+
 
 <!-- FAQ -->
 <section id="faq" class="py-20 bg-white">
@@ -467,54 +455,6 @@ $structuredData = [
                 </summary>
                 <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês com todas as funcionalidades incluídas: agenda, comissões, financeiro e estoque. Teste grátis por 7 dias.</p>
             </details>
-        </div>
-    </div>
-</section>
-
-<!-- Prova Social -->
-<section class="py-20 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-12">
-            <p class="text-sm font-semibold text-orange-600 uppercase tracking-[0.3em]">Depoimentos</p>
-            <h2 class="mt-4 text-3xl font-bold">Quem usa aprova</h2>
-        </div>
-        <div class="grid gap-6 md:grid-cols-3">
-            <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                <div class="flex gap-1 text-yellow-400 mb-4">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-sm text-slate-600 italic">"O controle de comissões facilitou muito o fechamento do mês. Antes era uma dor de cabeça, agora é automático."</p>
-                <div class="mt-4 font-semibold">Carlos Eduardo</div>
-                <div class="text-sm text-slate-500">Barbearia Vintage</div>
-            </article>
-            <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                <div class="flex gap-1 text-yellow-400 mb-4">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-sm text-slate-600 italic">"Sistema simples e direto. Consigo ver minha agenda pelo celular e já deixar tudo organizado para o dia seguinte."</p>
-                <div class="mt-4 font-semibold">Rafael Santos</div>
-                <div class="text-sm text-slate-500">Barbeiro Autônomo</div>
-            </article>
-            <article class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
-                <div class="flex gap-1 text-yellow-400 mb-4">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-sm text-slate-600 italic">"Melhor custo-benefício. Tem tudo que preciso: agenda, financeiro e estoque. Recomendo!"</p>
-                <div class="mt-4 font-semibold">André Oliveira</div>
-                <div class="text-sm text-slate-500">The Barber Club</div>
-            </article>
         </div>
     </div>
 </section>

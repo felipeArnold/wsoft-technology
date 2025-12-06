@@ -150,67 +150,30 @@ $structuredData = [
 </section>
 
 <!-- Pain vs Gain -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema da desorganização</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Seu dinheiro está parado no estoque?</h2>
-            <p class="mt-4 text-lg text-slate-600">Lojas sem um <strong>sistema de controle de estoque</strong> perdem vendas e dinheiro. Veja a diferença:</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pain -->
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 relative overflow-hidden group hover:shadow-lg transition">
-                <div class="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl">SEM SISTEMA</div>
-                <h3 class="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-xmark"></i> Estoque Furado
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Produtos vencem na prateleira</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Perde vendas por falta de mercadoria</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Não sabe o valor total do estoque</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Furtos e desvios passam despercebidos</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Gain -->
-            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
-                <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Estoque Controlado
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Controle rigoroso de validade</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Alerta de estoque mínimo para reposição</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Inventário rápido e preciso</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Relatórios de giro e lucratividade</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<x-site.comparison
+    :subtitle="'O problema da desorganização'"
+    :title="'Seu dinheiro está parado no estoque?'"
+    :description="'Lojas sem um <strong>sistema de controle de estoque</strong> perdem vendas e dinheiro. Veja a diferença:'"
+    :painTitle="'Estoque Furado'"
+    :painItems="[
+        'Produtos vencem na prateleira',
+        'Perde vendas por falta de mercadoria',
+        'Não sabe o valor total do estoque',
+        'Furtos e desvios passam despercebidos'
+    ]"
+    :gainTitle="'Estoque Controlado'"
+    :gainItems="[
+        'Controle rigoroso de validade',
+        'Alerta de estoque mínimo para reposição',
+        'Inventário rápido e preciso',
+        'Relatórios de giro e lucratividade'
+    ]"
+    :gainCardBg="'bg-emerald-900'"
+    :gainCardBorder="'border-emerald-800'"
+    :gainTitleColor="'text-emerald-400'"
+    :gainCheckColor="'text-emerald-400'"
+    :gainBadgeBg="'bg-emerald-500'"
+/>
 
 <!-- How it Works (New Section) -->
 <section id="como-funciona" class="py-24 bg-slate-50">
@@ -353,23 +316,15 @@ $structuredData = [
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-emerald-600 to-blue-600 text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">Organize seu estoque agora</h2>
-        <p class="mt-4 text-lg text-white/90 max-w-2xl mx-auto">
-            Teste o sistema de controle de estoque gratuitamente por 7 dias.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-10 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                Testar por 7 Dias
-                <i class="fa-solid fa-arrow-right ml-2"></i>
-            </a>
-            <a href="/#precos" class="inline-flex justify-center items-center rounded-xl border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                Ver Planos e Preços
-            </a>
-        </div>
-    </div>
-</section>
+<x-site.cta-final
+    :title="'Escolha um sistema completo para controle de estoque'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para gestão de estoque e vendas</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de lojas e varejos que usam WSoft'"
+    :gradient="'bg-gradient-to-br from-emerald-600 to-blue-600'"
+    :textColor="'text-emerald-50'"
+    :highlightColor="'text-yellow-300'"
+/>
+
 
 <!-- FAQ -->
 <section id="faq" class="py-20 bg-white">

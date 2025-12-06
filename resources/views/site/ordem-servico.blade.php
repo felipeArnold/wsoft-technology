@@ -142,67 +142,30 @@ $structuredData = [
 </section>
 
 <!-- Pain vs Gain -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema do papel</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Ainda usa papel para ordens de serviço?</h2>
-            <p class="mt-4 text-lg text-slate-600">Empresas sem um <strong>sistema de OS digital</strong> perdem tempo e dinheiro. Veja a diferença:</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pain -->
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 relative overflow-hidden group hover:shadow-lg transition">
-                <div class="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl">SEM SISTEMA</div>
-                <h3 class="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-xmark"></i> Desorganização Total
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Perde tempo preenchendo papel à mão</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Ordens de serviço extraviadas ou ilegíveis</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Não sabe o status dos serviços em andamento</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Imagem amadora e pouco profissional</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Gain -->
-            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
-                <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Profissionalismo Digital
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Crie OS profissionais em menos de 1 minuto</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Tudo salvo na nuvem, acessível de qualquer lugar</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Acompanhe status em tempo real com filtros</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Envio automático por e-mail e WhatsApp</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<x-site.comparison
+    :subtitle="'O problema do papel'"
+    :title="'Ainda usa papel para ordens de serviço?'"
+    :description="'Empresas sem um <strong>sistema de OS digital</strong> perdem tempo e dinheiro. Veja a diferença:'"
+    :painTitle="'Desorganização Total'"
+    :painItems="[
+        'Perde tempo preenchendo papel à mão',
+        'Ordens de serviço extraviadas ou ilegíveis',
+        'Não sabe o status dos serviços em andamento',
+        'Imagem amadora e pouco profissional'
+    ]"
+    :gainTitle="'Profissionalismo Digital'"
+    :gainItems="[
+        'Crie OS profissionais em menos de 1 minuto',
+        'Tudo salvo na nuvem, acessível de qualquer lugar',
+        'Acompanhe status em tempo real com filtros',
+        'Envio automático por e-mail e WhatsApp'
+    ]"
+    :gainCardBg="'bg-indigo-900'"
+    :gainCardBorder="'border-indigo-800'"
+    :gainTitleColor="'text-indigo-400'"
+    :gainCheckColor="'text-indigo-400'"
+    :gainBadgeBg="'bg-indigo-500'"
+/>
 
 <!-- How it Works -->
 <section id="como-funciona" class="py-24 bg-slate-50">
@@ -381,24 +344,15 @@ $structuredData = [
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-indigo-600 to-blue-600 text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">Elimine o papel e profissionalize seu negócio</h2>
-        <p class="mt-4 text-lg text-white/90 max-w-2xl mx-auto">
-            Comece agora com 7 dias de teste grátis. Sem cartão de crédito, sem compromisso.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-indigo-700 font-bold px-10 py-4 shadow-lg shadow-white/30 hover:bg-indigo-50 hover:-translate-y-1 transition transform duration-200">
-                Testar por 7 Dias
-                <i class="fa-solid fa-arrow-right ml-2"></i>
-            </a>
-            <a href="/#precos" class="inline-flex justify-center items-center rounded-xl border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                Ver Planos e Preços
-            </a>
-        </div>
-        <p class="mt-6 text-sm text-white/80">Mais de 500 empresas já digitalizaram suas OS com o WSoft</p>
-    </div>
-</section>
+<x-site.cta-final
+    :title="'Escolha um sistema completo para gestão de ordens de serviço'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de OS e serviços</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de prestadores de serviço que usam WSoft'"
+    :gradient="'bg-gradient-to-br from-indigo-600 to-blue-600'"
+    :textColor="'text-indigo-50'"
+    :highlightColor="'text-yellow-300'"
+/>
+
 
 <!-- FAQ -->
 <section id="faq" class="py-20 bg-white">

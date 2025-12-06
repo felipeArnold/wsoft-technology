@@ -186,25 +186,44 @@
             <div>
                 <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Soluções</h4>
                 <ul class="mt-4 space-y-2 text-sm text-slate-300">
-                    <li><a href="{{ route('landing.crm-gestao') }}" class="hover:text-white">Crm para gestão e financeiro</a></li>
-                    <li><a href="{{ route('landing.gestao-clientes') }}" class="hover:text-white">Sistema de Gestão de Clientes</a></li>
-                    <li><a href="{{ route('landing.gestao-fornecedores') }}" class="hover:text-white">Sistema de Gestão de Fornecedores</a></li>
-                    <li><a href="{{ route('landing.gestao-estoque') }}" class="hover:text-white">Sistema de Gestão de Estoque</a></li>
-                    <li><a href="{{ route('landing.contas-pagar') }}" class="hover:text-white">Sistema de Contas a Pagar</a></li>
-                    <li><a href="{{ route('landing.contas-receber') }}" class="hover:text-white">Sistema de Contas a Receber</a></li>
-                    <li><a href="{{ route('landing.controle-inadimplencia') }}" class="hover:text-white">Controle de Inadimplência</a></li>
+                    <li><a href="{{ route('landing.crm-gestao') }}" class="hover:text-white font-semibold">CRM Completo</a></li>
+
+                    <li class="pt-3 pb-1">
+                        <span class="text-xs uppercase tracking-wider text-slate-600">Financeiro</span>
+                    </li>
+                    <li><a href="{{ route('landing.contas-pagar') }}" class="hover:text-white">Contas a Pagar</a></li>
+                    <li><a href="{{ route('landing.contas-receber') }}" class="hover:text-white">Contas a Receber</a></li>
                     <li><a href="{{ route('landing.movimentacao-financeira') }}" class="hover:text-white">Fluxo de Caixa</a></li>
-                    <li><a href="{{ route('landing.ordem-servico') }}" class="hover:text-white">Sistema de Ordem de Serviço</a></li>
-                    <li><a href="{{ route('landing.assinatura-digital') }}" class="hover:text-white">Assinatura Digital</a></li>
-                    <li><a href="{{ route('landing.oficina') }}" class="hover:text-white">Sistema para Oficina</a></li>
-                    <li><a href="{{ route('landing.mecanica') }}" class="hover:text-white">Sistema para Mecânica</a></li>
-                    <li><a href="{{ route('landing.funilaria') }}" class="hover:text-white">Sistema para Funilaria</a></li>
-                    <li><a href="{{ route('landing.barbearia') }}" class="hover:text-white">Sistema para Barbearia</a></li>
+                    <li><a href="{{ route('landing.controle-inadimplencia') }}" class="hover:text-white">Controle de Inadimplência</a></li>
+
+                    <li class="pt-3 pb-1">
+                        <span class="text-xs uppercase tracking-wider text-slate-600">Gestão</span>
+                    </li>
+                    <li><a href="{{ route('landing.gestao-clientes') }}" class="hover:text-white">Gestão de Clientes</a></li>
+                    <li><a href="{{ route('landing.gestao-fornecedores') }}" class="hover:text-white">Gestão de Fornecedores</a></li>
+                    <li><a href="{{ route('landing.gestao-estoque') }}" class="hover:text-white">Gestão de Estoque</a></li>
+                    <li><a href="{{ route('landing.ordem-servico') }}" class="hover:text-white">Ordem de Serviço</a></li>
+
                 </ul>
             </div>
             <div>
                 <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Contato</h4>
                 <ul class="mt-4 space-y-2 text-sm text-slate-300">
+
+                    <li><a href="{{ route('landing.oficina') }}" class="hover:text-white">Oficina Mecânica</a></li>
+                    <li><a href="{{ route('landing.mecanica') }}" class="hover:text-white">Mecânica</a></li>
+                    <li><a href="{{ route('landing.funilaria') }}" class="hover:text-white">Funilaria</a></li>
+                    <li><a href="{{ route('landing.barbearia') }}" class="hover:text-white">Barbearia</a></li>
+
+                    <li class="pt-3 pb-1">
+                        <span class="text-xs uppercase tracking-wider text-slate-600">Recursos</span>
+                    </li>
+                    <li><a href="{{ route('landing.assinatura-digital') }}" class="hover:text-white">Assinatura Digital</a></li>
+
+                    <li class="pt-3 pb-1">
+                        <span class="text-xs uppercase tracking-wider text-slate-600">Fale Conosco</span>
+                    </li>
+
                     <li>contato@wsoft.com.br</li>
                     <li>Rolante/RS</li>
                 </ul>

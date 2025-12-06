@@ -11,7 +11,11 @@
     'gainTitleColor' => 'text-emerald-400',
     'gainCheckColor' => 'text-emerald-400',
     'gainBadgeBg' => 'bg-emerald-500',
-    'gainBadgeText' => 'RECOMENDADO'
+    'gainBadgeText' => 'RECOMENDADO',
+    'showButton' => true,
+    'buttonText' => 'Teste Grátis por 7 Dias',
+    'buttonUrl' => '/app/register',
+    'buttonColor' => 'blue'
 ])
 
 <section class="py-20 bg-white">
@@ -47,7 +51,7 @@
                 <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
                     <i class="fa-solid fa-rocket {{ $gainTitleColor }}"></i> {{ $gainTitle }}
                 </h3>
-                <ul class="space-y-4">
+                <ul class="space-y-4 @if($showButton) mb-6 @endif">
                     @foreach($gainItems as $item)
                     <li class="flex items-start gap-3 text-white/90">
                         <i class="fa-solid fa-check {{ $gainCheckColor }} mt-1"></i>
@@ -55,7 +59,19 @@
                     </li>
                     @endforeach
                 </ul>
+
+                @if($showButton)
+                <a
+                    href="{{ $buttonUrl }}"
+                    class="mt-6 w-full bg-gradient-to-r from-{{ $buttonColor }}-600 to-{{ $buttonColor }}-500 hover:from-{{ $buttonColor }}-500 hover:to-{{ $buttonColor }}-400 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-{{ $buttonColor }}-500/20 hover:shadow-{{ $buttonColor }}-500/40 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                    <i class="fa-solid fa-rocket"></i>
+                    {{ $buttonText }}
+                </a>
+                @endif
             </div>
         </div>
+
+
     </div>
 </section>

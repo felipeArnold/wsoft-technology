@@ -72,145 +72,83 @@ $structuredData = [
     :structuredData="$structuredData"
 >
 
-<!-- Hero -->
-<section id="hero" class="pt-32 pb-24 bg-gradient-to-b from-blue-950 via-blue-900 to-blue-800 text-white overflow-hidden relative">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
-        <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-xs font-semibold uppercase tracking-wider mb-6">
-                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                Controle de Inadimplência
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Zero Inadimplência</span> na Sua Empresa
-            </h1>
-            <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
-                Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional.
-            </p>
-            <div class="mt-10 flex flex-col sm:flex-row gap-4">
-                <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                    Testar por 7 Dias
-                    <i class="fa-solid fa-arrow-right ml-2"></i>
-                </a>
-                <a href="#como-funciona" class="inline-flex justify-center items-center rounded-xl border border-white/30 text-white font-semibold px-8 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                    <i class="fa-solid fa-play mr-2"></i>
-                    Como Funciona
-                </a>
-            </div>
-            <div class="mt-10 pt-8 border-t border-white/10">
-                <p class="text-sm text-emerald-200 mb-4">Ideal para:</p>
-                <div class="flex flex-wrap gap-3 text-sm font-medium text-white">
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Lojas de Roupas</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Mercadinhos</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Prestadores de Serviço</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10">Escolas e Cursos</span>
+<x-site.hero
+    badge="Controle de Inadimplência"
+    title="na Sua Empresa"
+    highlight="Zero Inadimplência"
+    description="Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional."
+    primaryButtonText="Testar por 7 Dias"
+    primaryButtonUrl="/app/register"
+    secondaryButtonText="Como Funciona"
+    secondaryButtonUrl="#como-funciona"
+    :idealFor="['Lojas de Roupas', 'Mercadinhos', 'Prestadores de Serviço', 'Escolas e Cursos']"
+    gradient="from-blue-950 to-blue-700"
+    highlightGradient="from-blue-200 to-white"
+>
+    <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <p class="text-sm uppercase text-blue-200 font-semibold tracking-wider">Total em Atraso</p>
+                <h3 class="text-3xl font-bold mt-1 text-red-400">R$ 4.250,00</h3>
+                <div class="flex items-center gap-2 mt-2">
+                    <span class="text-xs font-bold text-red-400 bg-red-400/10 px-2 py-0.5 rounded">12 clientes</span>
                 </div>
+            </div>
+            <div class="h-12 w-12 rounded-full bg-red-500/20 flex items-center justify-center border border-red-400/30">
+                <i class="fa-solid fa-triangle-exclamation text-red-300 text-xl"></i>
             </div>
         </div>
-        <div class="relative">
-            <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-            <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
-                <div class="flex items-center justify-between mb-6">
-                    <div>
-                        <p class="text-sm uppercase text-emerald-200 font-semibold tracking-wider">Total em Atraso</p>
-                        <h3 class="text-3xl font-bold mt-1 text-red-400">R$ 4.250,00</h3>
-                        <div class="flex items-center gap-2 mt-2">
-                            <span class="text-xs font-bold text-red-400 bg-red-400/10 px-2 py-0.5 rounded">12 clientes</span>
-                        </div>
-                    </div>
-                    <div class="h-12 w-12 rounded-full bg-red-500/20 flex items-center justify-center border border-red-400/30">
-                        <i class="fa-solid fa-triangle-exclamation text-red-300 text-xl"></i>
-                    </div>
+        <div class="space-y-4">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-xs text-blue-200">Recuperado este Mês</p>
+                    <span class="text-sm font-bold text-blue-300">R$ 1.800,00</span>
                 </div>
-                <div class="space-y-4">
-                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                        <div class="flex items-center justify-between mb-2">
-                            <p class="text-xs text-emerald-200">Recuperado este Mês</p>
-                            <span class="text-sm font-bold text-emerald-300">R$ 1.800,00</span>
-                        </div>
-                        <div class="h-2 bg-emerald-950/50 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 w-[45%] rounded-full"></div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                            <p class="text-xs text-emerald-200">Atraso > 30 dias</p>
-                            <p class="text-2xl font-bold mt-1 text-red-400">R$ 2k</p>
-                        </div>
-                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                            <p class="text-xs text-emerald-200">Acordos</p>
-                            <p class="text-2xl font-bold mt-1 text-blue-400">3</p>
-                        </div>
-                    </div>
+                <div class="h-2 bg-blue-950/50 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-blue-400 to-cyan-400 w-[45%] rounded-full"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <p class="text-xs text-blue-200">Atraso > 30 dias</p>
+                    <p class="text-2xl font-bold mt-1 text-red-400">R$ 2k</p>
+                </div>
+                <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <p class="text-xs text-blue-200">Acordos</p>
+                    <p class="text-2xl font-bold mt-1 text-blue-400">3</p>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</x-site.hero>
 
 <!-- Pain vs Gain -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">O problema do "fiado"</span>
-            <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">O lucro vai embora no calote?</h2>
-            <p class="mt-4 text-lg text-slate-600">Vender é bom, mas receber é fundamental. A falta de controle de cobrança quebra empresas.</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pain -->
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 relative overflow-hidden group hover:shadow-lg transition">
-                <div class="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl">SEM SISTEMA</div>
-                <h3 class="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-xmark"></i> Prejuízo Certo
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Vende para quem já está devendo</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Vergonha ou esquecimento de cobrar</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Perde o controle de prazos e valores</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
-                        <span>Cliente some e você fica no prejuízo</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Gain -->
-            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 relative overflow-hidden shadow-md group hover:shadow-xl transition transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">COM WSOFT</div>
-                <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Crédito Seguro
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Bloqueio automático de inadimplentes</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Cobrança profissional e impessoal</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Histórico de bom pagador</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700">
-                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
-                        <span>Régua de cobrança automatizada</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<x-site.comparison
+    title="O lucro vai embora no calote?"
+    subtitle="O problema do fiado"
+    description="Vender é bom, mas receber é fundamental. A falta de controle de cobrança quebra empresas."
+    painTitle="Prejuízo Certo"
+    :painItems="[
+        'Vende para quem já está devendo',
+        'Vergonha ou esquecimento de cobrar',
+        'Perde o controle de prazos e valores',
+        'Cliente some e você fica no prejuízo'
+    ]"
+    gainTitle="Crédito Seguro"
+    :gainItems="[
+        'Bloqueio automático de inadimplentes',
+        'Cobrança profissional e impessoal',
+        'Histórico de bom pagador',
+        'Régua de cobrança automatizada'
+    ]"
+    gainCardBg="bg-blue-900"
+    gainCardBorder="border-blue-800"
+    gainTitleColor="text-blue-400"
+    gainCheckColor="text-blue-400"
+    gainBadgeBg="bg-blue-500"
+    gainBadgeText="COM WSOFT"
+    buttonColor="blue"
+/>
 
 <!-- How it Works (New Section) -->
 <section id="como-funciona" class="py-24 bg-slate-50">
@@ -349,54 +287,90 @@ $structuredData = [
                 </div>
             </article>
         </div>
+
+        <div class="text-center mt-16">
+            <a
+                href="/app/register"
+                class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-300"
+            >
+                <i class="fa-solid fa-rocket text-xl"></i>
+                <span>Experimente Grátis por 7 Dias</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <p class="mt-4 text-sm text-slate-500">Cancele quando quiser</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Inline -->
+<section class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <x-site.cta-inline
+            title="Pare de Perder Dinheiro com Inadimplência"
+            description="Diga adeus aos calotes e recupere o controle do seu crédito. Com o WSoft, você automatiza cobranças, bloqueia maus pagadores e recupera valores que seriam perdidos."
+            buttonText="Reduzir Inadimplência Agora"
+            buttonUrl="/app/register"
+            gradient="from-blue-900 to-blue-700"
+            icon="fa-solid fa-shield-halved"
+        />
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-emerald-600 to-blue-600 text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">Recupere seu dinheiro agora</h2>
-        <p class="mt-4 text-lg text-white/90 max-w-2xl mx-auto">
-            Teste o sistema de controle de inadimplência gratuitamente por 7 dias.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-10 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                Testar por 7 Dias
-                <i class="fa-solid fa-arrow-right ml-2"></i>
-            </a>
-            <a href="/#precos" class="inline-flex justify-center items-center rounded-xl border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition backdrop-blur-sm">
-                Ver Planos e Preços
-            </a>
-        </div>
-    </div>
-</section>
+<x-site.cta-final
+    :title="'Escolha um sistema completo para controle de inadimplência'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para cobrança e recuperação</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de empresas que usam WSoft'"
+    :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
+    :textColor="'text-blue-50'"
+    :highlightColor="'text-yellow-300'"
+/>
 
-<!-- FAQ -->
-<section id="faq" class="py-20 bg-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">FAQ</p>
-            <h2 class="mt-4 text-3xl font-bold">Dúvidas Frequentes</h2>
-        </div>
-        <div class="space-y-4">
-            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    O sistema bloqueia vendas automaticamente?
-                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                </summary>
-                <p class="mt-3 text-slate-600">Sim! Você pode configurar para que o sistema bloqueie novas vendas a prazo para clientes com contas atrasadas.</p>
-            </details>
-            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Posso renegociar dívidas?
-                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                </summary>
-                <p class="mt-3 text-slate-600">Sim! O sistema permite agrupar várias contas atrasadas e criar um novo parcelamento (acordo) para o cliente.</p>
-            </details>
-        </div>
-    </div>
-</section>
+@livewire('landing-registration-form', [
+    'source' => 'site_controle_inadimplencia',
+    'title' => 'Comece agora gratuitamente',
+    'subtitle' => 'Reduza a inadimplência e recupere seu crédito com o WSoft.',
+    'gradient' => 'from-blue-900 to-blue-700',
+    'buttonText' => 'Testar por 7 Dias Grátis',
+    'buttonColor' => 'blue',
+    'focusColor' => 'blue'
+])
+
+
+<x-site.faq
+    title="Perguntas Frequentes sobre Controle de Inadimplência"
+    subtitle="FAQ"
+    subtitleColor="text-blue-600"
+    :questions="[
+        [
+            'question' => 'Como reduzir a inadimplência na minha empresa?',
+            'answer' => 'O primeiro passo é ter <strong>organização e controle</strong>. Com um sistema de controle de inadimplência como o WSoft, você sabe exatamente quem deve, há quanto tempo e pode automatizar lembretes de cobrança. Bloqueie novas vendas para devedores e envie mensagens profissionais via WhatsApp ou e-mail.'
+        ],
+        [
+            'question' => 'O que é um sistema de controle de inadimplência?',
+            'answer' => 'Um <strong>sistema de controle de inadimplência</strong> é uma ferramenta que monitora todos os pagamentos em atraso, identifica clientes devedores, envia cobranças automáticas e permite bloquear novas vendas a prazo. É essencial para empresas que vendem no crediário ou \'fiado\'.'
+        ],
+        [
+            'question' => 'O sistema bloqueia vendas automaticamente para inadimplentes?',
+            'answer' => 'Sim! Você pode configurar o <strong>bloqueio automático de vendas</strong> para clientes com contas atrasadas. Quando tentar vender para um devedor, o sistema alertará e poderá impedir novas vendas a prazo até a regularização.'
+        ],
+        [
+            'question' => 'Como fazer cobrança de clientes de forma profissional?',
+            'answer' => 'O WSoft permite enviar <strong>mensagens de cobrança profissionais</strong> via WhatsApp ou e-mail com um clique. Use templates personalizáveis que mantêm o tom cordial mas firme, evitando o constrangimento de cobranças pessoais.'
+        ],
+        [
+            'question' => 'Posso renegociar dívidas e fazer acordos no sistema?',
+            'answer' => 'Sim! O sistema permite <strong>renegociação de dívidas</strong> agrupando várias contas atrasadas e criando um novo parcelamento (acordo). Você pode registrar as condições, prazos e acompanhar o cumprimento do acordo.'
+        ],
+        [
+            'question' => 'Como saber o total que tenho a receber de clientes inadimplentes?',
+            'answer' => 'O painel de inadimplência mostra o <strong>valor total em atraso</strong>, separado por tempo de atraso (30, 60, 90 dias ou mais), facilitando a priorização da cobrança e a recuperação de crédito.'
+        ],
+        [
+            'question' => 'Qual o melhor software para controle de inadimplência?',
+            'answer' => 'O <strong>WSoft</strong> é um dos melhores softwares para controle de inadimplência do Brasil, oferecendo bloqueio automático, cobrança via WhatsApp, régua de cobrança automatizada, renegociação de dívidas e relatórios completos por apenas R$ 29,90/mês com 7 dias de teste grátis.'
+        ]
+    ]"
+/>
 
 </x-site-layout>

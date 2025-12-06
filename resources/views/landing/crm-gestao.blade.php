@@ -229,7 +229,19 @@
         </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- CTA Section -->
+<x-site.cta-final
+    :title="'Escolha um sistema completo para gestão empresarial'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para CRM e gestão empresarial</strong> por apenas <span class=\'text-yellow-400 font-bold\'>R$ 29,90/mês</span>.'"
+    :footer="'Junte-se a centenas de empresas que usam WSoft'"
+    :gradient="'bg-gradient-to-br from-blue-900 to-slate-900'"
+    :textColor="'text-blue-100'"
+    :highlightColor="'text-yellow-400'"
+    :priceUrl="'#oferta'"
+/>
+
+
+<!-- FAQ -->
     <section class="py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center mb-12">Dúvidas Frequentes</h2>
