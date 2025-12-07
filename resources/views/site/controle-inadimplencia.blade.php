@@ -12,7 +12,7 @@ $structuredData = [
             '@type' => 'Offer',
             'price' => '29.90',
             'priceCurrency' => 'BRL',
-            'url' => 'https://www.wsoft.dev.br/app/register',
+            'url' => 'https://www.wsoft.dev.br/sistema-para-controle-de-inadimplencia',
             'description' => 'Plano mensal com todas as funcionalidades'
         ],
         'aggregateRating' => [
@@ -77,8 +77,8 @@ $structuredData = [
     title="na Sua Empresa"
     highlight="Zero Inadimplência"
     description="Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional."
-    primaryButtonText="Testar por 7 Dias"
-    primaryButtonUrl="/app/register"
+    primaryButtonText="Falar no WhatsApp"
+    primaryButtonUrl="https://wa.me/5551999350578"
     secondaryButtonText="Como Funciona"
     secondaryButtonUrl="#como-funciona"
     :idealFor="['Lojas de Roupas', 'Mercadinhos', 'Prestadores de Serviço', 'Escolas e Cursos']"
@@ -290,14 +290,16 @@ $structuredData = [
 
         <div class="text-center mt-16">
             <a
-                href="/app/register"
+                href="https://wa.me/5551999350578"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-300"
             >
-                <i class="fa-solid fa-rocket text-xl"></i>
-                <span>Experimente Grátis por 7 Dias</span>
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Falar com Especialista</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
-            <p class="mt-4 text-sm text-slate-500">Cancele quando quiser</p>
+            <p class="mt-4 text-sm text-slate-500">Tire suas dúvidas pelo WhatsApp</p>
         </div>
     </div>
 </section>
@@ -308,8 +310,8 @@ $structuredData = [
         <x-site.cta-inline
             title="Pare de Perder Dinheiro com Inadimplência"
             description="Diga adeus aos calotes e recupere o controle do seu crédito. Com o WSoft, você automatiza cobranças, bloqueia maus pagadores e recupera valores que seriam perdidos."
-            buttonText="Reduzir Inadimplência Agora"
-            buttonUrl="/app/register"
+            buttonText="Falar no WhatsApp"
+            buttonUrl="https://wa.me/5551999350578"
             gradient="from-blue-900 to-blue-700"
             icon="fa-solid fa-shield-halved"
         />
@@ -326,15 +328,12 @@ $structuredData = [
     :highlightColor="'text-yellow-300'"
 />
 
-@livewire('landing-registration-form', [
-    'source' => 'site_controle_inadimplencia',
-    'title' => 'Comece agora gratuitamente',
-    'subtitle' => 'Reduza a inadimplência e recupere seu crédito com o WSoft.',
-    'gradient' => 'from-blue-900 to-blue-700',
-    'buttonText' => 'Testar por 7 Dias Grátis',
-    'buttonColor' => 'blue',
-    'focusColor' => 'blue'
-])
+<x-site.cta-whatsapp
+    title="Comece Gratuitamente pelo WhatsApp"
+    subtitle="Reduza a inadimplência e recupere seu crédito com o WSoft."
+    buttonText="Começar Agora"
+    gradient="from-blue-900 to-blue-700"
+/>
 
 
 <x-site.faq

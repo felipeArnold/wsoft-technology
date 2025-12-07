@@ -12,7 +12,7 @@ $structuredData = [
             '@type' => 'Offer',
             'price' => '29.90',
             'priceCurrency' => 'BRL',
-            'url' => 'https://www.wsoft.dev.br/app/register',
+            'url' => 'https://www.wsoft.dev.br/sistema-para-fluxo-de-caixa',
             'description' => 'Plano mensal com todas as funcionalidades'
         ],
         'aggregateRating' => [
@@ -77,8 +77,8 @@ $structuredData = [
     title="Movimentação Financeira em Tempo Real"
     highlight="Controle sua "
     description="Tenha o controle total do seu dinheiro. Acompanhe entradas, saídas e saiba exatamente qual é o lucro da sua empresa em tempo real."
-    primaryButtonText="Testar por 7 Dias"
-    primaryButtonUrl="/app/register"
+    primaryButtonText="Falar no WhatsApp"
+    primaryButtonUrl="https://wa.me/5551999350578"
     secondaryButtonText="Como Funciona"
     secondaryButtonUrl="#como-funciona"
     :idealFor="['Todas as Empresas', 'MEI', 'Autônomos', 'Comércio e Serviços']"
@@ -290,14 +290,16 @@ $structuredData = [
 
         <div class="text-center mt-16">
             <a
-                href="/app/register"
+                href="https://wa.me/5551999350578"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-300"
             >
-                <i class="fa-solid fa-rocket text-xl"></i>
-                <span>Experimente Grátis por 7 Dias</span>
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Falar com Especialista</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
-            <p class="mt-4 text-sm text-slate-500">Cancele quando quiser</p>
+            <p class="mt-4 text-sm text-slate-500">Tire suas dúvidas pelo WhatsApp</p>
         </div>
     </div>
 </section>
@@ -308,8 +310,8 @@ $structuredData = [
         <x-site.cta-inline
             title="Diga Adeus às Planilhas de Fluxo de Caixa"
             description="Chega de planilhas complexas e erros manuais. Com o WSoft, você tem controle financeiro profissional, DRE automático e visão clara do lucro em tempo real."
-            buttonText="Começar Agora"
-            buttonUrl="/app/register"
+            buttonText="Falar no WhatsApp"
+            buttonUrl="https://wa.me/5551999350578"
             gradient="from-blue-900 to-blue-700"
             icon="fa-solid fa-chart-line"
         />
@@ -326,15 +328,12 @@ $structuredData = [
     :highlightColor="'text-yellow-300'"
 />
 
-@livewire('landing-registration-form', [
-    'source' => 'site_movimentacao_financeira',
-    'title' => 'Comece agora gratuitamente',
-    'subtitle' => 'Tenha controle total do seu fluxo de caixa e saiba exatamente qual é o lucro da sua empresa.',
-    'gradient' => 'from-blue-900 to-blue-700',
-    'buttonText' => 'Testar por 7 Dias Grátis',
-    'buttonColor' => 'blue',
-    'focusColor' => 'blue'
-])
+<x-site.cta-whatsapp
+    title="Comece Gratuitamente pelo WhatsApp"
+    subtitle="Tenha controle total do seu fluxo de caixa e saiba exatamente qual é o lucro da sua empresa."
+    buttonText="Começar Agora"
+    gradient="from-blue-900 to-blue-700"
+/>
 
 
 <x-site.faq

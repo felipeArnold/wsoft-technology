@@ -12,7 +12,7 @@ $structuredData = [
             '@type' => 'Offer',
             'price' => '29.90',
             'priceCurrency' => 'BRL',
-            'url' => 'https://www.wsoft.dev.br/app/register',
+            'url' => 'https://www.wsoft.dev.br/sistema-para-contas-a-pagar',
             'description' => 'Plano mensal com todas as funcionalidades'
         ],
         'aggregateRating' => [
@@ -406,14 +406,16 @@ $structuredData = [
 
         <div class="text-center mt-16">
             <a
-                href="/app/register"
+                href="https://wa.me/5551999350578"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-300"
             >
-                <i class="fa-solid fa-rocket text-xl"></i>
-                <span>Experimente Grátis por 7 Dias</span>
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Falar com Especialista</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
-            <p class="mt-4 text-sm text-slate-500">Cancele quando quiser</p>
+            <p class="mt-4 text-sm text-slate-500">Tire suas dúvidas pelo WhatsApp</p>
         </div>
     </div>
 </section>
@@ -425,8 +427,8 @@ $structuredData = [
             <x-site.cta-inline
                 title="Migre da Planilha de Contas a Pagar para um Sistema Profissional"
                 description="Elimine erros manuais, fórmulas quebradas e retrabalho. Com o WSoft, automatize o controle de contas a pagar, receba alertas de vencimento e mantenha seu fluxo de caixa sempre organizado."
-                buttonText="Testar Sistema Gratuitamente"
-                buttonUrl="/app/register"
+                buttonText="Falar no WhatsApp"
+                buttonUrl="https://wa.me/5551999350578"
                 gradient="from-blue-900 to-blue-700"
                 icon="fa-solid fa-file-excel"
             />
@@ -495,15 +497,12 @@ $structuredData = [
     :highlightColor="'text-yellow-300'"
 />
 
-@livewire('landing-registration-form', [
-    'source' => 'site_contas_pagar',
-    'title' => 'Comece agora gratuitamente',
-    'subtitle' => 'Junte-se a centenas de empresas que já eliminaram multas e juros por atraso com o WSoft.',
-    'gradient' => 'from-blue-900 to-blue-700',
-    'buttonText' => 'Testar por 7 Dias Grátis',
-    'buttonColor' => 'blue',
-    'focusColor' => 'blue'
-])
+<x-site.cta-whatsapp
+    title="Comece Gratuitamente pelo WhatsApp"
+    subtitle="Junte-se a centenas de empresas que já eliminaram multas e juros por atraso com o WSoft."
+    buttonText="Começar Agora"
+    gradient="from-blue-900 to-blue-700"
+/>
 
 
 <x-site.faq

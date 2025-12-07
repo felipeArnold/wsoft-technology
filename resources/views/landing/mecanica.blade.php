@@ -463,13 +463,12 @@ $structuredData = [
 </section>
 
 <!-- Cadastro (Form Section) -->
-@livewire('landing-registration-form', [
-    'source' => 'landing_mecanica',
-    'title' => 'Crie sua conta grátis',
-    'subtitle' => 'Junte-se a mais de 500 oficinas que já modernizaram sua gestão com o WSoft.',
-    'gradient' => 'from-emerald-600 to-teal-700',
-    'buttonText' => 'Cadastrar Grátis'
-])
+<x-site.cta-whatsapp
+    title="Crie sua Conta pelo WhatsApp"
+    subtitle="Junte-se a mais de 500 oficinas que já modernizaram sua gestão com o WSoft."
+    buttonText="Começar Agora"
+    gradient="from-emerald-600 to-teal-700"
+/>
 
 <!-- CTA Section -->
 <x-site.cta-final
