@@ -118,6 +118,4 @@ Route::view('/oferta-especial', 'landing.sales')->name('landing.sales');
 Route::view('/crm-gestao-empresarial', 'landing.crm-gestao')->name('landing.crm-gestao');
 
 // Landing Page para Software Sob Medida
-Route::get('/software-sob-medida', function () {
-    return view('site.software-sob-medida');
-})->name('landing.software-sob-medida');
+Route::view('/software-sob-medida', 'site.software-sob-medida')->name('landing.software-sob-medida');
