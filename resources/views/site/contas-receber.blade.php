@@ -319,9 +319,9 @@ $structuredData = [
 />
 
 <x-site.cta-whatsapp
-    title="Entre em Contato pelo WhatsApp"
+    title="Comece Gratuitamente pelo WhatsApp"
     subtitle="Junte-se a centenas de empresas que reduziram inadimplência e aumentaram o fluxo de caixa com o WSoft."
-    buttonText="Falar com Especialista"
+    buttonText="Começar Agora"
     gradient="from-blue-900 to-blue-700"
 />
 

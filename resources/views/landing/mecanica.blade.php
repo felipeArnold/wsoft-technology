@@ -464,9 +464,9 @@ $structuredData = [
 
 <!-- Cadastro (Form Section) -->
 <x-site.cta-whatsapp
-    title="Entre em Contato pelo WhatsApp"
+    title="Crie sua Conta pelo WhatsApp"
     subtitle="Junte-se a mais de 500 oficinas que já modernizaram sua gestão com o WSoft."
-    buttonText="Falar com Especialista"
+    buttonText="Começar Agora"
     gradient="from-emerald-600 to-teal-700"
 />
 
