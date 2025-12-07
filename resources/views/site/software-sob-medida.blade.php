@@ -546,15 +546,12 @@ $structuredData = [
     :highlightColor="'text-yellow-300'"
 />
 
-@livewire('landing-registration-form', [
-    'source' => 'site_software_sob_medida',
-    'title' => 'Solicite uma Consultoria Gratuita',
-    'subtitle' => 'Vamos conversar sobre seu projeto e apresentar as melhores soluções para suas necessidades.',
-    'gradient' => 'from-blue-900 to-purple-900',
-    'buttonText' => 'Agendar Consultoria Grátis',
-    'buttonColor' => 'blue',
-    'focusColor' => 'blue'
-])
+<x-site.cta-whatsapp
+    title="Solicite uma Consultoria Gratuita"
+    subtitle="Vamos conversar sobre seu projeto e apresentar as melhores soluções para suas necessidades."
+    buttonText="Agendar Consultoria Grátis"
+    gradient="from-blue-900 to-purple-900"
+/>
 
 <!-- FAQ -->
 <x-site.faq

@@ -258,9 +258,37 @@
                     </div>
                 </div>
 
-                <!-- Right Column: Registration Form -->
+                <!-- Right Column: WhatsApp CTA -->
                 <div class="relative">
-                    <livewire:landing-register-form />
+                    <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
+                        <!-- Decorative elements -->
+                        <div class="absolute -top-20 -right-20 w-40 h-40 bg-green-500/30 rounded-full blur-3xl group-hover:bg-green-500/40 transition-colors duration-500"></div>
+                        <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-green-400/30 rounded-full blur-3xl group-hover:bg-green-400/40 transition-colors duration-500"></div>
+
+                        <div class="relative z-10">
+                            <div class="text-center mb-8">
+                                <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                    <i class="fa-brands fa-whatsapp text-green-300 text-4xl"></i>
+                                </div>
+                                <h3 class="text-3xl font-bold text-white tracking-tight">Fale Conosco</h3>
+                                <p class="text-blue-100 mt-2 font-light">Entre em contato pelo WhatsApp</p>
+                            </div>
+
+                            <a 
+                                href="https://wa.me/5551999350578" 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold px-6 py-4 rounded-xl shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                            >
+                                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                                <span>Chamar no WhatsApp</span>
+                            </a>
+
+                            <p class="text-sm text-blue-200 text-center mt-6">
+                                Tire suas dúvidas e garanta sua oferta especial
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

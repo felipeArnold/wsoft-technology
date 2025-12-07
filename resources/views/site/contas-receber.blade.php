@@ -318,15 +318,12 @@ $structuredData = [
     :highlightColor="'text-yellow-300'"
 />
 
-@livewire('landing-registration-form', [
-    'source' => 'site_contas_receber',
-    'title' => 'Comece agora gratuitamente',
-    'subtitle' => 'Junte-se a centenas de empresas que reduziram inadimplência e aumentaram o fluxo de caixa com o WSoft.',
-    'gradient' => 'from-blue-900 to-blue-700',
-    'buttonText' => 'Testar por 7 Dias Grátis',
-    'buttonColor' => 'blue',
-    'focusColor' => 'blue'
-])
+<x-site.cta-whatsapp
+    title="Entre em Contato pelo WhatsApp"
+    subtitle="Junte-se a centenas de empresas que reduziram inadimplência e aumentaram o fluxo de caixa com o WSoft."
+    buttonText="Falar com Especialista"
+    gradient="from-blue-900 to-blue-700"
+/>
 
 
 <x-site.faq
