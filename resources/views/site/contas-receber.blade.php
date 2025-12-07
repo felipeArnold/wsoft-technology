@@ -12,7 +12,7 @@ $structuredData = [
             '@type' => 'Offer',
             'price' => '29.90',
             'priceCurrency' => 'BRL',
-            'url' => 'https://www.wsoft.dev.br/app/register',
+            'url' => 'https://www.wsoft.dev.br/sistema-para-contas-a-receber',
             'description' => 'Plano mensal com todas as funcionalidades'
         ],
         'aggregateRating' => [
@@ -286,22 +286,24 @@ $structuredData = [
 
         <div class="text-center mt-16">
             <a
-                href="/app/register"
+                href="https://wa.me/5551999350578"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-300"
             >
-                <i class="fa-solid fa-rocket text-xl"></i>
-                <span>Experimente Grátis por 7 Dias</span>
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Falar com Especialista</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
-            <p class="mt-4 text-sm text-slate-500">Cancele quando quiser</p>
+            <p class="mt-4 text-sm text-slate-500">Tire suas dúvidas pelo WhatsApp</p>
         </div>
 
         <div class="mt-16 text-center">
             <x-site.cta-inline
                 title="Abandone Planilhas de Controle de Recebimentos"
                 description="Pare de perder tempo com planilhas manuais. Com o WSoft, você automatiza o controle de recebimentos, reduz inadimplência e tem previsão exata do que vai entrar no caixa."
-                buttonText="Começar Teste Gratuito"
-                buttonUrl="/app/register"
+                buttonText="Falar no WhatsApp"
+                buttonUrl="https://wa.me/5551999350578"
                 gradient="from-blue-900 to-blue-700"
                 icon="fa-solid fa-file-excel"
             />

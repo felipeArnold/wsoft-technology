@@ -414,10 +414,12 @@ $structuredData = [
 
         <div class="text-center mt-16">
             <a
-                href="/app/register"
+                href="https://wa.me/5551999350578"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-300"
             >
-                <i class="fa-solid fa-comments text-xl"></i>
+                <i class="fa-brands fa-whatsapp text-xl"></i>
                 <span>Solicitar Consultoria Grátis</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
