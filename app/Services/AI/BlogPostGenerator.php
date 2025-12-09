@@ -83,6 +83,7 @@ EXCERPT: [novo resumo]
 CONTEÚDO: [novo conteúdo em HTML]
 META_TITLE: [título SEO]
 META_DESCRIPTION: [descrição SEO]
+META_KEYWORDS: [palavras-chave separadas por vírgula]
 PROMPT;
 
         $response = $this->makeOpenAIRequest(
@@ -214,6 +215,7 @@ O post deve incluir:
    - Conclusão impactante
 4. Meta título para SEO (máximo 60 caracteres)
 5. Meta descrição para SEO (máximo 160 caracteres)
+6. Palavras-chave relevantes para SEO (5-10 palavras-chave separadas por vírgula)
 
 Forneça a resposta no seguinte formato:
 TÍTULO: [título do post]
@@ -221,6 +223,7 @@ EXCERPT: [resumo do post]
 CONTEÚDO: [conteúdo completo em HTML]
 META_TITLE: [título SEO]
 META_DESCRIPTION: [descrição SEO]
+META_KEYWORDS: [palavras-chave separadas por vírgula]
 PROMPT;
     }
 
@@ -237,6 +240,7 @@ PROMPT;
             'content' => '',
             'meta_title' => '',
             'meta_description' => '',
+            'meta_keywords' => '',
             'category_id' => $category?->id,
             'author_id' => $author?->id ?? auth()->id(),
             'status' => 'draft',
@@ -281,12 +285,19 @@ PROMPT;
                 continue;
             }
 
+            if (str_starts_with($line, 'META_KEYWORDS:')) {
+                $data['meta_keywords'] = mb_trim(mb_substr($line, 14));
+                $currentSection = null;
+
+                continue;
+            }
+
             if ($currentSection === 'content' && $line !== '') {
                 $contentLines[] = $line;
             }
         }
 
-        $data['content'] = implode("\n", $contentLines);
+        $data['content'] = $this->cleanContent(implode("\n", $contentLines));
 
         if (empty($data['title'])) {
             $data['title'] = $fallbackTitle;
@@ -303,6 +314,18 @@ PROMPT;
                 strip_tags($data['excerpt'] ?: $data['content']),
                 160
             );
+        }
+
+        if (empty($data['meta_keywords'])) {
+            // Gera keywords básicas baseadas no título se não houver
+            $data['meta_keywords'] = implode(', ', array_slice(
+                array_filter(
+                    explode(' ', Str::lower($data['title'])),
+                    fn ($word) => mb_strlen($word) > 3
+                ),
+                0,
+                5
+            ));
         }
 
         return $data;
@@ -333,5 +356,18 @@ PROMPT;
         }
 
         return $data;
+    }
+
+    private function cleanContent(string $content): string
+    {
+        $content = mb_trim($content);
+
+        // Remove marcadores de bloco de código markdown (```html, ```xml, ``` no início)
+        $content = preg_replace('/^```(?:html|xml|htm)?\s*/i', '', $content);
+
+        // Remove marcador de fechamento de bloco de código (``` no final)
+        $content = preg_replace('/\s*```\s*$/', '', $content);
+
+        return mb_trim($content);
     }
 }

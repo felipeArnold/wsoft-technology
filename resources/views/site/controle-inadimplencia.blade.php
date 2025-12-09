@@ -328,12 +328,15 @@ $structuredData = [
     :highlightColor="'text-yellow-300'"
 />
 
-<x-site.cta-whatsapp
-    title="Comece Gratuitamente pelo WhatsApp"
-    subtitle="Reduza a inadimplência e recupere seu crédito com o WSoft."
-    buttonText="Começar Agora"
-    gradient="from-blue-900 to-blue-700"
-/>
+@livewire('landing-registration-form', [
+    'source' => 'site_controle_inadimplencia',
+    'title' => 'Comece agora gratuitamente',
+    'subtitle' => 'Reduza a inadimplência e recupere seu crédito com o WSoft.',
+    'gradient' => 'from-blue-900 to-blue-700',
+    'buttonText' => 'Testar por 7 Dias Grátis',
+    'buttonColor' => 'blue',
+    'focusColor' => 'blue'
+])
 
 
 <x-site.faq

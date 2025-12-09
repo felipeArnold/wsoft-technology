@@ -328,12 +328,15 @@ $structuredData = [
     :highlightColor="'text-yellow-300'"
 />
 
-<x-site.cta-whatsapp
-    title="Comece Gratuitamente pelo WhatsApp"
-    subtitle="Tenha controle total do seu fluxo de caixa e saiba exatamente qual é o lucro da sua empresa."
-    buttonText="Começar Agora"
-    gradient="from-blue-900 to-blue-700"
-/>
+@livewire('landing-registration-form', [
+    'source' => 'site_movimentacao_financeira',
+    'title' => 'Comece agora gratuitamente',
+    'subtitle' => 'Tenha controle total do seu fluxo de caixa e saiba exatamente qual é o lucro da sua empresa.',
+    'gradient' => 'from-blue-900 to-blue-700',
+    'buttonText' => 'Testar por 7 Dias Grátis',
+    'buttonColor' => 'blue',
+    'focusColor' => 'blue'
+])
 
 
 <x-site.faq
