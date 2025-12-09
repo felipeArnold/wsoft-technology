@@ -4,7 +4,21 @@ declare(strict_types=1);
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function (): void {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+// Agenda geração diária de posts de blog para atrair leads
+Schedule::command('blog:generate-daily --publish')
+    ->dailyAt('09:00')
+    ->timezone('America/Sao_Paulo')
+    ->withoutOverlapping()
+    ->onSuccess(function () {
+        Log::info('Post de blog diário gerado com sucesso via schedule');
+    })
+    ->onFailure(function () {
+        Log::error('Falha ao gerar post de blog diário via schedule');
+    });

@@ -19,6 +19,24 @@ final class BlogPost extends Model
 
     protected $table = 'blog_posts';
 
+    protected $fillable = [
+        'category_id',
+        'author_id',
+        'title',
+        'slug',
+        'excerpt',
+        'content',
+        'featured_image',
+        'status',
+        'published_at',
+        'is_featured',
+        'view_count',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'og_image',
+    ];
+
     protected $casts = [
         'published_at' => 'datetime',
         'is_featured' => 'boolean',
