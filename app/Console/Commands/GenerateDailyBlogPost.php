@@ -302,8 +302,7 @@ final class GenerateDailyBlogPost extends Command
         }
 
         // Busca o primeiro admin ou o primeiro usuário
-        return User::where('is_admin', true)->first()
-            ?? User::orderBy('id')->first();
+        return User::query()->first();
     }
 
     private function selectTopic(): ?string
