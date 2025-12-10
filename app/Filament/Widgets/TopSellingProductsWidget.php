@@ -4,90 +4,145 @@ declare(strict_types=1);
 
 namespace App\Filament\Widgets;
 
-use App\Models\Product;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Widgets\TableWidget as BaseWidget;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\DB;
+use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
-final class TopSellingProductsWidget extends BaseWidget
+final class TopSellingProductsWidget extends ApexChartWidget
 {
     protected static ?string $heading = 'Produtos Mais Vendidos';
 
-    protected int|string|array $columnSpan = 'full';
 
-    protected static ?int $sort = 5;
+    protected static ?int $sort = 4;
 
-    public function table(Table $table): Table
+    protected function getOptions(): array
     {
-        return $table
-            ->query(
-                Product::query()
-                    ->select([
-                        'products.*',
-                        DB::raw('COALESCE(SUM(sale_items.quantity), 0) as total_sold'),
-                        DB::raw('COALESCE(SUM(sale_items.total), 0) as total_revenue'),
-                    ])
-                    ->leftJoin('sale_items', 'products.id', '=', 'sale_items.product_id')
-                    ->groupBy('products.id')
-                    ->having('total_sold', '>', 0)
-                    ->orderByDesc('total_sold')
-            )
-            ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Produto')
-                    ->searchable()
-                    ->sortable()
-                    ->weight('bold'),
+        $tenant = Filament::getTenant();
 
-                Tables\Columns\TextColumn::make('sku')
-                    ->label('SKU')
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('category.name')
-                    ->label('Categoria')
-                    ->badge()
-                    ->color('info')
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('total_sold')
-                    ->label('Quantidade Vendida')
-                    ->numeric(0)
-                    ->sortable()
-                    ->alignCenter()
-                    ->badge()
-                    ->color('success'),
-
-                Tables\Columns\TextColumn::make('total_revenue')
-                    ->label('Receita Total')
-                    ->money('BRL')
-                    ->sortable()
-                    ->weight('bold'),
-
-                Tables\Columns\TextColumn::make('stock')
-                    ->label('Estoque Atual')
-                    ->numeric(0)
-                    ->sortable()
-                    ->alignCenter()
-                    ->badge()
-                    ->color(fn (int $state): string => match (true) {
-                        $state === 0 => 'danger',
-                        $state <= 10 => 'warning',
-                        default => 'success',
-                    }),
-
-                Tables\Columns\TextColumn::make('price_sale')
-                    ->label('Preço de Venda')
-                    ->money('BRL')
-                    ->sortable(),
+        $query = DB::table('products')
+            ->select([
+                'products.id',
+                'products.name',
+                DB::raw('COALESCE(SUM(sale_items.quantity), 0) as total_sold'),
+                DB::raw('COALESCE(SUM(sale_items.total), 0) as total_revenue'),
             ])
-            ->filters([
-                Tables\Filters\SelectFilter::make('category_id')
-                    ->label('Categoria')
-                    ->relationship('category', 'name')
-                    ->preload(),
-            ])
-            ->defaultSort('total_sold', 'desc')
-            ->paginated([10, 25, 50]);
+            ->leftJoin('sale_items', 'products.id', '=', 'sale_items.product_id');
+
+        if ($tenant) {
+            $query->where('products.tenant_id', $tenant->id);
+        }
+
+        $products = $query
+            ->groupBy('products.id', 'products.name')
+            ->having('total_sold', '>', 0)
+            ->orderByDesc('total_sold')
+            ->limit(10)
+            ->get();
+
+        // Se não houver dados, retornar arrays vazios
+        if ($products->isEmpty()) {
+            $productNames = ['Nenhum produto vendido'];
+            $quantitiesSold = [0];
+            $revenues = [0];
+        } else {
+            $productNames = $products->pluck('name')->map(function ($name) {
+                return mb_strlen($name) > 30 ? mb_substr($name, 0, 27).'...' : $name;
+            })->toArray();
+
+            $quantitiesSold = $products->pluck('total_sold')->map(fn ($value) => (float) $value)->toArray();
+            $revenues = $products->pluck('total_revenue')->map(fn ($value) => (float) $value)->toArray();
+        }
+
+        return [
+            'chart' => [
+                'type' => 'bar',
+                'height' => 350,
+                'stacked' => true,
+                'toolbar' => [
+                    'show' => true,
+                ],
+                'zoom' => [
+                    'enabled' => true,
+                ],
+            ],
+            'series' => [
+                [
+                    'name' => 'Quantidade Vendida',
+                    'data' => $quantitiesSold,
+                ],
+                [
+                    'name' => 'Receita (R$)',
+                    'data' => $revenues,
+                ],
+            ],
+            'responsive' => [
+                [
+                    'breakpoint' => 480,
+                    'options' => [
+                        'legend' => [
+                            'position' => 'bottom',
+                            'offsetX' => -10,
+                            'offsetY' => 0,
+                        ],
+                    ],
+                ],
+            ],
+            'plotOptions' => [
+                'bar' => [
+                    'horizontal' => false,
+                    'borderRadius' => 10,
+                    'borderRadiusApplication' => 'end',
+                    'borderRadiusWhenStacked' => 'last',
+                    'dataLabels' => [
+                        'total' => [
+                            'enabled' => true,
+                            'style' => [
+                                'fontSize' => '13px',
+                                'fontWeight' => 900,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'xaxis' => [
+                'type' => 'category',
+                'categories' => $productNames,
+                'labels' => [
+                    'style' => [
+                        'fontFamily' => 'inherit',
+                    ],
+                ],
+            ],
+            'yaxis' => [
+                'title' => [
+                    'text' => 'Valores',
+                ],
+                'labels' => [
+                    'style' => [
+                        'fontFamily' => 'inherit',
+                    ],
+                ],
+            ],
+            'legend' => [
+                'position' => 'right',
+                'offsetY' => 40,
+                'fontFamily' => 'inherit',
+            ],
+            'fill' => [
+                'opacity' => 1,
+            ],
+            'colors' => ['#10b981', '#3b82f6'],
+            'dataLabels' => [
+                'enabled' => false,
+            ],
+            'grid' => [
+                'show' => true,
+            ],
+            'tooltip' => [
+                'enabled' => true,
+                'shared' => true,
+                'intersect' => false,
+            ],
+        ];
     }
 }

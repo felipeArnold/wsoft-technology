@@ -17,7 +17,9 @@ final class MonthlyCashFlow extends ApexChartWidget
 
     protected static ?string $chartId = 'monthlyCashFlow';
 
-    protected static ?string $heading = 'Fluxo de Caixa - Últimos 12 Meses';
+    protected static ?string $heading = 'Fluxo de Caixa - Últimos 12 Meses (Pago + A Vencer)';
+
+    protected int|string|array $columnSpan = 'full';
 
     protected function getOptions(): array
     {
@@ -30,28 +32,62 @@ final class MonthlyCashFlow extends ApexChartWidget
         $startDate = Carbon::now()->subMonths(11)->startOfMonth();
         $endDate = Carbon::now()->endOfMonth();
 
-        // Otimização: Buscar todos os dados em uma única query
         // Detectar o driver do banco de dados para usar a função correta
         $driver = DB::getDriverName();
+
+        // Usar paid_at se pago, senão usar due_date
         $dateFormatSql = $driver === 'sqlite'
-            ? "strftime('%Y-%m', accounts_installments.paid_at)"
-            : "DATE_FORMAT(accounts_installments.paid_at, '%Y-%m')";
+            ? "strftime('%Y-%m', COALESCE(accounts_installments.paid_at, accounts_installments.due_date))"
+            : "DATE_FORMAT(COALESCE(accounts_installments.paid_at, accounts_installments.due_date), '%Y-%m')";
 
         $tenant = Filament::getTenant();
 
-        $results = AccountsInstallments::query()
+        // Buscar contas pagas (usando paid_at)
+        $paidResults = AccountsInstallments::query()
             ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
             ->where('accounts_installments.tenant_id', $tenant?->id)
             ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
+            ->whereNotNull('accounts_installments.paid_at')
             ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
             ->selectRaw("
-                {$dateFormatSql} as month,
+                $dateFormatSql as month,
                 accounts.type,
                 SUM(accounts_installments.amount) as total
             ")
             ->groupBy('month', 'accounts.type')
-            ->get()
-            ->groupBy('month');
+            ->get();
+
+        // Buscar contas não pagas (usando due_date)
+        $unpaidResults = AccountsInstallments::query()
+            ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
+            ->where('accounts_installments.tenant_id', $tenant?->id)
+            ->whereIn('accounts_installments.status', [
+                PaymentStatusEnum::UNPAID->value,
+                PaymentStatusEnum::PARTIAL->value,
+                PaymentStatusEnum::OVERDUE->value,
+            ])
+            ->whereBetween('accounts_installments.due_date', [$startDate, $endDate])
+            ->selectRaw("
+                " . ($driver === 'sqlite'
+                    ? "strftime('%Y-%m', accounts_installments.due_date)"
+                    : "DATE_FORMAT(accounts_installments.due_date, '%Y-%m')") . " as month,
+                accounts.type,
+                SUM(accounts_installments.amount) as total
+            ")
+            ->groupBy('month', 'accounts.type')
+            ->get();
+
+        // Combinar resultados
+        $results = $paidResults->concat($unpaidResults)
+            ->groupBy('month')
+            ->map(function ($items) {
+                return $items->groupBy('type')->map(function ($group) {
+                    return (object) [
+                        'type' => $group->first()->type,
+                        'total' => $group->sum('total'),
+                    ];
+                })->values();
+            });
 
         // Processar dados para os últimos 12 meses
         for ($i = 11; $i >= 0; $i--) {
@@ -74,67 +110,98 @@ final class MonthlyCashFlow extends ApexChartWidget
 
         return [
             'chart' => [
-                'type' => 'line',
+                'type' => 'bar',
                 'height' => 350,
-                'stacked' => false,
+                'stacked' => true,
                 'toolbar' => [
                     'show' => true,
+                ],
+                'zoom' => [
+                    'enabled' => true,
                 ],
             ],
             'series' => [
                 [
                     'name' => 'Receitas',
-                    'type' => 'column',
                     'data' => $incomeData,
                 ],
                 [
                     'name' => 'Despesas',
-                    'type' => 'area',
                     'data' => $expensesData,
                 ],
                 [
                     'name' => 'Saldo Líquido',
-                    'type' => 'line',
                     'data' => $balanceData,
                 ],
             ],
-
-            'stroke' => [
-                'width' => [0, 2, 3],
-                'curve' => 'smooth',
-            ],
-            'fill' => [
-                'opacity' => [0.85, 0.25, 1],
-                'gradient' => [
-                    'inverseColors' => false,
-                    'shade' => 'light',
-                    'type' => 'vertical',
-                    'opacityFrom' => 0.85,
-                    'opacityTo' => 0.55,
-                    'stops' => [0, 100, 100, 100],
+            'responsive' => [
+                [
+                    'breakpoint' => 480,
+                    'options' => [
+                        'legend' => [
+                            'position' => 'bottom',
+                            'offsetX' => -10,
+                            'offsetY' => 0,
+                        ],
+                    ],
                 ],
-            ],
-            'xaxis' => [
-                'categories' => $months,
             ],
             'plotOptions' => [
                 'bar' => [
                     'horizontal' => false,
-                    'columnWidth' => '55%',
-                    'borderRadius' => 5,
+                    'borderRadius' => 10,
                     'borderRadiusApplication' => 'end',
+                    'borderRadiusWhenStacked' => 'last',
+                    'columnWidth' => '55%',
+                    'dataLabels' => [
+                        'total' => [
+                            'enabled' => true,
+                            'style' => [
+                                'fontSize' => '13px',
+                                'fontWeight' => 900,
+                            ],
+                        ],
+                    ],
                 ],
             ],
-            'colors' => ['#34c38f', '#f46a6a', '#556ee6'],
-            'yaxis' => [
+            'xaxis' => [
+                'type' => 'category',
+                'categories' => $months,
                 'labels' => [
-                    'formatter' => 'function (value) { return "R$ " + value.toLocaleString("pt-BR", {minimumFractionDigits: 2}); }',
+                    'style' => [
+                        'fontFamily' => 'inherit',
+                    ],
                 ],
+            ],
+            'yaxis' => [
+                'title' => [
+                    'text' => 'Valores (R$)',
+                ],
+                'labels' => [
+                    'style' => [
+                        'fontFamily' => 'inherit',
+                    ],
+                ],
+            ],
+            'legend' => [
+                'position' => 'right',
+                'offsetY' => 40,
+                'fontFamily' => 'inherit',
+            ],
+            'fill' => [
+                'opacity' => 1,
+            ],
+            'colors' => ['#10b981', '#ef4444', '#3b82f6'],
+            'dataLabels' => [
+                'enabled' => false,
+            ],
+            'grid' => [
+                'show' => true,
             ],
             'tooltip' => [
-                'y' => [
-                    'formatter' => 'function (value) { return "R$ " + value.toLocaleString("pt-BR", {minimumFractionDigits: 2}); }',
-                ],
+                'enabled' => true,
+                'shared' => true,
+                'intersect' => false,
             ],
         ];
     }

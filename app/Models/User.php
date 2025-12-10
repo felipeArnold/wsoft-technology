@@ -75,6 +75,12 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
         return $this->belongsToMany(Tenant::class);
     }
 
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class, 'team_user')
+            ->withTimestamps();
+    }
+
     public function canAccessTenant(Model $tenant): bool
     {
         return $this->tenants->contains($tenant);

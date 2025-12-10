@@ -81,7 +81,13 @@ final class AppPanelProvider extends PanelProvider
                     ->icon('heroicon-o-light-bulb')
                     ->visible(fn (): bool => Filament::getTenant() !== null),
             ])
-            ->tenantMenu(false)
+            ->tenantMenuItems([
+                Action::make('settings')
+                    ->label('Configuração')
+                    ->url(fn (): string => SettingsCluster::getNavigationUrl())
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->visible(fn (): bool => Filament::getTenant() !== null),
+            ])
             ->colors([
                 'danger' => Color::Red,
                 'gray' => Color::Gray,
@@ -93,7 +99,6 @@ final class AppPanelProvider extends PanelProvider
             ->maxContentWidth(Width::Full)
             ->tenantBillingProvider(new BillingProvider('default'))
             ->requiresTenantSubscription()
-            ->topNavigation()
             ->errorNotifications(false)
             ->databaseNotifications()
             ->sidebarCollapsibleOnDesktop()

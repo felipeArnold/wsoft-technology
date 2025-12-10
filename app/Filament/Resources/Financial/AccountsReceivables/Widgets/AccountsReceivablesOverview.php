@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Date;
 
 final class AccountsReceivablesOverview extends BaseWidget
 {
+    protected int | string | array $columnSpan = 'full';
+
+    protected function getColumns(): int
+    {
+        return 4;
+    }
+
     protected function getStats(): array
     {
         $today = Date::now();
@@ -63,18 +70,15 @@ final class AccountsReceivablesOverview extends BaseWidget
                 ->icon('heroicon-o-clock')
                 ->description('Parcelas em aberto')
                 ->color('warning'),
-
             Stat::make('Vencidas', (string) $overdueCount)
                 ->icon('heroicon-o-exclamation-triangle')
                 ->description('Parcelas vencidas')
                 ->color('danger')
                 ->chart($trendData),
-
             Stat::make('Recebidas no mês', (string) $receivedThisMonth)
                 ->icon('heroicon-o-check-circle')
                 ->description('Recebidas neste mês')
                 ->color('success'),
-
             Stat::make('Total a receber', 'R$ '.number_format((float) $totalToReceive, 2, ',', '.'))
                 ->icon('heroicon-o-banknotes')
                 ->description('Soma das parcelas em aberto')

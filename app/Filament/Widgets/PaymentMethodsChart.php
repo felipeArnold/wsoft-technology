@@ -5,34 +5,26 @@ declare(strict_types=1);
 namespace App\Filament\Widgets;
 
 use App\Enum\AccountsReceivable\PaymentMethodEnum;
-use App\Enum\AccountsReceivable\PaymentStatusEnum;
 use App\Models\Accounts\AccountsInstallments;
+use Filament\Facades\Filament;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 final class PaymentMethodsChart extends ApexChartWidget
 {
-    /**
-     * Chart Id
-     */
     protected static ?string $chartId = 'paymentMethodsChart';
 
-    /**
-     * Widget Title
-     */
     protected static ?string $heading = 'Formas de Pagamento';
 
     protected static ?int $sort = 3;
 
-    /**
-     * Chart options (series, labels, types, size, animations...)
-     * https://apexcharts.com/docs/options
-     */
     protected function getOptions(): array
     {
-        // Otimização: Buscar todos os counts em uma única query com GROUP BY
+        $tenant = Filament::getTenant();
+
+        // Buscar todas as contas (pagas e não pagas)
         $results = AccountsInstallments::query()
             ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
-            ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
+            ->when($tenant, fn ($query) => $query->where('accounts_installments.tenant_id', $tenant?->id))
             ->selectRaw('accounts.payment_method, COUNT(*) as count')
             ->groupBy('accounts.payment_method')
             ->get()
@@ -52,49 +44,107 @@ final class PaymentMethodsChart extends ApexChartWidget
             }
         }
 
+
         return [
             'chart' => [
-                'type' => 'donut',
-                'height' => 310,
+                'type' => 'bar',
+                'height' => 350,
+                'stacked' => true,
                 'toolbar' => [
                     'show' => true,
                 ],
-                'animations' => [
+                'zoom' => [
                     'enabled' => true,
-                    'easing' => 'easeinout',
-                    'speed' => 800,
                 ],
             ],
-            'series' => $data,
-            'labels' => $labels,
+            'series' => [
+                [
+                    'name' => 'Quantidade',
+                    'data' => $data,
+                ],
+            ],
+            'responsive' => [
+                [
+                    'breakpoint' => 480,
+                    'options' => [
+                        'legend' => [
+                            'position' => 'bottom',
+                            'offsetX' => -10,
+                            'offsetY' => 0,
+                        ],
+                    ],
+                ],
+            ],
+            'plotOptions' => [
+                'bar' => [
+                    'horizontal' => true,
+                    'borderRadius' => 10,
+                    'borderRadiusApplication' => 'end',
+                    'borderRadiusWhenStacked' => 'last',
+                    'dataLabels' => [
+                        'total' => [
+                            'enabled' => true,
+                            'style' => [
+                                'fontSize' => '13px',
+                                'fontWeight' => 900,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'xaxis' => [
+                'type' => 'category',
+                'categories' => $labels,
+                'labels' => [
+                    'style' => [
+                        'fontFamily' => 'inherit',
+                    ],
+                ],
+            ],
+            'yaxis' => [
+                'title' => [
+                    'text' => 'Valores',
+                ],
+                'labels' => [
+                    'style' => [
+                        'fontFamily' => 'inherit',
+                    ],
+                ],
+            ],
+            'legend' => [
+                'position' => 'right',
+                'offsetY' => 40,
+                'fontFamily' => 'inherit',
+            ],
+            'fill' => [
+                'opacity' => 1,
+            ],
             'colors' => $colors,
             'dataLabels' => [
-                'enabled' => true,
+                'enabled' => false,
             ],
-            'stroke' => [
+            'grid' => [
                 'show' => true,
-                'width' => 2,
-                'colors' => ['#ffffff'],
+            ],
+            'tooltip' => [
+                'enabled' => true,
+                'shared' => true,
+                'intersect' => false,
             ],
         ];
     }
 
-    /**
-     * Get color for payment method
-     */
     private function getColorForMethod(PaymentMethodEnum $method): string
     {
         return match ($method) {
-            PaymentMethodEnum::CASH => '#4ade80',
-            PaymentMethodEnum::PIX => '#fb923c',
-            PaymentMethodEnum::CREDIT_CARD => '#fbbf24',
-            PaymentMethodEnum::DEBIT_CARD => '#34d399',
-            PaymentMethodEnum::CREDIT => '#60a5fa',
-            PaymentMethodEnum::BANK_TRANSFER => '#22d3ee',
-            PaymentMethodEnum::CHECK => '#a78bfa',
-            PaymentMethodEnum::BOLETO => '#fb7185',
-            default => '#9ca3af',
+            PaymentMethodEnum::CASH => '#10b981',
+            PaymentMethodEnum::PIX => '#f97316',
+            PaymentMethodEnum::CREDIT_CARD => '#eab308',
+            PaymentMethodEnum::DEBIT_CARD => '#22c55e',
+            PaymentMethodEnum::CREDIT => '#3b82f6',
+            PaymentMethodEnum::BANK_TRANSFER => '#06b6d4',
+            PaymentMethodEnum::CHECK => '#8b5cf6',
+            PaymentMethodEnum::BOLETO => '#ec4899',
         };
-
     }
 }

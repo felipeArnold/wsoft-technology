@@ -17,7 +17,7 @@ final class OverdueAccounts extends BaseWidget
 
     protected int|string|array $columnSpan = 'full';
 
-    protected static ?int $sort = 4;
+    protected static ?int $sort = 5;
 
     public function table(Table $table): Table
     {
