@@ -40,11 +40,39 @@
     <meta name="twitter:description" content="{{ $twitterDescription ?? $description ?? 'Sistema de gestão com financeiro, OS, vendas e assinatura digital.' }}" />
 
     <!-- Structured Data -->
-    @if(isset($structuredData))
-        <script type="application/ld+json">
-        {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
-        </script>
-    @endif
+    @php
+        $globalSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => 'WSoft Tecnologia',
+            'url' => 'https://www.wsoft.dev.br',
+            'logo' => asset('images/logo.png'),
+            'sameAs' => [
+                'https://www.instagram.com/wsoft.tecnologia/',
+                'https://www.facebook.com/wsoft.tecnologia'
+            ],
+            'contactPoint' => [
+                '@type' => 'ContactPoint',
+                'telephone' => '+55-51-99999-9999',
+                'contactType' => 'customer service',
+                'areaServed' => 'BR',
+                'availableLanguage' => 'Portuguese'
+            ]
+        ];
+
+        if(isset($structuredData)) {
+            // Se já existe structuredData da página, adicionamos o Organization como um elemento extra se for array de arrays,
+            // ou se for um único objeto, transformamos em array.
+            // O padrão adotado nas páginas é um array de objetos (schemas).
+            $finalStructuredData = array_merge($structuredData, [$globalSchema]);
+        } else {
+            $finalStructuredData = [$globalSchema];
+        }
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($finalStructuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+    </script>
 
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">

@@ -58,6 +58,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como fazer Fluxo de Caixa com WSoft',
+        'description' => 'Guia rápido para registrar movimentações e analisar a saúde financeira.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Registre Tudo',
+                'text' => 'Cada venda, cada pagamento, cada retirada. Tudo é registrado no sistema para compor o seu fluxo de caixa.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Acompanhe o Saldo',
+                'text' => 'Veja o saldo de cada conta bancária e do caixa físico em tempo real. Faça transferências e sangrias com segurança.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Analise o Resultado',
+                'text' => 'Gere o DRE (Demonstrativo de Resultado) e veja se sua empresa teve lucro ou prejuízo no mês.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp

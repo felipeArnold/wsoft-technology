@@ -38,6 +38,32 @@ $structuredData = [
             'ratingValue' => '4.9',
             'ratingCount' => '145'
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como organizar sua Oficina Mecânica com WSoft',
+        'description' => 'Passo a passo para emitir OS, controlar financeiro e crescer seu negócio.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Crie Ordens de Serviço',
+                'text' => 'Emita ordens de serviço digitais com fotos, descrição de serviços, peças utilizadas e valores. Sistema de ordem de serviço completo e profissional.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Controle Financeiro Completo',
+                'text' => 'Tenha controle total do financeiro com contas a pagar e receber, sistema de fluxo de caixa e relatórios detalhados. Organização empresarial real.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Analise e Cresça',
+                'text' => 'Tome decisões baseadas em dados. Veja relatórios de vendas, controle de produtos, cadastro de clientes e fornecedores em um único painel.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp

@@ -58,6 +58,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como reduzir a inadimplência com WSoft',
+        'description' => 'Passo a passo para identificar devedores, automatizar cobranças e recuperar crédito.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Identifique o Atraso',
+                'text' => 'O sistema monitora todos os vencimentos e destaca em vermelho quem não pagou. Você sabe na hora quem cobrar.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Notifique o Cliente',
+                'text' => 'Envie lembretes amigáveis antes do vencimento e avisos de cobrança após o atraso. Tudo via WhatsApp ou E-mail.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Bloqueie e Negocie',
+                'text' => 'O sistema bloqueia novas vendas para devedores até a regularização. Registre acordos e parcele a dívida para recuperar o valor.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp
@@ -183,17 +209,15 @@ $structuredData = [
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Filtro por dias de atraso</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="order-1">
-                    <div class="flex items-center gap-4 mb-6">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">2</span>
+                            <span>Filtro- [x] Implement OrganizationSchema (Global/Shared) <!-- id: 2 -->
+- [/] Implement ProductSchema and HowToSchema for each landing page <!-- id: 3 -->
+    - [x] assinatura-digital.blade.php <!-- id: 4 -->
+    - [x] barbearia.blade.php <!-- id: 5 -->
+    - [x] contas-pagar.blade.php <!-- id: 6 -->
+    - [x] contas-receber.blade.php <!-- id: 7 -->
+    - [/] controle-inadimplencia.blade.php <!-- id: 8 -->
+    - [/] crm-gestao.blade.php <!-- id: 9 -->
+    - [/] funilaria.blade.php <!-- id: 10 -->center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">2</span>
                         <h3 class="text-2xl font-bold text-slate-900">Notifique o Cliente</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">

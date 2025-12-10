@@ -66,6 +66,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como organizar sua Barbearia com WSoft',
+        'description' => 'Guia prático para organizar agenda, comissões e financeiro da sua barbearia usando o sistema WSoft.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Organize a Agenda',
+                'text' => 'Adeus papel e caneta. Tenha uma visão clara de todos os horários, encaixes e profissionais disponíveis.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Controle Comissões',
+                'text' => 'Defina a porcentagem de comissão para cada barbeiro e deixe o sistema calcular tudo automaticamente. Fechamento de caixa sem dor de cabeça.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Fidelize Clientes',
+                'text' => 'Saiba quem são seus melhores clientes, a frequência de corte e ofereça um atendimento personalizado.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp

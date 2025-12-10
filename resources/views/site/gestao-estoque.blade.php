@@ -58,6 +58,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como fazer Controle de Estoque com WSoft',
+        'description' => 'Guia prático para cadastrar produtos, movimentar estoque e analisar resultados.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Cadastre seus Produtos',
+                'text' => 'Registre seus produtos com código de barras, preço de custo, preço de venda, estoque mínimo e validade.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Movimente o Estoque',
+                'text' => 'As vendas dão baixa automática no estoque. As compras alimentam o estoque. Tudo integrado e automático.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Acompanhe os Resultados',
+                'text' => 'Veja quais produtos vendem mais (Curva ABC), quais estão parados e qual o lucro real da sua operação.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp

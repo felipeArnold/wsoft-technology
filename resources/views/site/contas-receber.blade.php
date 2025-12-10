@@ -58,6 +58,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como controlar Contas a Receber com WSoft',
+        'description' => 'Guia rápido para registrar vendas, monitorar recebimentos e reduzir inadimplência com o sistema WSoft.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Registre a Venda',
+                'text' => 'Ao fazer uma venda, o sistema já lança o contas a receber automaticamente, seja boleto, cartão ou crediário.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Monitore Recebimentos',
+                'text' => 'Acompanhe dia a dia o que deve entrar no caixa. Identifique atrasos rapidamente e tome providências.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Baixa e Conciliação',
+                'text' => 'Confirme o recebimento com um clique. O valor entra no saldo do caixa ou banco e o cliente fica em dia.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp

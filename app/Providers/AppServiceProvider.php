@@ -35,5 +35,8 @@ final class AppServiceProvider extends ServiceProvider
 
         // Register policies
         Gate::policy(Tenant::class, TenantPolicy::class);
+
+        // Register observers
+        \App\Models\Blog\BlogPost::observe(\App\Observers\BlogPostObserver::class);
     }
 }

@@ -1,3 +1,46 @@
+@php
+$structuredData = [
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => 'WSoft Tecnologia',
+        'url' => 'https://www.wsoft.dev.br',
+        'logo' => asset('images/logo.png'),
+        'sameAs' => [
+            'https://www.instagram.com/wsoft.dev.br',
+            'https://www.facebook.com/wsoft.dev.br'
+        ],
+        'contactPoint' => [
+            '@type' => 'ContactPoint',
+            'telephone' => '+55-51-99935-0578',
+            'contactType' => 'customer service',
+            'areaServed' => 'BR',
+            'availableLanguage' => 'Portuguese'
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'SoftwareApplication',
+        'name' => 'WSoft - CRM e Gestão Empresarial',
+        'url' => 'https://www.wsoft.dev.br/landing/crm-gestao',
+        'description' => 'Sistema de CRM completo com controle financeiro, gestão de estoque e vendas. Centralize sua empresa em um só lugar.',
+        'operatingSystem' => 'Web',
+        'applicationCategory' => 'BusinessApplication',
+        'offers' => [
+            '@type' => 'Offer',
+            'price' => '29.90',
+            'priceCurrency' => 'BRL',
+            'url' => 'https://www.wsoft.dev.br/landing/crm-gestao#oferta',
+            'description' => 'Plano Mensal Completo'
+        ],
+        'aggregateRating' => [
+            '@type' => 'AggregateRating',
+            'ratingValue' => '4.8',
+            'ratingCount' => '156'
+        ]
+    ]
+];
+@endphp
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -33,6 +76,10 @@
         gtag('event', 'conversion', {'send_to': 'AW-11559494036/-uoWCOCWoIQaEJTD_4cr'});
     </script>
 
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+    </script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
     <!-- Urgency Banner -->

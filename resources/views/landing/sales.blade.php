@@ -34,6 +34,72 @@
         gtag('event', 'conversion', {'send_to': 'AW-11559494036/-uoWCOCWoIQaEJTD_4cr'});
     </script>
 
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "WSoft - Sistema de Gestão Empresarial",
+                "url": "https://www.wsoft.dev.br/sales",
+                "description": "Sistema de gestão completo para finanças, vendas e estoque. Controle total do seu negócio.",
+                "operatingSystem": "Web",
+                "applicationCategory": "BusinessApplication",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "29.90",
+                    "priceCurrency": "BRL",
+                    "url": "https://www.wsoft.dev.br/sales",
+                    "description": "Oferta Especial Limitada: Sistema Completo + Bônus"
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "ratingCount": "320"
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "É difícil de usar?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Não! O WSoft foi feito para quem não tem tempo a perder. É intuitivo e fácil. Se você sabe usar o WhatsApp, sabe usar o WSoft."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Preciso de um computador potente?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Não. O sistema roda direto no navegador, em qualquer computador, tablet ou celular com internet."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "E se eu não gostar?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Você tem 7 dias para testar. Se achar que não é para você, devolvemos 100% do seu dinheiro. Sem perguntas."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Tem fidelidade?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Nenhuma. Você é livre para cancelar quando quiser."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
     <!-- Urgency Banner -->

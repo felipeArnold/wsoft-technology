@@ -57,6 +57,44 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como desenvolvemos seu software sob medida',
+        'description' => 'Metodologia ágil com entregas incrementais e feedback constante.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Descoberta e Análise',
+                'text' => 'Mergulhamos profundamente no seu negócio para entender seus desafios, processos e objetivos. Cada detalhe importa para criar a solução perfeita.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Design e Prototipação',
+                'text' => 'Antes de escrever uma linha de código, você visualiza exatamente como será seu software. Aprovações claras em cada etapa.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Desenvolvimento Ágil',
+                'text' => 'Desenvolvemos em sprints de 2 semanas com entregas incrementais. Você acompanha a evolução e pode testar funcionalidades antes da conclusão final.',
+                'position' => 3
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Testes e Homologação',
+                'text' => 'Rigoroso processo de testes para garantir que tudo funcione perfeitamente. Sua equipe valida cada funcionalidade antes do lançamento.',
+                'position' => 4
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Implantação e Treinamento',
+                'text' => 'Colocamos seu software em produção com todo suporte necessário. Sua equipe recebe treinamento completo para usar todas as funcionalidades.',
+                'position' => 5
+            ]
+        ]
     ]
 ];
 @endphp

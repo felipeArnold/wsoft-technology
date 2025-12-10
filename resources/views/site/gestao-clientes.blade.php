@@ -66,6 +66,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como organizar a Gestão de Clientes com WSoft',
+        'description' => 'Passo a passo para centralizar dados, acompanhar histórico e vender mais.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Cadastre seus Clientes',
+                'text' => 'Mantenha todos os dados organizados em um só lugar. Registre informações de contato, documentos, endereço e adicione tags para segmentar sua base.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Acompanhe o Histórico',
+                'text' => 'Saiba exatamente o que acontece com cada cliente. Registre atendimentos, ligações, orçamentos e vendas. Tenha uma visão 360º do relacionamento.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Analise e Venda Mais',
+                'text' => 'Tome decisões baseadas em dados. Identifique seus melhores clientes, produtos mais vendidos e oportunidades de crescimento com relatórios automáticos.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp

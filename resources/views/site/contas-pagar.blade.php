@@ -58,6 +58,44 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como organizar Contas a Pagar com WSoft',
+        'description' => 'Passo a passo completo para gerenciar contas a pagar, evitar juros e organizar o financeiro da sua empresa com WSoft.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Cadastre seus Fornecedores',
+                'text' => 'Organize todos os fornecedores em um único lugar. Tenha acesso rápido a contatos, dados bancários e histórico de pagamentos.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Lance suas Contas a Pagar',
+                'text' => 'Registre todas as despesas: luz, água, aluguel, fornecedores, impostos. Configure repetições mensais para contas fixas.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Acompanhe Vencimentos',
+                'text' => 'Visualize no calendário tudo que precisa ser pago. Alertas automáticos evitam esquecimentos e juros desnecessários.',
+                'position' => 3
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Controle a Movimentação Financeira',
+                'text' => 'Dê baixa nos pagamentos realizados e acompanhe o saldo em cada conta bancária. Tenha controle total do fluxo de caixa.',
+                'position' => 4
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Analise com Relatórios',
+                'text' => 'Relatórios completos mostram para onde está indo seu dinheiro. Identifique oportunidades de economia e melhore resultados.',
+                'position' => 5
+            ]
+        ]
     ]
 ];
 @endphp

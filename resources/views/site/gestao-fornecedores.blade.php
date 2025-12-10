@@ -58,6 +58,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como gerenciar Fornecedores com WSoft',
+        'description' => 'Passo a passo para cadastrar parceiros, registrar compras e reduzir custos.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Cadastre seus Fornecedores',
+                'text' => 'Centralize os dados de contato, CNPJ, prazos de pagamento e categorias de produtos de cada fornecedor.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Registre as Compras',
+                'text' => 'Lance as notas de entrada e mantenha o histórico de tudo que foi comprado. O sistema atualiza o estoque e o financeiro automaticamente.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Analise Custos',
+                'text' => 'Saiba quanto você está gastando com cada fornecedor e identifique oportunidades de economia.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp

@@ -50,6 +50,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como usar Assinatura Digital no WSoft',
+        'description' => 'Passo a passo para criar, enviar e assinar documentos digitalmente com validade jurídica usando o sistema WSoft.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Crie Seu Documento',
+                'text' => 'Gere contratos, propostas ou ordens de serviço direto no sistema. Use templates prontos ou personalize do seu jeito.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Envie para Assinatura',
+                'text' => 'Com um clique, envie o documento por e-mail ou WhatsApp. O cliente recebe um link seguro para assinar de qualquer dispositivo.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Documento Assinado e Arquivado',
+                'text' => 'Assim que assinado, o documento retorna automaticamente ao sistema. Tudo salvo na nuvem com certificado digital e validade jurídica.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp

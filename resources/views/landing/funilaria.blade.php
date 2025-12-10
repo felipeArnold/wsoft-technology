@@ -84,6 +84,32 @@ $structuredData = [
                 ]
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'Como gerenciar Funilaria e Pintura com WSoft',
+        'description' => 'Passo a passo para organizar sua funilaria, das Ordens de Serviço ao financeiro.',
+        'step' => [
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Crie a Ordem de Serviço',
+                'text' => 'Registre a entrada do veículo, adicione fotos do estado inicial, relate o defeito e inicie o atendimento com profissionalismo.',
+                'position' => 1
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Adicione Peças e Serviços',
+                'text' => 'Lance as peças utilizadas (com baixa automática no estoque) e a mão de obra. O sistema calcula o total na hora.',
+                'position' => 2
+            ],
+            [
+                '@type' => 'HowToStep',
+                'name' => 'Receba e Fidelize',
+                'text' => 'Envie a OS pronta pelo WhatsApp, receba o pagamento e mantenha o histórico do cliente para futuras revisões.',
+                'position' => 3
+            ]
+        ]
     ]
 ];
 @endphp
