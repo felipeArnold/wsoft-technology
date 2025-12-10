@@ -13,7 +13,14 @@ final class SalesOverview extends BaseWidget
 {
     use InteractsWithPageTable;
 
+    protected int | string | array $columnSpan = 'full';
+
     protected ?string $pollingInterval = null;
+
+    protected function getColumns(): int
+    {
+        return 4;
+    }
 
     protected function getTablePage(): string
     {
@@ -55,17 +62,14 @@ final class SalesOverview extends BaseWidget
                 ->description("{$completedSales} concluídas · {$pendingSales} pendentes · {$cancelledSales} canceladas")
                 ->color('primary')
                 ->chart($trendData),
-
             Stat::make('Faturamento', 'R$ '.number_format((float) $totalAmount, 2, ',', '.'))
                 ->icon('heroicon-o-banknotes')
                 ->description('Ticket médio: R$ '.number_format((float) $averageTicket, 2, ',', '.'))
                 ->color('success'),
-
             Stat::make('Concluídas', 'R$ '.number_format((float) $completedAmount, 2, ',', '.'))
                 ->icon('heroicon-o-check-circle')
                 ->description("{$completedSales} vendas ({$completedPercent}% do total)")
                 ->color('success'),
-
             Stat::make('Pendentes', 'R$ '.number_format((float) $pendingAmount, 2, ',', '.'))
                 ->icon('heroicon-o-clock')
                 ->description("{$pendingSales} vendas ({$pendingPercent}% do total)")
