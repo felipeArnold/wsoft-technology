@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('document', 14)->nullable();
             $table->string('website')->nullable();
-            $table->enum('type', ['vehicle', 'other'])->default('other');
+            $table->string('type')->default('other');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['name', 'slug', 'document']);

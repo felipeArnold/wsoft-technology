@@ -103,8 +103,8 @@ $structuredData = [
     title="na Sua Empresa"
     highlight="Zero Inadimplência"
     description="Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional."
-    primaryButtonText="Falar no WhatsApp"
-    primaryButtonUrl="https://wa.me/5551999350578"
+    primaryButtonText="Teste grátis por 7 dias"
+    primaryButtonUrl="/app/register"
     secondaryButtonText="Como Funciona"
     secondaryButtonUrl="#como-funciona"
     :idealFor="['Lojas de Roupas', 'Mercadinhos', 'Prestadores de Serviço', 'Escolas e Cursos']"
@@ -312,7 +312,11 @@ $structuredData = [
             </article>
         </div>
 
-        <div class="text-center mt-16">
+        <div class="mt-16 flex flex-col md:flex-row justify-center items-center gap-4">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
             <a
                 href="https://wa.me/5551999350578"
                 target="_blank"
@@ -339,6 +343,13 @@ $structuredData = [
             gradient="from-blue-900 to-blue-700"
             icon="fa-solid fa-shield-halved"
         />
+
+        <div class="mt-8 text-center bg-slate-50 pb-12">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
     </div>
 </section>
 

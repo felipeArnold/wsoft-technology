@@ -103,45 +103,48 @@ $structuredData = [
     title="Movimentação Financeira em Tempo Real"
     highlight="Controle sua "
     description="Tenha o controle total do seu dinheiro. Acompanhe entradas, saídas e saiba exatamente qual é o lucro da sua empresa em tempo real."
-    primaryButtonText="Falar no WhatsApp"
-    primaryButtonUrl="https://wa.me/5551999350578"
+    primaryButtonText="Teste grátis por 7 dias"
+    primaryButtonUrl="/app/register"
     secondaryButtonText="Como Funciona"
     secondaryButtonUrl="#como-funciona"
     :idealFor="['Todas as Empresas', 'MEI', 'Autônomos', 'Comércio e Serviços']"
     gradient="from-blue-950 to-blue-700"
     highlightGradient="from-blue-200 to-white"
 >
-    <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
-        <div class="flex items-center justify-between mb-6">
-            <div>
-                <p class="text-sm uppercase text-blue-200 font-semibold tracking-wider">Saldo Atual</p>
-                <h3 class="text-3xl font-bold mt-1">R$ 15.420,00</h3>
-                <div class="flex items-center gap-2 mt-2">
-                    <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">+ R$ 2.300 hoje</span>
+    <div class="relative">
+        <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <p class="text-sm uppercase text-blue-200 font-semibold tracking-wider">Saldo Atual</p>
+                    <h3 class="text-3xl font-bold mt-1">R$ 15.420,00</h3>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">+ R$ 2.300 hoje</span>
+                    </div>
+                </div>
+                <div class="h-12 w-12 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-400/30">
+                    <i class="fa-solid fa-scale-balanced text-blue-300 text-xl"></i>
                 </div>
             </div>
-            <div class="h-12 w-12 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-400/30">
-                <i class="fa-solid fa-scale-balanced text-blue-300 text-xl"></i>
-            </div>
-        </div>
-        <div class="space-y-4">
-            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                <div class="flex items-center justify-between mb-2">
-                    <p class="text-xs text-blue-200">Lucro no Mês</p>
-                    <span class="text-sm font-bold text-blue-300">R$ 8.900,00</span>
-                </div>
-                <div class="h-2 bg-blue-950/50 rounded-full overflow-hidden">
-                    <div class="h-full bg-gradient-to-r from-blue-400 to-cyan-400 w-[70%] rounded-full"></div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-4">
                 <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <p class="text-xs text-blue-200">Entradas</p>
-                    <p class="text-2xl font-bold mt-1 text-green-400">R$ 25k</p>
+                    <div class="flex items-center justify-between mb-2">
+                        <p class="text-xs text-blue-200">Lucro no Mês</p>
+                        <span class="text-sm font-bold text-blue-300">R$ 8.900,00</span>
+                    </div>
+                    <div class="h-2 bg-blue-950/50 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-blue-400 to-cyan-400 w-[70%] rounded-full"></div>
+                    </div>
                 </div>
-                <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <p class="text-xs text-blue-200">Saídas</p>
-                    <p class="text-2xl font-bold mt-1 text-red-400">R$ 16k</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                        <p class="text-xs text-blue-200">Entradas</p>
+                        <p class="text-2xl font-bold mt-1 text-green-400">R$ 25k</p>
+                    </div>
+                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                        <p class="text-xs text-blue-200">Saídas</p>
+                        <p class="text-2xl font-bold mt-1 text-red-400">R$ 16k</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,12 +172,13 @@ $structuredData = [
     ]"
     gainCardBg="bg-blue-900"
     gainCardBorder="border-blue-800"
-    gainTitleColor="text-blue-400"
-    gainCheckColor="text-blue-400"
+    gainTitleColor="text-emerald-400"
+    gainCheckColor="text-emerald-400"
     gainBadgeBg="bg-blue-500"
     gainBadgeText="COM WSOFT"
     buttonColor="blue"
 />
+
 
 <!-- How it Works (New Section) -->
 <section id="como-funciona" class="py-24 bg-slate-50">
@@ -272,6 +276,14 @@ $structuredData = [
                     </ul>
                 </div>
             </div>
+
+        </div>
+
+        <div class="mt-16 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>
@@ -314,7 +326,11 @@ $structuredData = [
             </article>
         </div>
 
-        <div class="text-center mt-16">
+        <div class="mt-16 flex flex-col md:flex-row justify-center items-center gap-4">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
             <a
                 href="https://wa.me/5551999350578"
                 target="_blank"
@@ -341,6 +357,13 @@ $structuredData = [
             gradient="from-blue-900 to-blue-700"
             icon="fa-solid fa-chart-line"
         />
+
+        <div class="mt-8 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
     </div>
 </section>
 

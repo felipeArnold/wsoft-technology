@@ -113,6 +113,8 @@ $structuredData = [
     description="Centralize cadastros, histórico de vendas e atendimentos em um único lugar. O sistema de gestão de clientes ideal para quem quer crescer."
     :idealFor="['Lojas e Comércio', 'Prestadores de Serviço', 'Oficinas e Mecânicas', 'Consultórios']"
     idealForTitle="Perfeito para:"
+    primaryButtonText="Teste grátis por 7 dias"
+    primaryButtonUrl="/app/register"
 >
     <div class="relative">
         <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
@@ -358,7 +360,11 @@ $structuredData = [
             </article>
         </div>
 
-        <div class="text-center mt-16">
+        <div class="mt-16 flex flex-col md:flex-row justify-center items-center gap-4">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
             <a
                 href="https://wa.me/5551999350578"
                 target="_blank"
@@ -436,6 +442,13 @@ $structuredData = [
                 gradient="from-blue-900 to-blue-700"
                 icon="fa-solid fa-users"
             />
+
+            <div class="mt-8 text-center">
+                <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                    <span>Testar Gratuitamente</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
     </div>
 </section>

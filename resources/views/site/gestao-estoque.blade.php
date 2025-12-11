@@ -109,14 +109,14 @@ $structuredData = [
                 Sistema de Controle de Estoque
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Gestão de Estoque</span> sem Complicação
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Controle de Estoque</span> para Pequenas Empresas
             </h1>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
-                Evite perdas, controle a validade e saiba exatamente o que você tem na loja. O <strong>sistema de gestão de estoque</strong> que sua empresa precisa.
+                O sistema completo para você gerenciar seu estoque, controlar a validade dos produtos e evitar perdas.
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                    Testar por 7 Dias
+                    Teste grátis por 7 dias
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
                 <a href="#como-funciona" class="inline-flex justify-center items-center rounded-xl border border-white/30 text-white font-semibold px-8 py-4 hover:bg-white/10 transition backdrop-blur-sm">

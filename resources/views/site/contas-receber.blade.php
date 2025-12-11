@@ -102,8 +102,9 @@ $structuredData = [
     badge="Controle de Contas a Receber"
     highlight="Receba em Dia"
     title="e Cresça"
-    description="Não perca o controle das suas vendas a prazo. Gerencie recebimentos, reduza a inadimplência e tenha caixa saudável."
-    :idealFor="['Lojas', 'Clínicas', 'Escolas', 'Prestadores de Serviço']"
+    description="Controle todos os seus recebimentos em um só lugar. Automatize cobranças, reduza a inadimplência e tenha previsibilidade de caixa."
+    primaryButtonText="Teste grátis por 7 dias"
+    primaryButtonUrl="/app/register"
 >
     <div class="relative">
         <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
@@ -268,6 +269,14 @@ $structuredData = [
                     </ul>
                 </div>
             </div>
+
+        </div>
+
+        <div class="mt-16 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>
@@ -310,7 +319,11 @@ $structuredData = [
             </article>
         </div>
 
-        <div class="text-center mt-16">
+        <div class="mt-16 flex flex-col md:flex-row justify-center items-center gap-4">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
             <a
                 href="https://wa.me/5551999350578"
                 target="_blank"
@@ -333,6 +346,13 @@ $structuredData = [
                 gradient="from-blue-900 to-blue-700"
                 icon="fa-solid fa-file-excel"
             />
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>

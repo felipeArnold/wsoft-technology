@@ -3,7 +3,7 @@
     'badgeIcon' => true,
     'title',
     'highlight',
-    'description',
+    'description' => null,
     'primaryButtonText' => 'Testar por 7 Dias',
     'primaryButtonUrl' => '/app/register',
     'secondaryButtonText' => 'Como Funciona',

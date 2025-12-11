@@ -142,7 +142,7 @@ $structuredData = [
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="#cadastro" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                    Começar Agora
+                    Teste grátis por 7 dias
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
                 <a href="#como-funciona" class="inline-flex justify-center items-center rounded-xl border border-white/30 text-white font-semibold px-8 py-4 hover:bg-white/10 transition backdrop-blur-sm">
@@ -337,6 +337,13 @@ $structuredData = [
                 </div>
             </div>
         </div>
+
+        <div class="mt-16 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
     </div>
 </section>
 
@@ -392,6 +399,13 @@ $structuredData = [
                 <p class="text-sm text-slate-600 leading-relaxed">Organize e agende os serviços. Evite filas e melhore o atendimento na sua oficina.</p>
             </article>
         </div>
+
+        <div class="mt-16 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
     </div>
 </section>
 
@@ -431,6 +445,13 @@ $structuredData = [
                     <p class="mt-3 text-slate-600">Equipe pronta para te ajudar via WhatsApp. Nada de robôs, fale com gente.</p>
                 </div>
             </article>
+        </div>
+
+        <div class="mt-16 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>

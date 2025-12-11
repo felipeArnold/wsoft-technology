@@ -6,6 +6,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Clusters\Settings\SettingsCluster;
 use App\Filament\Pages\Auth\RegisterTeam;
+use App\Filament\Pages\Auth\RegisterUser;
 use App\Filament\Resources\Suggestions\SuggestionResource;
 use App\Models\Tenant;
 use Filament\Actions\Action;
@@ -40,11 +41,12 @@ final class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('app')
             ->login()
-            ->registration()
+            ->registration(RegisterUser::class)
             ->passwordReset()
             ->emailVerification()
             ->emailChangeVerification()
             ->profile()
+            ->unsavedChangesAlerts()
             ->tenant(
                 Tenant::class,
                 slugAttribute: 'slug'

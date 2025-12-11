@@ -114,8 +114,9 @@ $structuredData = [
     badge="Controle de Contas a Pagar"
     highlight="Contas a Pagar"
     title="sob Controle"
-    description="Chega de pagar juros por esquecimento. Centralize suas despesas, receba alertas de vencimento e tenha previsibilidade financeira."
-    :idealFor="['Pequenas Empresas', 'MEI', 'Prestadores de Serviço', 'Comércio']"
+    description="Organize suas contas a pagar e evite multas e juros. Tenha visão total das suas despesas e mantenha seu financeiro sempre em dia."
+    primaryButtonText="Teste grátis por 7 dias"
+    primaryButtonUrl="/app/register"
 >
     <div class="relative">
         <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
@@ -375,6 +376,13 @@ $structuredData = [
                 </div>
             </div>
         </div>
+
+        <div class="mt-16 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
     </div>
 </section>
 
@@ -442,7 +450,11 @@ $structuredData = [
             </article>
         </div>
 
-        <div class="text-center mt-16">
+        <div class="mt-16 flex flex-col md:flex-row justify-center items-center gap-4">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
             <a
                 href="https://wa.me/5551999350578"
                 target="_blank"
@@ -470,6 +482,13 @@ $structuredData = [
                 gradient="from-blue-900 to-blue-700"
                 icon="fa-solid fa-file-excel"
             />
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>
@@ -521,6 +540,13 @@ $structuredData = [
                 <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur-3xl opacity-20"></div>
                 <img src="/images/crm/dashboard-preview.png" alt="Sistema Financeiro Completo" class="relative rounded-2xl shadow-2xl border border-slate-200" loading="lazy" decoding="async">
             </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Testar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>
