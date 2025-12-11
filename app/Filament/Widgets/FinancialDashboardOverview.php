@@ -28,16 +28,16 @@ final class FinancialDashboardOverview extends BaseWidget
                 $q->where('type', 'receivables');
             });
 
-        $totalToReceive = (clone $receivablesQuery)
+        $totalToReceive = (float) (clone $receivablesQuery)
             ->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL, PaymentStatusEnum::OVERDUE])
             ->sum('amount');
 
-        $receivedThisMonth = (clone $receivablesQuery)
+        $receivedThisMonth = (float) (clone $receivablesQuery)
             ->where('status', PaymentStatusEnum::PAID)
             ->whereBetween('paid_at', [$startOfMonth, $endOfMonth])
             ->sum('amount');
 
-        $overdueReceivables = (clone $receivablesQuery)
+        $overdueReceivables = (float) (clone $receivablesQuery)
             ->where(function ($q) use ($today): void {
                 $q->where('status', PaymentStatusEnum::OVERDUE)
                     ->orWhere(function ($q2) use ($today): void {
@@ -53,16 +53,16 @@ final class FinancialDashboardOverview extends BaseWidget
                 $q->where('type', 'payables');
             });
 
-        $totalToPay = (clone $payablesQuery)
+        $totalToPay = (float) (clone $payablesQuery)
             ->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL, PaymentStatusEnum::OVERDUE])
             ->sum('amount');
 
-        $paidThisMonth = (clone $payablesQuery)
+        $paidThisMonth = (float) (clone $payablesQuery)
             ->where('status', PaymentStatusEnum::PAID)
             ->whereBetween('paid_at', [$startOfMonth, $endOfMonth])
             ->sum('amount');
 
-        $overduePayables = (clone $payablesQuery)
+        $overduePayables = (float) (clone $payablesQuery)
             ->where(function ($q) use ($today): void {
                 $q->where('status', PaymentStatusEnum::OVERDUE)
                     ->orWhere(function ($q2) use ($today): void {
