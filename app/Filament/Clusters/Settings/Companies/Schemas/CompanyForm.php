@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Clusters\Settings\Companies\Schemas;
 
+use App\Enums\TenantType;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -51,10 +53,13 @@ final class CompanyForm
                             ->maxLength(255)
                             ->columnSpan(1),
 
-                        TextInput::make('type')
-                            ->label('Tipo')
-                            ->maxLength(255)
-                            ->default('company')
+                        Select::make('type')
+                            ->label('Tipo de Empresa')
+                            ->options(TenantType::toSelectArray())
+                            ->default(TenantType::OTHER->value)
+                            ->required()
+                            ->searchable()
+                            ->helperText('Selecione o tipo de negócio da sua empresa')
                             ->columnSpan(1),
                     ])
                     ->columnSpanFull()
