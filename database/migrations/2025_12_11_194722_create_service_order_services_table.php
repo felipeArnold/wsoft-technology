@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
             $table->foreignId('service_order_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('service_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreign('service_id')
+                ->references('id')
+                ->on('services')
+                ->nullOnDelete();
+            $table->foreignId('service_id')->nullable();
             $table->string('service_name');
             $table->integer('quantity')->default(1);
             $table->decimal('unit_price', 10, 2)->default(0);
