@@ -22,3 +22,15 @@ Schedule::command('blog:generate-daily --publish')
     ->onFailure(function () {
         Log::error('Falha ao gerar post de blog diário via schedule');
     });
+
+// Agenda envio de notificações de trial e cadastro incompleto
+Schedule::command('trial:notify')
+    ->dailyAt('10:00')
+    ->timezone('America/Sao_Paulo')
+    ->withoutOverlapping()
+    ->onSuccess(function () {
+        Log::info('Notificações de trial enviadas com sucesso via schedule');
+    })
+    ->onFailure(function () {
+        Log::error('Falha ao enviar notificações de trial via schedule');
+    });
