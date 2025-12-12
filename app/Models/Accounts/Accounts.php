@@ -7,6 +7,7 @@ namespace App\Models\Accounts;
 use App\Enum\AccountsReceivable\PaymentMethodEnum;
 use App\Helpers\FormatterHelper;
 use App\Models\Person\Person;
+use App\Models\ServiceOrder;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -44,6 +45,11 @@ final class Accounts extends Model
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);
+    }
+
+    public function serviceOrder(): BelongsTo
+    {
+        return $this->belongsTo(ServiceOrder::class);
     }
 
     public function installments(): HasMany

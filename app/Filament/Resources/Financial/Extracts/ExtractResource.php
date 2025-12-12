@@ -19,7 +19,7 @@ final class ExtractResource extends Resource
 {
     protected static ?string $model = Accounts::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::PresentationChartBar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPresentationChartBar;
 
     protected static string|null|UnitEnum $navigationGroup = 'Financeiro';
 

@@ -22,7 +22,7 @@ final class EnvelopeResource extends Resource
 {
     protected static ?string $model = Envelope::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::Envelope;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -44,20 +44,10 @@ final class EnvelopeResource extends Resource
         return EnvelopesTable::configure($table);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
             'index' => ListEnvelopes::route('/'),
-            //            'create' => CreateEnvelope::route('/create'),
-            //            'view' => ViewEnvelope::route('/{record}'),
-            //            'edit' => EditEnvelope::route('/{record}/edit'),
         ];
     }
 }

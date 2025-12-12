@@ -46,7 +46,6 @@ final class AppPanelProvider extends PanelProvider
             ->emailVerification()
             ->emailChangeVerification()
             ->profile()
-            ->unsavedChangesAlerts()
             ->tenant(
                 Tenant::class,
                 slugAttribute: 'slug'

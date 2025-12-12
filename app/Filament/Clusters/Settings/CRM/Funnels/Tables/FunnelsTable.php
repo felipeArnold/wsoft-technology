@@ -7,6 +7,7 @@ namespace App\Filament\Clusters\Settings\CRM\Funnels\Tables;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -82,10 +83,9 @@ final class FunnelsTable
             ->emptyStateHeading('Nenhum funil encontrado')
             ->emptyStateDescription('Crie um novo funil para começar a gerenciar suas etapas.')
             ->emptyStateActions([
-                Action::make('create')
-                    ->label('Criar Funil')
-                    ->icon('heroicon-o-plus')
-                    ->modalHeading('Criar Novo Funil'),
+                CreateAction::make()
+                    ->label('Novo Funil')
+                    ->icon('heroicon-o-plus'),
             ]);
     }
 }

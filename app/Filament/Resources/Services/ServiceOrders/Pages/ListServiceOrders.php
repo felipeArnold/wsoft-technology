@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Services\ServiceOrders\Pages;
 
+use App\Filament\Clusters\Settings\Services\ServiceResource;
 use App\Filament\Resources\Services\ServiceOrders\ServiceOrderResource;
 use App\Models\ServiceOrder;
+use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -59,6 +61,14 @@ final class ListServiceOrders extends ListRecords
     {
         return [
             CreateAction::make()->label('Nova Ordem')->icon('heroicon-o-plus'),
+            Action::make('settings')
+                ->hiddenLabel()
+                ->color('default')
+                ->outlined()
+                ->icon('heroicon-o-cog-6-tooth')
+                ->url(ServiceResource::getUrl('index'))
+                ->openUrlInNewTab(false)
+                ->tooltip('Gerenciar Serviços'),
         ];
     }
 }
