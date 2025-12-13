@@ -334,7 +334,7 @@ $structuredData = [
                 <div class="order-2">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-purple-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="/images/crm/reports.png" alt="Painel do Parceiro" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <img src="/images/crm/dashboard-preview.png" alt="Painel do Parceiro" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
