@@ -119,3 +119,6 @@ Route::view('/crm-gestao-empresarial', 'landing.crm-gestao')->name('landing.crm-
 
 // Landing Page para Software Sob Medida
 Route::view('/software-sob-medida', 'site.software-sob-medida')->name('landing.software-sob-medida');
+
+// Landing Page para Sistema White Label
+Route::view('/sistema-white-label-para-revenda', 'site.white-label')->name('landing.white-label');
