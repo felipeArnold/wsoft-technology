@@ -10,12 +10,13 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section as SchemaSection;
-use Filament\Schemas\Components\TextInput as SchemaTextInput;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use STS\FilamentImpersonate\Actions\Impersonate;
 
 final class UserResource extends Resource
 {
@@ -52,11 +53,11 @@ final class UserResource extends Resource
             ->schema([
                 SchemaSection::make('Informações do Usuário')
                     ->schema([
-                        SchemaTextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nome')
                             ->required()
                             ->maxLength(255),
-                        SchemaTextInput::make('email')
+                       TextInput::make('email')
                             ->label('Email')
                             ->email()
                             ->required()

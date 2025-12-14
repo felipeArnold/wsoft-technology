@@ -12,9 +12,9 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section as SchemaSection;
-use Filament\Schemas\Components\TextInput as SchemaTextInput;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -55,22 +55,22 @@ final class TenantResource extends Resource
             ->schema([
                 SchemaSection::make('Informações da Empresa')
                     ->schema([
-                        SchemaTextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nome')
                             ->required()
                             ->maxLength(255),
-                        SchemaTextInput::make('slug')
+                        TextInput::make('slug')
                             ->label('Slug')
                             ->disabled()
                             ->dehydrated(false),
-                        SchemaTextInput::make('document')
+                        TextInput::make('document')
                             ->label('CNPJ/CPF')
                             ->maxLength(18),
-                        SchemaTextInput::make('email')
+                        TextInput::make('email')
                             ->label('Email')
                             ->email()
                             ->maxLength(255),
-                        SchemaTextInput::make('phone')
+                        TextInput::make('phone')
                             ->label('Telefone')
                             ->tel()
                             ->maxLength(20),
@@ -79,25 +79,25 @@ final class TenantResource extends Resource
 
                 SchemaSection::make('Endereço')
                     ->schema([
-                        SchemaTextInput::make('zip_code')
+                        TextInput::make('zip_code')
                             ->label('CEP')
                             ->maxLength(9),
-                        SchemaTextInput::make('street')
+                        TextInput::make('street')
                             ->label('Rua')
                             ->maxLength(255),
-                        SchemaTextInput::make('number')
+                        TextInput::make('number')
                             ->label('Número')
                             ->maxLength(10),
-                        SchemaTextInput::make('complement')
+                        TextInput::make('complement')
                             ->label('Complemento')
                             ->maxLength(255),
-                        SchemaTextInput::make('neighborhood')
+                        TextInput::make('neighborhood')
                             ->label('Bairro')
                             ->maxLength(255),
-                        SchemaTextInput::make('city')
+                        TextInput::make('city')
                             ->label('Cidade')
                             ->maxLength(255),
-                        SchemaTextInput::make('state')
+                        TextInput::make('state')
                             ->label('Estado')
                             ->maxLength(2),
                     ])
