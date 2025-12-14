@@ -9,6 +9,7 @@ use App\Filament\Exports\ActivityExportExporter;
 use App\Filament\Imports\ActivitiesImporter;
 use App\Filament\Imports\ProductImporter;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ExportAction;
@@ -180,9 +181,14 @@ final class ActivitiesTable
             ])
             ->striped()
             ->defaultSort('due_date', 'asc')
-            ->emptyStateIcon('heroicon-o-clipboard-document-check')
-            ->emptyStateHeading('Nenhuma atividade encontrada')
-            ->emptyStateDescription('Crie sua primeira atividade para começar a gerenciar suas tarefas e compromissos.')
+            ->emptyStateIcon('heroicon-o-calendar')
+            ->emptyStateHeading('Nenhuma agenda encontrada')
+            ->emptyStateDescription('Crie sua primeira agenda para começar a gerenciar suas tarefas e compromissos.')
+            ->emptyStateActions([
+                CreateAction::make()
+                    ->label('Nova agenda')
+                    ->icon('heroicon-o-plus'),
+            ])
             ->defaultPaginationPageOption(25);
     }
 }

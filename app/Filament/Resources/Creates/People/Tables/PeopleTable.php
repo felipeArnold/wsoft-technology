@@ -7,6 +7,7 @@ namespace App\Filament\Resources\Creates\People\Tables;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Models\Person\Person;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -126,6 +127,12 @@ final class PeopleTable
             ->striped()
             ->emptyStateIcon('heroicon-o-users')
             ->emptyStateHeading('Nenhum cliente encontrado')
-            ->emptyStateDescription('Comece criando seu primeiro cliente clicando no botão abaixo');
+            ->emptyStateDescription('Comece criando seu primeiro cliente clicando no botão abaixo')
+            ->emptyStateActions([
+                CreateAction::make()
+                    ->label('Novo Cliente')
+                    ->icon('heroicon-o-plus'),
+            ])
+            ->defaultPaginationPageOption(25);
     }
 }

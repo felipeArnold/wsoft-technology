@@ -20,11 +20,11 @@ final class ActivityResource extends Resource
 {
     protected static ?string $model = Activity::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendar;
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $label = 'Atividades';
+    protected static ?string $label = 'Agenda';
 
     protected static string|UnitEnum|null $navigationGroup = 'Cadastros';
 
@@ -67,13 +67,6 @@ final class ActivityResource extends Resource
     public static function table(Table $table): Table
     {
         return ActivitiesTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

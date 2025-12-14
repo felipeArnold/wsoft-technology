@@ -14,6 +14,7 @@ use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Repeater\TableColumn;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -85,6 +86,14 @@ final class SaleForm
                                         Repeater::make('items')
                                             ->relationship()
                                             ->hiddenLabel()
+                                            ->compact()
+                                            ->table([
+                                                TableColumn::make('Produto'),
+                                                TableColumn::make('Quantidade'),
+                                                TableColumn::make('Preço Unit.'),
+                                                TableColumn::make('Desconto'),
+                                                TableColumn::make('Total'),
+                                            ])
                                             ->schema([
                                                 Select::make('product_id')
                                                     ->label('Produto')
@@ -113,7 +122,7 @@ final class SaleForm
                                                     ->default(1)
                                                     ->minValue(1)
                                                     ->required()
-                                                    ->reactive()
+                                                    ->live(onBlur: true)
                                                     ->afterStateUpdated(function ($state, $get, $set): void {
                                                         $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
                                                         $discount = FormatterHelper::toDecimal($get('discount'));
@@ -125,7 +134,7 @@ final class SaleForm
                                                     ->label('Preço Unit.')
                                                     ->default('0,00')
                                                     ->required()
-                                                    ->reactive()
+                                                    ->live(onBlur: true)
                                                     ->afterStateUpdated(function ($state, $get, $set): void {
                                                         $unitPrice = FormatterHelper::toDecimal($state);
                                                         $quantity = (int) $get('quantity');
@@ -137,7 +146,7 @@ final class SaleForm
                                                 PtbrMoney::make('discount')
                                                     ->label('Desconto')
                                                     ->default('0,00')
-                                                    ->reactive()
+                                                    ->live(onBlur: true)
                                                     ->afterStateUpdated(function ($state, $get, $set): void {
                                                         $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
                                                         $quantity = (int) $get('quantity');
@@ -223,7 +232,7 @@ final class SaleForm
                                         PtbrMoney::make('discount_amount')
                                             ->label('Desconto Geral')
                                             ->default('0,00')
-                                            ->reactive()
+                                            ->live(onBlur: true)
                                             ->afterStateUpdated(function ($state, $get, $set): void {
                                                 $subtotal = FormatterHelper::toDecimal($get('subtotal'));
                                                 $discount = FormatterHelper::toDecimal($state);

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Filament\Clusters\Settings\Services\ServiceResource;
 use App\Filament\Components\PtbrMoney;
 use App\Helpers\FormatterHelper;
 use App\Models\Accounts\Accounts;
 use App\Models\Concerns\Categorizable;
 use App\Models\Person\Person;
 use App\Observers\ServiceOrderObserver;
+use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DatePicker;
@@ -183,7 +185,6 @@ final class ServiceOrder extends Model
                                 ->schema([
                                     RichEditor::make('description')
                                         ->label('Descrição')
-                                        ->required()
                                         ->columnSpanFull(),
                                     RichEditor::make('observations')
                                         ->label('Observações')
@@ -297,123 +298,133 @@ final class ServiceOrder extends Model
     {
         return Section::make('Serviços')
             ->description('Adicione os serviços prestados nesta ordem')
-            ->icon('heroicon-o-wrench-screwdriver')
-            ->schema([
-                Repeater::make('serviceOrderServices')
-                    ->relationship()
-                    ->hiddenLabel()
-                    ->compact()
-                    ->hiddenLabel()
-                    ->default([])
-                    ->compact(true)
-                    ->table([
-                        TableColumn::make('Serviço'),
-                        TableColumn::make('Qtd'),
-                        TableColumn::make('Preço Unit.'),
-                        TableColumn::make('Desconto'),
-                        TableColumn::make('Total'),
-                    ])
-                    ->schema([
-                        Select::make('service_id')
-                            ->label('Serviço')
-                            ->placeholder('Selecione o serviço')
-                            ->options(fn () => Service::pluck('name', 'id'))
-                            ->native(false)
-                            ->searchable()
-                            ->required()
-                            ->reactive()
-                            ->afterStateUpdated(function ($state, $set): void {
-                                if ($state) {
-                                    $service = Service::query()->find($state);
-                                    if ($service) {
-                                        $set('service_name', $service->name);
-                                        $set('unit_price', FormatterHelper::money($service->price));
-                                        $discount = FormatterHelper::toDecimal($service->discount);
-                                        $total = $service->price - $discount;
-                                        $set('discount', FormatterHelper::money($discount));
-                                        $set('total', FormatterHelper::money($total));
+           ->afterHeader([
+               Action::make('settings')
+                   ->label('Configurações de Serviços')
+                   ->color('default')
+                   ->outlined()
+                   ->icon('heroicon-o-cog-6-tooth')
+                   ->url(ServiceResource::getUrl('index'))
+                   ->openUrlInNewTab(true)
+                   ->tooltip('Gerenciar Serviços'),
+            ])
+                ->icon('heroicon-o-wrench-screwdriver')
+                ->schema([
+                    Repeater::make('serviceOrderServices')
+                        ->relationship()
+                        ->hiddenLabel()
+                        ->compact()
+                        ->hiddenLabel()
+                        ->default([])
+                        ->compact(true)
+                        ->table([
+                            TableColumn::make('Serviço'),
+                            TableColumn::make('Qtd'),
+                            TableColumn::make('Preço Unit.'),
+                            TableColumn::make('Desconto'),
+                            TableColumn::make('Total'),
+                        ])
+                        ->schema([
+                            Select::make('service_id')
+                                ->label('Serviço')
+                                ->placeholder('Selecione o serviço')
+                                ->options(fn () => Service::pluck('name', 'id'))
+                                ->native(false)
+                                ->searchable()
+                                ->required()
+                                ->reactive()
+                                ->afterStateUpdated(function ($state, $set): void {
+                                    if ($state) {
+                                        $service = Service::query()->find($state);
+                                        if ($service) {
+                                            $set('service_name', $service->name);
+                                            $set('unit_price', FormatterHelper::money($service->price));
+                                            $discount = FormatterHelper::toDecimal($service->discount);
+                                            $total = $service->price - $discount;
+                                            $set('discount', FormatterHelper::money($discount));
+                                            $set('total', FormatterHelper::money($total));
+                                        }
                                     }
-                                }
-                            })
-                            ->columnSpan(4),
-                        Hidden::make('service_name'),
-                        TextInput::make('quantity')
-                            ->label('Qtd')
-                            ->numeric()
-                            ->default(1)
-                            ->minValue(1)
-                            ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(function ($state, $get, $set): void {
-                                $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
-                                $discount = FormatterHelper::toDecimal($get('discount'));
-                                $total = ($unitPrice * (int) $state) - $discount;
-                                $set('total', FormatterHelper::money($total));
-                                self::recalculateTotals($get, $set);
-                            })
-                            ->columnSpan(2),
-                        PtbrMoney::make('unit_price')
-                            ->label('Preço Unit.')
-                            ->default('0,00')
-                            ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(function ($state, $get, $set): void {
-                                $unitPrice = FormatterHelper::toDecimal($state);
-                                $quantity = (int) $get('quantity');
-                                $discount = FormatterHelper::toDecimal($get('discount'));
-                                $total = ($unitPrice * $quantity) - $discount;
-                                $set('total', FormatterHelper::money($total));
-                                self::recalculateTotals($get, $set);
-                            })
-                            ->columnSpan(2),
-                        PtbrMoney::make('discount')
-                            ->label('Desconto')
-                            ->default('0,00')
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(function ($state, $get, $set): void {
-                                $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
-                                $quantity = (int) $get('quantity');
-                                $discount = FormatterHelper::toDecimal($state);
-                                $total = ($unitPrice * $quantity) - $discount;
-                                $set('total', FormatterHelper::money($total));
-                                self::recalculateTotals($get, $set);
-                            })
-                            ->columnSpan(2),
-                        PtbrMoney::make('total')
-                            ->label('Total')
-                            ->default('0,00')
-                            ->disabled()
-                            ->dehydrated()
-                            ->columnSpan(2),
-                    ])
-                    ->columns(12)
-                    ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
-                        $data['tenant_id'] = Filament::getTenant()->id;
-                        $data['unit_price'] = FormatterHelper::toDecimal($data['unit_price']);
-                        $data['discount'] = FormatterHelper::toDecimal($data['discount']);
-                        $data['total'] = FormatterHelper::toDecimal($data['total']);
+                                })
+                                ->columnSpan(4),
+                            Hidden::make('service_name'),
+                            TextInput::make('quantity')
+                                ->label('Qtd')
+                                ->numeric()
+                                ->default(1)
+                                ->minValue(1)
+                                ->required()
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function ($state, $get, $set): void {
+                                    $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
+                                    $discount = FormatterHelper::toDecimal($get('discount'));
+                                    $total = ($unitPrice * (int) $state) - $discount;
+                                    $set('total', FormatterHelper::money($total));
+                                    self::recalculateTotals($get, $set);
+                                })
+                                ->columnSpan(2),
+                            PtbrMoney::make('unit_price')
+                                ->label('Preço Unit.')
+                                ->default('0,00')
+                                ->required()
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function ($state, $get, $set): void {
+                                    $unitPrice = FormatterHelper::toDecimal($state);
+                                    $quantity = (int) $get('quantity');
+                                    $discount = FormatterHelper::toDecimal($get('discount'));
+                                    $total = ($unitPrice * $quantity) - $discount;
+                                    $set('total', FormatterHelper::money($total));
+                                    self::recalculateTotals($get, $set);
+                                })
+                                ->columnSpan(2),
+                            PtbrMoney::make('discount')
+                                ->label('Desconto')
+                                ->default('0,00')
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function ($state, $get, $set): void {
+                                    $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
+                                    $quantity = (int) $get('quantity');
+                                    $discount = FormatterHelper::toDecimal($state);
+                                    $total = ($unitPrice * $quantity) - $discount;
+                                    $set('total', FormatterHelper::money($total));
+                                    self::recalculateTotals($get, $set);
+                                })
+                                ->columnSpan(2),
+                            PtbrMoney::make('total')
+                                ->label('Total')
+                                ->default('0,00')
+                                ->disabled()
+                                ->dehydrated()
+                                ->columnSpan(2),
+                        ])
+                        ->columns(12)
+                        ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
+                            $data['tenant_id'] = Filament::getTenant()->id;
+                            $data['unit_price'] = FormatterHelper::toDecimal($data['unit_price']);
+                            $data['discount'] = FormatterHelper::toDecimal($data['discount']);
+                            $data['total'] = FormatterHelper::toDecimal($data['total']);
 
-                        return $data;
-                    })
-                    ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
-                        $data['tenant_id'] = Filament::getTenant()->id;
-                        $data['unit_price'] = FormatterHelper::toDecimal($data['unit_price']);
-                        $data['discount'] = FormatterHelper::toDecimal($data['discount']);
-                        $data['total'] = FormatterHelper::toDecimal($data['total']);
+                            return $data;
+                        })
+                        ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
+                            $data['tenant_id'] = Filament::getTenant()->id;
+                            $data['unit_price'] = FormatterHelper::toDecimal($data['unit_price']);
+                            $data['discount'] = FormatterHelper::toDecimal($data['discount']);
+                            $data['total'] = FormatterHelper::toDecimal($data['total']);
 
-                        return $data;
-                    })
-                    ->addActionLabel('Adicionar Serviço')
-                    ->reorderable()
-                    ->collapsible()
-                    ->cloneable()
-                    ->defaultItems(0)
-                    ->live()
-                    ->afterStateUpdated(function ($get, $set): void {
-                        self::recalculateTotals($get, $set);
-                    })
-                    ->columnSpanFull(),
-            ]);
+                            return $data;
+                        })
+                        ->addActionLabel('Adicionar Serviço')
+                        ->reorderable()
+                        ->collapsible()
+                        ->cloneable()
+                        ->defaultItems(0)
+                        ->live()
+                        ->afterStateUpdated(function ($get, $set): void {
+                            self::recalculateTotals($get, $set);
+                        })
+                        ->columnSpanFull(),
+                ]);
     }
 
     private static function getProductsSection(): Section

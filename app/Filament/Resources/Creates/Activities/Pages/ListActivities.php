@@ -19,7 +19,7 @@ final class ListActivities extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Nova Atividade')
+                ->label('Nova agenda')
                 ->icon('heroicon-o-plus'),
             ImportAction::make()
                 ->hiddenLabel()

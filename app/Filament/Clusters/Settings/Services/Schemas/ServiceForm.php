@@ -21,7 +21,6 @@ final class ServiceForm
                         TextInput::make('name')
                             ->label('Nome')
                             ->required()
-                            ->unique(ignoreRecord: true)
                             ->maxLength(255),
                         PtbrMoney::make('price')
                             ->label('Preço')

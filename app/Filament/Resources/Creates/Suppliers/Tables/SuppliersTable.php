@@ -7,6 +7,7 @@ namespace App\Filament\Resources\Creates\Suppliers\Tables;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Models\Person\Person;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -97,6 +98,12 @@ final class SuppliersTable
             ->striped()
             ->emptyStateIcon('heroicon-o-building-storefront')
             ->emptyStateHeading('Nenhum fornecedor encontrado')
-            ->emptyStateDescription('Comece criando seu primeiro fornecedor clicando no botão abaixo');
+            ->emptyStateDescription('Comece criando seu primeiro fornecedor clicando no botão abaixo')
+            ->emptyStateActions([
+                CreateAction::make()
+                    ->label('Novo Cliente')
+                    ->icon('heroicon-o-plus'),
+            ])
+            ->defaultPaginationPageOption(25);
     }
 }

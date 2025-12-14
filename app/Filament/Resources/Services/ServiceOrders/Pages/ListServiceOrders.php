@@ -60,7 +60,7 @@ final class ListServiceOrders extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()->label('Nova Ordem')->icon('heroicon-o-plus'),
+            CreateAction::make()->label('Nova OS')->icon('heroicon-o-plus'),
             Action::make('settings')
                 ->hiddenLabel()
                 ->color('default')

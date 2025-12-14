@@ -94,7 +94,7 @@ final class ProductForm
                             ->label('Valor de Custo')
                             ->default(0)
                             ->required()
-                            ->reactive()
+                            ->live(onBlur: true)
                             ->afterStateUpdated(function ($state, callable $set, callable $get): void {
                                 $cost = FormatterHelper::toDecimal($state);
                                 $sale = FormatterHelper::toDecimal($get('price_sale') ?? 0);
@@ -119,7 +119,7 @@ final class ProductForm
                             ->label('Valor de Venda')
                             ->default(0)
                             ->required()
-                            ->reactive()
+                            ->live(onBlur: true)
                             ->afterStateUpdated(function ($state, callable $set, callable $get): void {
                                 $sale = FormatterHelper::toDecimal($state);
                                 $cost = FormatterHelper::toDecimal($get('price_cost') ?? 0);
