@@ -58,6 +58,14 @@ final class OverdueAccounts extends BaseWidget
                     ->searchable()
                     ->limit(50),
 
+                Tables\Columns\TextColumn::make('accounts.categories.name')
+                    ->label('Categorias')
+                    ->badge()
+                    ->color('gray')
+                    ->searchable()
+                    ->separator(',')
+                    ->placeholder('—'),
+
                 Tables\Columns\TextColumn::make('due_date')
                     ->label('Data de Vencimento')
                     ->date('d/m/Y')
@@ -93,6 +101,14 @@ final class OverdueAccounts extends BaseWidget
                             });
                         }
                     }),
+                Tables\Filters\SelectFilter::make('categories')
+                    ->label('Categorias')
+                    ->relationship('accounts.categories', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->native(false)
+                    ->multiple()
+                    ->placeholder('Todas as categorias'),
             ])
             ->defaultSort('due_date', 'asc')
             ->paginated([10, 25, 50]);

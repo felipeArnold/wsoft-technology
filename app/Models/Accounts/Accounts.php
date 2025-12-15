@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 final class Accounts extends Model
 {
@@ -55,6 +56,11 @@ final class Accounts extends Model
     public function installments(): HasMany
     {
         return $this->hasMany(AccountsInstallments::class, 'accounts_id');
+    }
+
+    public function categories(): MorphToMany
+    {
+        return $this->morphToMany(\App\Models\Category::class, 'categorizable');
     }
 
     protected function amount(): Attribute

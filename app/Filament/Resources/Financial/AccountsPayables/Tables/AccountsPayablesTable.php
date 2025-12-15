@@ -99,12 +99,12 @@ final class AccountsPayablesTable
                     ->searchable()
                     ->sortable()
                     ->placeholder('—'),
-                TextColumn::make('accounts.category')
-                    ->label('Categoria')
+                TextColumn::make('accounts.categories.name')
+                    ->label('Categorias')
                     ->badge()
                     ->color('gray')
                     ->searchable()
-                    ->sortable()
+                    ->separator(',')
                     ->placeholder('—'),
                 TextColumn::make('paid_at')
                     ->label('Pago em')
@@ -234,30 +234,22 @@ final class AccountsPayablesTable
                         return $paymentMethod ? 'Forma: '.$paymentMethod->getLabel() : null;
                     }),
 
-                SelectFilter::make('category')
-                    ->label('Categoria')
-                    ->options(function (): array {
-                        return \App\Models\Accounts\Accounts::query()
-                            ->where('type', 'payables')
-                            ->whereNotNull('category')
-                            ->distinct()
-                            ->pluck('category', 'category')
-                            ->toArray();
-                    })
-                    ->query(function ($query, array $data): void {
-                        if (filled($data['value'])) {
-                            $query->whereHas('accounts', fn ($q) => $q->where('category', $data['value']));
-                        }
-                    })
+                SelectFilter::make('categories')
+                    ->label('Categorias')
+                    ->relationship('accounts.categories', 'name')
                     ->searchable()
+                    ->preload()
                     ->native(false)
+                    ->multiple()
                     ->placeholder('Todas as categorias')
                     ->indicateUsing(function (array $data): ?string {
-                        if (! filled($data['value'])) {
+                        if (! filled($data['values']) || empty($data['values'])) {
                             return null;
                         }
 
-                        return 'Categoria: '.$data['value'];
+                        $categories = \App\Models\Category::whereIn('id', $data['values'])->pluck('name')->toArray();
+
+                        return 'Categorias: '.implode(', ', $categories);
                     }),
 
                 Filter::make('amount_range')
@@ -442,7 +434,7 @@ final class AccountsPayablesTable
             ])
             ->groups([
                 Group::make('Status')->collapsible(),
-                Group::make('accounts.category')->label('Categoria')->collapsible(),
+                Group::make('accounts.categories.name')->label('Categorias')->collapsible(),
                 Group::make('accounts.payment_method')->label('Forma de Pagamento')->collapsible(),
             ])
             ->toolbarActions([

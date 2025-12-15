@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Financial\AccountsReceivables\Schemas;
 
 use App\Helpers\FormatterHelper;
+use App\Models\Category;
 use App\Models\Person\Person;
 use App\Models\User;
 use Carbon\Carbon;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
@@ -121,9 +123,9 @@ final class AccountsReceivableForm
                                                             $items[$i]['amount'] = FormatterHelper::money((($i === 0 ? $firstCents : $baseCents) / 100));
                                                             $items[$i]['installment_number'] = $items[$i]['installment_number'] ?? ($i + 1);
                                                             $items[$i]['due_date'] = $items[$i]['due_date'] ?? (
-                                                            $installmentsCount > 1
-                                                                ? Carbon::now()->addMonths($i)->format('Y-m-d')
-                                                                : Carbon::now()->format('Y-m-d')
+                                                                $installmentsCount > 1
+                                                                    ? Carbon::now()->addMonths($i)->format('Y-m-d')
+                                                                    : Carbon::now()->format('Y-m-d')
                                                             );
                                                             $items[$i]['status'] = $items[$i]['status'] ?? 0;
                                                         }
@@ -233,10 +235,6 @@ final class AccountsReceivableForm
                                                     ->searchable()
                                                     ->required()
                                                     ->columnSpan(2),
-                                                TextInput::make('category')
-                                                    ->label('Categoria')
-                                                    ->placeholder('Ex: Vendas, Serviços')
-                                                    ->maxLength(100),
                                                 TextInput::make('reference_number')
                                                     ->label('Número de referência')
                                                     ->placeholder('Ex: NF-001, Pedido-123')
@@ -302,6 +300,24 @@ final class AccountsReceivableForm
                                                     ->default(0.00),
                                             ]),
                                     ]),
+
+                                Section::make('Etiquetas')
+                                    ->icon('heroicon-o-tag')
+                                    ->description('Classifique esta conta com etiquetas')
+                                    ->schema([
+                                        CheckboxList::make('categories')
+                                            ->label('Etiquetas')
+                                            ->relationship('categories', 'name')
+                                            ->options(fn () => Category::query()->pluck('name', 'id'))
+                                            ->searchable()
+                                            ->bulkToggleable()
+                                            ->gridDirection('row')
+                                            ->columns(3)
+                                            ->columnSpanFull(),
+                                    ])
+                                    ->collapsible()
+                                    ->collapsed()
+                                    ->columnSpanFull(),
 
                                 Section::make('Instruções de Pagamento')
                                     ->icon('heroicon-o-document-text')
