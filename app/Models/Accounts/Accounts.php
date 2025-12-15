@@ -10,6 +10,7 @@ use App\Models\Person\Person;
 use App\Models\ServiceOrder;
 use App\Models\Tenant;
 use App\Models\User;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,40 @@ final class Accounts extends Model
         'due_date' => 'date',
         'paid_at' => 'datetime',
     ];
+
+    public static function getAccountsRelation(): array
+    {
+        return [
+            TextColumn::make('parcels')
+                ->label('Parcelas')
+                ->badge()
+                ->formatStateUsing(fn ($state) => $state.' x'),
+            TextColumn::make('amount')
+                ->label('Valor')
+                ->money('BRL')
+                ->sortable(),
+            TextColumn::make('status')
+                ->label('Status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'paid' => 'success',
+                    'open' => 'warning',
+                    'overdue' => 'danger',
+                    'partial' => 'info',
+                    default => 'gray',
+                }),
+            TextColumn::make('payment_method')
+                ->label('Forma de Pagamento')
+                ->placeholder('—'),
+            TextColumn::make('categories.name')
+                ->label('Categorias')
+                ->badge()
+                ->color('gray')
+                ->searchable()
+                ->separator(',')
+                ->placeholder('—'),
+        ];
+    }
 
     public function tenant(): BelongsTo
     {
