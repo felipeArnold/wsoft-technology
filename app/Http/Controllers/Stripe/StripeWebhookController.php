@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Stripe;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tenant;
+use App\Notifications\TrialEndingSoonNotification;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -304,13 +305,13 @@ final class StripeWebhookController extends Controller
         // Notificar todos os usuários do tenant
         $users = $tenant->users;
         if ($users->isNotEmpty()) {
-            Notification::send($users, new TrialEndingSoonNotification($tenant, $subscription));
-
-            Log::info('Trial ending notification sent', [
-                'tenant_id' => $tenant->id,
-                'subscription_id' => $subscription->id,
-                'users_count' => $users->count(),
-            ]);
+//            Notification::send($users, new TrialEndingSoonNotification($tenant, $subscription));
+//
+//            Log::info('Trial ending notification sent', [
+//                'tenant_id' => $tenant->id,
+//                'subscription_id' => $subscription->id,
+//                'users_count' => $users->count(),
+//            ]);
         }
     }
 

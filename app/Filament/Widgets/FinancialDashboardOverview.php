@@ -6,6 +6,7 @@ namespace App\Filament\Widgets;
 
 use App\Enum\AccountsReceivable\PaymentStatusEnum;
 use App\Models\Accounts\AccountsInstallments;
+use Filament\Support\Enums\IconPosition;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\Date;
@@ -32,6 +33,10 @@ final class FinancialDashboardOverview extends BaseWidget
             ->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL, PaymentStatusEnum::OVERDUE])
             ->sum('amount');
 
+        $countToReceive = (int) (clone $receivablesQuery)
+            ->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL, PaymentStatusEnum::OVERDUE])
+            ->count();
+
         $receivedThisMonth = (float) (clone $receivablesQuery)
             ->where('status', PaymentStatusEnum::PAID)
             ->whereBetween('paid_at', [$startOfMonth, $endOfMonth])
@@ -57,6 +62,10 @@ final class FinancialDashboardOverview extends BaseWidget
             ->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL, PaymentStatusEnum::OVERDUE])
             ->sum('amount');
 
+        $countToPay = (int) (clone $payablesQuery)
+            ->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL, PaymentStatusEnum::OVERDUE])
+            ->count();
+
         $paidThisMonth = (float) (clone $payablesQuery)
             ->where('status', PaymentStatusEnum::PAID)
             ->whereBetween('paid_at', [$startOfMonth, $endOfMonth])
@@ -75,33 +84,67 @@ final class FinancialDashboardOverview extends BaseWidget
         // Saldo do mês
         $monthlyBalance = $receivedThisMonth - $paidThisMonth;
 
+        // Calcular saldo do mês anterior para comparação
+        $startOfLastMonth = (clone $today)->subMonth()->startOfMonth();
+        $endOfLastMonth = (clone $today)->subMonth()->endOfMonth();
+
+        $receivedLastMonth = (float) AccountsInstallments::query()
+            ->whereHas('accounts', function ($q): void {
+                $q->where('type', 'receivables');
+            })
+            ->where('status', PaymentStatusEnum::PAID)
+            ->whereBetween('paid_at', [$startOfLastMonth, $endOfLastMonth])
+            ->sum('amount');
+
+        $paidLastMonth = (float) AccountsInstallments::query()
+            ->whereHas('accounts', function ($q): void {
+                $q->where('type', 'payables');
+            })
+            ->where('status', PaymentStatusEnum::PAID)
+            ->whereBetween('paid_at', [$startOfLastMonth, $endOfLastMonth])
+            ->sum('amount');
+
+        $lastMonthBalance = $receivedLastMonth - $paidLastMonth;
+
+        // Calcular variação percentual
+        $balanceVariation = $lastMonthBalance != 0
+            ? (($monthlyBalance - $lastMonthBalance) / abs($lastMonthBalance)) * 100
+            : 0;
+
         // Inadimplência total
         $totalOverdue = $overdueReceivables + $overduePayables;
 
+        // Contar contas em atraso
+        $countOverdue = (int) AccountsInstallments::query()
+            ->where(function ($q) use ($today): void {
+                $q->where('status', PaymentStatusEnum::OVERDUE)
+                    ->orWhere(function ($q2) use ($today): void {
+                        $q2->whereIn('status', [PaymentStatusEnum::UNPAID, PaymentStatusEnum::PARTIAL])
+                            ->whereDate('due_date', '<', $today);
+                    });
+            })
+            ->count();
+
         return [
+            Stat::make('Saldo em caixa', 'R$ '.number_format($monthlyBalance, 2, ',', '.'))
+                ->icon('heroicon-m-currency-dollar')
+                ->description(($balanceVariation >= 0 ? '+ ' : '- ').number_format(abs($balanceVariation), 1, ',', '.').'% vs mês anterior')
+                ->color($monthlyBalance >= 0 ? 'success' : 'danger'),
+
             Stat::make('A Receber', 'R$ '.number_format($totalToReceive, 2, ',', '.'))
-                ->description('Total em aberto')
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
-                ->color('success')
-                ->chart($this->getReceivablesTrend()),
+                ->icon('heroicon-m-arrow-trending-up')
+                ->description($countToReceive.' '.($countToReceive === 1 ? 'conta pendente' : 'contas pendentes'))
+                ->color('success'),
 
             Stat::make('A Pagar', 'R$ '.number_format($totalToPay, 2, ',', '.'))
-                ->description('Total em aberto')
-                ->descriptionIcon('heroicon-m-arrow-trending-down')
-                ->color('danger')
-                ->chart($this->getPayablesTrend()),
-
-            Stat::make('Saldo do Mês', 'R$ '.number_format($monthlyBalance, 2, ',', '.'))
-                ->description($monthlyBalance >= 0 ? 'Positivo' : 'Negativo')
-                ->descriptionIcon($monthlyBalance >= 0 ? 'heroicon-m-check-circle' : 'heroicon-m-exclamation-triangle')
-                ->color($monthlyBalance >= 0 ? 'success' : 'danger')
-                ->chart($this->getMonthlyBalanceTrend()),
+                ->icon('heroicon-m-arrow-trending-down')
+                ->description($countToPay.' '.($countToPay === 1 ? 'conta pendente' : 'contas pendentes'))
+                ->color('danger'),
 
             Stat::make('Inadimplência', 'R$ '.number_format($totalOverdue, 2, ',', '.'))
-                ->description('Valores em atraso')
-                ->descriptionIcon('heroicon-m-exclamation-triangle')
-                ->color($totalOverdue > 0 ? 'danger' : 'success')
-                ->chart($this->getOverdueTrend()),
+                ->icon('heroicon-m-exclamation-triangle')
+                ->description($countOverdue.' '.($countOverdue === 1 ? 'conta atrasada' : 'contas atrasadas'))
+                ->color('danger'),
         ];
     }
 
