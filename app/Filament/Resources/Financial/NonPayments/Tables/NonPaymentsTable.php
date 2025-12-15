@@ -10,6 +10,8 @@ use App\Models\Accounts\AccountsInstallments;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
@@ -157,8 +159,11 @@ final class NonPaymentsTable
                 Group::make('due_date')->label('Mês de Vencimento')->collapsible(),
             ])
             ->recordActions([
+                ViewAction::make()->hiddenLabel()->tooltip('Visualizar Detalhes'),
+                EditAction::make()->hiddenLabel()->tooltip('Editar Parcela'),
                 Action::make('mark_as_paid')
-                    ->label('Marcar como Pago')
+                    ->hiddenLabel()
+                    ->tooltip('Marcar como Pago')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->requiresConfirmation()
@@ -171,7 +176,8 @@ final class NonPaymentsTable
                         ]);
                     }),
                 Action::make('send_reminder')
-                    ->label('Enviar Lembrete')
+                    ->hiddenLabel()
+                    ->tooltip('Enviar Lembrete')
                     ->icon('heroicon-o-envelope')
                     ->color('warning')
                     ->requiresConfirmation()

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Financial\Extracts;
 
+use App\Filament\Resources\Financial\Extracts\Pages\EditExtract;
 use App\Filament\Resources\Financial\Extracts\Pages\ListExtracts;
+use App\Filament\Resources\Financial\Extracts\Pages\ViewExtract;
 use App\Filament\Resources\Financial\Extracts\Schemas\ExtractForm;
 use App\Filament\Resources\Financial\Extracts\Tables\ExtractsTable;
-use App\Models\Accounts\Accounts;
+use App\Models\Accounts\AccountsInstallments;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -17,7 +19,7 @@ use UnitEnum;
 
 final class ExtractResource extends Resource
 {
-    protected static ?string $model = Accounts::class;
+    protected static ?string $model = AccountsInstallments::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPresentationChartBar;
 
