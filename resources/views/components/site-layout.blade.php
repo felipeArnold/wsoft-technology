@@ -234,6 +234,7 @@
                 <ul class="mt-4 space-y-2 text-sm text-slate-300">
                     <li><a href="{{ route('landing.crm-gestao') }}" class="hover:text-white font-semibold">CRM Completo</a></li>
                     <li><a href="{{ route('landing.software-sob-medida') }}" class="hover:text-white font-semibold">Software Sob Medida</a></li>
+                    <li><a href="{{ route('landing.white-label') }}" class="hover:text-white font-semibold">White Label</a></li>
 
                     <li class="pt-3 pb-1">
                         <span class="text-xs uppercase tracking-wider text-slate-600">Financeiro</span>
