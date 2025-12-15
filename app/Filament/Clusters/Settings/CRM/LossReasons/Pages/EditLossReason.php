@@ -20,7 +20,7 @@ final class EditLossReason extends EditRecord
             ViewAction::make(),
             DeleteAction::make()
                 ->disabled(fn ($record) => $record->is_default === true)
-                ->before(function ($record) {
+                ->before(function ($record): void {
                     if ($record->is_default) {
                         throw new Exception('Default loss reasons cannot be deleted.');
                     }

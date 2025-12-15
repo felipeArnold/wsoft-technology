@@ -70,12 +70,12 @@ final class SendTrialNotifications extends Command
         $this->info("🏢 Processando empresas em trial (faltando {$daysBeforeEnd} dias ou menos)...");
 
         // Busca empresas com subscriptions em trial que estão acabando
-        $tenants = Tenant::whereHas('subscriptions', function ($query) use ($daysBeforeEnd) {
+        $tenants = Tenant::whereHas('subscriptions', function ($query) use ($daysBeforeEnd): void {
             $query->whereNotNull('trial_ends_at')
                 ->where('trial_ends_at', '>', now())
                 ->where('trial_ends_at', '<=', now()->addDays($daysBeforeEnd))
                 ->where('stripe_status', 'trialing');
-        })->with(['subscriptions' => function ($query) use ($daysBeforeEnd) {
+        })->with(['subscriptions' => function ($query) use ($daysBeforeEnd): void {
             $query->whereNotNull('trial_ends_at')
                 ->where('trial_ends_at', '>', now())
                 ->where('trial_ends_at', '<=', now()->addDays($daysBeforeEnd))

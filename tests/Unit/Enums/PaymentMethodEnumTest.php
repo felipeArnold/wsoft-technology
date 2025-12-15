@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Enum\AccountsReceivable\PaymentMethodEnum;
 
-describe('PaymentMethodEnum', function () {
-    it('has all expected cases', function () {
+describe('PaymentMethodEnum', function (): void {
+    it('has all expected cases', function (): void {
         $cases = PaymentMethodEnum::cases();
 
         expect($cases)->toHaveCount(8)
@@ -19,7 +19,7 @@ describe('PaymentMethodEnum', function () {
             ->and(in_array(PaymentMethodEnum::CREDIT_CARD, $cases, true))->toBeTrue();
     });
 
-    it('returns correct labels', function () {
+    it('returns correct labels', function (): void {
         expect(PaymentMethodEnum::CASH->getLabel())->toBe('Dinheiro')
             ->and(PaymentMethodEnum::CREDIT->getLabel())->toBe('Cartão')
             ->and(PaymentMethodEnum::PIX->getLabel())->toBe('PIX')
@@ -30,7 +30,7 @@ describe('PaymentMethodEnum', function () {
             ->and(PaymentMethodEnum::CREDIT_CARD->getLabel())->toBe('Cartão de Crédito');
     });
 
-    it('returns correct colors', function () {
+    it('returns correct colors', function (): void {
         expect(PaymentMethodEnum::CASH->getColor())->toBe('success')
             ->and(PaymentMethodEnum::CREDIT->getColor())->toBe('primary')
             ->and(PaymentMethodEnum::PIX->getColor())->toBe('warning')
@@ -41,7 +41,7 @@ describe('PaymentMethodEnum', function () {
             ->and(PaymentMethodEnum::CREDIT_CARD->getColor())->toBe('primary');
     });
 
-    it('returns correct icons', function () {
+    it('returns correct icons', function (): void {
         expect(PaymentMethodEnum::CASH->getIcon())->toBe('heroicon-o-currency-dollar')
             ->and(PaymentMethodEnum::CREDIT->getIcon())->toBe('heroicon-o-credit-card')
             ->and(PaymentMethodEnum::PIX->getIcon())->toBe('heroicon-o-qr-code')
@@ -52,7 +52,7 @@ describe('PaymentMethodEnum', function () {
             ->and(PaymentMethodEnum::CREDIT_CARD->getIcon())->toBe('heroicon-o-credit-card');
     });
 
-    it('has correct string values', function () {
+    it('has correct string values', function (): void {
         expect(PaymentMethodEnum::CASH->value)->toBe('cash')
             ->and(PaymentMethodEnum::CREDIT->value)->toBe('card')
             ->and(PaymentMethodEnum::PIX->value)->toBe('pix')
@@ -63,7 +63,7 @@ describe('PaymentMethodEnum', function () {
             ->and(PaymentMethodEnum::CREDIT_CARD->value)->toBe('credit_card');
     });
 
-    it('implements required interfaces', function () {
+    it('implements required interfaces', function (): void {
         expect(PaymentMethodEnum::CASH)
             ->toBeInstanceOf(Filament\Support\Contracts\HasLabel::class)
             ->toBeInstanceOf(Filament\Support\Contracts\HasColor::class)

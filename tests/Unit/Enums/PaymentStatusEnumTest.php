@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Enum\AccountsReceivable\PaymentStatusEnum;
 
-describe('PaymentStatusEnum', function () {
-    it('has all expected cases', function () {
+describe('PaymentStatusEnum', function (): void {
+    it('has all expected cases', function (): void {
         $cases = PaymentStatusEnum::cases();
 
         expect($cases)->toHaveCount(5)
@@ -16,7 +16,7 @@ describe('PaymentStatusEnum', function () {
             ->and(in_array(PaymentStatusEnum::PARTIAL, $cases, true))->toBeTrue();
     });
 
-    it('returns correct labels', function () {
+    it('returns correct labels', function (): void {
         expect(PaymentStatusEnum::UNPAID->getLabel())->toBe('Em aberto')
             ->and(PaymentStatusEnum::PAID->getLabel())->toBe('Pago')
             ->and(PaymentStatusEnum::OVERDUE->getLabel())->toBe('Vencido')
@@ -24,7 +24,7 @@ describe('PaymentStatusEnum', function () {
             ->and(PaymentStatusEnum::PARTIAL->getLabel())->toBe('Parcial');
     });
 
-    it('returns correct colors', function () {
+    it('returns correct colors', function (): void {
         expect(PaymentStatusEnum::UNPAID->getColor())->toBe('warning')
             ->and(PaymentStatusEnum::PAID->getColor())->toBe('success')
             ->and(PaymentStatusEnum::OVERDUE->getColor())->toBe('danger')
@@ -32,7 +32,7 @@ describe('PaymentStatusEnum', function () {
             ->and(PaymentStatusEnum::PARTIAL->getColor())->toBe('info');
     });
 
-    it('returns correct icons', function () {
+    it('returns correct icons', function (): void {
         expect(PaymentStatusEnum::UNPAID->getIcon())->toBe('heroicon-o-clock')
             ->and(PaymentStatusEnum::PAID->getIcon())->toBe('heroicon-o-check-circle')
             ->and(PaymentStatusEnum::OVERDUE->getIcon())->toBe('heroicon-o-exclamation-triangle')
@@ -40,7 +40,7 @@ describe('PaymentStatusEnum', function () {
             ->and(PaymentStatusEnum::PARTIAL->getIcon())->toBe('heroicon-o-minus-circle');
     });
 
-    it('has correct integer values', function () {
+    it('has correct integer values', function (): void {
         expect(PaymentStatusEnum::UNPAID->value)->toBe(0)
             ->and(PaymentStatusEnum::PAID->value)->toBe(1)
             ->and(PaymentStatusEnum::OVERDUE->value)->toBe(2)
@@ -48,7 +48,7 @@ describe('PaymentStatusEnum', function () {
             ->and(PaymentStatusEnum::PARTIAL->value)->toBe(4);
     });
 
-    it('implements required interfaces', function () {
+    it('implements required interfaces', function (): void {
         expect(PaymentStatusEnum::UNPAID)
             ->toBeInstanceOf(Filament\Support\Contracts\HasLabel::class)
             ->toBeInstanceOf(Filament\Support\Contracts\HasColor::class)

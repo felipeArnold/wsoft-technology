@@ -79,7 +79,7 @@ final class LossReasonsTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->before(function ($records) {
+                        ->before(function ($records): void {
                             foreach ($records as $record) {
                                 if ($record->is_default) {
                                     throw new Exception('Default loss reasons cannot be deleted.');

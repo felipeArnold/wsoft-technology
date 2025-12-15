@@ -16,10 +16,10 @@ Schedule::command('blog:generate-daily --publish')
     ->dailyAt('09:00')
     ->timezone('America/Sao_Paulo')
     ->withoutOverlapping()
-    ->onSuccess(function () {
+    ->onSuccess(function (): void {
         Log::info('Post de blog diário gerado com sucesso via schedule');
     })
-    ->onFailure(function () {
+    ->onFailure(function (): void {
         Log::error('Falha ao gerar post de blog diário via schedule');
     });
 
@@ -28,9 +28,9 @@ Schedule::command('trial:notify')
     ->dailyAt('10:00')
     ->timezone('America/Sao_Paulo')
     ->withoutOverlapping()
-    ->onSuccess(function () {
+    ->onSuccess(function (): void {
         Log::info('Notificações de trial enviadas com sucesso via schedule');
     })
-    ->onFailure(function () {
+    ->onFailure(function (): void {
         Log::error('Falha ao enviar notificações de trial via schedule');
     });
