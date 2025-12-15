@@ -34,7 +34,7 @@ final class Accounts extends Model
         'paid_at' => 'datetime',
     ];
 
-    public static function getAccountsRelation(): array
+    public static function getTableColumns(): array
     {
         return [
             TextColumn::make('parcels')

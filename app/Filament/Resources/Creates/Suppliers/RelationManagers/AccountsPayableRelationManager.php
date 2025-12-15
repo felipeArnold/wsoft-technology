@@ -28,7 +28,7 @@ final class AccountsPayableRelationManager extends RelationManager
     {
         return $table
             ->modifyQueryUsing(fn (Builder $query) => $query->where('type', 'payables'))
-            ->columns(Accounts::getAccountsRelation())
+            ->columns(Accounts::getTableColumns())
             ->recordActions([
                 Action::make('edit')
                     ->label('Editar')
