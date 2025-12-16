@@ -75,7 +75,6 @@ final class Person extends Model
                         ->label('CPF/CNPJ')
                         ->dynamic()
                         ->reactive()
-                        ->required()
                         ->columnSpan(1)
                         ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
 
@@ -323,7 +322,6 @@ final class Person extends Model
                         ->label('CPF/CNPJ')
                         ->dynamic()
                         ->reactive()
-                        ->required()
                         ->columnSpan(1)
                         ->visible(fn ($get) => mb_strlen(preg_replace('/\D/', '', $get('document') ?? '')) !== 14),
 
