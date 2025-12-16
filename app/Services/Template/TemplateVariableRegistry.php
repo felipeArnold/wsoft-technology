@@ -38,36 +38,47 @@ final class TemplateVariableRegistry
      */
     public static function render(string $template, TemplateContext $context, array $data): string
     {
+        $replacements = match ($context) {
+            TemplateContext::ServiceOrder => self::renderServiceOrder($data),
+        };
+
+        return strtr($template, $replacements);
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, string>
+     */
+    private static function renderServiceOrder(array $data): array
+    {
         $replacements = [];
 
-        if ($context === TemplateContext::ServiceOrder) {
-            /** @var ServiceOrder|null $order */
-            $order = $data['serviceOrder'] ?? null;
-            if ($order !== null) {
-                $replacements = [
-                    '{{service_order.number}}' => (string) $order->getAttribute('number'),
-                    '{{service_order.status}}' => (string) $order->getAttribute('status'),
-                    '{{service_order.priority}}' => (string) $order->getAttribute('priority'),
-                    '{{service_order.opening_date}}' => optional($order->getAttribute('opening_date'))?->format('d/m/Y') ?? '',
-                    '{{service_order.expected_completion_date}}' => optional($order->getAttribute('expected_completion_date'))?->format('d/m/Y') ?? '',
-                    '{{service_order.completion_date}}' => optional($order->getAttribute('completion_date'))?->format('d/m/Y') ?? '',
-                    '{{service_order.total_value}}' => (string) $order->getAttribute('total_value'),
-                    '{{service_order.labor_value}}' => (string) $order->getAttribute('labor_value'),
-                    '{{service_order.parts_value}}' => (string) $order->getAttribute('parts_value'),
-                    '{{service_order.description}}' => (string) $order->getAttribute('description'),
-                    '{{service_order.observations}}' => (string) $order->getAttribute('observations'),
-                ];
+        /** @var ServiceOrder|null $order */
+        $order = $data['serviceOrder'] ?? null;
+        if ($order !== null) {
+            $replacements = [
+                '{{service_order.number}}' => (string) $order->getAttribute('number'),
+                '{{service_order.status}}' => (string) $order->getAttribute('status'),
+                '{{service_order.priority}}' => (string) $order->getAttribute('priority'),
+                '{{service_order.opening_date}}' => optional($order->getAttribute('opening_date'))?->format('d/m/Y') ?? '',
+                '{{service_order.expected_completion_date}}' => optional($order->getAttribute('expected_completion_date'))?->format('d/m/Y') ?? '',
+                '{{service_order.completion_date}}' => optional($order->getAttribute('completion_date'))?->format('d/m/Y') ?? '',
+                '{{service_order.total_value}}' => (string) $order->getAttribute('total_value'),
+                '{{service_order.labor_value}}' => (string) $order->getAttribute('labor_value'),
+                '{{service_order.parts_value}}' => (string) $order->getAttribute('parts_value'),
+                '{{service_order.description}}' => (string) $order->getAttribute('description'),
+                '{{service_order.observations}}' => (string) $order->getAttribute('observations'),
+            ];
 
-                $person = $order->relationLoaded('person') ? $order->getRelation('person') : $order->person()->first();
-                if ($person !== null) {
-                    $replacements['{{customer.name}}'] = (string) $person->getAttribute('name');
-                    // pick first email if exists
-                    $email = method_exists($person, 'emails') ? $person->emails()->first() : null;
-                    $replacements['{{customer.email}}'] = $email?->getAttribute('email') ?? '';
-                }
+            $person = $order->relationLoaded('person') ? $order->getRelation('person') : $order->person()->first();
+            if ($person !== null) {
+                $replacements['{{customer.name}}'] = (string) $person->getAttribute('name');
+                // pick first email if exists
+                $email = method_exists($person, 'emails') ? $person->emails()->first() : null;
+                $replacements['{{customer.email}}'] = $email?->getAttribute('email') ?? '';
             }
         }
 
-        return strtr($template, $replacements);
+        return $replacements;
     }
 }

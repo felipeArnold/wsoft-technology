@@ -22,7 +22,7 @@ final class SuggestionResource extends Resource
 {
     protected static ?string $model = Suggestion::class;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-light-bulb';
     }
@@ -42,7 +42,7 @@ final class SuggestionResource extends Resource
         return 'Sugestões';
     }
 
-    public static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): string
     {
         return 'Sistema';
     }

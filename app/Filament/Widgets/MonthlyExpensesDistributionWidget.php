@@ -11,58 +11,58 @@ use Filament\Facades\Filament;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
-final class MonthlyCashFlow extends ApexChartWidget
+final class MonthlyExpensesDistributionWidget extends ApexChartWidget
 {
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 4;
 
-    protected static ?string $chartId = 'monthlyCashFlow';
+    protected static ?string $chartId = 'monthlyExpensesDistribution';
 
-    protected static ?string $heading = 'Fluxo de Caixa';
+    protected static ?string $heading = 'Distribuição Mensal de Gastos';
 
-    protected static ?string $subheading = 'Comparativo de receitas e despesas';
+    protected static ?string $subheading = 'Despesas nos últimos 12 meses';
 
     protected int|string|array $columnSpan = 'full';
 
     protected function getOptions(): array
     {
         $months = [];
-        $incomeData = [];
-        $expensesData = [];
-        $balanceData = [];
+        $paidExpenses = [];
+        $unpaidExpenses = [];
 
         // Calcular período dos últimos 12 meses
         $startDate = Carbon::now()->subMonths(11)->startOfMonth();
         $endDate = Carbon::now()->endOfMonth();
 
-        // Detectar o driver do banco de dados para usar a função correta
+        // Detectar o driver do banco de dados
         $driver = DB::getDriverName();
 
-        // Usar paid_at se pago, senão usar due_date
         $dateFormatSql = $driver === 'sqlite'
             ? "strftime('%Y-%m', COALESCE(accounts_installments.paid_at, accounts_installments.due_date))"
             : "DATE_FORMAT(COALESCE(accounts_installments.paid_at, accounts_installments.due_date), '%Y-%m')";
 
         $tenant = Filament::getTenant();
 
-        // Buscar contas pagas (usando paid_at)
+        // Buscar despesas pagas (usando paid_at)
         $paidResults = AccountsInstallments::query()
             ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
-            ->where('accounts_installments.tenant_id', $tenant?->id)
+            ->where('accounts_installments.tenant_id', $tenant->id ?? null)
+            ->where('accounts.type', 'payables')
             ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
             ->whereNotNull('accounts_installments.paid_at')
             ->whereBetween('accounts_installments.paid_at', [$startDate, $endDate])
             ->selectRaw("
                 $dateFormatSql as month,
-                accounts.type,
                 SUM(accounts_installments.amount) as total
             ")
-            ->groupBy('month', 'accounts.type')
-            ->get();
+            ->groupBy('month')
+            ->get()
+            ->keyBy('month');
 
-        // Buscar contas não pagas (usando due_date)
+        // Buscar despesas não pagas (usando due_date)
         $unpaidResults = AccountsInstallments::query()
             ->join('accounts', 'accounts_installments.accounts_id', '=', 'accounts.id')
-            ->where('accounts_installments.tenant_id', $tenant?->id)
+            ->where('accounts_installments.tenant_id', $tenant->id ?? null)
+            ->where('accounts.type', 'payables')
             ->whereIn('accounts_installments.status', [
                 PaymentStatusEnum::UNPAID->value,
                 PaymentStatusEnum::PARTIAL->value,
@@ -73,23 +73,11 @@ final class MonthlyCashFlow extends ApexChartWidget
                 '.($driver === 'sqlite'
                     ? "strftime('%Y-%m', accounts_installments.due_date)"
                     : "DATE_FORMAT(accounts_installments.due_date, '%Y-%m')").' as month,
-                accounts.type,
                 SUM(accounts_installments.amount) as total
             ')
-            ->groupBy('month', 'accounts.type')
-            ->get();
-
-        // Combinar resultados
-        $results = $paidResults->concat($unpaidResults)
             ->groupBy('month')
-            ->map(function ($items) {
-                return $items->groupBy('type')->map(function ($group) {
-                    return (object) [
-                        'type' => $group->first()->type,
-                        'total' => $group->sum('total'),
-                    ];
-                })->values();
-            });
+            ->get()
+            ->keyBy('month');
 
         // Processar dados para os últimos 12 meses
         for ($i = 11; $i >= 0; $i--) {
@@ -99,20 +87,16 @@ final class MonthlyCashFlow extends ApexChartWidget
             // Nome do mês em português
             $months[] = mb_convert_case($date->locale('pt_BR')->isoFormat('MMM'), MB_CASE_TITLE, 'UTF-8');
 
-            // Obter receitas e despesas do mês dos resultados
-            $monthData = $results->get($monthKey, collect());
+            $paid = (float) ($paidResults->get($monthKey)->total ?? 0);
+            $unpaid = (float) ($unpaidResults->get($monthKey)->total ?? 0);
 
-            $income = (float) $monthData->firstWhere('type', 'receivables')?->total ?? 0;
-            $expenses = (float) $monthData->firstWhere('type', 'payables')?->total ?? 0;
-
-            $incomeData[] = $income;
-            $expensesData[] = $expenses;
-            $balanceData[] = $income - $expenses;
+            $paidExpenses[] = $paid;
+            $unpaidExpenses[] = $unpaid;
         }
 
         return [
             'chart' => [
-                'type' => 'area',
+                'type' => 'bar',
                 'height' => 350,
                 'stacked' => true,
                 'toolbar' => [
@@ -124,42 +108,19 @@ final class MonthlyCashFlow extends ApexChartWidget
             ],
             'series' => [
                 [
-                    'name' => 'Receitas',
-                    'data' => $incomeData,
+                    'name' => 'Despesas Pagas',
+                    'data' => $paidExpenses,
                 ],
                 [
-                    'name' => 'Despesas',
-                    'data' => $expensesData,
-                ],
-            ],
-            'responsive' => [
-                [
-                    'breakpoint' => 480,
-                    'options' => [
-                        'legend' => [
-                            'position' => 'bottom',
-                            'offsetX' => -10,
-                            'offsetY' => 0,
-                        ],
-                    ],
+                    'name' => 'Despesas Pendentes',
+                    'data' => $unpaidExpenses,
                 ],
             ],
             'plotOptions' => [
                 'bar' => [
                     'horizontal' => false,
-                    'borderRadius' => 10,
-                    'borderRadiusApplication' => 'around',
-                    'borderRadiusWhenStacked' => 'last',
+                    'borderRadius' => 8,
                     'columnWidth' => '55%',
-                    'dataLabels' => [
-                        'total' => [
-                            'enabled' => true,
-                            'style' => [
-                                'fontSize' => '13px',
-                                'fontWeight' => 900,
-                            ],
-                        ],
-                    ],
                 ],
             ],
             'xaxis' => [
@@ -182,19 +143,20 @@ final class MonthlyCashFlow extends ApexChartWidget
                 ],
             ],
             'legend' => [
-                'position' => 'right',
-                'offsetY' => 40,
+                'position' => 'top',
+                'horizontalAlign' => 'left',
                 'fontFamily' => 'inherit',
             ],
             'fill' => [
                 'opacity' => 1,
             ],
-            'colors' => ['#10b981', '#ef4444', '#3b82f6'],
+            'colors' => ['#ef4444', '#f59e0b'],
             'dataLabels' => [
                 'enabled' => false,
             ],
             'grid' => [
                 'show' => true,
+                'borderColor' => '#e5e7eb',
             ],
             'tooltip' => [
                 'enabled' => true,

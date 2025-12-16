@@ -12,6 +12,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property array<int, string>|null $documents
+ * @property \Illuminate\Support\Carbon|null $deadline
+ * @property string|null $name
+ * @property string|null $status
+ *
  * @method static \Illuminate\Database\Eloquent\Builder where($column, $operator = null, $value = null, $boolean = 'and')
  * @method static \App\Models\DigitalSignature\Envelope|null find($id, $columns = ['*'])
  */

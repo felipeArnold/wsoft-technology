@@ -102,7 +102,12 @@ PROMPT;
 
         $content = $response->choices[0]->message->content;
 
-        return $this->parseResponse($content, $post->title, $post->category, $post->author);
+        /** @var BlogCategory|null $category */
+        $category = $post->category;
+        /** @var User|null $author */
+        $author = $post->author;
+
+        return $this->parseResponse($content, $post->title, $category, $author);
     }
 
     public function generateSEOMetadata(string $title, string $content): array
@@ -183,9 +188,7 @@ PROMPT;
             throw new Exception('Falha ao se comunicar com a API da OpenAI após múltiplas tentativas.');
         } finally {
             // Restaura o tempo de execução original
-            if ($originalTimeLimit !== false) {
-                set_time_limit((int) $originalTimeLimit);
-            }
+            set_time_limit((int) $originalTimeLimit);
         }
     }
 
@@ -241,8 +244,8 @@ PROMPT;
             'meta_title' => '',
             'meta_description' => '',
             'meta_keywords' => '',
-            'category_id' => $category?->id,
-            'author_id' => $author?->id ?? auth()->id(),
+            'category_id' => $category->id ?? null,
+            'author_id' => $author->id ?? auth()->id(),
             'status' => 'draft',
         ];
 

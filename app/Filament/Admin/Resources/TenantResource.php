@@ -24,7 +24,7 @@ final class TenantResource extends Resource
 {
     protected static ?string $model = Tenant::class;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-building-office';
     }
@@ -44,7 +44,7 @@ final class TenantResource extends Resource
         return 'Empresas';
     }
 
-    public static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): string
     {
         return 'Clientes';
     }

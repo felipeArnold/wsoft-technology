@@ -46,8 +46,9 @@ final class BlogPostResource extends Resource
                 'draft' => 'Rascunho',
                 'published' => 'Publicado',
                 'scheduled' => 'Agendado',
+                default => 'Desconhecido',
             },
-            'Categoria' => $record->category?->name ?? 'Sem categoria',
+            'Categoria' => $record->category->name ?? 'Sem categoria',
         ];
     }
 

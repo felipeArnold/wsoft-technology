@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\DigitalSignature;
 
 use App\Models\DigitalSignature\Envelope;
+use App\Models\DigitalSignature\Signer;
 use Exception;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
@@ -84,7 +85,6 @@ final class ZapSignService
 
             return $data;
         } catch (Exception $e) {
-            dd($e);
             Log::error('Error creating ZApSign document', [
                 'envelope_id' => $envelope->id,
                 'error' => $e->getMessage(),
@@ -265,6 +265,7 @@ final class ZapSignService
         $signers = [];
 
         foreach ($envelope->signers as $signer) {
+            /** @var Signer $signer */
             $signerData = [
                 'name' => $signer->name,
                 'email' => $signer->email,
@@ -307,10 +308,8 @@ final class ZapSignService
 
     /**
      * Determina o método de autenticação baseado no tipo de signatário
-     *
-     * @param  \App\Models\DigitalSignature\Signer  $signer
      */
-    private function getAuthMode($signer): string
+    private function getAuthMode(Signer $signer): string
     {
         // Método padrão: assinatura na tela + token por email
         $authMode = 'assinaturaTela';

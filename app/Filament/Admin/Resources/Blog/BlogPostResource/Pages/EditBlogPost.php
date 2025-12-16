@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Admin\Resources\Blog\BlogPostResource\Pages;
 
 use App\Filament\Admin\Resources\Blog\BlogPostResource\BlogPostResource;
+use App\Models\Blog\BlogPost;
 use App\Services\AI\BlogPostGenerator;
 use Exception;
 use Filament\Actions\Action;
@@ -31,7 +32,9 @@ final class EditBlogPost extends EditRecord
                 ->modalSubmitActionLabel('Melhorar Post')
                 ->action(function (BlogPostGenerator $generator): void {
                     try {
-                        $improvedData = $generator->improveExistingPost($this->record);
+                        /** @var BlogPost $post */
+                        $post = $this->record;
+                        $improvedData = $generator->improveExistingPost($post);
 
                         $this->form->fill($improvedData);
 
@@ -54,9 +57,11 @@ final class EditBlogPost extends EditRecord
                 ->color('info')
                 ->action(function (BlogPostGenerator $generator): void {
                     try {
+                        /** @var BlogPost $post */
+                        $post = $this->record;
                         $seoData = $generator->generateSEOMetadata(
-                            $this->record->title,
-                            $this->record->content,
+                            $post->title,
+                            $post->content,
                         );
 
                         $this->form->fill([

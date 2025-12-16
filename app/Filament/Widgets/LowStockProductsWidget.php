@@ -15,7 +15,7 @@ final class LowStockProductsWidget extends BaseWidget
 
     protected int|string|array $columnSpan = 'full';
 
-    protected static ?int $sort = 6;
+    protected static ?int $sort = 1;
 
     public function table(Table $table): Table
     {

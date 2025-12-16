@@ -16,13 +16,12 @@ use Filament\Schemas\Components\Section as SchemaSection;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use STS\FilamentImpersonate\Actions\Impersonate;
 
 final class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-users';
     }
@@ -42,7 +41,7 @@ final class UserResource extends Resource
         return 'Usuários';
     }
 
-    public static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): string
     {
         return 'Clientes';
     }
@@ -57,7 +56,7 @@ final class UserResource extends Resource
                             ->label('Nome')
                             ->required()
                             ->maxLength(255),
-                       TextInput::make('email')
+                        TextInput::make('email')
                             ->label('Email')
                             ->email()
                             ->required()
