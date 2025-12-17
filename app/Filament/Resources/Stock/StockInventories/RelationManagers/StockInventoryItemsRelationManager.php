@@ -93,6 +93,7 @@ final class StockInventoryItemsRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('product.name')
+            ->modifyQueryUsing(fn ($query) => $query->with(['product']))
             ->columns([
                 TextColumn::make('product.name')
                     ->label('Produto')

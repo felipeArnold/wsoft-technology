@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Blog\BlogPost;
 use App\Models\Tenant;
+use App\Observers\BlogPostObserver;
 use App\Policies\TenantPolicy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
@@ -37,6 +39,6 @@ final class AppServiceProvider extends ServiceProvider
         Gate::policy(Tenant::class, TenantPolicy::class);
 
         // Register observers
-        \App\Models\Blog\BlogPost::observe(\App\Observers\BlogPostObserver::class);
+        BlogPost::observe(BlogPostObserver::class);
     }
 }

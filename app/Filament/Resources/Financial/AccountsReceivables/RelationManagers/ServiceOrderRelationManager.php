@@ -38,6 +38,7 @@ final class ServiceOrderRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('number')
+            ->modifyQueryUsing(fn ($query) => $query->with(['person', 'user', 'categories']))
             ->columns(ServiceOrder::getTableColumns())
             ->headerActions([
                 CreateAction::make(),
