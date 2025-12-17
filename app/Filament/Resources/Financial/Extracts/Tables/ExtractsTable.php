@@ -300,7 +300,7 @@ final class ExtractsTable
                 FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
             ->defaultPaginationPageOption(100)
-            ->paginated([10, 25, 50, 100, 'all'])
+            ->paginationPageOptions([10, 25, 50, 100, 250, 'all'])
             ->striped()
             ->emptyStateIcon('heroicon-o-presentation-chart-bar')
             ->emptyStateHeading('Nenhum extrato encontrado')

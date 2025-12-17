@@ -516,6 +516,8 @@ final class AccountsReceivablesTable
                     ->icon('heroicon-m-plus')
                     ->url('accounts-receivables/create'),
             ])
+            ->defaultPaginationPageOption(100)
+            ->paginationPageOptions([10, 25, 50, 100, 250, 'all'])
             ->recordUrl(function ($record) {
                 return 'accounts-receivables/'.$record->accounts->id.'/edit';
             })

@@ -516,6 +516,8 @@ final class AccountsPayablesTable
                     ->icon('heroicon-m-plus')
                     ->url('accounts-payables/create'),
             ])
+            ->defaultPaginationPageOption(100)
+            ->paginationPageOptions([10, 25, 50, 100, 250, 'all'])
             ->recordUrl(function ($record) {
                 return 'accounts-payables/'.$record->accounts->id.'/edit';
             })

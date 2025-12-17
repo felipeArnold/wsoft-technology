@@ -225,6 +225,8 @@ final class NonPaymentsTable
                     ->label('Ver todas as contas')
                     ->icon('heroicon-m-currency-dollar')
                     ->url('/accounts-receivables'),
-            ]);
+            ])
+            ->defaultPaginationPageOption(100)
+            ->paginationPageOptions([10, 25, 50, 100, 250, 'all']);
     }
 }

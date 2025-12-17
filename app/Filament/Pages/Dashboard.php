@@ -11,10 +11,17 @@ use App\Filament\Widgets\MonthlyCashFlow;
 use App\Filament\Widgets\MonthlyExpensesDistributionWidget;
 use App\Filament\Widgets\OverdueAccounts;
 use App\Filament\Widgets\PaymentMethodsChart;
+use App\Filament\Widgets\RecentStockMovementsWidget;
+use App\Filament\Widgets\SalesByCategoryWidget;
+use App\Filament\Widgets\SalesOverviewWidget;
+use App\Filament\Widgets\SalesRevenueChart;
 use App\Filament\Widgets\ServiceOrdersByStatusChart;
 use App\Filament\Widgets\ServiceOrdersCompletionTrend;
 use App\Filament\Widgets\ServiceOrdersCreationByDayChart;
 use App\Filament\Widgets\ServiceOrdersOverview;
+use App\Filament\Widgets\StockMovementsByTypeWidget;
+use App\Filament\Widgets\StockOverviewWidget;
+use App\Filament\Widgets\StockValueByCategoryWidget;
 use App\Filament\Widgets\TopSellingProductsWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
 use Filament\Schemas\Components\Tabs;
@@ -59,7 +66,10 @@ final class Dashboard extends BaseDashboard
                             ->icon('heroicon-o-shopping-cart')
                             ->schema(
                                 $this->getWidgetsSchemaComponents([
+                                    SalesOverviewWidget::class,
+                                    SalesRevenueChart::class,
                                     TopSellingProductsWidget::class,
+                                    SalesByCategoryWidget::class,
                                 ])
                             ),
 
@@ -78,7 +88,11 @@ final class Dashboard extends BaseDashboard
                             ->icon('heroicon-o-cube')
                             ->schema(
                                 $this->getWidgetsSchemaComponents([
+                                    StockOverviewWidget::class,
+                                    StockMovementsByTypeWidget::class,
+                                    StockValueByCategoryWidget::class,
                                     LowStockProductsWidget::class,
+                                    RecentStockMovementsWidget::class,
                                 ])
                             ),
                     ])
