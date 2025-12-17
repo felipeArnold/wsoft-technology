@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\BusinessMetricsOverview;
+use App\Filament\Widgets\ChurnRateChart;
 use App\Filament\Widgets\ExpensesByCategoryWidget;
 use App\Filament\Widgets\FinancialDashboardOverview;
 use App\Filament\Widgets\LowStockProductsWidget;
+use App\Filament\Widgets\LtvTrendChart;
 use App\Filament\Widgets\MonthlyCashFlow;
 use App\Filament\Widgets\MonthlyExpensesDistributionWidget;
+use App\Filament\Widgets\MrrTrendChart;
 use App\Filament\Widgets\OverdueAccounts;
 use App\Filament\Widgets\PaymentMethodsChart;
 use App\Filament\Widgets\RecentStockMovementsWidget;
@@ -46,6 +50,17 @@ final class Dashboard extends BaseDashboard
                                 $this->getWidgetsSchemaComponents([
                                     FinancialDashboardOverview::class,
                                     MonthlyCashFlow::class,
+                                ])
+                            ),
+
+                        Tabs\Tab::make('Métricas de Negócio')
+                            ->icon('heroicon-o-chart-pie')
+                            ->schema(
+                                $this->getWidgetsSchemaComponents([
+                                    BusinessMetricsOverview::class,
+                                    MrrTrendChart::class,
+                                    LtvTrendChart::class,
+                                    ChurnRateChart::class,
                                 ])
                             ),
 
