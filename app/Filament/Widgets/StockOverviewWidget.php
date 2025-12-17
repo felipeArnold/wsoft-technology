@@ -37,7 +37,7 @@ final class StockOverviewWidget extends BaseWidget
             : 0;
 
         return [
-            Stat::make('Valor Total em Estoque', 'R$ ' . number_format($totalStockValue, 2, ',', '.'))
+            Stat::make('Valor Total em Estoque', 'R$ ' . number_format((float) $totalStockValue, 2, ',', '.'))
                 ->description('Baseado no custo dos produtos')
                 ->descriptionIcon('heroicon-o-currency-dollar')
                 ->color('success')
@@ -53,7 +53,7 @@ final class StockOverviewWidget extends BaseWidget
                 ->descriptionIcon('heroicon-o-arrow-trending-down')
                 ->color('warning'),
 
-            Stat::make('Valor Médio por Produto', 'R$ ' . number_format($averageStockValue, 2, ',', '.'))
+            Stat::make('Valor Médio por Produto', 'R$ ' . number_format((float) $averageStockValue, 2, ',', '.'))
                 ->description('Produtos em estoque')
                 ->descriptionIcon('heroicon-o-chart-bar')
                 ->color('info'),
