@@ -10,4 +10,9 @@ use Filament\Resources\Pages\CreateRecord;
 final class CreateAccountsPayable extends CreateRecord
 {
     protected static string $resource = AccountsPayableResource::class;
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Conta a pagar criada com sucesso';
+    }
 }

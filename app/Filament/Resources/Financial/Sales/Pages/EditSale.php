@@ -26,6 +26,11 @@ final class EditSale extends EditRecord
         return $data;
     }
 
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Venda atualizada com sucesso';
+    }
+
     protected function getHeaderActions(): array
     {
         return [
@@ -75,7 +80,12 @@ final class EditSale extends EditRecord
                     $this->refreshFormData(['status', 'completed_at']);
                 }),
             ViewAction::make(),
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->requiresConfirmation()
+                ->modalHeading('Excluir Venda')
+                ->modalDescription('Tem certeza que deseja excluir esta venda? Esta ação não pode ser desfeita.')
+                ->modalSubmitActionLabel('Sim, excluir')
+                ->successNotificationTitle('Venda excluída com sucesso'),
         ];
     }
 }

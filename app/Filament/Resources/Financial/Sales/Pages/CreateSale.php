@@ -23,4 +23,14 @@ final class CreateSale extends CreateRecord
 
         return $data;
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Venda criada com sucesso';
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('edit', ['record' => $this->record]);
+    }
 }

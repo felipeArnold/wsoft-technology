@@ -13,7 +13,7 @@ final class ServiceOrdersOverview extends BaseWidget
 {
     protected static ?int $sort = 1;
 
-    protected static ?string $loadingIndicator = 'Loading...';
+    protected static bool $isLazy = true;
 
     protected function getStats(): array
     {

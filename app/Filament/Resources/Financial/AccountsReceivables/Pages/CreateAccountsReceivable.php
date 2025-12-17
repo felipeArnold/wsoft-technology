@@ -10,4 +10,9 @@ use Filament\Resources\Pages\CreateRecord;
 final class CreateAccountsReceivable extends CreateRecord
 {
     protected static string $resource = AccountsReceivableResource::class;
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Conta a receber criada com sucesso';
+    }
 }
