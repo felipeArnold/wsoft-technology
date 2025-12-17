@@ -336,6 +336,39 @@ $structuredData = [
                     </ul>
                 </div>
             </div>
+
+            <!-- Step 4 -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">4</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Visão Geral do Negócio</h3>
+                    </div>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Tenha o controle total na palma da mão. Acompanhe gráficos, faturamento e alertas importantes em um único painel inteligente.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Resumo financeiro diário</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Gráficos de desempenho</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Alertas de pendências</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="order-2">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
+                        <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="{{ asset('images/sistema/dashboard/visao-geral.png') }}" alt="Dashboard Visão Geral" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="mt-16 text-center">

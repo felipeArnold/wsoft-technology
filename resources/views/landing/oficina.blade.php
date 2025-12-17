@@ -268,33 +268,64 @@ $structuredData = [
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <div class="aspect-video bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center text-slate-400">
-                            <i class="fa-solid fa-chart-line text-6xl"></i>
-                        </div>
+                        <img src="{{ asset('images/sistema/os/whatsapp-share.png') }}" alt="Envio via WhatsApp" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
                         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">3</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Analise e Cresça</h3>
+                        <h3 class="text-2xl font-bold text-slate-900">Receba e Fidelize</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Tome decisões baseadas em dados. Veja relatórios de vendas, controle de produtos, cadastro de clientes e fornecedores em um único painel.
+                        Envie a OS pronta pelo WhatsApp, receba o pagamento e mantenha o histórico do cliente para futuras revisões.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Relatórios de OS e faturamento</span>
+                            <span>Envio PDF no WhatsApp</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Controle de produtos e estoque</span>
+                            <span>Controle de garantia</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Indicadores de desempenho</span>
+                            <span>Lembretes de revisão</span>
                         </li>
                     </ul>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">4</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Visão Geral do Negócio</h3>
+                    </div>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Tenha o controle total na palma da mão. Acompanhe gráficos, faturamento e alertas importantes em um único painel inteligente.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Resumo financeiro diário</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Gráficos de desempenho</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Alertas de pendências</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="order-2">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
+                        <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="{{ asset('images/sistema/dashboard/visao-geral.png') }}" alt="Dashboard Visão Geral" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                    </div>
                 </div>
             </div>
         </div>
