@@ -10,6 +10,7 @@ use App\Filament\Pages\Auth\RegisterUser;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\Suggestions\SuggestionResource;
 use App\Models\Tenant;
+use App\Notifications\MultiFactorAuthenticationCode;
 use Filament\Actions\Action;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Enums\ThemeMode;
@@ -52,7 +53,9 @@ final class AppPanelProvider extends PanelProvider
             )
             ->tenantRegistration(RegisterTeam::class)
             ->multiFactorAuthentication([
-                EmailAuthentication::make()->codeExpiryMinutes(2),
+                EmailAuthentication::make()
+                    ->codeExpiryMinutes(2)
+                    ->codeNotification(MultiFactorAuthenticationCode::class),
             ])
             ->navigationGroups([
                 'Cadastros',
@@ -112,7 +115,7 @@ final class AppPanelProvider extends PanelProvider
                     ? asset('images/logo-white.png')
                     : asset('images/logo.png')
             )
-            ->brandLogoHeight(fn (): string => Auth::check() ? '4rem' : '5rem')
+            ->brandLogoHeight(fn (): string => Auth::check() ? '3rem' : '5rem')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')

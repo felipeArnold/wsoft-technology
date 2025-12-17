@@ -121,7 +121,7 @@ final class StockInventoriesTable
             ->emptyStateActions([
                 CreateAction::make()
                     ->icon('heroicon-s-plus')
-                    ->label('Nova Movimentação')
+                    ->label('Nova Movimentação'),
             ])
             ->paginated([10, 25, 50, 100]);
     }

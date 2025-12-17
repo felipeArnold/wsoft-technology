@@ -14,6 +14,8 @@ final class ExpensesByCategoryWidget extends ApexChartWidget
 {
     protected static ?int $sort = 3;
 
+    protected int|string|array $columnSpan = 'full';
+
     protected static ?string $chartId = 'expensesByCategory';
 
     protected static ?string $heading = 'Despesas por Categoria';

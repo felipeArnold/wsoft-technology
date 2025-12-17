@@ -53,102 +53,102 @@ final class ServiceOrdersTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-//                Action::make('create_account_receivable')
-//                    ->label('Gerar Conta a Receber')
-//                    ->icon('heroicon-o-currency-dollar')
-//                    ->modalWidth('md')
-//                    ->color('success')
-//                    ->visible(fn (ServiceOrder $record) => $record->total_value > 0 && $record->person_id !== null)
-//                    ->form([
-//                        Select::make('parcels')
-//                            ->label('Parcelas')
-//                            ->options([
-//                                '1' => 'À vista',
-//                                '2' => '2x',
-//                                '3' => '3x',
-//                                '4' => '4x',
-//                                '5' => '5x',
-//                                '6' => '6x',
-//                                '7' => '7x',
-//                                '8' => '8x',
-//                                '9' => '9x',
-//                                '10' => '10x',
-//                                '12' => '12x',
-//                            ])
-//                            ->default('1')
-//                            ->native(false)
-//                            ->required(),
-//                        TextInput::make('days_to_pay')
-//                            ->label('Dia do vencimento')
-//                            ->numeric()
-//                            ->default((int) now()->format('d'))
-//                            ->minValue(1)
-//                            ->maxValue(31)
-//                            ->maxLength(2)
-//                            ->required(),
-//                        Select::make('payment_method')
-//                            ->label('Método de pagamento')
-//                            ->options([
-//                                'cash' => 'Dinheiro',
-//                                'card' => 'Cartão',
-//                                'pix' => 'PIX',
-//                                'bank_transfer' => 'Transferência Bancária',
-//                                'check' => 'Cheque',
-//                                'boleto' => 'Boleto',
-//                                'debit_card' => 'Cartão de Débito',
-//                                'credit_card' => 'Cartão de Crédito',
-//                            ])
-//                            ->default('pix')
-//                            ->native(false)
-//                            ->required(),
-//                    ])
-//                    ->action(function (array $data, ServiceOrder $record): void {
-//                        // Create account receivable
-//                        $account = Accounts::query()->create([
-//                            'tenant_id' => Filament::getTenant()->id,
-//                            'user_id' => $record->user_id,
-//                            'person_id' => $record->person_id,
-//                            'service_order_id' => $record->id,
-//                            'type' => 'receivables',
-//                            'amount' => $record->total_value,
-//                            'parcels' => (int) $data['parcels'],
-//                            'days_to_pay' => (int) $data['days_to_pay'],
-//                            'status' => 'pending',
-//                            'payment_method' => $data['payment_method'],
-//                            'category' => 'Ordem de Serviço',
-//                            'reference_number' => $record->number ?? "OS-{$record->id}",
-//                            'notes' => $record->description,
-//                        ]);
-//
-//                        // Create installments
-//                        $installmentsCount = (int) $data['parcels'];
-//                        $totalCents = (int) round($record->total_value * 100);
-//                        $baseCents = intdiv($totalCents, $installmentsCount);
-//                        $firstCents = $totalCents - ($baseCents * ($installmentsCount - 1));
-//                        $dayOfMonth = (int) $data['days_to_pay'];
-//
-//                        for ($i = 0; $i < $installmentsCount; $i++) {
-//                            $dueDate = now()
-//                                ->copy()
-//                                ->startOfMonth()
-//                                ->addMonths($i)
-//                                ->day($dayOfMonth);
-//
-//                            $account->installments()->create([
-//                                'tenant_id' => Filament::getTenant()->id,
-//                                'installment_number' => $i + 1,
-//                                'amount' => ($i === 0 ? $firstCents : $baseCents) / 100,
-//                                'due_date' => $dueDate,
-//                                'status' => 0,
-//                            ]);
-//                        }
-//
-//                        Notification::make()
-//                            ->title('Conta a receber criada com sucesso')
-//                            ->success()
-//                            ->body('A conta a receber foi gerada a partir da ordem de serviço.')
-//                            ->send();
-//                    }),
+                //                Action::make('create_account_receivable')
+                //                    ->label('Gerar Conta a Receber')
+                //                    ->icon('heroicon-o-currency-dollar')
+                //                    ->modalWidth('md')
+                //                    ->color('success')
+                //                    ->visible(fn (ServiceOrder $record) => $record->total_value > 0 && $record->person_id !== null)
+                //                    ->form([
+                //                        Select::make('parcels')
+                //                            ->label('Parcelas')
+                //                            ->options([
+                //                                '1' => 'À vista',
+                //                                '2' => '2x',
+                //                                '3' => '3x',
+                //                                '4' => '4x',
+                //                                '5' => '5x',
+                //                                '6' => '6x',
+                //                                '7' => '7x',
+                //                                '8' => '8x',
+                //                                '9' => '9x',
+                //                                '10' => '10x',
+                //                                '12' => '12x',
+                //                            ])
+                //                            ->default('1')
+                //                            ->native(false)
+                //                            ->required(),
+                //                        TextInput::make('days_to_pay')
+                //                            ->label('Dia do vencimento')
+                //                            ->numeric()
+                //                            ->default((int) now()->format('d'))
+                //                            ->minValue(1)
+                //                            ->maxValue(31)
+                //                            ->maxLength(2)
+                //                            ->required(),
+                //                        Select::make('payment_method')
+                //                            ->label('Método de pagamento')
+                //                            ->options([
+                //                                'cash' => 'Dinheiro',
+                //                                'card' => 'Cartão',
+                //                                'pix' => 'PIX',
+                //                                'bank_transfer' => 'Transferência Bancária',
+                //                                'check' => 'Cheque',
+                //                                'boleto' => 'Boleto',
+                //                                'debit_card' => 'Cartão de Débito',
+                //                                'credit_card' => 'Cartão de Crédito',
+                //                            ])
+                //                            ->default('pix')
+                //                            ->native(false)
+                //                            ->required(),
+                //                    ])
+                //                    ->action(function (array $data, ServiceOrder $record): void {
+                //                        // Create account receivable
+                //                        $account = Accounts::query()->create([
+                //                            'tenant_id' => Filament::getTenant()->id,
+                //                            'user_id' => $record->user_id,
+                //                            'person_id' => $record->person_id,
+                //                            'service_order_id' => $record->id,
+                //                            'type' => 'receivables',
+                //                            'amount' => $record->total_value,
+                //                            'parcels' => (int) $data['parcels'],
+                //                            'days_to_pay' => (int) $data['days_to_pay'],
+                //                            'status' => 'pending',
+                //                            'payment_method' => $data['payment_method'],
+                //                            'category' => 'Ordem de Serviço',
+                //                            'reference_number' => $record->number ?? "OS-{$record->id}",
+                //                            'notes' => $record->description,
+                //                        ]);
+                //
+                //                        // Create installments
+                //                        $installmentsCount = (int) $data['parcels'];
+                //                        $totalCents = (int) round($record->total_value * 100);
+                //                        $baseCents = intdiv($totalCents, $installmentsCount);
+                //                        $firstCents = $totalCents - ($baseCents * ($installmentsCount - 1));
+                //                        $dayOfMonth = (int) $data['days_to_pay'];
+                //
+                //                        for ($i = 0; $i < $installmentsCount; $i++) {
+                //                            $dueDate = now()
+                //                                ->copy()
+                //                                ->startOfMonth()
+                //                                ->addMonths($i)
+                //                                ->day($dayOfMonth);
+                //
+                //                            $account->installments()->create([
+                //                                'tenant_id' => Filament::getTenant()->id,
+                //                                'installment_number' => $i + 1,
+                //                                'amount' => ($i === 0 ? $firstCents : $baseCents) / 100,
+                //                                'due_date' => $dueDate,
+                //                                'status' => 0,
+                //                            ]);
+                //                        }
+                //
+                //                        Notification::make()
+                //                            ->title('Conta a receber criada com sucesso')
+                //                            ->success()
+                //                            ->body('A conta a receber foi gerada a partir da ordem de serviço.')
+                //                            ->send();
+                //                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

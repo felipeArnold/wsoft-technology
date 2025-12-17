@@ -15,13 +15,13 @@ final class MonthlyCashFlow extends ApexChartWidget
 {
     protected static ?int $sort = 2;
 
+    protected int|string|array $columnSpan = 'full';
+
     protected static ?string $chartId = 'monthlyCashFlow';
 
     protected static ?string $heading = 'Fluxo de Caixa';
 
     protected static ?string $subheading = 'Comparativo de receitas e despesas';
-
-    protected int|string|array $columnSpan = 'full';
 
     protected function getOptions(): array
     {

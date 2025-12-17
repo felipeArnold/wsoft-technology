@@ -22,7 +22,7 @@
         "marcelweidum/filament-expiration-notice": "^1.0",
         "marvinlabs/laravel-discord-logger": "^1.4",
         "openai-php/laravel": "^0.18.0",
-        "resend/resend-laravel": "^1.0",
+        "resend/resend-laravel": "^1.1",
         "resend/resend-php": "^1.0",
         "stechstudio/filament-impersonate": "^4.0"
     },

@@ -9,7 +9,6 @@ use App\Filament\Components\PtbrMoney;
 use App\Helpers\FormatterHelper;
 use App\Models\Product;
 use App\Models\StockMovement;
-use BladeUI\Icons\Components\Icon;
 use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Actions\EditAction;

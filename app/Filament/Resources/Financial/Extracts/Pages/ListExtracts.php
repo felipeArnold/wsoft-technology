@@ -201,6 +201,7 @@ final class ListExtracts extends ListRecords
                         })
                         ->map(function ($group, $key) {
                             $date = Carbon::parse($key.'-01');
+
                             return (object) [
                                 'month_name' => ucfirst($date->translatedFormat('F/Y')),
                                 'receivables' => $group->filter(fn ($i) => $i->accounts->type === 'receivables')->sum('amount'),

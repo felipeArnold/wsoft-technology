@@ -17,6 +17,8 @@ final class PaymentMethodsChart extends ApexChartWidget
 
     protected static ?int $sort = 3;
 
+    protected int|string|array $columnSpan = 'full';
+
     protected function getOptions(): array
     {
         $tenant = Filament::getTenant();
@@ -43,7 +45,6 @@ final class PaymentMethodsChart extends ApexChartWidget
                 $colors[] = $this->getColorForMethod($method);
             }
         }
-
 
         return [
             'chart' => [

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Clusters\Settings\CRM\Funnels\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;

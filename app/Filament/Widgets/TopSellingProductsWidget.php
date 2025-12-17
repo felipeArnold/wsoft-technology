@@ -12,8 +12,9 @@ final class TopSellingProductsWidget extends ApexChartWidget
 {
     protected static ?string $heading = 'Produtos Mais Vendidos';
 
-
     protected static ?int $sort = 4;
+
+    protected int|string|array $columnSpan = 'full';
 
     protected function getOptions(): array
     {

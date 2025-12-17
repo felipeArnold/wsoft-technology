@@ -11,6 +11,10 @@ use App\Filament\Widgets\MonthlyCashFlow;
 use App\Filament\Widgets\MonthlyExpensesDistributionWidget;
 use App\Filament\Widgets\OverdueAccounts;
 use App\Filament\Widgets\PaymentMethodsChart;
+use App\Filament\Widgets\ServiceOrdersByStatusChart;
+use App\Filament\Widgets\ServiceOrdersCompletionTrend;
+use App\Filament\Widgets\ServiceOrdersCreationByDayChart;
+use App\Filament\Widgets\ServiceOrdersOverview;
 use App\Filament\Widgets\TopSellingProductsWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
 use Filament\Schemas\Components\Tabs;
@@ -20,7 +24,7 @@ final class Dashboard extends BaseDashboard
 {
     public function getColumns(): int
     {
-        return 2;
+        return 12;
     }
 
     public function content(Schema $schema): Schema
@@ -59,12 +63,14 @@ final class Dashboard extends BaseDashboard
                                 ])
                             ),
 
-                        // ordem de serviço
                         Tabs\Tab::make('Ordem de Serviço')
                             ->icon('heroicon-o-wrench-screwdriver')
                             ->schema(
                                 $this->getWidgetsSchemaComponents([
-                                    // OrdemDeServicoWidget::class,
+                                    ServiceOrdersOverview::class,
+                                    ServiceOrdersByStatusChart::class,
+                                    ServiceOrdersCreationByDayChart::class,
+                                    ServiceOrdersCompletionTrend::class,
                                 ])
                             ),
 

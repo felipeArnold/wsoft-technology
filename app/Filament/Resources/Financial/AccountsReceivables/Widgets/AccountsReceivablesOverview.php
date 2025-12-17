@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Date;
 
 final class AccountsReceivablesOverview extends BaseWidget
 {
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     protected function getColumns(): int
     {

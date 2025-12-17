@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Stock\StockMovements;
 
-use App\Filament\Resources\Stock\StockMovements\Pages\CreateStockMovement;
 use App\Filament\Resources\Stock\StockMovements\Pages\ListStockMovements;
 use App\Filament\Resources\Stock\StockMovements\Schemas\StockMovementForm;
 use App\Filament\Resources\Stock\StockMovements\Tables\StockMovementsTable;

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Stock\StockMovements\Tables;
 
-use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms;
@@ -127,7 +126,7 @@ final class StockMovementsTable
             ->emptyStateActions([
                 CreateAction::make()
                     ->icon('heroicon-s-plus')
-                    ->label('Nova Movimentação')
+                    ->label('Nova Movimentação'),
             ])
             ->paginated([10, 25, 50, 100]);
     }

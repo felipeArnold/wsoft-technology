@@ -13,7 +13,7 @@ final class SalesOverview extends BaseWidget
 {
     use InteractsWithPageTable;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     protected ?string $pollingInterval = null;
 

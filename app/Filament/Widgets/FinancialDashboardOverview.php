@@ -6,7 +6,6 @@ namespace App\Filament\Widgets;
 
 use App\Enum\AccountsReceivable\PaymentStatusEnum;
 use App\Models\Accounts\AccountsInstallments;
-use Filament\Support\Enums\IconPosition;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\Date;
@@ -14,6 +13,8 @@ use Illuminate\Support\Facades\Date;
 final class FinancialDashboardOverview extends BaseWidget
 {
     protected static ?int $sort = 1;
+
+    protected int|string|array $columnSpan = 'full';
 
     protected function getStats(): array
     {
@@ -107,7 +108,7 @@ final class FinancialDashboardOverview extends BaseWidget
         $lastMonthBalance = $receivedLastMonth - $paidLastMonth;
 
         // Calcular variação percentual
-        $balanceVariation = $lastMonthBalance != 0
+        $balanceVariation = abs($lastMonthBalance) > 0.01
             ? (($monthlyBalance - $lastMonthBalance) / abs($lastMonthBalance)) * 100
             : 0;
 

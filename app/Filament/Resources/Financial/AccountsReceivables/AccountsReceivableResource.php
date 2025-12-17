@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Financial\AccountsReceivables;
 
-use App\Filament\Clusters\Financial\FinancialCluster;
 use App\Filament\Resources\Financial\AccountsReceivables\Pages\CreateAccountsReceivable;
 use App\Filament\Resources\Financial\AccountsReceivables\Pages\EditAccountsReceivable;
 use App\Filament\Resources\Financial\AccountsReceivables\Pages\ListAccountsReceivables;

@@ -86,6 +86,7 @@ final class ExtractsTable
                             ->using(function ($query) {
                                 $receitas = $query->whereHas('accounts', fn ($q) => $q->where('type', 'receivables'))->sum('amount');
                                 $despesas = $query->whereHas('accounts', fn ($q) => $q->where('type', 'payables'))->sum('amount');
+
                                 return $receitas - $despesas;
                             }),
                     ]),
