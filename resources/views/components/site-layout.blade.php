@@ -255,13 +255,19 @@
                 </ul>
             </div>
             <div>
-                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Contato</h4>
+                <h4 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Segmentos</h4>
                 <ul class="mt-4 space-y-2 text-sm text-slate-300">
 
                     <li><a href="{{ route('landing.oficina') }}" class="hover:text-white">Oficina Mecânica</a></li>
                     <li><a href="{{ route('landing.mecanica') }}" class="hover:text-white">Mecânica</a></li>
                     <li><a href="{{ route('landing.funilaria') }}" class="hover:text-white">Funilaria</a></li>
                     <li><a href="{{ route('landing.barbearia') }}" class="hover:text-white">Barbearia</a></li>
+                    <li><a href="{{ route('landing.salao-beleza') }}" class="hover:text-white">Salão de Beleza</a></li>
+                    <li><a href="{{ route('landing.clinica-estetica') }}" class="hover:text-white">Clínica de Estética</a></li>
+                    <li><a href="{{ route('landing.loja-roupas') }}" class="hover:text-white">Loja de Roupas</a></li>
+                    <li><a href="{{ route('landing.pet-shop') }}" class="hover:text-white">Pet Shop</a></li>
+                    <li><a href="{{ route('landing.pizzaria') }}" class="hover:text-white">Pizzaria</a></li>
+                    <li><a href="{{ route('landing.lava-rapido') }}" class="hover:text-white">Lava Rápido</a></li>
 
                     <li class="pt-3 pb-1">
                         <span class="text-xs uppercase tracking-wider text-slate-600">Recursos</span>

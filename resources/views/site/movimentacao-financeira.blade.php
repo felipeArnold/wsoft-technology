@@ -102,7 +102,7 @@ $structuredData = [
     badge="Fluxo de Caixa"
     title="Movimentação Financeira em Tempo Real"
     highlight="Controle sua "
-    description="Tenha o controle total do seu dinheiro. Acompanhe entradas, saídas e saiba exatamente qual é o lucro da sua empresa em tempo real."
+    description="Tenha o controle total do seu dinheiro. Acompanhe entradas, saídas e saiba exatamente qual é o lucro da sua empresa em tempo real. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
     secondaryButtonText="Como Funciona"

@@ -102,7 +102,7 @@ $structuredData = [
     badge="Controle de Contas a Receber"
     highlight="Receba em Dia"
     title="e Cresça"
-    description="Controle todos os seus recebimentos em um só lugar. Automatize cobranças, reduza a inadimplência e tenha previsibilidade de caixa."
+    description="Controle todos os seus recebimentos em um só lugar. Automatize cobranças, reduza a inadimplência e tenha previsibilidade de caixa. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
 >

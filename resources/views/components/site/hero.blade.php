@@ -36,7 +36,7 @@
             </h1>
 
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
-                {{ $description }}
+                {!! $description !!}
             </p>
 
             <div class="mt-10 flex flex-col sm:flex-row gap-4">

@@ -102,7 +102,7 @@ $structuredData = [
     badge="Controle de Inadimplência"
     title="na Sua Empresa"
     highlight="Zero Inadimplência"
-    description="Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional."
+    description="Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
     secondaryButtonText="Como Funciona"

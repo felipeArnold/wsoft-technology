@@ -114,7 +114,7 @@ $structuredData = [
     badge="Controle de Contas a Pagar"
     highlight="Contas a Pagar"
     title="sob Controle"
-    description="Organize suas contas a pagar e evite multas e juros. Tenha visão total das suas despesas e mantenha seu financeiro sempre em dia."
+    description="Organize suas contas a pagar e evite multas e juros. Tenha visão total das suas despesas e mantenha seu financeiro sempre em dia. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
 >

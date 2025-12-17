@@ -83,6 +83,36 @@ Route::get('/sistema-para-barbearia', function () {
     return view('site.barbearia');
 })->name('landing.barbearia');
 
+// Landing Page para Salão de Beleza
+Route::get('/sistema-para-salao-de-beleza', function () {
+    return view('site.salao-beleza');
+})->name('landing.salao-beleza');
+
+// Landing Page para Clínica de Estética
+Route::get('/sistema-para-clinica-estetica', function () {
+    return view('site.clinica-estetica');
+})->name('landing.clinica-estetica');
+
+// Landing Page para Loja de Roupas
+Route::get('/sistema-para-loja-de-roupas', function () {
+    return view('site.loja-roupas');
+})->name('landing.loja-roupas');
+
+// Landing Page para Pet Shop
+Route::get('/sistema-para-pet-shop', function () {
+    return view('site.pet-shop');
+})->name('landing.pet-shop');
+
+// Landing Page para Pizzaria
+Route::get('/sistema-para-pizzaria', function () {
+    return view('site.pizzaria');
+})->name('landing.pizzaria');
+
+// Landing Page para Lava Rápido
+Route::get('/sistema-para-lava-rapido', function () {
+    return view('site.lava-rapido');
+})->name('landing.lava-rapido');
+
 // Landing Page para Assinatura Digital
 Route::get('/assinatura-digital', function () {
     return view('site.assinatura-digital');

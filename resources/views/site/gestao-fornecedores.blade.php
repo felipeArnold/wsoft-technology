@@ -112,7 +112,7 @@ $structuredData = [
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Gestão de Fornecedores</span> Simples e Eficiente
             </h1>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
-                Centralize cadastros, histórico de compras e cotações em um único lugar. Melhore suas negociações com um <strong>sistema de gestão de fornecedores</strong> completo.
+                Centralize cadastros, histórico de compras e cotações em um único lugar. Melhore suas negociações com um <strong>sistema de gestão de fornecedores</strong> completo. <span class="text-emerald-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">

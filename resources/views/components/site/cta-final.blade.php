@@ -21,9 +21,11 @@
                 Começar Agora
                 <i class="fa-solid fa-arrow-right ml-2"></i>
             </a>
+            @if($priceUrl)
             <a href="{{ $priceUrl }}" class="inline-flex justify-center items-center rounded-xl border border-white/60 text-white font-semibold px-10 py-4 hover:bg-white/10 transition backdrop-blur-sm">
                 Ver Planos e Preços
             </a>
+            @endif
         </div>
         <p class="mt-6 text-sm {{ $textColor }} opacity-80">{{ $footer }}</p>
     </div>

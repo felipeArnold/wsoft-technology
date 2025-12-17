@@ -70,7 +70,7 @@ $structuredData = [
     badge="Gestão Completa e Simplificada"
     highlight="O CRM Definitivo para"
     title="Gestão Financeira"
-    description="Centralize clientes, vendas, financeiro e estoque em uma única plataforma. Diga adeus às planilhas e assuma o controle do seu negócio."
+    description="Centralize clientes, vendas, financeiro e estoque em uma única plataforma. Diga adeus às planilhas e assuma o controle do seu negócio. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
 >
