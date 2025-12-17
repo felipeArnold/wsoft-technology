@@ -20,33 +20,7 @@
 
 ### 🔴 Crítico
 
-#### 1.1 Rate Limiting
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto - Vulnerável a ataques de força bruta
-
-**Problema:**
-- Sem limitação de tentativas de login
-- APIs sem rate limiting
-- Vulnerável a DDoS em nível de aplicação
-
-**Solução:**
-```php
-// Adicionar no RouteServiceProvider ou em routes
-RateLimiter::for('api', function (Request $request) {
-    return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
-});
-
-RateLimiter::for('login', function (Request $request) {
-    return Limit::perMinute(5)->by($request->email.$request->ip());
-});
-```
-
-**Arquivos afetados:**
-- `app/Providers/RouteServiceProvider.php`
-- `routes/api.php`
-- Páginas de login do Filament
-
----
+---~~
 
 #### 1.2 Validação de Uploads de Arquivo
 **Status:** ⚠️ Implementação parcial
@@ -113,36 +87,6 @@ $cleanHtml = Str::of($dirtyHtml)->stripTags(['p', 'br', 'strong', 'em', 'ul', 'o
 
 ---
 
-### 🟡 Importante
-
-#### 1.4 Tokens de API com Expiração
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Problema:**
-- Tokens do Sanctum sem expiração configurada
-- Falta rotação de tokens
-- Sem revogação automática
-
-**Solução:**
-```php
-// config/sanctum.php
-'expiration' => 60, // 60 minutos
-
-// Implementar middleware de expiração
-class CheckTokenExpiration
-{
-    public function handle($request, Closure $next)
-    {
-        if ($request->user() && $request->user()->currentAccessToken()->created_at->addMinutes(60)->isPast()) {
-            $request->user()->currentAccessToken()->delete();
-            return response()->json(['message' => 'Token expired'], 401);
-        }
-
-        return $next($request);
-    }
-}
-```
 
 ---
 
@@ -178,33 +122,30 @@ class ServiceOrder extends Model
 
 ### 🔴 Crítico
 
-#### 2.1 N+1 Query Problems
-**Status:** ⚠️ Presente em múltiplos widgets
+~~#### 2.1 N+1 Query Problems
+**Status:** ✅ Corrigido
 **Impacto:** Alto - Performance ruim com muitos dados
 
-**Problema:**
-```php
-// Em widgets como LowStockProductsWidget
-Product::query()
-    ->whereNotNull('stock_alert')
-    ->get();
+**Implementação:**
+Adicionado eager loading em todos os widgets e RelationManagers identificados:
 
-// Depois acessa $product->category->name (N+1!)
-```
+**Widgets corrigidos:**
+- `app/Filament/Widgets/LowStockProductsWidget.php` - Adicionado `->with(['category', 'person'])`
+- `app/Filament/Widgets/RecentStockMovementsWidget.php` - ✅ Já tinha eager loading correto
 
-**Solução:**
-```php
-Product::query()
-    ->with(['category', 'person'])
-    ->whereNotNull('stock_alert')
-    ->get();
-```
+**RelationManagers corrigidos:**
+- `app/Filament/Resources/Creates/Products/RelationManagers/StockMovementsRelationManager.php` - Adicionado `->with(['user'])`
+- `app/Filament/Resources/Stock/StockInventories/RelationManagers/StockInventoryItemsRelationManager.php` - Adicionado `->with(['product'])`
+- `app/Filament/Resources/Creates/People/RelationManagers/ServicesOrdersRelationManager.php` - Adicionado `->with(['person', 'user', 'categories'])`
+- `app/Filament/Resources/Creates/People/RelationManagers/AccountsReceivableRelationManager.php` - Adicionado `->with(['categories'])`
+- `app/Filament/Resources/Creates/Suppliers/RelationManagers/ServicesOrdersRelationManager.php` - Adicionado `->with(['person', 'user', 'categories'])`
+- `app/Filament/Resources/Creates/Suppliers/RelationManagers/AccountsPayableRelationManager.php` - Adicionado `->with(['categories'])`
+- `app/Filament/Resources/Financial/AccountsReceivables/RelationManagers/ServiceOrderRelationManager.php` - Adicionado `->with(['person', 'user', 'categories'])`
 
-**Arquivos afetados:**
-- `app/Filament/Widgets/LowStockProductsWidget.php`
-- `app/Filament/Widgets/RecentStockMovementsWidget.php`
-- `app/Filament/Widgets/TopSellingProductsWidget.php`
-- Todos os Resources com RelationManagers
+**Benefícios:**
+- Redução significativa no número de queries ao banco de dados
+- Melhoria na performance ao carregar listas com muitos registros
+- Menor tempo de resposta em páginas com múltiplos relacionamentos~~
 
 ---
 
@@ -271,37 +212,43 @@ Sale::with(['items.product.category', 'person', 'user'])
 ### 🟡 Importante
 
 #### 2.4 Índices de Banco de Dados
-**Status:** ⚠️ Incompleto
+**Status:** ✅ Implementado
 **Impacto:** Médio - Consultas lentas com crescimento de dados
 
-**Problema:**
-- Faltam índices em campos frequentemente consultados
-- Foreign keys sem índices explícitos
-- Campos de data sem índices
+**Implementação:**
+Criada migration `2025_12_17_144724_add_additional_database_indexes.php` com índices estratégicos para otimização de consultas frequentes.
 
-**Solução:**
-```php
-// Adicionar migration
-Schema::table('service_orders', function (Blueprint $table) {
-    $table->index('status');
-    $table->index('priority');
-    $table->index(['tenant_id', 'created_at']);
-    $table->index(['person_id', 'status']);
-});
+**Índices adicionados:**
 
-Schema::table('accounts', function (Blueprint $table) {
-    $table->index('status');
-    $table->index('type');
-    $table->index(['tenant_id', 'type', 'status']);
-    $table->index('due_date');
-});
+**service_orders:**
+- `status` - Filtros por status
+- `created_at` - Ordenação temporal
+- `[tenant_id, created_at]` - Queries de timeline por tenant
+- `[person_id, status]` - Busca de ordens por cliente e status
 
-Schema::table('products', function (Blueprint $table) {
-    $table->index(['tenant_id', 'stock']);
-    $table->index('sku');
-    $table->index('barcode');
-});
-```
+**products:**
+- `barcode` - Busca rápida por código de barras
+- `[tenant_id, stock]` - Controle de estoque por tenant
+
+**stock_movements (crítico - não tinha índices):**
+- `[tenant_id, product_id]` - Histórico de movimentações por produto
+- `[tenant_id, type]` - Filtro de movimentações por tipo (entrada/saída)
+- `[tenant_id, created_at]` - Timeline de movimentações
+- `[product_id, created_at]` - Histórico temporal por produto
+- `type` - Filtro simples por tipo de movimentação
+
+**accounts:**
+- `status` - Filtros por status de pagamento
+- `type` - Separação rápida entre receitas/despesas
+
+**accounts_installments:**
+- `status` - Filtros de parcelas pagas/pendentes
+- `[tenant_id, status]` - Controle de parcelas por tenant
+
+**Benefícios:**
+- Redução significativa no tempo de resposta de queries com filtros
+- Melhoria na performance de listagens e relatórios
+- Otimização crítica na tabela stock_movements que não tinha nenhum índice
 
 ---
 
@@ -410,16 +357,6 @@ npm install driver.js
 
 ---
 
-#### 3.5 Modo Escuro
-**Status:** ✅ Parcialmente implementado
-**Impacto:** Baixo
-
-**Melhorias:**
-- Testar todos os componentes no dark mode
-- Garantir contraste adequado
-- Salvar preferência do usuário
-
----
 
 #### 3.6 Notificações em Tempo Real
 **Status:** ⚠️ Não implementado
@@ -613,17 +550,6 @@ public function export(): BinaryFileResponse
 
 ---
 
-#### 6.4 WhatsApp Business API
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto - Canal de comunicação importante
-
-**Sugestão:**
-- Notificações via WhatsApp
-- Confirmação de agendamentos
-- Status de OS
-- Lembretes de pagamento
-
----
 
 #### 6.5 Impressão de OS
 **Status:** ⚠️ Não implementado
