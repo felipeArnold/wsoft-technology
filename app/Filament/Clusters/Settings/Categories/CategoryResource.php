@@ -29,7 +29,7 @@ final class CategoryResource extends Resource
 
     protected static ?string $label = 'Etiqueta';
 
-    protected static ?string $recordTitleAttribute = 'Etiqueta';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static string|UnitEnum|null $navigationGroup = 'Personalização';
 
