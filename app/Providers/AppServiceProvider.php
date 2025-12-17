@@ -35,10 +35,8 @@ final class AppServiceProvider extends ServiceProvider
 
         URL::forceHttps(app()->isProduction());
 
-        // Register policies
         Gate::policy(Tenant::class, TenantPolicy::class);
 
-        // Register observers
         BlogPost::observe(BlogPostObserver::class);
     }
 }
