@@ -27,7 +27,7 @@ final class AccountsReceivableRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('type', 'receivables'))
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('type', 'receivables')->with(['categories']))
             ->columns(Accounts::getTableColumns())
             ->recordActions([
                 Action::make('edit')

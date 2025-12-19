@@ -22,6 +22,7 @@ final class LowStockProductsWidget extends BaseWidget
         return $table
             ->query(
                 Product::query()
+                    ->with(['category', 'person'])
                     ->whereNotNull('stock_alert')
                     ->whereRaw('stock <= stock_alert')
                     ->where('stock_alert', '>', 0)

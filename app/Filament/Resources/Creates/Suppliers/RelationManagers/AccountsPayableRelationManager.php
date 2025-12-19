@@ -27,7 +27,7 @@ final class AccountsPayableRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('type', 'payables'))
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('type', 'payables')->with(['categories']))
             ->columns(Accounts::getTableColumns())
             ->recordActions([
                 Action::make('edit')

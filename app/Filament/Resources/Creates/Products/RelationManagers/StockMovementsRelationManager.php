@@ -22,6 +22,7 @@ final class StockMovementsRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('id')
+            ->modifyQueryUsing(fn ($query) => $query->with(['user']))
             ->columns([
                 TextColumn::make('created_at')
                     ->label('Data/Hora')
