@@ -20,6 +20,8 @@
 
 ### 🔴 Crítico
 
+---~~
+
 #### 1.2 Validação de Uploads de Arquivo
 **Status:** ⚠️ Implementação parcial
 **Impacto:** Alto - Risco de upload de arquivos maliciosos
@@ -85,7 +87,6 @@ $cleanHtml = Str::of($dirtyHtml)->stripTags(['p', 'br', 'strong', 'em', 'ul', 'o
 
 ---
 
-### 🟡 Importante
 
 ---
 
@@ -121,33 +122,30 @@ class ServiceOrder extends Model
 
 ### 🔴 Crítico
 
-#### 2.1 N+1 Query Problems
-**Status:** ⚠️ Presente em múltiplos widgets
+~~#### 2.1 N+1 Query Problems
+**Status:** ✅ Corrigido
 **Impacto:** Alto - Performance ruim com muitos dados
 
-**Problema:**
-```php
-// Em widgets como LowStockProductsWidget
-Product::query()
-    ->whereNotNull('stock_alert')
-    ->get();
+**Implementação:**
+Adicionado eager loading em todos os widgets e RelationManagers identificados:
 
-// Depois acessa $product->category->name (N+1!)
-```
+**Widgets corrigidos:**
+- `app/Filament/Widgets/LowStockProductsWidget.php` - Adicionado `->with(['category', 'person'])`
+- `app/Filament/Widgets/RecentStockMovementsWidget.php` - ✅ Já tinha eager loading correto
 
-**Solução:**
-```php
-Product::query()
-    ->with(['category', 'person'])
-    ->whereNotNull('stock_alert')
-    ->get();
-```
+**RelationManagers corrigidos:**
+- `app/Filament/Resources/Creates/Products/RelationManagers/StockMovementsRelationManager.php` - Adicionado `->with(['user'])`
+- `app/Filament/Resources/Stock/StockInventories/RelationManagers/StockInventoryItemsRelationManager.php` - Adicionado `->with(['product'])`
+- `app/Filament/Resources/Creates/People/RelationManagers/ServicesOrdersRelationManager.php` - Adicionado `->with(['person', 'user', 'categories'])`
+- `app/Filament/Resources/Creates/People/RelationManagers/AccountsReceivableRelationManager.php` - Adicionado `->with(['categories'])`
+- `app/Filament/Resources/Creates/Suppliers/RelationManagers/ServicesOrdersRelationManager.php` - Adicionado `->with(['person', 'user', 'categories'])`
+- `app/Filament/Resources/Creates/Suppliers/RelationManagers/AccountsPayableRelationManager.php` - Adicionado `->with(['categories'])`
+- `app/Filament/Resources/Financial/AccountsReceivables/RelationManagers/ServiceOrderRelationManager.php` - Adicionado `->with(['person', 'user', 'categories'])`
 
-**Arquivos afetados:**
-- `app/Filament/Widgets/LowStockProductsWidget.php`
-- `app/Filament/Widgets/RecentStockMovementsWidget.php`
-- `app/Filament/Widgets/TopSellingProductsWidget.php`
-- Todos os Resources com RelationManagers
+**Benefícios:**
+- Redução significativa no número de queries ao banco de dados
+- Melhoria na performance ao carregar listas com muitos registros
+- Menor tempo de resposta em páginas com múltiplos relacionamentos~~
 
 ---
 
@@ -176,6 +174,45 @@ Sale::with(['items.product.category', 'person', 'user'])
 ---
 
 ### 🟡 Importante
+
+#### 2.4 Índices de Banco de Dados
+**Status:** ✅ Implementado
+**Impacto:** Médio - Consultas lentas com crescimento de dados
+
+**Implementação:**
+Criada migration `2025_12_17_144724_add_additional_database_indexes.php` com índices estratégicos para otimização de consultas frequentes.
+
+**Índices adicionados:**
+
+**service_orders:**
+- `status` - Filtros por status
+- `created_at` - Ordenação temporal
+- `[tenant_id, created_at]` - Queries de timeline por tenant
+- `[person_id, status]` - Busca de ordens por cliente e status
+
+**products:**
+- `barcode` - Busca rápida por código de barras
+- `[tenant_id, stock]` - Controle de estoque por tenant
+
+**stock_movements (crítico - não tinha índices):**
+- `[tenant_id, product_id]` - Histórico de movimentações por produto
+- `[tenant_id, type]` - Filtro de movimentações por tipo (entrada/saída)
+- `[tenant_id, created_at]` - Timeline de movimentações
+- `[product_id, created_at]` - Histórico temporal por produto
+- `type` - Filtro simples por tipo de movimentação
+
+**accounts:**
+- `status` - Filtros por status de pagamento
+- `type` - Separação rápida entre receitas/despesas
+
+**accounts_installments:**
+- `status` - Filtros de parcelas pagas/pendentes
+- `[tenant_id, status]` - Controle de parcelas por tenant
+
+**Benefícios:**
+- Redução significativa no tempo de resposta de queries com filtros
+- Melhoria na performance de listagens e relatórios
+- Otimização crítica na tabela stock_movements que não tinha nenhum índice
 
 ---
 
@@ -230,6 +267,22 @@ Product::query()->limit(100)->get();
 npm install driver.js
 ```
 
+---
+
+
+#### 3.6 Notificações em Tempo Real
+**Status:** ⚠️ Não implementado
+**Impacto:** Médio
+
+**Sugestão:**
+- Implementar Laravel Echo + Pusher/Soketi
+- Notificar quando:
+  - Nova OS atribuída
+  - Pagamento recebido
+  - Estoque baixo
+  - Documento assinado
+
+---
 
 ## 4. Testes e Qualidade
 
