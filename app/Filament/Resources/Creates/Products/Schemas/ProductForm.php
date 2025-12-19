@@ -172,12 +172,9 @@ final class ProductForm
                             ])
                             ->createOptionUsing(function (array $data): int {
                                 $supplier = Person::create([
-                                    'client_or_supplier' => 'supplier',
+                                    'is_supplier' => true,
                                     'name' => $data['name'],
-                                    'cpf_cnpj' => $data['cpf_cnpj'],
-                                    'mobile_phone' => $data['mobile_phone'] ?? null,
-                                    'email' => $data['email'] ?? null,
-                                    'type' => 'PF',
+                                    'document' => $data['cpf_cnpj'],
                                     'tenant_id' => Filament::getTenant()->id,
                                 ]);
 
