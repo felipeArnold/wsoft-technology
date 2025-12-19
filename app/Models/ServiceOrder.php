@@ -46,6 +46,7 @@ final class ServiceOrder extends Model
         'opening_date' => 'date',
         'expected_completion_date' => 'date',
         'completion_date' => 'date',
+        'completed_at' => 'datetime',
         'total_value' => 'float',
         'labor_value' => 'float',
         'parts_value' => 'float',

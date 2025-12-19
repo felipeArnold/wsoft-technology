@@ -14,9 +14,25 @@ final class ServiceOrderObserver
 {
     public function creating(ServiceOrder $serviceOrder)
     {
-        $lastOrder = ServiceOrder::query()->max('id');
+        // Generate order number based on current month
+        $prefix = '#OS-'.now()->format('Y-m').'-';
 
-        $serviceOrder->number = '#OS-'.now()->format('Y-m').'-'.Str::padLeft($lastOrder + 1, 3, '0');
+        // Get the last order number for the current month
+        $lastOrder = ServiceOrder::query()
+            ->where('number', 'like', $prefix.'%')
+            ->orderBy('number', 'desc')
+            ->value('number');
+
+        if ($lastOrder) {
+            // Extract the sequential number from the last order
+            $lastNumber = (int) mb_substr($lastOrder, -3);
+            $nextNumber = $lastNumber + 1;
+        } else {
+            // First order of the month
+            $nextNumber = 1;
+        }
+
+        $serviceOrder->number = $prefix.Str::padLeft($nextNumber, 3, '0');
 
         $values = [
             FormatterHelper::toDecimal($serviceOrder->labor_value),
@@ -28,6 +44,16 @@ final class ServiceOrderObserver
 
     public function updated(ServiceOrder $serviceOrder): void
     {
+        // Set completed_at timestamp when status changes to completed
+        if ($serviceOrder->wasChanged('status') &&
+            $serviceOrder->status === 'completed' &&
+            ! $serviceOrder->completed_at
+        ) {
+            $serviceOrder->completed_at = now();
+            $serviceOrder->saveQuietly();
+        }
+
+        // Generate commission when status changes to completed
         if ($serviceOrder->wasChanged('status') &&
             $serviceOrder->status === 'completed' &&
             ! $serviceOrder->hasCommission() &&
@@ -36,19 +62,15 @@ final class ServiceOrderObserver
         ) {
             $this->generateCommission($serviceOrder);
         }
-
-        if ($serviceOrder->wasChanged('status') &&
-            $serviceOrder->status === 'completed' &&
-            ! $serviceOrder->completed_at
-        ) {
-            $serviceOrder->completed_at = now();
-            $serviceOrder->saveQuietly();
-        }
     }
 
     private function generateCommission(ServiceOrder $serviceOrder): void
     {
         $user = $serviceOrder->userAssigned;
+
+        if (! $user || $user->commission_percentage <= 0) {
+            return;
+        }
 
         Commission::query()->create([
             'tenant_id' => $serviceOrder->tenant_id,
