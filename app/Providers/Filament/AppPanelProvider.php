@@ -136,6 +136,7 @@ final class AppPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                'throttle:login',
             ])
             ->authMiddleware([
                 Authenticate::class,

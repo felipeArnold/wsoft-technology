@@ -20,34 +20,6 @@
 
 ### 🔴 Crítico
 
-#### 1.1 Rate Limiting
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto - Vulnerável a ataques de força bruta
-
-**Problema:**
-- Sem limitação de tentativas de login
-- APIs sem rate limiting
-- Vulnerável a DDoS em nível de aplicação
-
-**Solução:**
-```php
-// Adicionar no RouteServiceProvider ou em routes
-RateLimiter::for('api', function (Request $request) {
-    return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
-});
-
-RateLimiter::for('login', function (Request $request) {
-    return Limit::perMinute(5)->by($request->email.$request->ip());
-});
-```
-
-**Arquivos afetados:**
-- `app/Providers/RouteServiceProvider.php`
-- `routes/api.php`
-- Páginas de login do Filament
-
----
-
 #### 1.2 Validação de Uploads de Arquivo
 **Status:** ⚠️ Implementação parcial
 **Impacto:** Alto - Risco de upload de arquivos maliciosos
@@ -115,35 +87,6 @@ $cleanHtml = Str::of($dirtyHtml)->stripTags(['p', 'br', 'strong', 'em', 'ul', 'o
 
 ### 🟡 Importante
 
-#### 1.4 Tokens de API com Expiração
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Problema:**
-- Tokens do Sanctum sem expiração configurada
-- Falta rotação de tokens
-- Sem revogação automática
-
-**Solução:**
-```php
-// config/sanctum.php
-'expiration' => 60, // 60 minutos
-
-// Implementar middleware de expiração
-class CheckTokenExpiration
-{
-    public function handle($request, Closure $next)
-    {
-        if ($request->user() && $request->user()->currentAccessToken()->created_at->addMinutes(60)->isPast()) {
-            $request->user()->currentAccessToken()->delete();
-            return response()->json(['message' => 'Token expired'], 401);
-        }
-
-        return $next($request);
-    }
-}
-```
-
 ---
 
 #### 1.5 Logs de Auditoria
@@ -208,42 +151,6 @@ Product::query()
 
 ---
 
-#### 2.2 Cache de Dados Frequentes
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto - Queries repetitivas
-
-**Problema:**
-- Dashboard recalcula tudo a cada refresh
-- Widgets fazem mesmas queries várias vezes
-- Categorias e dados de configuração sem cache
-
-**Solução:**
-```php
-// Cache de dashboard
-public function getStats(): array
-{
-    return Cache::remember(
-        'dashboard-stats-' . Filament::getTenant()->id,
-        now()->addMinutes(5),
-        function () {
-            // ... cálculos
-        }
-    );
-}
-
-// Invalidar cache quando dados mudarem
-protected static function booted()
-{
-    static::saved(function () {
-        Cache::forget('dashboard-stats-' . Filament::getTenant()->id);
-    });
-}
-```
-
-**Arquivos afetados:**
-- Todos os widgets (40+)
-- `app/Models/Category.php`
-- `app/Models/Product.php`
 
 ---
 
@@ -269,39 +176,6 @@ Sale::with(['items.product.category', 'person', 'user'])
 ---
 
 ### 🟡 Importante
-
-#### 2.4 Índices de Banco de Dados
-**Status:** ⚠️ Incompleto
-**Impacto:** Médio - Consultas lentas com crescimento de dados
-
-**Problema:**
-- Faltam índices em campos frequentemente consultados
-- Foreign keys sem índices explícitos
-- Campos de data sem índices
-
-**Solução:**
-```php
-// Adicionar migration
-Schema::table('service_orders', function (Blueprint $table) {
-    $table->index('status');
-    $table->index('priority');
-    $table->index(['tenant_id', 'created_at']);
-    $table->index(['person_id', 'status']);
-});
-
-Schema::table('accounts', function (Blueprint $table) {
-    $table->index('status');
-    $table->index('type');
-    $table->index(['tenant_id', 'type', 'status']);
-    $table->index('due_date');
-});
-
-Schema::table('products', function (Blueprint $table) {
-    $table->index(['tenant_id', 'stock']);
-    $table->index('sku');
-    $table->index('barcode');
-});
-```
 
 ---
 
@@ -340,58 +214,6 @@ Product::query()->limit(100)->get();
 
 ## 3. Experiência do Usuário (UX/UI)
 
-### 🟡 Importante
-
-#### 3.1 Feedback Visual
-**Status:** ⚠️ Implementação básica
-**Impacto:** Médio
-
-**Melhorias:**
-- ✅ Adicionar skeleton loaders nos widgets
-- ✅ Loading states mais claros
-- ✅ Confirmações de ações destrutivas
-- ✅ Mensagens de sucesso mais descritivas
-
-**Exemplo:**
-```php
-// No Resource
-protected function getDeletedNotificationTitle(): ?string
-{
-    return 'Ordem de serviço #' . $this->record->number . ' excluída com sucesso';
-}
-```
-
----
-
-#### 3.2 Busca Global
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Sugestão:**
-- Implementar busca global no Filament
-- Buscar em múltiplos recursos (clientes, produtos, OS)
-- Atalho de teclado (Ctrl+K)
-
-**Implementação:**
-```php
-// No PanelProvider
-->globalSearch()
-->globalSearchKeyBindings(['command+k', 'ctrl+k'])
-```
-
----
-
-#### 3.3 Atalhos de Teclado
-**Status:** ⚠️ Não implementado
-**Impacto:** Baixo - Melhora produtividade
-
-**Sugestões:**
-- `N` - Nova OS
-- `Ctrl+S` - Salvar
-- `/` - Buscar
-- `Esc` - Fechar modal
-
----
 
 #### 3.4 Tour Guiado (Onboarding)
 **Status:** ⚠️ Não implementado
@@ -408,32 +230,6 @@ protected function getDeletedNotificationTitle(): ?string
 npm install driver.js
 ```
 
----
-
-#### 3.5 Modo Escuro
-**Status:** ✅ Parcialmente implementado
-**Impacto:** Baixo
-
-**Melhorias:**
-- Testar todos os componentes no dark mode
-- Garantir contraste adequado
-- Salvar preferência do usuário
-
----
-
-#### 3.6 Notificações em Tempo Real
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Sugestão:**
-- Implementar Laravel Echo + Pusher/Soketi
-- Notificar quando:
-  - Nova OS atribuída
-  - Pagamento recebido
-  - Estoque baixo
-  - Documento assinado
-
----
 
 ## 4. Testes e Qualidade
 
@@ -540,14 +336,6 @@ jobs:
 
 ---
 
-#### 5.2 Documentação de API
-**Status:** ⚠️ Não existe
-**Impacto:** Alto se API for pública
-
-**Sugestão:**
-```bash
-composer require darkaonline/l5-swagger
-```
 
 ---
 
@@ -613,17 +401,6 @@ public function export(): BinaryFileResponse
 
 ---
 
-#### 6.4 WhatsApp Business API
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto - Canal de comunicação importante
-
-**Sugestão:**
-- Notificações via WhatsApp
-- Confirmação de agendamentos
-- Status de OS
-- Lembretes de pagamento
-
----
 
 #### 6.5 Impressão de OS
 **Status:** ⚠️ Não implementado
@@ -661,15 +438,6 @@ public function export(): BinaryFileResponse
 
 ---
 
-#### 6.8 Checklist de Inspeção
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Sugestão:**
-- Checklist personalizado por tipo de serviço
-- Fotos antes/depois
-- Assinatura do cliente
-
 ---
 
 #### 6.9 Gestão de Garantias
@@ -684,42 +452,9 @@ public function export(): BinaryFileResponse
 ---
 
 ## 7. Integrações
-
-### 🟡 Importante
-
-#### 7.1 Mercado Pago
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto - Alternativa ao Stripe no Brasil
-
-**Sugestão:**
-```bash
-composer require mercadopago/dx-php
-```
-
 ---
 
-#### 7.2 SMS (Twilio/Zenvia)
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Uso:**
-- Confirmações
-- Lembretes
-- 2FA via SMS
-
----
-
-#### 7.3 Google Calendar
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Uso:**
-- Sincronizar agendamentos
-- Lembretes
-
----
-
-#### 7.4 Nota Fiscal Eletrônica
+#### 7.1 Nota Fiscal Eletrônica
 **Status:** ⚠️ Não implementado
 **Impacto:** Alto - Obrigatório para muitos negócios
 
@@ -729,7 +464,7 @@ composer require mercadopago/dx-php
 
 ---
 
-#### 7.5 Boleto Bancário
+#### 7.2 Boleto Bancário
 **Status:** ⚠️ Não implementado
 **Impacto:** Médio
 
@@ -741,108 +476,6 @@ composer require mercadopago/dx-php
 ---
 
 ## 8. DevOps e Infraestrutura
-
-### 🔴 Crítico
-
-#### 8.1 Ambiente de Staging
-**Status:** ⚠️ Não configurado
-**Impacto:** Alto
-
-**Sugestão:**
-- Ambiente idêntico à produção
-- Deploy automático de branches de feature
-- Testes antes de produção
-
----
-
-#### 8.2 Monitoramento de Erros
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto
-
-**Sugestão:**
-```bash
-composer require sentry/sentry-laravel
-```
-
-**Configuração:**
-```php
-// config/sentry.php
-'dsn' => env('SENTRY_LARAVEL_DSN'),
-'traces_sample_rate' => 0.2,
-```
-
----
-
-#### 8.3 Health Checks
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto
-
-**Sugestão:**
-```php
-// routes/web.php
-Route::get('/health', function () {
-    return response()->json([
-        'status' => 'ok',
-        'database' => DB::connection()->getPdo() ? 'connected' : 'disconnected',
-        'cache' => Cache::has('health-check'),
-        'queue' => Queue::size() < 1000,
-    ]);
-});
-```
-
----
-
-#### 8.4 CDN para Assets
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Sugestão:**
-- Cloudflare ou AWS CloudFront
-- Cache de imagens
-- Compressão automática
-
----
-
-### 🟡 Importante
-
-#### 8.5 Docker para Desenvolvimento
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Sugestão:**
-```yaml
-# docker-compose.yml
-version: '3.8'
-services:
-  app:
-    build: .
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/var/www/html
-    depends_on:
-      - mysql
-      - redis
-
-  mysql:
-    image: mysql:8.0
-    environment:
-      MYSQL_DATABASE: wsoft
-      MYSQL_ROOT_PASSWORD: secret
-
-  redis:
-    image: redis:alpine
-```
-
----
-
-#### 8.6 Logs Centralizados
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Sugestão:**
-- ELK Stack (Elasticsearch, Logstash, Kibana)
-- Ou usar serviço como Papertrail, Loggly
 
 ---
 
@@ -878,33 +511,6 @@ services:
 
 ### 🟡 Importante
 
-#### 10.1 Service Layer
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio - Código nos controllers/resources
-
-**Problema:**
-- Lógica de negócio nos Resources
-- Dificulta reuso
-- Dificulta testes
-
-**Solução:**
-```php
-// app/Services/ServiceOrderService.php
-class ServiceOrderService
-{
-    public function create(array $data): ServiceOrder
-    {
-        return DB::transaction(function () use ($data) {
-            $serviceOrder = ServiceOrder::create($data);
-            $this->createServices($serviceOrder, $data['services']);
-            $this->createProducts($serviceOrder, $data['products']);
-            $this->calculateTotals($serviceOrder);
-
-            return $serviceOrder;
-        });
-    }
-}
-```
 
 ---
 
@@ -966,23 +572,6 @@ Product::lowStock()->get();
 
 ---
 
-## 11. Monitoramento e Analytics
-
-### 🟡 Importante
-
-#### 11.1 Métricas de Negócio
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Sugestões:**
-- MRR (Monthly Recurring Revenue)
-- Churn rate
-- CAC (Customer Acquisition Cost)
-- LTV (Lifetime Value)
-- NPS (Net Promoter Score)
-
----
-
 
 ## 12. Backup e Recuperação
 
@@ -1038,48 +627,6 @@ $schedule->command('backup:clean')->daily()->at('01:30');
 - RTO (Recovery Time Objective)
 - Procedimento de restore
 - Testes de recuperação
-
----
-
-## Priorização Sugerida
-
-### Sprint 1 (Crítico - Segurança)
-1. ✅ Rate Limiting
-2. ✅ Validação de Uploads
-3. ✅ Sanitização de Inputs
-4. ✅ Backup Automático
-
-### Sprint 2 (Crítico - Performance)
-1. ✅ N+1 Query Problems
-2. ✅ Cache de Dados
-3. ✅ Índices de Banco
-4. ✅ Eager Loading
-
-### Sprint 3 (Importante - Features)
-1. ✅ Agendamento de Serviços
-2. ✅ Impressão de OS
-3. ✅ Gestão de Orçamentos
-4. ✅ Relatórios Exportáveis
-
-### Sprint 4 (Importante - DevOps)
-1. ✅ Monitoramento de Erros (Sentry)
-2. ✅ Health Checks
-3. ✅ CI/CD Pipeline
-4. ✅ Ambiente de Staging
-
-### Sprint 5 (Importante - Integrações)
-1. ✅ WhatsApp Business API
-2. ✅ Mercado Pago
-3. ✅ Nota Fiscal Eletrônica
-4. ✅ Portal do Cliente
-
-### Sprint 6 (Testes e Qualidade)
-1. ✅ Testes Unitários (80% cobertura)
-2. ✅ Testes de Integração
-3. ✅ Testes E2E (fluxos críticos)
-4. ✅ Documentação completa
-
----
 
 ## Conclusão
 
