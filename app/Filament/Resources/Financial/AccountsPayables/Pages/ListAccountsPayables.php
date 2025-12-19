@@ -95,11 +95,4 @@ final class ListAccountsPayables extends ListRecords
                 }),
         ];
     }
-
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            AccountsPayablesOverview::class,
-        ];
-    }
 }

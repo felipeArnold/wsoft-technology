@@ -137,11 +137,4 @@ final class ListSales extends ListRecords
                 }),
         ];
     }
-
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            SalesOverview::class,
-        ];
-    }
 }

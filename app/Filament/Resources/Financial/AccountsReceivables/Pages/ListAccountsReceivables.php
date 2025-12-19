@@ -93,11 +93,4 @@ final class ListAccountsReceivables extends ListRecords
                 }),
         ];
     }
-
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            AccountsReceivablesOverview::class,
-        ];
-    }
 }
