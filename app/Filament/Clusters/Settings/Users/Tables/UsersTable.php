@@ -27,6 +27,11 @@ final class UsersTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
+                TextColumn::make('commission_percentage')
+                    ->label('Comissão')
+                    ->formatStateUsing(fn ($state) => $state ? number_format((float) $state, 2, ',', '.').'%' : '—')
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable()

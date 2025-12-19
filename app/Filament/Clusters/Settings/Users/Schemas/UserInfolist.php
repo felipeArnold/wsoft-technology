@@ -30,6 +30,10 @@ final class UserInfolist
                         TextEntry::make('email')
                             ->label('E-mail')
                             ->placeholder('-'),
+                        TextEntry::make('commission_percentage')
+                            ->label('Percentual de Comissão')
+                            ->formatStateUsing(fn ($state) => $state ? number_format($state, 2, ',', '.').'%' : 'Não configurado')
+                            ->placeholder('-'),
                         TextEntry::make('email_verified_at')
                             ->label('E-mail verificado em')
                             ->dateTime()

@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[ObservedBy(ServiceOrderObserver::class)]
 final class ServiceOrder extends Model
@@ -127,14 +128,22 @@ final class ServiceOrder extends Model
                                         ]))
                                         ->columnSpan(1),
                                     Select::make('user_id')
-                                        ->label('Responsável Técnico')
+                                        ->label('Responsável')
                                         ->relationship('user', 'name')
                                         ->searchable()
                                         ->preload()
                                         ->required()
                                         ->columnSpan(1),
+                                    Select::make('assigned_user_id')
+                                        ->label('Responsável Técnico')
+                                        ->relationship('userAssigned', 'name')
+                                        ->helperText('Usuário responsável pela execução técnica da ordem de serviço')
+                                        ->searchable()
+                                        ->preload()
+                                        ->required()
+                                        ->columnSpan(1),
                                 ])
-                                ->columns(2)
+                                ->columns(3)
                                 ->columnSpanFull(),
                         ]),
 
@@ -254,7 +263,12 @@ final class ServiceOrder extends Model
                 ->sortable(),
             TextColumn::make('user.name')
                 ->label('Responsável')
-                ->searchable(),
+                ->searchable()
+                ->toggleable(),
+            TextColumn::make('userAssigned.name')
+                ->label('Responsável Técnico')
+                ->searchable()
+                ->toggleable(),
             TextColumn::make('categories.name')
                 ->label('Etiquetas')
                 ->badge()
@@ -272,6 +286,11 @@ final class ServiceOrder extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function userAssigned(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
     }
 
     public function person(): BelongsTo
@@ -292,6 +311,16 @@ final class ServiceOrder extends Model
     public function accounts(): HasMany
     {
         return $this->hasMany(Accounts::class);
+    }
+
+    public function commission(): HasOne
+    {
+        return $this->hasOne(Commission::class);
+    }
+
+    public function hasCommission(): bool
+    {
+        return $this->commission()->exists();
     }
 
     private static function getServicesSection(): Section
@@ -333,7 +362,7 @@ final class ServiceOrder extends Model
                             ->searchable()
                             ->required()
                             ->reactive()
-                            ->afterStateUpdated(function ($state, $set): void {
+                            ->afterStateUpdated(function ($state, $set, $get): void {
                                 if ($state) {
                                     $service = Service::query()->find($state);
                                     if ($service) {
@@ -343,6 +372,7 @@ final class ServiceOrder extends Model
                                         $total = $service->price - $discount;
                                         $set('discount', FormatterHelper::money($discount));
                                         $set('total', FormatterHelper::money($total));
+                                        self::recalculateTotals($get, $set);
                                     }
                                 }
                             })
@@ -453,7 +483,7 @@ final class ServiceOrder extends Model
                             ->searchable()
                             ->required()
                             ->reactive()
-                            ->afterStateUpdated(function ($state, $set): void {
+                            ->afterStateUpdated(function ($state, $set, $get): void {
                                 if ($state) {
                                     $product = Product::find($state);
                                     if ($product) {
@@ -461,6 +491,7 @@ final class ServiceOrder extends Model
                                         $set('unit_price', FormatterHelper::money($product->price_sale));
                                         $total = $product->price_sale;
                                         $set('total', FormatterHelper::money($total));
+                                        self::recalculateTotals($get, $set);
                                     }
                                 }
                             })

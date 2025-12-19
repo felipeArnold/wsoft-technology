@@ -6,6 +6,8 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\BusinessMetricsOverview;
 use App\Filament\Widgets\ChurnRateChart;
+use App\Filament\Widgets\CommissionsOverview;
+use App\Filament\Widgets\CommissionsTrendChart;
 use App\Filament\Widgets\ExpensesByCategoryWidget;
 use App\Filament\Widgets\FinancialDashboardOverview;
 use App\Filament\Widgets\LowStockProductsWidget;
@@ -96,6 +98,15 @@ final class Dashboard extends BaseDashboard
                                     ServiceOrdersByStatusChart::class,
                                     ServiceOrdersCreationByDayChart::class,
                                     ServiceOrdersCompletionTrend::class,
+                                ])
+                            ),
+
+                        Tabs\Tab::make('Comissões')
+                            ->icon('heroicon-o-banknotes')
+                            ->schema(
+                                $this->getWidgetsSchemaComponents([
+                                    CommissionsOverview::class,
+                                    CommissionsTrendChart::class,
                                 ])
                             ),
 

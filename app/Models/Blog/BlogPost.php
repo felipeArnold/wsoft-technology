@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models\Blog;
 
 use App\Models\User;
+use App\Observers\BlogPostObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
+#[ObservedBy(BlogPostObserver::class)]
 final class BlogPost extends Model
 {
     use HasFactory;

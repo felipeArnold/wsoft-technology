@@ -225,7 +225,7 @@ final class ServiceOrdersTable
                         ->accessSelectedRecords()
                         ->form([
                             Select::make('user_id')
-                                ->label('Responsável Técnico')
+                                ->label('Responsável')
                                 ->relationship('user', 'name')
                                 ->searchable()
                                 ->preload()
@@ -241,7 +241,7 @@ final class ServiceOrdersTable
                             Notification::make()
                                 ->title('Responsável atualizado com sucesso')
                                 ->success()
-                                ->body('O responsável técnico das ordens de serviço selecionadas foi atualizado.')
+                                ->body('O responsável das ordens de serviço selecionadas foi atualizado.')
                                 ->send();
                         }),
                     Action::make('create_account_receivable')

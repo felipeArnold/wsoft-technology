@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
@@ -53,6 +54,7 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
         'password',
         'avatar',
         'has_email_authentication',
+        'commission_percentage',
     ];
 
     /**
@@ -121,6 +123,16 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
         $this->save();
     }
 
+    public function commissions(): HasMany
+    {
+        return $this->hasMany(Commission::class);
+    }
+
+    public function serviceOrders(): HasMany
+    {
+        return $this->hasMany(ServiceOrder::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -132,6 +144,7 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'has_email_authentication' => 'boolean',
+            'commission_percentage' => 'decimal:2',
         ];
     }
 }

@@ -35,6 +35,15 @@ final class UserForm
                             ->revealable()
                             ->required(fn (string $operation): bool => $operation === 'create')
                             ->dehydrated(fn (?string $state) => filled($state)),
+                        TextInput::make('commission_percentage')
+                            ->label('Percentual de Comissão (%)')
+                            ->numeric()
+                            ->suffix('%')
+                            ->minValue(0)
+                            ->maxValue(100)
+                            ->step(0.01)
+                            ->default(0)
+                            ->helperText('Percentual de comissão sobre serviços prestados'),
                         FileUpload::make('avatar')
                             ->label('Avatar')
                             ->image()
