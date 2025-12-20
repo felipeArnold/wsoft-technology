@@ -141,7 +141,6 @@ final class ServiceOrder extends Model
                                         ->helperText('Usuário responsável pela execução técnica da ordem de serviço')
                                         ->searchable()
                                         ->preload()
-                                        ->required()
                                         ->columnSpan(1),
                                 ])
                                 ->columns(3)
