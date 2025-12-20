@@ -8,8 +8,8 @@
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
     <link rel="stylesheet" href="{{ asset('css/site/index.css') }}">
-    <meta name="robots" content="noindex, nofollow" /> <!-- Hidden from search engines to keep it exclusive -->
-    
+    <meta name="robots" content="noindex, nofollow" />
+
     <!-- Google Tag Manager & Analytics (Placeholder) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5442GH2J"></script>
     <script>
@@ -37,60 +37,60 @@
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@graph": [
+        "@@context": "https://schema.org",
+        "@@graph": [
             {
-                "@type": "SoftwareApplication",
+                "@@type": "SoftwareApplication",
                 "name": "WSoft - Sistema de Gestão Empresarial",
                 "url": "https://www.wsoft.dev.br/sales",
                 "description": "Sistema de gestão completo para finanças, vendas e estoque. Controle total do seu negócio.",
                 "operatingSystem": "Web",
                 "applicationCategory": "BusinessApplication",
                 "offers": {
-                    "@type": "Offer",
+                    "@@type": "Offer",
                     "price": "29.90",
                     "priceCurrency": "BRL",
                     "url": "https://www.wsoft.dev.br/sales",
                     "description": "Oferta Especial Limitada: Sistema Completo + Bônus"
                 },
                 "aggregateRating": {
-                    "@type": "AggregateRating",
+                    "@@type": "AggregateRating",
                     "ratingValue": "4.9",
                     "ratingCount": "320"
                 }
             },
             {
-                "@type": "FAQPage",
+                "@@type": "FAQPage",
                 "mainEntity": [
                     {
-                        "@type": "Question",
+                        "@@type": "Question",
                         "name": "É difícil de usar?",
                         "acceptedAnswer": {
-                            "@type": "Answer",
+                            "@@type": "Answer",
                             "text": "Não! O WSoft foi feito para quem não tem tempo a perder. É intuitivo e fácil. Se você sabe usar o WhatsApp, sabe usar o WSoft."
                         }
                     },
                     {
-                        "@type": "Question",
+                        "@@type": "Question",
                         "name": "Preciso de um computador potente?",
                         "acceptedAnswer": {
-                            "@type": "Answer",
+                            "@@type": "Answer",
                             "text": "Não. O sistema roda direto no navegador, em qualquer computador, tablet ou celular com internet."
                         }
                     },
                     {
-                        "@type": "Question",
+                        "@@type": "Question",
                         "name": "E se eu não gostar?",
                         "acceptedAnswer": {
-                            "@type": "Answer",
+                            "@@type": "Answer",
                             "text": "Você tem 7 dias para testar. Se achar que não é para você, devolvemos 100% do seu dinheiro. Sem perguntas."
                         }
                     },
                     {
-                        "@type": "Question",
+                        "@@type": "Question",
                         "name": "Tem fidelidade?",
                         "acceptedAnswer": {
-                            "@type": "Answer",
+                            "@@type": "Answer",
                             "text": "Nenhuma. Você é livre para cancelar quando quiser."
                         }
                     }
@@ -114,19 +114,19 @@
     <!-- Hero Section -->
     <section class="pt-32 pb-20 bg-gradient-to-b from-slate-900 to-blue-900 text-white relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
-        
+
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <div class="inline-block mb-6 px-4 py-1.5 rounded-full bg-green-500/20 border border-green-500/50 text-green-300 text-sm font-bold uppercase tracking-wider animate-bounce">
                 🔥 Oferta Exclusiva: Acesso Imediato
             </div>
-            
+
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8">
                 Transforme seu Negócio em uma <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Máquina de Lucros</span>
             </h1>
-            
+
             <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-12 leading-relaxed">
-                Abandone as planilhas confusas. Tenha controle total do seu financeiro, vendas e estoque em um único lugar. 
+                Abandone as planilhas confusas. Tenha controle total do seu financeiro, vendas e estoque em um único lugar.
                 <span class="text-white font-bold block mt-2">Simples, Rápido e Automático.</span>
             </p>
 
@@ -188,7 +188,7 @@
                     <p class="text-lg text-slate-600 mb-8">
                         O WSoft não é apenas um sistema, é o seu parceiro de crescimento. Automatize o chato e foque no que importa: vender.
                     </p>
-                    
+
                     <div class="space-y-6">
                         <div class="flex gap-4">
                             <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-xl">
@@ -262,7 +262,7 @@
     <!-- The Offer (Stack) -->
     <section id="oferta" class="py-24 bg-blue-900 text-white relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-5"></div>
-        
+
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4">Oferta Especial Limitada</h2>
@@ -340,8 +340,8 @@
                                 <p class="text-blue-100 mt-2 font-light">Entre em contato pelo WhatsApp</p>
                             </div>
 
-                            <a 
-                                href="https://wa.me/5551999350578" 
+                            <a
+                                href="https://wa.me/5551999350578"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold px-6 py-4 rounded-xl shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
@@ -364,7 +364,7 @@
     <section class="py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center mb-12">Dúvidas Frequentes</h2>
-            
+
             <div class="space-y-6">
                 <div class="border border-slate-200 rounded-xl p-6 hover:border-blue-300 transition duration-300">
                     <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-circle-question text-blue-500"></i> É difícil de usar?</h3>

@@ -74,13 +74,12 @@
     {!! json_encode($finalStructuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
 
+    <link href="{{ asset('images/icon.webp') }}" rel="apple-touch-icon">
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
     <link rel="preload" href="{{ asset('images/icon.webp') }}" as="image" fetchpriority="high">
     <link rel="preload" href="{{ asset('images/icon.webp') }}" as="image">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
-    <link href="https://consultafipe.com.br/public/img/icon.png" rel="icon">
-    <link href="https://consultafipe.com.br/public/img/icon.png" rel="apple-touch-icon">
 
     <!-- Critical CSS inline -->
     <style>
