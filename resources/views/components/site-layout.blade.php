@@ -75,11 +75,12 @@
     </script>
 
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
+    <link rel="preload" href="{{ asset('images/icon.webp') }}" as="image" fetchpriority="high">
+    <link rel="preload" href="{{ asset('images/icon.webp') }}" as="image">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
-    <!-- Preload critical images -->
-    <link rel="preload" href="{{ asset('images/logo.png') }}" as="image" fetchpriority="high">
-    <link rel="preload" href="{{ asset('images/logo-white.png') }}" as="image">
+    <link href="https://consultafipe.com.br/public/img/icon.png" rel="icon">
+    <link href="https://consultafipe.com.br/public/img/icon.png" rel="apple-touch-icon">
 
     <!-- Critical CSS inline -->
     <style>
