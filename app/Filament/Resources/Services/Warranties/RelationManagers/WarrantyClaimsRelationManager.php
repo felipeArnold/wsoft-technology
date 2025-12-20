@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Services\Warranties\RelationManagers;
 
+use App\Filament\Components\PtbrMoney;
+use App\Helpers\FormatterHelper;
 use Filament\Actions\CreateAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -37,7 +42,7 @@ final class WarrantyClaimsRelationManager extends RelationManager
                     ->schema([
                         TextInput::make('claim_number')
                             ->label('Número do Acionamento')
-                            ->default(fn () => 'AC-' . now()->format('Ymd') . '-' . str_pad((string) rand(1, 9999), 4, '0', STR_PAD_LEFT))
+                            ->default(fn () => 'AC-'.now()->format('Ymd').'-'.mb_str_pad((string) rand(1, 9999), 4, '0', STR_PAD_LEFT))
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->columnSpan(1),
@@ -122,25 +127,19 @@ final class WarrantyClaimsRelationManager extends RelationManager
                             ->inline(false)
                             ->columnSpanFull(),
 
-                        TextInput::make('labor_cost')
+                        PtbrMoney::make('labor_cost')
                             ->label('Custo de Mão de Obra')
-                            ->numeric()
-                            ->prefix('R$')
-                            ->default(0)
+                            ->default('0,00')
                             ->columnSpan(1),
 
-                        TextInput::make('parts_cost')
+                        PtbrMoney::make('parts_cost')
                             ->label('Custo de Peças')
-                            ->numeric()
-                            ->prefix('R$')
-                            ->default(0)
+                            ->default('0,00')
                             ->columnSpan(1),
 
-                        TextInput::make('additional_cost')
+                        PtbrMoney::make('additional_cost')
                             ->label('Custos Adicionais')
-                            ->numeric()
-                            ->prefix('R$')
-                            ->default(0)
+                            ->default('0,00')
                             ->columnSpan(1),
                     ])
                     ->columns(3)
@@ -307,8 +306,25 @@ final class WarrantyClaimsRelationManager extends RelationManager
                 CreateAction::make()
                     ->label('Novo Acionamento')
                     ->mutateFormDataUsing(function (array $data): array {
-                        $data['tenant_id'] = \Filament\Facades\Filament::getTenant()->id;
+                        $data['tenant_id'] = Filament::getTenant()->id;
                         $data['user_id'] = auth()->id();
+
+                        // Converter valores monetários
+                        $data['labor_cost'] = FormatterHelper::toDecimal($data['labor_cost'] ?? '0,00');
+                        $data['parts_cost'] = FormatterHelper::toDecimal($data['parts_cost'] ?? '0,00');
+                        $data['additional_cost'] = FormatterHelper::toDecimal($data['additional_cost'] ?? '0,00');
+
+                        return $data;
+                    }),
+            ])
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        // Converter valores monetários ao editar
+                        $data['labor_cost'] = FormatterHelper::toDecimal($data['labor_cost'] ?? '0,00');
+                        $data['parts_cost'] = FormatterHelper::toDecimal($data['parts_cost'] ?? '0,00');
+                        $data['additional_cost'] = FormatterHelper::toDecimal($data['additional_cost'] ?? '0,00');
 
                         return $data;
                     }),
