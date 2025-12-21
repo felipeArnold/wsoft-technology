@@ -34,7 +34,7 @@
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>{{ url('/mecanica') }}</loc>
+        <loc>{{ url('/software-gestao-oficina-mecanica') }}</loc>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
