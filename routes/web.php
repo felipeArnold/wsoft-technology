@@ -31,8 +31,11 @@ Route::get('/oficina', [OficinaLeadController::class, 'index'])->name('landing.o
 Route::post('/oficina/lead', [OficinaLeadController::class, 'store'])->name('landing.oficina.store');
 
 // Landing Page para Sistema de Mecânica
-Route::get('/mecanica', [MecanicaLeadController::class, 'index'])->name('landing.mecanica');
-Route::post('/mecanica/lead', [MecanicaLeadController::class, 'store'])->name('landing.mecanica.store');
+Route::get('/software-gestao-oficina-mecanica', [MecanicaLeadController::class, 'index'])->name('landing.mecanica');
+Route::post('/software-gestao-oficina-mecanica/lead', [MecanicaLeadController::class, 'store'])->name('landing.mecanica.store');
+
+// 301 Redirect from old URL to new SEO-optimized URL
+Route::redirect('/mecanica', '/software-gestao-oficina-mecanica', 301);
 
 // Landing Page para Sistema de Funilaria
 Route::get('/funilaria', [FunilariaLeadController::class, 'index'])->name('landing.funilaria');

@@ -3,9 +3,9 @@ $structuredData = [
     [
         '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
-        'name' => 'WSoft - Sistema para Mecânica Automotiva',
-        'url' => 'https://www.wsoft.dev.br/landing/mecanica',
-        'description' => 'Sistema de gestão completo para oficinas e mecânicas. Controle de OS, financeiro, estoque e cadastro de clientes.',
+        'name' => 'WSoft - Software de Gestão para Oficina Mecânica',
+        'url' => 'https://www.wsoft.dev.br/software-gestao-oficina-mecanica',
+        'description' => 'Software de gestão completo para oficinas mecânicas. Controle de ordens de serviço, controle financeiro, estoque de peças e emissão de NFE.',
         'operatingSystem' => 'Web',
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
@@ -24,10 +24,10 @@ $structuredData = [
     [
         '@context' => 'https://schema.org',
         '@type' => 'AutoRepair',
-        'name' => 'WSoft Tecnologia - Sistema de Gestão para Mecânicas',
+        'name' => 'WSoft Tecnologia - Software para Oficina Mecânica',
         'image' => 'https://www.wsoft.dev.br/images/logo.png',
-        'description' => 'Sistema de gestão completo para oficinas mecânicas e auto centers. Controle financeiro, estoque e OS.',
-        'url' => 'https://www.wsoft.dev.br/landing/mecanica',
+        'description' => 'Software de gestão completo para oficinas mecânicas. Controle financeiro, ordem de serviço digital e estoque de peças.',
+        'url' => 'https://www.wsoft.dev.br/software-gestao-oficina-mecanica',
         'priceRange' => '$$',
         'address' => [
             '@type' => 'PostalAddress',
@@ -45,42 +45,50 @@ $structuredData = [
         'mainEntity' => [
             [
                 '@type' => 'Question',
-                'name' => 'O sistema emite Ordem de Serviço (OS)?',
+                'name' => 'O que é um software de gestão para oficina mecânica?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim! O WSoft permite criar ordens de serviço completas, com cadastro de peças, mão de obra, fotos e status de acompanhamento.'
+                    'text' => 'Um software de gestão para oficina mecânica é um sistema que ajuda a organizar e controlar todos os processos da oficina: ordens de serviço, controle financeiro, estoque de peças, cadastro de clientes e veículos.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Consigo controlar o financeiro da oficina?',
+                'name' => 'Como funciona a ordem de serviço digital?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Com certeza. O sistema possui controle completo de contas a pagar e receber, fluxo de caixa e relatórios de lucratividade.'
+                    'text' => 'A ordem de serviço digital permite criar OS completas no sistema, com dados do cliente, veículo, defeito relatado, peças utilizadas e serviços executados. Você pode adicionar fotos, gerar PDF e enviar por WhatsApp.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Tem controle de estoque de peças?',
+                'name' => 'O software faz controle financeiro da oficina?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim, você pode controlar o estoque de peças, definir estoque mínimo e vincular produtos diretamente nas Ordens de Serviço.'
+                    'text' => 'Sim! O WSoft possui controle financeiro completo com contas a pagar e receber, fluxo de caixa diário e mensal, relatórios de lucratividade e controle de inadimplência.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'O sistema envia mensagens para clientes?',
+                'name' => 'Como funciona o controle de estoque de peças?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim, você pode enviar orçamentos e avisos sobre o status da OS diretamente pelo WhatsApp para seus clientes.'
+                    'text' => 'Você cadastra as peças com preço de custo e venda. Quando adiciona uma peça na ordem de serviço, o sistema dá baixa automática no estoque.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Quanto custa o sistema para oficina?',
+                'name' => 'O sistema emite NFE para oficina mecânica?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem taxa de adesão e com todas as funcionalidades liberadas.'
+                    'text' => 'Sim, o WSoft possui integração para emissão de Nota Fiscal Eletrônica (NFE). Você pode emitir NFE diretamente da ordem de serviço.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Quanto custa o software para oficina mecânica?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'O WSoft custa apenas R$ 29,90 por mês. Sem taxa de adesão, sem letras miúdas. Todas as funcionalidades estão incluídas: ordem de serviço, controle financeiro, estoque, cadastro de clientes e suporte via WhatsApp.'
                 ]
             ]
         ]
@@ -115,12 +123,12 @@ $structuredData = [
 @endphp
 
 <x-site-layout
-    :title="'Sistema para Mecânica Automotiva | Gestão e OS | WSoft'"
-    :description="'Sistema de gestão para oficinas mecânicas com OS digital, controle financeiro, fluxo de caixa e cadastro de clientes e fornecedores.'"
-    :keywords="'sistema oficina mecanica, software oficina, ordem de serviço oficina, gestão oficina, programa para oficina, controle financeiro oficina, sistema para auto center'"
-    :canonical="'https://www.wsoft.dev.br/landing/mecanica'"
-    :ogTitle="'Sistema de Gestão para Oficinas Mecânicas | WSoft'"
-    :ogDescription="'Organize sua oficina, controle OS e aumente seus lucros com o sistema mais simples e completo do mercado.'"
+    :title="'Software de Gestão para Oficina Mecânica | WSoft'"
+    :description="'Software completo para oficina mecânica: ordem de serviço digital, controle financeiro, estoque de peças e emissão de NFE. Teste grátis por 7 dias!'"
+    :keywords="'software de gestão para oficina mecânica, software para oficina mecânica, sistema para oficina mecânica, software de controle financeiro para oficina mecânica, software para gerenciamento de oficina mecânica, software para oficina mecânica com NFE'"
+    :canonical="'https://www.wsoft.dev.br/software-gestao-oficina-mecanica'"
+    :ogTitle="'Software de Gestão para Oficina Mecânica | WSoft'"
+    :ogDescription="'Controle financeiro, ordens de serviço e estoque de peças em um só sistema. Teste grátis por 7 dias. Apenas R$ 29,90/mês'"
     :structuredData="$structuredData"
 >
 
@@ -135,10 +143,10 @@ $structuredData = [
                 Sistema para Mecânica
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Gestão Profissional para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Mecânica Automotiva</span>
+                Software de Gestão para <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Oficina Mecânica</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
-                Ordem de serviço digital, controle financeiro e estoque de peças. O sistema ideal para mecânicas e auto centers. <span class="text-emerald-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Controle financeiro completo, ordem de serviço digital e gestão de estoque de peças. Tudo que sua oficina mecânica precisa para crescer. <span class="text-emerald-400 font-bold block mt-2">Teste grátis por 7 dias. Apenas R$ 29,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="#cadastro" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
@@ -201,11 +209,28 @@ $structuredData = [
     </div>
 </section>
 
+<!-- Introduction Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-slate-700 leading-relaxed mb-6">
+                Se você é dono de uma oficina mecânica, sabe como é desafiador gerenciar ordens de serviço, controlar peças do estoque, acompanhar o financeiro e ainda lidar com clientes. <strong>Um software de gestão para oficina mecânica resolve isso.</strong>
+            </p>
+            <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                O WSoft é um <strong>software para oficina mecânica</strong> completo que centraliza tudo em um único sistema: emissão de ordens de serviço digitais, controle financeiro sem planilhas, gestão de estoque de peças com baixa automática e até emissão de NFE para quem precisa formalizar os serviços.
+            </p>
+            <p class="text-lg text-slate-600 leading-relaxed">
+                Nosso <strong>sistema para oficina mecânica</strong> foi desenvolvido para ser simples e prático. Mesmo quem nunca usou um software consegue começar a usar no mesmo dia. E o melhor: você testa grátis por 7 dias, sem precisar cadastrar cartão de crédito.
+            </p>
+        </div>
+    </div>
+</section>
+
 <!-- Pain vs Gain -->
 <x-site.comparison
-    title="Sua oficina está perdendo dinheiro?"
-    subtitle="O problema da desorganização"
-    description="A falta de gestão pode estar custando caro para o seu negócio. Veja a diferença:"
+    title="Sua oficina mecânica está perdendo dinheiro?"
+    subtitle="O custo da desorganização"
+    description="Sem um software de gestão para oficina mecânica, você perde controle do financeiro, estoque e clientes. Veja a diferença:"
     painTitle="Gestão Manual"
     :painItems="[
         'OS de papel que somem ou rasgam',
@@ -233,8 +258,8 @@ $structuredData = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-20">
             <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Passo a Passo</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Como funciona o Sistema para Oficina</h2>
-            <p class="mt-4 text-lg text-slate-600">Simples de usar, feito para o dia a dia corrido da mecânica.</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Como funciona nosso software para oficina mecânica</h2>
+            <p class="mt-4 text-lg text-slate-600">Simples de usar, feito para o dia a dia corrido da sua oficina.</p>
         </div>
 
         <div class="space-y-24">
@@ -249,10 +274,10 @@ $structuredData = [
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
                         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">1</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Crie a Ordem de Serviço</h3>
+                        <h3 class="text-2xl font-bold text-slate-900">Crie Ordens de Serviço Digitais</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Registre a entrada do veículo, adicione fotos do estado inicial, relate o defeito e inicie o atendimento com profissionalismo.
+                        Registre cada entrada de veículo com ordem de serviço profissional. Adicione fotos, descreva o defeito e acompanhe todo o processo de forma organizada. Acabe com papéis perdidos e OS rasgadas.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
@@ -276,10 +301,10 @@ $structuredData = [
                 <div class="order-1">
                     <div class="flex items-center gap-4 mb-6">
                         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">2</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Adicione Peças e Serviços</h3>
+                        <h3 class="text-2xl font-bold text-slate-900">Controle Estoque e Calcule Valores</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Lance as peças utilizadas (com baixa automática no estoque) e a mão de obra. O sistema calcula o total na hora.
+                        Lance peças e serviços direto na OS. O software para gerenciamento de oficina mecânica dá baixa automática no estoque e calcula o valor total na hora. Nunca mais esqueça de cobrar uma peça.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
@@ -315,10 +340,10 @@ $structuredData = [
                 <div class="order-1 lg:order-2">
                     <div class="flex items-center gap-4 mb-6">
                         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">3</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Receba e Fidelize</h3>
+                        <h3 class="text-2xl font-bold text-slate-900">Finalize e Fidelize Clientes</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Envie a OS pronta pelo WhatsApp, receba o pagamento e mantenha o histórico do cliente para futuras revisões.
+                        Envie a OS pelo WhatsApp, receba o pagamento e mantenha histórico completo do veículo. Seus clientes vão lembrar da sua oficina quando precisarem de manutenção novamente.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
@@ -342,10 +367,10 @@ $structuredData = [
                 <div class="order-1">
                     <div class="flex items-center gap-4 mb-6">
                         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">4</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Visão Geral do Negócio</h3>
+                        <h3 class="text-2xl font-bold text-slate-900">Acompanhe o Controle Financeiro</h3>
                     </div>
                     <p class="text-lg text-slate-600 mb-6">
-                        Tenha o controle total na palma da mão. Acompanhe gráficos, faturamento e alertas importantes em um único painel inteligente.
+                        Tenha visão completa do financeiro da sua oficina. Veja faturamento, contas a pagar e receber, fluxo de caixa e muito mais. Um verdadeiro software de controle financeiro para oficina mecânica.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-slate-700">
@@ -384,45 +409,45 @@ $structuredData = [
 <section id="funcionalidades" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Funcionalidades</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Tudo que sua oficina precisa</h2>
-            <p class="mt-4 text-lg text-slate-600">Da OS ao financeiro, controle total do seu negócio automotivo</p>
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Recursos Completos</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Funcionalidades do software para oficina mecânica</h2>
+            <p class="mt-4 text-lg text-slate-600">Da ordem de serviço ao controle financeiro, tudo integrado em um só lugar</p>
         </div>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all duration-300">
                 <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors duration-300">
                     <i class="fa-solid fa-file-invoice text-emerald-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Ordem de Serviço</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">Crie OS completas com placa, modelo, peças, serviços, defeito e solução. Imprima ou envie PDF.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Ordem de Serviço Digital</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Crie ordens de serviço completas com placa, modelo, peças, serviços e histórico. Imprima PDF ou envie por WhatsApp.</p>
             </article>
             <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300">
                 <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors duration-300">
                     <i class="fa-solid fa-wrench text-blue-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Controle de Estoque</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">Cadastro de peças com preço de compra e venda. Baixa automática ao inserir na OS.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Gestão de Estoque de Peças</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Controle de peças com preço de compra e venda. Baixa automática ao inserir peças na ordem de serviço.</p>
             </article>
             <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-purple-200 transition-all duration-300">
                 <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors duration-300">
                     <i class="fa-solid fa-money-bill-transfer text-purple-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Gestão Financeira</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">Contas a pagar e receber, fluxo de caixa diário e mensal. Saiba onde vai cada centavo.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Controle Financeiro Completo</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Contas a pagar e receber, fluxo de caixa diário e mensal. Controle cada centavo da sua oficina sem planilhas.</p>
             </article>
             <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300">
                 <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-orange-600 transition-colors duration-300">
                     <i class="fa-solid fa-car text-orange-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Cadastro de Veículos</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">Histórico completo por placa. Saiba todas as revisões que o veículo já fez na sua oficina.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Cadastro de Clientes e Veículos</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Histórico completo por placa e cliente. Saiba todas as manutenções que o veículo já fez na sua oficina mecânica.</p>
             </article>
             <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300">
                 <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors duration-300">
                     <i class="fa-brands fa-whatsapp text-red-600 group-hover:text-white text-xl transition-colors duration-300"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Avisos no WhatsApp</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">Notifique seu cliente quando o carro estiver pronto ou envie orçamentos com um clique.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Integração com WhatsApp</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Envie orçamentos e notifique clientes quando o carro estiver pronto. Tudo com um clique direto do sistema.</p>
             </article>
             <article class="group rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:shadow-lg hover:border-teal-200 transition-all duration-300">
                 <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-600 transition-colors duration-300">
@@ -442,13 +467,84 @@ $structuredData = [
     </div>
 </section>
 
-<!-- Benefícios -->
-<section id="vantagens" class="py-20 bg-slate-50">
+<!-- NFE and Reports Section -->
+<section class="py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Vantagens</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Por que escolher o WSoft?</h2>
-            <p class="mt-4 text-lg text-slate-600">Simples, prático e eficiente</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Emissão de NFE e Relatórios Gerenciais</h2>
+            <p class="mt-4 text-lg text-slate-600">Software para oficina mecânica com NFE integrada e relatórios completos</p>
+        </div>
+        
+        <div class="grid gap-8 md:grid-cols-2">
+            <article class="bg-white rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div class="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-file-invoice text-emerald-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">Emissão de NFE Integrada</h3>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    Para oficinas mecânicas que precisam emitir nota fiscal, nosso software possui integração completa para emissão de NFE diretamente do sistema.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-emerald-500"></i>
+                        <span>Emita NFE direto da ordem de serviço</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-emerald-500"></i>
+                        <span>Controle completo de impostos</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-emerald-500"></i>
+                        <span>Envio automático por e-mail</span>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="bg-white rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-chart-line text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">Relatórios para Gestão</h3>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    Tome decisões com base em dados. Nosso software de controle financeiro para oficina mecânica oferece relatórios completos e detalhados.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-blue-500"></i>
+                        <span>Faturamento por período</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-blue-500"></i>
+                        <span>Serviços mais executados</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-blue-500"></i>
+                        <span>Peças mais vendidas</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700">
+                        <i class="fa-solid fa-check text-blue-500"></i>
+                        <span>Lucratividade da oficina</span>
+                    </li>
+                </ul>
+            </article>
+        </div>
+
+        <div class="mt-12 text-center">
+            <a href="#cadastro" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Organize sua oficina hoje</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Benefícios -->
+<section id="vantagens" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Diferenciais WSoft</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Por que usar o WSoft na sua oficina mecânica?</h2>
+            <p class="mt-4 text-lg text-slate-600">Benefícios práticos para o dia a dia da sua oficina</p>
         </div>
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <article class="flex gap-6">
@@ -457,7 +553,7 @@ $structuredData = [
                 </div>
                 <div>
                     <h3 class="text-xl font-semibold">Fácil de Usar</h3>
-                    <p class="mt-3 text-slate-600">Interface intuitiva, sem complicações. Você aprende a usar em minutos.</p>
+                    <p class="mt-3 text-slate-600">Interface intuitiva desenvolvida para donos de oficina. Você aprende a usar em minutos, sem complicação.</p>
                 </div>
             </article>
             <article class="flex gap-6">
@@ -465,8 +561,8 @@ $structuredData = [
                     <i class="fa-solid fa-cloud text-blue-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold">100% Online</h3>
-                    <p class="mt-3 text-slate-600">Acesse de onde estiver: computador, celular ou tablet. Seus dados sempre seguros.</p>
+                    <h3 class="text-xl font-semibold">100% Online e Seguro</h3>
+                    <p class="mt-3 text-slate-600">Acesse de qualquer lugar: computador, celular ou tablet. Seus dados sempre seguros na nuvem, com backup automático.</p>
                 </div>
             </article>
             <article class="flex gap-6">
@@ -481,8 +577,8 @@ $structuredData = [
         </div>
 
         <div class="mt-16 text-center">
-            <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
-                <span>Testar Gratuitamente</span>
+            <a href="#cadastro" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                <span>Controle financeiro sem planilhas</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
@@ -490,12 +586,12 @@ $structuredData = [
 </section>
 
 <!-- Price Section -->
-<section id="precos" class="py-20 bg-white">
+<section id="precos" class="py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Planos</p>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Preço justo para sua oficina</h2>
-            <p class="mt-4 text-lg text-slate-600">Comece grátis, sem cartão de crédito.</p>
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Investimento</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Quanto custa um software para oficina mecânica?</h2>
+            <p class="mt-4 text-lg text-slate-600">Preço justo e transparente. Teste grátis por 7 dias sem cartão de crédito.</p>
         </div>
 
         <div class="max-w-md mx-auto">
@@ -544,17 +640,17 @@ $structuredData = [
 
 <!-- Cadastro (Form Section) -->
 <x-site.cta-whatsapp
-    title="Crie sua Conta pelo WhatsApp"
-    subtitle="Junte-se a mais de 500 oficinas que já modernizaram sua gestão com o WSoft."
-    buttonText="Começar Agora"
+    title="Teste o software para oficina mecânica grátis por 7 dias"
+    subtitle="Mais de 500 oficinas já modernizaram sua gestão com o WSoft. Comece agora sem compromisso."
+    buttonText="Começar teste grátis"
     gradient="from-emerald-600 to-teal-700"
 />
 
 <!-- CTA Section -->
 <x-site.cta-final
-    :title="'Escolha um sistema completo para gestão de mecânica automotiva'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para centro automotivo</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
-    :footer="'Junte-se a centenas de mecânicas que usam WSoft'"
+    :title="'Comece a usar o melhor software de gestão para oficina mecânica'"
+    :description="'Teste grátis por 7 dias sem cartão de crédito. Depois apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span> para ter controle total da sua oficina.'"
+    :footer="'Junte-se a mais de 500 oficinas mecânicas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-emerald-600 to-blue-600'"
     :textColor="'text-emerald-50'"
     :highlightColor="'text-yellow-300'"
@@ -565,49 +661,73 @@ $structuredData = [
 <section id="faq_section" class="py-20 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-12">
-            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Dúvidas</p>
-            <h2 class="mt-4 text-3xl font-bold">Perguntas Frequentes</h2>
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Dúvidas Frequentes</p>
+            <h2 class="mt-4 text-3xl font-bold">Perguntas sobre software para oficina mecânica</h2>
         </div>
         <div class="space-y-4">
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    O sistema emite Ordem de Serviço (OS)?
+                    O que é um software de gestão para oficina mecânica?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim! O WSoft permite criar ordens de serviço completas, com cadastro de peças, mão de obra, fotos e status de acompanhamento.</p>
+                <p class="mt-3 text-slate-600">Um software de gestão para oficina mecânica é um sistema que ajuda a organizar e controlar todos os processos da oficina: ordens de serviço, controle financeiro, estoque de peças, cadastro de clientes e veículos. Ele substitui cadernos, papéis e planilhas por um sistema integrado e profissional.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Consigo controlar o financeiro da oficina?
+                    Como funciona a ordem de serviço digital?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Com certeza. O sistema possui controle completo de contas a pagar e receber, fluxo de caixa e relatórios de lucratividade.</p>
+                <p class="mt-3 text-slate-600">A ordem de serviço digital permite criar OS completas no sistema, com dados do cliente, veículo, defeito relatado, peças utilizadas e serviços executados. Você pode adicionar fotos, gerar PDF e enviar por WhatsApp. Tudo fica registrado e organizado no histórico.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Tem controle de estoque de peças?
+                    O software faz controle financeiro da oficina?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim, você pode controlar o estoque de peças, definir estoque mínimo e vincular produtos diretamente nas Ordens de Serviço.</p>
+                <p class="mt-3 text-slate-600">Sim! O WSoft possui controle financeiro completo com contas a pagar e receber, fluxo de caixa diário e mensal, relatórios de lucratividade e controle de inadimplência. Você não precisa mais usar planilhas para controlar o dinheiro da oficina.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    O sistema envia mensagens para clientes?
+                    Como funciona o controle de estoque de peças?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">Sim, você pode enviar orçamentos e avisos sobre o status da OS diretamente pelo WhatsApp para seus clientes.</p>
+                <p class="mt-3 text-slate-600">Você cadastra as peças com preço de custo e venda. Quando adiciona uma peça na ordem de serviço, o sistema dá baixa automática no estoque. Assim você sempre sabe quantas peças tem disponíveis e nunca esquece de cobrar uma peça utilizada.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                    Quanto custa o sistema para oficina?
+                    O sistema emite NFE para oficina mecânica?
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem taxa de adesão e com todas as funcionalidades liberadas.</p>
+                <p class="mt-3 text-slate-600">Sim, o WSoft possui integração para emissão de Nota Fiscal Eletrônica (NFE). Você pode emitir NFE diretamente da ordem de serviço, facilitando a formalização dos serviços prestados pela sua oficina mecânica.</p>
+            </details>
+            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                    Posso testar o software antes de pagar?
+                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                </summary>
+                <p class="mt-3 text-slate-600">Sim! Oferecemos 7 dias de teste grátis, sem precisar cadastrar cartão de crédito. Você pode testar todas as funcionalidades do software para oficina mecânica e decidir se atende suas necessidades.</p>
+            </details>
+            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                    Quanto custa o software para oficina mecânica?
+                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                </summary>
+                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês. Sem taxa de adesão, sem letras miúdas. Todas as funcionalidades estão incluídas: ordem de serviço, controle financeiro, estoque, cadastro de clientes e suporte via WhatsApp.</p>
+            </details>
+            <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                    Preciso instalar algum programa no computador?
+                    <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                    <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                </summary>
+                <p class="mt-3 text-slate-600">Não! O WSoft é 100% online (na nuvem). Você acessa direto do navegador, de qualquer computador, celular ou tablet. Não precisa instalar nada e seus dados ficam sempre seguros com backup automático.</p>
             </details>
         </div>
     </div>
