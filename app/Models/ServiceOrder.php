@@ -124,9 +124,27 @@ final class ServiceOrder extends Model
                                         ->searchable()
                                         ->preload()
                                         ->required()
+                                        ->reactive()
                                         ->createOptionForm(fn (Schema $schema) => $schema->components([
                                             ...Person::getForm(),
                                         ]))
+                                        ->afterStateUpdated(fn ($set) => $set('vehicle_id', null))
+                                        ->columnSpan(1),
+                                    Select::make('vehicle_id')
+                                        ->label('Veículo')
+                                        ->relationship(
+                                            'vehicle',
+                                            'plate',
+                                            fn ($query, $get) => $query->when(
+                                                $get('person_id'),
+                                                fn ($query, $personId) => $query->where('person_id', $personId)
+                                            )
+                                        )
+                                        ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->plate} - {$record->brand} {$record->model}")
+                                        ->searchable()
+                                        ->preload()
+                                        ->helperText('Selecione o veículo do cliente')
+                                        ->disabled(fn ($get) => ! $get('person_id'))
                                         ->columnSpan(1),
                                     Select::make('user_id')
                                         ->label('Responsável')
@@ -143,7 +161,7 @@ final class ServiceOrder extends Model
                                         ->preload()
                                         ->columnSpan(1),
                                 ])
-                                ->columns(3)
+                                ->columns(2)
                                 ->columnSpanFull(),
                         ]),
 
@@ -219,6 +237,15 @@ final class ServiceOrder extends Model
                 ->label('Cliente')
                 ->searchable()
                 ->sortable(),
+            TextColumn::make('vehicle.plate')
+                ->label('Veículo')
+                ->searchable()
+                ->sortable()
+                ->formatStateUsing(fn ($record) => $record->vehicle
+                    ? "{$record->vehicle->plate} - {$record->vehicle->brand} {$record->vehicle->model}"
+                    : 'N/A')
+                ->placeholder('N/A')
+                ->toggleable(),
             TextColumn::make('status')
                 ->label('Status')
                 ->badge()
@@ -296,6 +323,11 @@ final class ServiceOrder extends Model
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);
+    }
+
+    public function vehicle(): BelongsTo
+    {
+        return $this->belongsTo(Vehicle::class);
     }
 
     public function serviceOrderServices(): HasMany

@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Models\Person;
 
 use App\Filament\Components\CnpjComponent;
+use App\Models\Accounts\Accounts;
 use App\Models\Concerns\Categorizable;
+use App\Models\ServiceOrder;
 use App\Models\Tenant;
+use App\Models\Vehicle;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
@@ -17,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use Leandrocfe\FilamentPtbrFormFields\Document;
 
 /**
@@ -26,12 +30,12 @@ use Leandrocfe\FilamentPtbrFormFields\Document;
  * @property string $type
  * @property string|null $surname
  * @property string|null $document
- * @property \Illuminate\Support\Carbon|null $birth_date
+ * @property Carbon|null $birth_date
  * @property string|null $nationality
  * @property string|null $naturalness
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  * @property-read Tenant $tenant
  */
 final class Person extends Model
@@ -424,16 +428,21 @@ final class Person extends Model
 
     public function servicesOrders(): HasMany
     {
-        return $this->hasMany(\App\Models\ServiceOrder::class);
+        return $this->hasMany(ServiceOrder::class);
     }
 
     public function accounts(): HasMany
     {
-        return $this->hasMany(\App\Models\Accounts\Accounts::class);
+        return $this->hasMany(Accounts::class);
     }
 
     public function supplierRepresentatives(): HasMany
     {
         return $this->hasMany(SupplierRepresentative::class, 'supplier_id');
+    }
+
+    public function vehicles(): HasMany
+    {
+        return $this->hasMany(Vehicle::class);
     }
 }
