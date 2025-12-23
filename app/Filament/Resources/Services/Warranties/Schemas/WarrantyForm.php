@@ -100,7 +100,7 @@ final class WarrantyForm
                             ->native(false)
                             ->default(now())
                             ->reactive()
-                            ->afterStateUpdated(function ($state, $get, $set) {
+                            ->afterStateUpdated(function ($state, $get, $set): void {
                                 $durationDays = $get('duration_days');
                                 if ($state && $durationDays) {
                                     $endDate = \Carbon\Carbon::parse($state)->addDays((int) $durationDays);
@@ -115,7 +115,7 @@ final class WarrantyForm
                             ->default(90)
                             ->required()
                             ->reactive()
-                            ->afterStateUpdated(function ($state, $get, $set) {
+                            ->afterStateUpdated(function ($state, $get, $set): void {
                                 $startDate = $get('start_date');
                                 if ($startDate && $state) {
                                     $endDate = \Carbon\Carbon::parse($startDate)->addDays((int) $state);

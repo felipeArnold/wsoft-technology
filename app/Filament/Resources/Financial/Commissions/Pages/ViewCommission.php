@@ -25,7 +25,7 @@ final class ViewCommission extends ViewRecord
                 ->requiresConfirmation()
                 ->modalHeading('Confirmar Pagamento')
                 ->modalDescription('Tem certeza que deseja marcar esta comissão como paga?')
-                ->action(function () {
+                ->action(function (): void {
                     $currentUser = Filament::auth()->user();
                     $this->record->markAsPaid($currentUser);
                     $this->refreshFormData(['status', 'paid_at', 'paid_by_user_id']);
@@ -38,7 +38,7 @@ final class ViewCommission extends ViewRecord
                 ->requiresConfirmation()
                 ->modalHeading('Confirmar Alteração')
                 ->modalDescription('Tem certeza que deseja marcar esta comissão como pendente?')
-                ->action(function () {
+                ->action(function (): void {
                     $this->record->markAsPending();
                     $this->refreshFormData(['status', 'paid_at', 'paid_by_user_id']);
                 })

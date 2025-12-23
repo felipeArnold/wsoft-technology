@@ -178,7 +178,7 @@ final class BusinessMetricsOverview extends BaseWidget
         $totalCustomersWithPayments = DB::table('people')
             ->where('people.tenant_id', $tenantId)
             ->where('people.is_client', true)
-            ->whereExists(function ($query) {
+            ->whereExists(function ($query): void {
                 $query->select(DB::raw(1))
                     ->from('accounts')
                     ->whereColumn('accounts.person_id', 'people.id')
@@ -195,7 +195,7 @@ final class BusinessMetricsOverview extends BaseWidget
         $churnedCustomers = DB::table('people')
             ->where('people.tenant_id', $tenantId)
             ->where('people.is_client', true)
-            ->whereExists(function ($query) {
+            ->whereExists(function ($query): void {
                 // Garantir que o cliente já teve algum pagamento
                 $query->select(DB::raw(1))
                     ->from('accounts')
@@ -203,7 +203,7 @@ final class BusinessMetricsOverview extends BaseWidget
                     ->join('accounts_installments', 'accounts.id', '=', 'accounts_installments.accounts_id')
                     ->where('accounts_installments.status', PaymentStatusEnum::PAID->value);
             })
-            ->whereNotExists(function ($query) use ($churnThreshold) {
+            ->whereNotExists(function ($query) use ($churnThreshold): void {
                 // Não tem pagamentos nos últimos 60 dias
                 $query->select(DB::raw(1))
                     ->from('accounts')
@@ -226,7 +226,7 @@ final class BusinessMetricsOverview extends BaseWidget
         return DB::table('people')
             ->where('people.tenant_id', $tenantId)
             ->where('people.is_client', true)
-            ->whereExists(function ($query) {
+            ->whereExists(function ($query): void {
                 // Garantir que o cliente já teve algum pagamento
                 $query->select(DB::raw(1))
                     ->from('accounts')
@@ -234,7 +234,7 @@ final class BusinessMetricsOverview extends BaseWidget
                     ->join('accounts_installments', 'accounts.id', '=', 'accounts_installments.accounts_id')
                     ->where('accounts_installments.status', PaymentStatusEnum::PAID->value);
             })
-            ->whereNotExists(function ($query) use ($churnThreshold) {
+            ->whereNotExists(function ($query) use ($churnThreshold): void {
                 // Não tem pagamentos nos últimos 60 dias
                 $query->select(DB::raw(1))
                     ->from('accounts')

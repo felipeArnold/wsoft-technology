@@ -41,7 +41,7 @@ final class ChurnRateChart extends ApexChartWidget
             $activeCustomers = DB::table('people')
                 ->where('people.tenant_id', $tenant?->id)
                 ->where('people.is_client', true)
-                ->whereExists(function ($query) use ($monthStart) {
+                ->whereExists(function ($query) use ($monthStart): void {
                     $query->select(DB::raw(1))
                         ->from('accounts')
                         ->whereColumn('accounts.person_id', 'people.id')
@@ -61,7 +61,7 @@ final class ChurnRateChart extends ApexChartWidget
             $churnedCustomers = DB::table('people')
                 ->where('people.tenant_id', $tenant?->id)
                 ->where('people.is_client', true)
-                ->whereExists(function ($query) use ($monthStart) {
+                ->whereExists(function ($query) use ($monthStart): void {
                     // Teve pagamentos antes do mês
                     $query->select(DB::raw(1))
                         ->from('accounts')
@@ -70,7 +70,7 @@ final class ChurnRateChart extends ApexChartWidget
                         ->where('accounts_installments.status', PaymentStatusEnum::PAID->value)
                         ->where('accounts_installments.paid_at', '<', $monthStart);
                 })
-                ->whereNotExists(function ($query) use ($churnThreshold, $monthEnd) {
+                ->whereNotExists(function ($query) use ($churnThreshold, $monthEnd): void {
                     // Não tem pagamentos entre churnThreshold e fim do mês
                     $query->select(DB::raw(1))
                         ->from('accounts')

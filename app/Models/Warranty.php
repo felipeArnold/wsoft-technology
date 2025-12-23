@@ -120,7 +120,7 @@ final class Warranty extends Model
 
     public function scopeExpired($query)
     {
-        return $query->where(function ($q) {
+        return $query->where(function ($q): void {
             $q->where('status', 'expired')
                 ->orWhere('end_date', '<', now()->toDateString());
         });
