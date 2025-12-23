@@ -78,14 +78,14 @@ final class WarrantyResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::expiring(30)->count() > 0
-            ? (string) static::getModel()::expiring(30)->count()
+        return self::getModel()::expiring(30)->count() > 0
+            ? (string) self::getModel()::expiring(30)->count()
             : null;
     }
 
     public static function getNavigationBadgeColor(): string|array|null
     {
-        $count = static::getModel()::expiring(30)->count();
+        $count = self::getModel()::expiring(30)->count();
 
         return match (true) {
             $count > 10 => 'danger',

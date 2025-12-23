@@ -89,8 +89,8 @@ final class SalesByCategoryWidget extends ApexChartWidget
             'tooltip' => [
                 'enabled' => true,
                 'y' => [
-                    'formatter' => "function(val, { seriesIndex, w }) {
-                        const quantities = " . json_encode($quantities) . ";
+                    'formatter' => 'function(val, { seriesIndex, w }) {
+                        const quantities = '.json_encode($quantities).";
                         return 'R$ ' + val.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' (' + quantities[seriesIndex] + ' un)';
                     }",
                 ],

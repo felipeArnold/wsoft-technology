@@ -15,8 +15,7 @@ final class ServiceOrdersByStatusChart extends ApexChartWidget
 
     protected static ?int $sort = 2;
 
-    protected int | string | array $columnSpan = 1;
-
+    protected int|string|array $columnSpan = 1;
 
     protected function getOptions(): array
     {

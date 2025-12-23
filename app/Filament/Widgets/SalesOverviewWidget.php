@@ -63,10 +63,10 @@ final class SalesOverviewWidget extends BaseWidget
         }
 
         return [
-            Stat::make('Receita do Mês', 'R$ ' . number_format($currentMonthRevenue, 2, ',', '.'))
+            Stat::make('Receita do Mês', 'R$ '.number_format($currentMonthRevenue, 2, ',', '.'))
                 ->description(
                     abs($revenueChange) > 0
-                        ? ($revenueChange > 0 ? '+' : '') . number_format($revenueChange, 1, ',', '.') . '% vs mês anterior'
+                        ? ($revenueChange > 0 ? '+' : '').number_format($revenueChange, 1, ',', '.').'% vs mês anterior'
                         : 'Sem comparação'
                 )
                 ->descriptionIcon($revenueChange > 0 ? 'heroicon-o-arrow-trending-up' : 'heroicon-o-arrow-trending-down')
@@ -76,19 +76,19 @@ final class SalesOverviewWidget extends BaseWidget
             Stat::make('Vendas do Mês', $currentMonthSales)
                 ->description(
                     abs($salesChange) > 0
-                        ? ($salesChange > 0 ? '+' : '') . number_format($salesChange, 1, ',', '.') . '% vs mês anterior'
+                        ? ($salesChange > 0 ? '+' : '').number_format($salesChange, 1, ',', '.').'% vs mês anterior'
                         : 'Sem comparação'
                 )
                 ->descriptionIcon($salesChange > 0 ? 'heroicon-o-arrow-trending-up' : 'heroicon-o-arrow-trending-down')
                 ->color($salesChange >= 0 ? 'success' : 'danger'),
 
-            Stat::make('Ticket Médio', 'R$ ' . number_format($averageTicket, 2, ',', '.'))
+            Stat::make('Ticket Médio', 'R$ '.number_format($averageTicket, 2, ',', '.'))
                 ->description('Média do mês atual')
                 ->descriptionIcon('heroicon-o-shopping-cart')
                 ->color('info'),
 
-            Stat::make('Receita Total', 'R$ ' . number_format($totalRevenue, 2, ',', '.'))
-                ->description($totalSales . ' vendas realizadas')
+            Stat::make('Receita Total', 'R$ '.number_format($totalRevenue, 2, ',', '.'))
+                ->description($totalSales.' vendas realizadas')
                 ->descriptionIcon('heroicon-o-currency-dollar')
                 ->color('success'),
         ];

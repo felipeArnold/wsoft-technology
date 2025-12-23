@@ -13,7 +13,7 @@ final class CreateServiceOrder extends CreateRecord
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Ordem de serviço ' . $this->record->number . ' criada com sucesso';
+        return 'Ordem de serviço '.$this->record->number.' criada com sucesso';
     }
 
     protected function getRedirectUrl(): string

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Widgets;
 
-use App\Models\Product;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
@@ -107,8 +106,8 @@ final class StockValueByCategoryWidget extends ApexChartWidget
             'tooltip' => [
                 'enabled' => true,
                 'y' => [
-                    'formatter' => "function(val, { seriesIndex, dataPointIndex, w }) {
-                        const quantities = " . json_encode($quantities) . ";
+                    'formatter' => 'function(val, { seriesIndex, dataPointIndex, w }) {
+                        const quantities = '.json_encode($quantities).";
                         return 'R$ ' + val.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' (' + quantities[dataPointIndex] + ' un)'
                     }",
                 ],

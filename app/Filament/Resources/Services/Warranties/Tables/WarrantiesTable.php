@@ -15,7 +15,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-class WarrantiesTable
+final class WarrantiesTable
 {
     public static function configure(Table $table): Table
     {
@@ -57,7 +57,7 @@ class WarrantiesTable
                     ->date('d/m/Y')
                     ->sortable()
                     ->description(fn ($record) => $record->getDaysRemaining() > 0
-                        ? $record->getDaysRemaining() . ' dias restantes'
+                        ? $record->getDaysRemaining().' dias restantes'
                         : 'Expirada'
                     ),
 

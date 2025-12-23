@@ -62,6 +62,7 @@ final class AppServiceProvider extends ServiceProvider
                 (str_contains($request->path(), 'login') ||
                  str_contains($request->path(), 'auth'))) {
                 $email = $request->input('email', $request->input('data.email', ''));
+
                 return Limit::perMinute(5)->by($email.$request->ip());
             }
 

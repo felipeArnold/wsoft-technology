@@ -15,7 +15,7 @@ final class EditProduct extends EditRecord
 
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Produto "' . $this->record->name . '" atualizado com sucesso';
+        return 'Produto "'.$this->record->name.'" atualizado com sucesso';
     }
 
     protected function getHeaderActions(): array
@@ -25,9 +25,9 @@ final class EditProduct extends EditRecord
             DeleteAction::make()
                 ->requiresConfirmation()
                 ->modalHeading('Excluir Produto')
-                ->modalDescription('Tem certeza que deseja excluir o produto "' . $this->record->name . '"? Esta ação não pode ser desfeita.')
+                ->modalDescription('Tem certeza que deseja excluir o produto "'.$this->record->name.'"? Esta ação não pode ser desfeita.')
                 ->modalSubmitActionLabel('Sim, excluir')
-                ->successNotificationTitle('Produto "' . $this->record->name . '" excluído com sucesso'),
+                ->successNotificationTitle('Produto "'.$this->record->name.'" excluído com sucesso'),
         ];
     }
 }

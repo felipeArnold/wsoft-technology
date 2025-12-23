@@ -60,8 +60,7 @@ final class RecentStockMovementsWidget extends BaseWidget
                         'saida' => 'danger',
                         default => 'warning',
                     })
-                    ->formatStateUsing(fn (int $state, StockMovement $record): string =>
-                        ($record->type === 'entrada' ? '+' : ($record->type === 'saida' ? '-' : '')) . $state
+                    ->formatStateUsing(fn (int $state, StockMovement $record): string => ($record->type === 'entrada' ? '+' : ($record->type === 'saida' ? '-' : '')).$state
                     ),
 
                 Tables\Columns\TextColumn::make('stock_before')

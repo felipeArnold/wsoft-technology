@@ -13,7 +13,7 @@ final class CreateProduct extends CreateRecord
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Produto "' . $this->record->name . '" criado com sucesso';
+        return 'Produto "'.$this->record->name.'" criado com sucesso';
     }
 
     protected function getRedirectUrl(): string

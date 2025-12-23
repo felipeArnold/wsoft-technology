@@ -8,7 +8,6 @@ use App\Models\Blog\BlogCategory;
 use App\Models\Blog\BlogPost;
 use App\Models\User;
 use Exception;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use OpenAI\Laravel\Facades\OpenAI;
 

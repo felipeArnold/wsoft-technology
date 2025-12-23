@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Financial\Sales\Pages;
 
 use App\Filament\Resources\Financial\Sales\SaleResource;
-use App\Filament\Resources\Financial\Sales\Widgets\SalesOverview;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Filament\Actions\Action;

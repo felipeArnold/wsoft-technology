@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Financial\AccountsPayables\Pages;
 
 use App\Filament\Resources\Financial\AccountsPayables\AccountsPayableResource;
-use App\Filament\Resources\Financial\AccountsPayables\Widgets\AccountsPayablesOverview;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Filament\Actions\Action;

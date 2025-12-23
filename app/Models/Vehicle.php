@@ -73,6 +73,6 @@ final class Vehicle extends Model
 
     public function serviceOrders(): HasMany
     {
-        return $this->hasMany(\App\Models\ServiceOrder::class);
+        return $this->hasMany(ServiceOrder::class);
     }
 }

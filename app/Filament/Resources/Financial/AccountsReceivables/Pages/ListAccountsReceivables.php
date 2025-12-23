@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Financial\AccountsReceivables\Pages;
 
 use App\Filament\Resources\Financial\AccountsReceivables\AccountsReceivableResource;
-use App\Filament\Resources\Financial\AccountsReceivables\Widgets\AccountsReceivablesOverview;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Filament\Actions\Action;

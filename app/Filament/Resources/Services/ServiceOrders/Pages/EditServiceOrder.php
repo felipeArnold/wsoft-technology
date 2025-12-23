@@ -20,7 +20,7 @@ final class EditServiceOrder extends EditRecord
 
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Ordem de serviço #' . $this->record->number . ' atualizada com sucesso';
+        return 'Ordem de serviço #'.$this->record->number.' atualizada com sucesso';
     }
 
     protected function getHeaderActions(): array
@@ -134,7 +134,7 @@ final class EditServiceOrder extends EditRecord
                 ->modalHeading('Excluir Ordem de Serviço')
                 ->modalDescription('Tem certeza que deseja excluir esta ordem de serviço? Esta ação não pode ser desfeita.')
                 ->modalSubmitActionLabel('Sim, excluir')
-                ->successNotificationTitle('Ordem de serviço #' . $this->record->number . ' excluída com sucesso'),
+                ->successNotificationTitle('Ordem de serviço #'.$this->record->number.' excluída com sucesso'),
         ];
     }
 }

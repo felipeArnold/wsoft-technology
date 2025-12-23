@@ -11,7 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
-class WarrantyForm
+final class WarrantyForm
 {
     public static function configure(Schema $schema): Schema
     {
