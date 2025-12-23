@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Creates\Vehicles\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -79,6 +81,9 @@ final class VehiclesTable
                 EditAction::make(),
             ])
             ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
                 FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
             ->striped()

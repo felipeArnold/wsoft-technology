@@ -8,7 +8,9 @@ use App\Models\Blog\BlogCategory;
 use App\Models\Blog\BlogPost;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use OpenAI\Laravel\Facades\OpenAI;
 
 final class BlogPostGenerator
 {
@@ -29,14 +31,14 @@ final class BlogPostGenerator
             messages: [
                 [
                     'role' => 'system',
-                    'content' => 'Você é um assistente especializado em criar conteúdo de blog de alta qualidade em português brasileiro. Você deve gerar posts bem estruturados, informativos e otimizados para SEO.',
+                    'content' => 'Você é um assistente especializado em criar conteúdo de blog de alta qualidade em português brasileiro. Você deve gerar posts bem estruturados, informativos e otimizados para SEO. CRÍTICO: Você DEVE incluir NO MÍNIMO 3 backlinks internos no formato <a href="/url">texto</a> em TODOS os posts. Isso não é opcional.',
                 ],
                 [
                     'role' => 'user',
                     'content' => $prompt,
                 ],
             ],
-            maxTokens: 3000,
+            maxTokens: 4000,
         );
 
         $content = $response->choices[0]->message->content;
@@ -68,11 +70,28 @@ final class BlogPostGenerator
     public function improveExistingPost(BlogPost $post): array
     {
         $prompt = <<<PROMPT
+⚠️ ATENÇÃO - REQUISITO CRÍTICO DE BACKLINKS:
+Você DEVE incluir NO MÍNIMO 3 backlinks internos no conteúdo HTML usando as páginas listadas abaixo.
+Formato obrigatório: <a href="/url">texto descritivo</a>
+Sem backlinks = tarefa incompleta e inaceitável.
+
+Páginas OBRIGATÓRIAS para backlinks (escolha as mais relevantes ao tópico):
+- /sistema-para-gestao-de-clientes, /sistema-para-gestao-de-fornecedores, /sistema-para-gestao-de-estoque
+- /sistema-para-contas-a-pagar, /sistema-para-contas-a-receber, /sistema-para-controle-de-inadimplencia
+- /sistema-para-fluxo-de-caixa, /sistema-ordem-servico
+- /software-gestao-oficina-mecanica, /funilaria
+- /sistema-para-barbearia, /sistema-para-salao-de-beleza, /sistema-para-clinica-estetica
+- /sistema-para-loja-de-roupas, /sistema-para-pet-shop, /sistema-para-pizzaria, /sistema-para-lava-rapido
+- /beneficios, /demonstracao, /faq, /assinatura-digital
+
+Exemplo: "É essencial ter um <a href="/sistema-ordem-servico">sistema de ordem de serviço</a> eficiente."
+
 Analise e melhore o seguinte post de blog. Mantenha o mesmo tema e estrutura, mas:
 1. Melhore a qualidade do texto
 2. Adicione mais detalhes e exemplos relevantes
 3. Otimize para SEO
 4. Torne o conteúdo mais envolvente
+5. ADICIONE NO MÍNIMO 3 BACKLINKS INTERNOS (conforme lista acima)
 
 Título atual: {$post->title}
 Conteúdo atual: {$post->content}
@@ -80,7 +99,7 @@ Conteúdo atual: {$post->content}
 Forneça uma versão melhorada no formato:
 TÍTULO: [novo título]
 EXCERPT: [novo resumo]
-CONTEÚDO: [novo conteúdo em HTML]
+CONTEÚDO: [novo conteúdo em HTML com backlinks internos]
 META_TITLE: [título SEO]
 META_DESCRIPTION: [descrição SEO]
 META_KEYWORDS: [palavras-chave separadas por vírgula]
@@ -90,14 +109,14 @@ PROMPT;
             messages: [
                 [
                     'role' => 'system',
-                    'content' => 'Você é um editor profissional especializado em melhorar conteúdo de blog em português brasileiro.',
+                    'content' => 'Você é um editor profissional especializado em melhorar conteúdo de blog em português brasileiro. CRÍTICO: Você DEVE incluir NO MÍNIMO 3 backlinks internos no formato <a href="/url">texto</a> em TODOS os posts. Isso não é opcional.',
                 ],
                 [
                     'role' => 'user',
                     'content' => $prompt,
                 ],
             ],
-            maxTokens: 3000,
+            maxTokens: 4000,
         );
 
         $content = $response->choices[0]->message->content;
@@ -159,7 +178,7 @@ PROMPT;
         try {
             while ($attempt < $this->maxRetries) {
                 try {
-                    return \OpenAI\Laravel\Facades\OpenAI::chat()->create([
+                    return OpenAI::chat()->create([
                         'model' => 'gpt-4o-mini',
                         'messages' => $messages,
                         'temperature' => $temperature,
@@ -207,6 +226,34 @@ TÓPICO: {$topic}
 {$categoryContext}TOM: {$tone}
 EXTENSÃO: Aproximadamente {$wordCount} palavras
 
+⚠️ ATENÇÃO - REQUISITO CRÍTICO DE BACKLINKS:
+Você DEVE incluir NO MÍNIMO 3 backlinks internos no conteúdo HTML usando as páginas listadas abaixo.
+Formato obrigatório: <a href="/url">texto descritivo</a>
+Sem backlinks = tarefa incompleta e inaceitável.
+
+Páginas OBRIGATÓRIAS para backlinks (escolha as mais relevantes ao tópico):
+- /sistema-para-gestao-de-clientes
+- /sistema-para-gestao-de-fornecedores
+- /sistema-para-gestao-de-estoque
+- /sistema-para-contas-a-pagar
+- /sistema-para-contas-a-receber
+- /sistema-para-controle-de-inadimplencia
+- /sistema-para-fluxo-de-caixa
+- /sistema-ordem-servico
+- /software-gestao-oficina-mecanica
+- /funilaria
+- /sistema-para-barbearia
+- /sistema-para-salao-de-beleza
+- /sistema-para-clinica-estetica
+- /sistema-para-loja-de-roupas
+- /sistema-para-pet-shop
+- /sistema-para-pizzaria
+- /sistema-para-lava-rapido
+- /beneficios
+- /demonstracao
+- /faq
+- /assinatura-digital
+
 O post deve incluir:
 1. Um título atraente e otimizado para SEO
 2. Um resumo/excerpt convincente (2-3 frases)
@@ -215,15 +262,19 @@ O post deve incluir:
    - Subtítulos (h2, h3) para organizar o conteúdo
    - Parágrafos bem escritos
    - Listas quando apropriado
+   - NO MÍNIMO 3 backlinks internos (conforme requisito acima)
    - Conclusão impactante
 4. Meta título para SEO (máximo 60 caracteres)
 5. Meta descrição para SEO (máximo 160 caracteres)
 6. Palavras-chave relevantes para SEO (5-10 palavras-chave separadas por vírgula)
 
+Exemplo de backlink correto no conteúdo:
+"Para uma gestão eficiente, é fundamental contar com um <a href="/sistema-ordem-servico">sistema de ordem de serviço</a> moderno que centralize todas as informações."
+
 Forneça a resposta no seguinte formato:
 TÍTULO: [título do post]
 EXCERPT: [resumo do post]
-CONTEÚDO: [conteúdo completo em HTML]
+CONTEÚDO: [conteúdo completo em HTML com backlinks internos]
 META_TITLE: [título SEO]
 META_DESCRIPTION: [descrição SEO]
 META_KEYWORDS: [palavras-chave separadas por vírgula]

@@ -210,18 +210,61 @@ $structuredData = [
 </section>
 
 <!-- Introduction Section -->
-<section class="py-16 bg-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="prose prose-lg max-w-none">
-            <p class="text-xl text-slate-700 leading-relaxed mb-6">
-                Se você é dono de uma oficina mecânica, sabe como é desafiador gerenciar ordens de serviço, controlar peças do estoque, acompanhar o financeiro e ainda lidar com clientes. <strong>Um software de gestão para oficina mecânica resolve isso.</strong>
-            </p>
-            <p class="text-lg text-slate-600 leading-relaxed mb-6">
-                O WSoft é um <strong>software para oficina mecânica</strong> completo que centraliza tudo em um único sistema: emissão de ordens de serviço digitais, controle financeiro sem planilhas, gestão de estoque de peças com baixa automática e até emissão de NFE para quem precisa formalizar os serviços.
-            </p>
-            <p class="text-lg text-slate-600 leading-relaxed">
-                Nosso <strong>sistema para oficina mecânica</strong> foi desenvolvido para ser simples e prático. Mesmo quem nunca usou um software consegue começar a usar no mesmo dia. E o melhor: você testa grátis por 7 dias, sem precisar cadastrar cartão de crédito.
-            </p>
+<section class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <p class="text-sm font-semibold text-emerald-600 uppercase tracking-[0.3em]">Solução Completa</p>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">A gestão da sua oficina mecânica em um só lugar</h2>
+            <p class="mt-4 text-lg text-slate-600">Centralize todos os processos e ganhe tempo para focar no que realmente importa</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div class="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-file-invoice text-emerald-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">Gestão Simplificada</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    Se você é dono de uma oficina mecânica, sabe como é desafiador gerenciar ordens de serviço, controlar peças do estoque, acompanhar o financeiro e ainda lidar com clientes. <strong>Um software de gestão para oficina mecânica resolve isso.</strong>
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-layer-group text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">Sistema Completo</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    O WSoft é um <strong>software para oficina mecânica</strong> completo que centraliza tudo em um único sistema: emissão de ordens de serviço digitais, controle financeiro sem planilhas, gestão de estoque de peças com baixa automática e até emissão de NFE.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-rocket text-purple-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">Fácil de Usar</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    Nosso <strong>sistema para oficina mecânica</strong> foi desenvolvido para ser simples e prático. Mesmo quem nunca usou um software consegue começar a usar no mesmo dia. E o melhor: você testa grátis por 7 dias, sem precisar cadastrar cartão de crédito.
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl p-8 md:p-12 text-white text-center shadow-xl">
+            <div class="max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 border border-white/30 text-white text-sm font-semibold uppercase tracking-wider mb-6">
+                    <i class="fa-solid fa-gift"></i>
+                    <span>Teste Grátis</span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold mb-4">Comece a organizar sua oficina hoje mesmo</h3>
+                <p class="text-lg text-emerald-50 mb-6">
+                    Teste todas as funcionalidades por 7 dias, sem compromisso. Depois, apenas <span class="font-bold text-yellow-300">R$ 29,90/mês</span> para ter controle total da sua oficina mecânica.
+                </p>
+                <a href="#cadastro" class="inline-flex items-center gap-3 bg-white text-emerald-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-emerald-50 transform hover:-translate-y-0.5 transition-all duration-300">
+                    <span>Começar Teste Grátis</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
     </div>
 </section>

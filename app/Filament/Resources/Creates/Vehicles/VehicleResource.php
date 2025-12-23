@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Creates\Vehicles;
 
-use App\Filament\Resources\Creates\Vehicles\Pages\CreateVehicle;
-use App\Filament\Resources\Creates\Vehicles\Pages\EditVehicle;
 use App\Filament\Resources\Creates\Vehicles\Pages\ListVehicles;
 use App\Filament\Resources\Creates\Vehicles\Schemas\VehicleForm;
 use App\Filament\Resources\Creates\Vehicles\Tables\VehiclesTable;
@@ -76,8 +74,6 @@ final class VehicleResource extends Resource
     {
         return [
             'index' => ListVehicles::route('/'),
-            'create' => CreateVehicle::route('/create'),
-            'edit' => EditVehicle::route('/{record}/edit'),
         ];
     }
 
