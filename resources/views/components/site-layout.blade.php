@@ -340,6 +340,8 @@
         });
     </script>
 
+    <x-site.whatsapp-btn />
+
     {{ $scripts ?? '' }}
 </body>
 </html>

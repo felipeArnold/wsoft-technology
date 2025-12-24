@@ -126,7 +126,7 @@ $structuredData = [
                     Sistema Online para Pequenas Empresas
                 </div>
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                    Sistema de Gestão Financeira <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Online</span> para Pequenas Empresas e MEI
+                    Sistema de gestão financeira <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white"> para pequenas empresas e MEI</span>
                 </h1>
                 <p class="mt-6 text-lg md:text-xl text-blue-100 leading-relaxed max-w-lg">
                     Abandone as planilhas complicadas e softwares caros. Centralize controle financeiro, gestão de vendas, administração de estoque e emissão de ordens de serviço em uma plataforma ERP online feita para quem quer crescer de verdade. Software de gestão empresarial completo, simples e acessível.
@@ -159,7 +159,7 @@ $structuredData = [
                     <div class="flex items-center justify-between mb-8">
                         <div>
                             <p class="text-sm uppercase text-blue-200 font-semibold tracking-wider">Faturamento Mensal</p>
-                            <h3 class="text-3xl font-bold mt-1">R$ 124.890,00</h3>
+                            <p class="text-3xl font-bold mt-1">R$ 124.890,00</p>
                             <div class="flex items-center gap-2 mt-2">
                                 <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">+15% vs mês anterior</span>
                             </div>
@@ -241,6 +241,10 @@ $structuredData = [
                     <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-bl-xl">CENÁRIO DESEJADO</div>
                     <h3 class="text-xl font-bold text-green-700 mb-6 flex items-center gap-2">
                         <i class="fa-solid fa-circle-check"></i> Com WSoft
+                    </h3>
+
+                    <h3 class="text-xl font-bold text-slate-700 mb-6 flex items-center gap-2">
+                        Tenha um Sistema para controle financeiro completo e fácil de usar
                     </h3>
                     <ul class="space-y-4">
                         <li class="flex items-start gap-3 text-slate-700">
