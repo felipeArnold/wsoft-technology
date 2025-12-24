@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Widgets;
 
+use App\Models\Product;
 use Filament\Facades\Filament;
-use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 final class TopSellingProductsWidget extends ApexChartWidget
@@ -20,23 +20,12 @@ final class TopSellingProductsWidget extends ApexChartWidget
     {
         $tenant = Filament::getTenant();
 
-        $query = DB::table('products')
-            ->select([
-                'products.id',
-                'products.name',
-                DB::raw('COALESCE(SUM(sale_items.quantity), 0) as total_sold'),
-                DB::raw('COALESCE(SUM(sale_items.total), 0) as total_revenue'),
-            ])
-            ->leftJoin('sale_items', 'products.id', '=', 'sale_items.product_id');
-
-        if ($tenant) {
-            $query->where('products.tenant_id', $tenant->id);
-        }
-
-        $products = $query
-            ->groupBy('products.id', 'products.name')
-            ->having('total_sold', '>', 0)
-            ->orderByDesc('total_sold')
+        $products = Product::query()
+            ->withSum('saleItems', 'quantity')
+            ->withSum('saleItems', 'total')
+            ->when($tenant, fn ($query) => $query->where('tenant_id', $tenant->id))
+            ->whereRelation('saleItems', 'quantity', '>', 0)
+            ->orderByDesc('sale_items_sum_quantity')
             ->limit(10)
             ->get();
 
@@ -46,12 +35,14 @@ final class TopSellingProductsWidget extends ApexChartWidget
             $quantitiesSold = [0];
             $revenues = [0];
         } else {
-            $productNames = $products->pluck('name')->map(function ($name) {
+            $productNames = $products->map(function (Product $product) {
+                $name = $product->name;
+
                 return mb_strlen($name) > 30 ? mb_substr($name, 0, 27).'...' : $name;
             })->toArray();
 
-            $quantitiesSold = $products->pluck('total_sold')->map(fn ($value) => (float) $value)->toArray();
-            $revenues = $products->pluck('total_revenue')->map(fn ($value) => (float) $value)->toArray();
+            $quantitiesSold = $products->map(fn (Product $product) => (float) $product->sale_items_sum_quantity)->toArray();
+            $revenues = $products->map(fn (Product $product) => (float) $product->sale_items_sum_total)->toArray();
         }
 
         return [

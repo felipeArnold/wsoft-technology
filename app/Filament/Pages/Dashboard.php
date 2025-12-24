@@ -37,7 +37,7 @@ final class Dashboard extends BaseDashboard
 {
     public function getColumns(): int
     {
-        return 12;
+        return 5;
     }
 
     public function content(Schema $schema): Schema
@@ -95,8 +95,8 @@ final class Dashboard extends BaseDashboard
                             ->schema(
                                 $this->getWidgetsSchemaComponents([
                                     ServiceOrdersOverview::class,
-                                    ServiceOrdersByStatusChart::class,
                                     ServiceOrdersCreationByDayChart::class,
+                                    ServiceOrdersByStatusChart::class,
                                     ServiceOrdersCompletionTrend::class,
                                 ])
                             ),

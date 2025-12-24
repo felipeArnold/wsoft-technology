@@ -16,6 +16,7 @@ use Filament\Facades\Filament;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 final class PeopleTable
@@ -123,7 +124,11 @@ final class PeopleTable
                     ->since()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->defaultSort('name', 'asc')
+            ->defaultSort('name')
+            ->groups([
+                Group::make('created_at')->label('Data de Cadastro')->date()->collapsible(),
+                Group::make('updated_at')->label('Data de Atualização')->date()->collapsible(),
+            ])
             ->filters([
                 TrashedFilter::make(),
                 SelectFilter::make('categories')

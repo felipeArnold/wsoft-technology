@@ -138,6 +138,10 @@ final class CommissionsTable
                     DeleteBulkAction::make(),
                 ]),
                 FilamentExportBulkAction::make('export')->label('Exportar'),
-            ]);
+            ])
+            ->striped()
+            ->emptyStateIcon('heroicon-o-inbox')
+            ->emptyStateHeading('Nenhum registro encontrado')
+            ->emptyStateDescription('Não há comissões para exibir no momento.');
     }
 }

@@ -22,6 +22,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 final class ProductsTable
@@ -33,8 +34,7 @@ final class ProductsTable
                 TextColumn::make('name')
                     ->label('Nome do Produto')
                     ->searchable()
-                    ->sortable()
-                    ->weight('bold'),
+                    ->sortable(),
                 TextColumn::make('sku')
                     ->label('SKU')
                     ->searchable()
@@ -110,6 +110,9 @@ final class ProductsTable
                         true: fn ($query) => $query->whereRaw('net_profit > 0'),
                         false: fn ($query) => $query->whereRaw('net_profit <= 0'),
                     ),
+            ])
+            ->groups([
+                Group::make('person.name')->label('Fornecedor')->collapsible(),
             ])
             ->recordActions([
                 ViewAction::make()->label('Ver'),
@@ -253,7 +256,6 @@ final class ProductsTable
                     }),
             ])
             ->toolbarActions([
-
                 FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
             ->striped()

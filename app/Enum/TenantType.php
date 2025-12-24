@@ -100,18 +100,6 @@ enum TenantType: string
             ->toArray();
     }
 
-    public function isAutomotive(): bool
-    {
-        return in_array($this, [
-            self::MECHANIC,
-            self::AUTO_REPAIR,
-            self::CAR_DEALERSHIP,
-            self::AUTO_PARTS,
-            self::CAR_WASH,
-            self::TIRE_SHOP,
-        ], strict: true);
-    }
-
     public function getLabel(): string
     {
         return match ($this) {
@@ -201,6 +189,18 @@ enum TenantType: string
             self::INDUSTRY => 'Indústria',
             self::OTHER => 'Outros',
         };
+    }
+
+    public function isAutomotive(): bool
+    {
+        return in_array($this, [
+            self::MECHANIC,
+            self::AUTO_REPAIR,
+            self::CAR_DEALERSHIP,
+            self::AUTO_PARTS,
+            self::CAR_WASH,
+            self::TIRE_SHOP,
+        ], strict: true);
     }
 
     public function getDescription(): string

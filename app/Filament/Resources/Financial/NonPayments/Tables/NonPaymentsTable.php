@@ -220,12 +220,6 @@ final class NonPaymentsTable
             ->emptyStateIcon('heroicon-o-exclamation-triangle')
             ->emptyStateHeading('Nenhuma inadimplência encontrada')
             ->emptyStateDescription('Parabéns! Você não possui contas em atraso no momento.')
-            ->emptyStateActions([
-                Action::make('view_all_accounts')
-                    ->label('Ver todas as contas')
-                    ->icon('heroicon-m-currency-dollar')
-                    ->url('/accounts-receivables'),
-            ])
             ->defaultPaginationPageOption(100)
             ->paginationPageOptions([10, 25, 50, 100, 250, 'all']);
     }

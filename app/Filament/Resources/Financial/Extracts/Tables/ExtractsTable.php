@@ -304,12 +304,6 @@ final class ExtractsTable
             ->striped()
             ->emptyStateIcon('heroicon-o-presentation-chart-bar')
             ->emptyStateHeading('Nenhum extrato encontrado')
-            ->emptyStateDescription('Crie uma nova conta para começar a gerar extratos.')
-            ->emptyStateActions([
-                Action::make('create_account')
-                    ->label('Criar nova conta')
-                    ->icon('heroicon-m-plus')
-                    ->url('/accounts-receivables/create'),
-            ]);
+            ->emptyStateDescription('Crie uma nova conta para começar a gerar extratos.');
     }
 }
