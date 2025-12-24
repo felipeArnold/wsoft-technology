@@ -96,6 +96,10 @@ final class RecentStockMovementsWidget extends BaseWidget
                     ]),
             ])
             ->defaultSort('created_at', 'desc')
-            ->paginated([10, 25, 50]);
+            ->paginated([10, 25, 50])
+            ->striped()
+            ->emptyStateIcon('heroicon-o-check-badge')
+            ->emptyStateHeading('Nenhum movimento de estoque encontrado.')
+            ->emptyStateDescription('Todos os movimentos de estoque foram registrados.');
     }
 }

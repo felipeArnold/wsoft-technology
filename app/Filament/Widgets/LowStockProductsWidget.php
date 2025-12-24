@@ -118,6 +118,10 @@ final class LowStockProductsWidget extends BaseWidget
                     }),
             ])
             ->defaultSort('stock', 'asc')
-            ->paginated([10, 25, 50]);
+            ->paginated([10, 25, 50])
+            ->striped()
+            ->emptyStateIcon('heroicon-o-check-badge')
+            ->emptyStateHeading('Nenhuma produto com estoque baixo')
+            ->emptyStateDescription('Todos os produtos estão com estoque adequado.');
     }
 }

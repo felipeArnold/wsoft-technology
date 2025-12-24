@@ -62,7 +62,39 @@ $structuredData = [
                 'name' => 'Preciso de equipe grande para usar o sistema?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Não. O layout foi desenhado para pequenas empresas que querem profissionalizar processos sem burocracia.'
+                    'text' => 'Não. O layout foi desenhado para pequenas empresas que querem profissionalizar processos sem burocracia. O sistema de gestão WSoft funciona perfeitamente para empresas com 1 a 50 funcionários, incluindo MEI e autônomos que trabalham sozinhos.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'O que é um sistema de gestão financeira e para que serve?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Um sistema de gestão financeira é um software ERP (Enterprise Resource Planning) que centraliza todas as operações financeiras e administrativas da empresa em uma única plataforma. Serve para controlar fluxo de caixa, contas a pagar e receber, vendas, estoque, ordem de serviço e relatórios gerenciais, eliminando a necessidade de múltiplas planilhas e sistemas desconectados.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Qual a diferença entre sistema de gestão e ERP?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'ERP (Enterprise Resource Planning) é um tipo específico de sistema de gestão que integra todos os departamentos da empresa (financeiro, vendas, estoque, produção) em uma única plataforma. O WSoft é um ERP completo que unifica gestão financeira, controle de estoque, ordem de serviço e vendas, enquanto sistemas de gestão genéricos podem focar apenas em uma área específica.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Como funciona o controle de inadimplência no WSoft?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'O sistema identifica automaticamente contas em atraso, segmenta devedores por tempo de vencimento e dispara lembretes automáticos por e-mail e WhatsApp em intervalos configuráveis. Você acompanha negociações, histórico de cobranças e pode gerar relatórios de inadimplência para tomar decisões estratégicas sobre recuperação de crédito.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'O sistema funciona para MEI e autônomos?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Sim, o WSoft é ideal para MEI (Microempreendedor Individual) e profissionais autônomos que precisam organizar finanças, controlar receitas e despesas, emitir ordens de serviço e gerenciar clientes. O sistema foi desenvolvido pensando em pequenos negócios que precisam de profissionalização sem complexidade, com preço acessível e interface simples.'
                 ]
             ]
         ]
@@ -94,10 +126,10 @@ $structuredData = [
                     Sistema Online para Pequenas Empresas
                 </div>
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                    Gestão Financeira <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Simples</span> para o seu Negócio
+                    Sistema de Gestão Financeira <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Online</span> para Pequenas Empresas e MEI
                 </h1>
                 <p class="mt-6 text-lg md:text-xl text-blue-100 leading-relaxed max-w-lg">
-                    Abandone as planilhas complicadas. Centralize financeiro, vendas, estoque e OS em uma plataforma feita para quem quer crescer de verdade.
+                    Abandone as planilhas complicadas e softwares caros. Centralize controle financeiro, gestão de vendas, administração de estoque e emissão de ordens de serviço em uma plataforma ERP online feita para quem quer crescer de verdade. Software de gestão empresarial completo, simples e acessível.
                 </p>
                 <div class="mt-10 flex flex-col sm:flex-row gap-4">
                     <a href="/app/register" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
@@ -176,7 +208,7 @@ $structuredData = [
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-red-600 font-bold tracking-wider uppercase text-sm">Pare de perder dinheiro</span>
                 <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900">Sua empresa está sangrando e você nem percebe</h2>
-                <p class="mt-4 text-lg text-slate-600">A falta de gestão profissional é o principal motivo de quebra de pequenas empresas no Brasil. Em qual cenário você está hoje?</p>
+                <p class="mt-4 text-lg text-slate-600">A falta de gestão profissional e controle financeiro adequado é o principal motivo de quebra de pequenas empresas no Brasil. Sem um sistema de gestão empresarial eficiente, você perde receita, aumenta custos operacionais e compromete o crescimento sustentável do negócio. Em qual cenário você está hoje?</p>
             </div>
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Pain -->
@@ -240,13 +272,212 @@ $structuredData = [
         </div>
     </section>
 
+    <!-- O que é Sistema de Gestão -->
+    <section id="o-que-e" class="py-24 bg-slate-50 relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-100/50 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest mb-4">
+                    Conceito & Definição
+                </span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">
+                    O que é um Sistema de Gestão Financeira e ERP Online?
+                </h2>
+                <div class="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Context / Definition -->
+            <div class="max-w-4xl mx-auto mb-20 text-center">
+                <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                    Um <strong class="text-blue-700 font-bold">sistema de gestão financeira</strong> (ERP) é o cérebro digital da sua empresa. Ele centraliza, automatiza e organiza todas as operações — do financeiro ao estoque — em uma única plataforma inteligente.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8 text-left bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
+                    <div class="relative pl-6 border-l-4 border-slate-200">
+                         <p class="text-slate-600 italic">"Diferente de planilhas isoladas, um ERP conecta tudo. Quando você faz uma venda, o estoque baixa, o financeiro atualiza e o relatório fica pronto. Tudo automático."</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                             <i class="fa-solid fa-layer-group text-blue-600"></i> Integração Total
+                        </h4>
+                        <p class="text-sm text-slate-500">
+                            Financeiro, Vendas, Estoque, OS, Notas Fiscais e Relatórios conversando entre si em tempo real.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Por que precisa (Problems) -->
+            <div class="mb-20">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-slate-900">Por que Pequenas Empresas precisam disso urgente?</h3>
+                    <p class="text-slate-500 mt-2">Se você enfrenta algum desses desafios, o WSoft é para você:</p>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                     <!-- Card 1 -->
+                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                             <i class="fa-solid fa-chart-pie text-red-500 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Falta de Controle</h4>
+                            <p class="text-xs text-slate-500 mt-1">Não sabe qual é o lucro real no fim do mês.</p>
+                        </div>
+                     </div>
+                     <!-- Card 2 -->
+                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                             <i class="fa-solid fa-file-invoice-dollar text-red-500 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Contas Desorganizadas</h4>
+                            <p class="text-xs text-slate-500 mt-1">Dificuldade em acompanhar pagar e receber.</p>
+                        </div>
+                     </div>
+                     <!-- Card 3 -->
+                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                             <i class="fa-solid fa-boxes-stacked text-red-500 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Estoque Furado</h4>
+                            <p class="text-xs text-slate-500 mt-1">Perdas, rupturas e mercadoria parada.</p>
+                        </div>
+                     </div>
+                     <!-- Card 4 -->
+                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                             <i class="fa-solid fa-hand-holding-dollar text-red-500 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Inadimplência Alta</h4>
+                            <p class="text-xs text-slate-500 mt-1">Falta de cobrança sistemática e automática.</p>
+                        </div>
+                     </div>
+                     <!-- Card 5 -->
+                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                             <i class="fa-solid fa-clock text-red-500 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Tempo Perdido</h4>
+                            <p class="text-xs text-slate-500 mt-1">Horas gastas em tarefas manuais e repetitivas.</p>
+                        </div>
+                     </div>
+                </div>
+                
+                <div class="text-center mt-8 max-w-3xl mx-auto">
+                    <p class="text-slate-600 bg-blue-50/50 p-4 rounded-xl border border-blue-100 inline-block">
+                        <i class="fa-solid fa-lightbulb text-yellow-500 mr-2"></i>
+                        O <span class="font-bold text-blue-700">WSoft</span> resolve isso tudo com uma interface simples, preço justo e feito para quem não tem tempo a perder.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div>
+                 <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-slate-900">O que não pode faltar em um ERP Completo</h3>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Feature Item 1 -->
+                    <a href="{{ route('landing.movimentacao-financeira') }}" class="block p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-white transition-all duration-300 group cursor-pointer">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-coins text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Gestão Financeira</h4>
+                        <p class="text-sm text-slate-600">Controle total de fluxo de caixa, DRE gerencial, balanço e projeções futuras.</p>
+                    </a>
+
+                    <!-- Feature Item 2 -->
+                    <a href="{{ route('landing.contas-pagar') }}" class="block p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-white transition-all duration-300 group cursor-pointer">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-money-bill-transfer text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Contas a Pagar/Receber</h4>
+                        <p class="text-sm text-slate-600">Automação de cobranças, alertas de vencimento e conciliação bancária.</p>
+                    </a>
+
+                    <!-- Feature Item 3 -->
+                    <a href="{{ route('landing.gestao-estoque') }}" class="block p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-white transition-all duration-300 group cursor-pointer">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cubes text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Controle de Estoque</h4>
+                        <p class="text-sm text-slate-600">Gestão de produtos, grades, kits, alertas de mínimo e movimentações.</p>
+                    </a>
+                    
+                    <!-- Feature Item 4 -->
+                    <a href="{{ route('landing.ordem-servico') }}" class="block p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-white transition-all duration-300 group cursor-pointer">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-screwdriver-wrench text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Ordem de Serviço</h4>
+                        <p class="text-sm text-slate-600">Criação, aprovação online, acompanhamento de status e faturamento de OS.</p>
+                    </a>
+
+                    <!-- Feature Item 5 -->
+                    <a href="{{ route('landing.gestao-clientes') }}" class="block p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-white transition-all duration-300 group cursor-pointer">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-users text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">CRM Integrado</h4>
+                        <p class="text-sm text-slate-600">Histórico completo de clientes e fornecedores, orçamentos e atendimentos.</p>
+                    </a>
+
+                    <!-- Feature Item 6 -->
+                    <a href="{{ route('landing.movimentacao-financeira') }}" class="block p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-white transition-all duration-300 group cursor-pointer">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-chart-simple text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Relatórios Inteligentes</h4>
+                        <p class="text-sm text-slate-600">Dashboards visuais e indicadores de performance para sua empresa.</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CTA Block -->
+            <div class="mt-16 text-center">
+                <div class="inline-flex flex-col items-center gap-4 bg-white p-8 rounded-3xl shadow-xl shadow-blue-100/50 border border-blue-50 max-w-2xl mx-auto relative overflow-hidden group hover:border-blue-200 transition-colors">
+                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
+                     <div class="absolute -right-8 -top-8 w-24 h-24 bg-blue-50 rounded-full blur-2xl group-hover:bg-blue-100 transition-colors"></div>
+                     
+                     <h3 class="text-2xl font-bold text-slate-800 relative z-10">Pronto para organizar sua empresa?</h3>
+                     
+                     <div class="flex flex-col sm:flex-row items-center gap-6 w-full justify-center mt-2 relative z-10">
+                        <a href="/app/register" class="w-full sm:w-auto inline-flex justify-center items-center rounded-xl bg-blue-600 text-white font-bold px-8 py-4 shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:-translate-y-1 transition transform duration-200 group-cta">
+                            Começar Teste Grátis de 7 Dias
+                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <div class="text-left border-l-2 border-slate-100 pl-6 hidden sm:block">
+                            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide">Plano Completo</p>
+                            <p class="text-2xl font-bold text-slate-900">R$ 29,90<span class="text-sm text-slate-500 font-normal">/mês</span></p>
+                        </div>
+                         <!-- Mobile Price -->
+                        <div class="text-center sm:hidden">
+                            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide">Depois apenas</p>
+                            <p class="text-xl font-bold text-slate-900">R$ 29,90<span class="text-sm text-slate-500 font-normal">/mês</span></p>
+                        </div>
+                     </div>
+                     <p class="text-xs text-slate-400 mt-2 relative z-10">Sem fidelidade. Cancele quando quiser.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Benefícios principais -->
     <section id="beneficios" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto">
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Benefícios principais</p>
-                <h2 class="mt-4 text-3xl md:text-4xl font-bold">Controle total com linguagem simples e persuasiva</h2>
-                <p class="mt-4 text-slate-600">Tudo o que sua empresa precisa para organizar processos, reduzir custos e aumentar receita.</p>
+                <h2 class="mt-4 text-3xl md:text-4xl font-bold">Sistema de Gestão Completo: Controle Financeiro, Operacional e Comercial</h2>
+                <p class="mt-4 text-slate-600">Tudo o que sua empresa precisa para organizar processos administrativos, reduzir custos operacionais e aumentar receita. Um ERP online que integra gestão financeira, controle de estoque, vendas e ordem de serviço em uma única plataforma de gestão empresarial.</p>
             </div>
             <div class="grid gap-12 md:grid-cols-2 mt-4">
                 <article class="flex gap-6">
@@ -254,8 +485,8 @@ $structuredData = [
                         <i class="fa-solid fa-chart-line text-blue-600 text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-xl font-semibold">Gestão Financeira Completa</h3>
-                        <p class="mt-3 text-slate-600">Centralize entradas, saídas, projeções e limites em um único painel. Acompanhe o fluxo de caixa em tempo real e tome decisões baseadas em dados concretos.</p>
+                        <h3 class="text-xl font-semibold">Gestão Financeira Completa e Controle de Fluxo de Caixa</h3>
+                        <p class="mt-3 text-slate-600">Centralize entradas, saídas, projeções financeiras e limites de orçamento em um único painel de controle. Acompanhe o fluxo de caixa em tempo real, visualize DRE (Demonstração do Resultado do Exercício) simplificada e tome decisões estratégicas baseadas em dados concretos. Sistema de gestão financeira que elimina a necessidade de múltiplas planilhas e softwares desconectados.</p>
                     </div>
                 </article>
                 <article class="flex gap-6">
@@ -272,8 +503,8 @@ $structuredData = [
                         <i class="fa-solid fa-file-invoice text-purple-600 text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-xl font-semibold">Contas a Pagar e Receber</h3>
-                        <p class="mt-3 text-slate-600">Automatize cobranças e acompanhe prazos com alertas inteligentes. Mantenha o caixa previsível e evite surpresas desagradáveis.</p>
+                        <h3 class="text-xl font-semibold">Contas a Pagar e Receber com Automação Inteligente</h3>
+                        <p class="mt-3 text-slate-600">Automatize cobranças recorrentes, gestão de contas a pagar e receber, e acompanhe prazos de vencimento com alertas inteligentes por e-mail e WhatsApp. Mantenha o caixa previsível, evite surpresas desagradáveis e reduza significativamente a inadimplência com lembretes automáticos. Sistema de conciliação bancária integrado para facilitar o controle financeiro diário.</p>
                     </div>
                 </article>
                 <article class="flex gap-6">
@@ -281,8 +512,8 @@ $structuredData = [
                         <i class="fa-solid fa-clipboard-list text-orange-600 text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-xl font-semibold">Sistema de Ordem de Serviço</h3>
-                        <p class="mt-3 text-slate-600">Crie, aprove e monitore cada OS com fotos, checklist e notificações. Workflow completo do orçamento ao faturamento.</p>
+                        <h3 class="text-xl font-semibold">Sistema de Ordem de Serviço (OS) Integrado</h3>
+                        <p class="mt-3 text-slate-600">Crie, aprove e monitore cada ordem de serviço com fotos, checklist personalizado e notificações automáticas. Workflow completo do orçamento ao faturamento, integrado com controle de estoque e gestão de clientes. Ideal para oficinas mecânicas, prestadores de serviço e empresas que precisam de controle operacional profissional. Emissão de OS online com validação digital e histórico completo.</p>
                     </div>
                 </article>
                 <article class="flex gap-6">
@@ -299,8 +530,8 @@ $structuredData = [
                         <i class="fa-solid fa-box text-teal-600 text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-xl font-semibold">Controle de Produtos, Estoque e Vendas</h3>
-                        <p class="mt-3 text-slate-600">Gerencie estoque com lote, alertas de mínimo e preços atualizados, além de integrar vendas diretamente com ordens de serviço.</p>
+                        <h3 class="text-xl font-semibold">Controle de Produtos, Estoque e Vendas Integrado</h3>
+                        <p class="mt-3 text-slate-600">Gerencie estoque com controle de lote, alertas de estoque mínimo, gestão de preços atualizados e movimentações de entrada e saída. Integre vendas diretamente com ordens de serviço, evitando retrabalho e erros de lançamento. Sistema de inventário que previne ruptura de estoque e otimiza compras, reduzindo custos com mercadoria parada ou em falta.</p>
                     </div>
                 </article>
                 <article class="flex gap-6">
@@ -384,12 +615,12 @@ $structuredData = [
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
             <div>
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Por que o WSoft Tecnologia?</p>
-                <h2 class="mt-4 text-3xl font-bold">Um ERP simples, rápido e pensado para o dia a dia</h2>
+                <h2 class="mt-4 text-3xl font-bold">ERP Online Simples, Rápido e Pensado para Pequenas Empresas</h2>
                 <p class="mt-4 text-slate-600">
-                    O WSoft nasceu para ser um ERP simples, intuitivo e pronto para acelerar oficinas, mecânicas, lojas de serviços e qualquer sistema para microempresa que precise profissionalizar a operação.
+                    O WSoft nasceu para ser um sistema de gestão empresarial (ERP) simples, intuitivo e pronto para acelerar oficinas mecânicas, prestadores de serviço, lojas de serviços, comércio varejista e qualquer microempresa ou MEI que precise profissionalizar a operação sem complexidade desnecessária.
                 </p>
                 <p class="mt-4 text-slate-600">
-                    Com processos guiados e dashboards objetivos, você garante organização empresarial, previsibilidade e mais tempo para vender.
+                    Com processos guiados, dashboards objetivos e interface intuitiva, você garante organização empresarial completa, previsibilidade financeira e mais tempo livre para focar em vendas e crescimento. Diferente de sistemas ERP complexos e caros, o WSoft foi desenvolvido especificamente para pequenos negócios que precisam de eficiência sem burocracia.
                 </p>
                 <ul class="mt-6 space-y-3 text-slate-800">
                     <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-green-500 mt-1"></i> Implantação em dias, não em meses.</li>
@@ -431,9 +662,9 @@ $structuredData = [
     <section id="demo" class="py-20 bg-slate-900 text-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-sm uppercase tracking-[0.3em] text-blue-300">Demonstração ao vivo</p>
-            <h2 class="mt-4 text-3xl font-bold">Veja o sistema em ação antes de decidir</h2>
+            <h2 class="mt-4 text-3xl font-bold">Veja o Sistema de Gestão em Ação Antes de Decidir</h2>
             <p class="mt-4 text-blue-100 max-w-3xl mx-auto">
-                Mostre para seu time como o software de gestão empresarial simplifica OS, financeiro e relacionamento com clientes em poucos cliques.
+                Explore na prática como o software de gestão empresarial WSoft simplifica ordem de serviço, controle financeiro, gestão de estoque e relacionamento com clientes em poucos cliques. Visualize dashboards intuitivos, relatórios gerenciais e processos automatizados que transformam a administração do seu negócio.
             </p>
             <div class="mt-10 rounded-3xl border border-white/20 bg-gradient-to-r from-blue-800 to-blue-600 p-4 md:p-10 shadow-2xl">
                 <div class="rounded-2xl border border-white/30 bg-white/5 overflow-hidden shadow-2xl">
@@ -448,8 +679,8 @@ $structuredData = [
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">Funcionalidades detalhadas</p>
-                <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Tudo o que você precisa para crescer</h2>
-                <p class="mt-4 text-lg text-slate-600">Ferramentas completas e integradas para otimizar cada área do seu negócio</p>
+                <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Módulos Completos de ERP: Tudo que Você Precisa para Crescer</h2>
+                <p class="mt-4 text-lg text-slate-600">Ferramentas completas e integradas de sistema de gestão empresarial para otimizar cada área do seu negócio. Software ERP online com módulos de financeiro, vendas, estoque, ordem de serviço e muito mais.</p>
             </div>
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <a href="{{ route('landing.gestao-clientes') }}" class="group block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300 cursor-pointer">
@@ -718,7 +949,8 @@ $structuredData = [
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto">
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">FAQ</p>
-                <h2 class="mt-4 text-3xl font-bold">Perguntas frequentes sobre gestão, financeiro e fluxo de caixa</h2>
+                <h2 class="mt-4 text-3xl font-bold">Perguntas Frequentes: Sistema de Gestão Financeira, ERP e Controle Empresarial</h2>
+                <p class="mt-4 text-slate-600">Tire suas dúvidas sobre software de gestão, controle financeiro, fluxo de caixa e como o WSoft pode ajudar sua empresa a crescer de forma organizada.</p>
             </div>
             <div class="mt-12 space-y-4">
                 <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
@@ -759,7 +991,55 @@ $structuredData = [
                         <span class="text-sm text-slate-500 group-open:hidden">+</span>
                         <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                     </summary>
-                    <p class="mt-3 text-slate-600">Não. O layout foi desenhado para pequenas empresas que querem profissionalizar processos sem burocracia.</p>
+                    <p class="mt-3 text-slate-600">Não. O layout foi desenhado para pequenas empresas que querem profissionalizar processos sem burocracia. O sistema de gestão WSoft funciona perfeitamente para empresas com 1 a 50 funcionários, incluindo MEI e autônomos que trabalham sozinhos.</p>
+                </details>
+                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                        O que é um sistema de gestão financeira e para que serve?
+                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                    </summary>
+                    <p class="mt-3 text-slate-600">Um sistema de gestão financeira é um software ERP (Enterprise Resource Planning) que centraliza todas as operações financeiras e administrativas da empresa em uma única plataforma. Serve para controlar fluxo de caixa, contas a pagar e receber, vendas, estoque, ordem de serviço e relatórios gerenciais, eliminando a necessidade de múltiplas planilhas e sistemas desconectados.</p>
+                </details>
+                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                        Qual a diferença entre sistema de gestão e ERP?
+                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                    </summary>
+                    <p class="mt-3 text-slate-600">ERP (Enterprise Resource Planning) é um tipo específico de sistema de gestão que integra todos os departamentos da empresa (financeiro, vendas, estoque, produção) em uma única plataforma. O WSoft é um ERP completo que unifica gestão financeira, controle de estoque, ordem de serviço e vendas, enquanto sistemas de gestão genéricos podem focar apenas em uma área específica.</p>
+                </details>
+                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                        Como funciona o controle de inadimplência no WSoft?
+                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                    </summary>
+                    <p class="mt-3 text-slate-600">O sistema identifica automaticamente contas em atraso, segmenta devedores por tempo de vencimento e dispara lembretes automáticos por e-mail e WhatsApp em intervalos configuráveis. Você acompanha negociações, histórico de cobranças e pode gerar relatórios de inadimplência para tomar decisões estratégicas sobre recuperação de crédito.</p>
+                </details>
+                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                        O sistema funciona para MEI e autônomos?
+                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                    </summary>
+                    <p class="mt-3 text-slate-600">Sim, o WSoft é ideal para MEI (Microempreendedor Individual) e profissionais autônomos que precisam organizar finanças, controlar receitas e despesas, emitir ordens de serviço e gerenciar clientes. O sistema foi desenvolvido pensando em pequenos negócios que precisam de profissionalização sem complexidade, com preço acessível e interface simples.</p>
+                </details>
+                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                        Preciso de treinamento para usar o sistema?
+                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                    </summary>
+                    <p class="mt-3 text-slate-600">O WSoft foi projetado para ser intuitivo e fácil de usar, mas oferecemos treinamento gratuito e suporte humanizado via WhatsApp para garantir que você aproveite todas as funcionalidades. A maioria dos usuários começa a usar o sistema em poucos dias, com implantação rápida e processos guiados que facilitam o aprendizado.</p>
+                </details>
+                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
+                        Posso integrar o sistema com meu banco?
+                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
+                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
+                    </summary>
+                    <p class="mt-3 text-slate-600">O sistema possui recursos de conciliação bancária que facilitam a importação de extratos e reconciliação automática de transações. Você pode configurar integrações com principais bancos brasileiros para sincronizar movimentações financeiras e manter o controle de caixa sempre atualizado, reduzindo trabalho manual e erros de lançamento.</p>
                 </details>
             </div>
         </div>
