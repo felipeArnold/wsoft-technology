@@ -78,12 +78,19 @@ final class OverdueAccounts extends BaseWidget
 
                 Tables\Columns\TextColumn::make('days_overdue')
                     ->label('Dias em Atraso')
+                    ->badge()
                     ->getStateUsing(function (AccountsInstallments $record): int {
-                        if (! $record->due_date) {
+                        if ($record->due_date === null) {
                             return 0;
                         }
 
                         return (int) Carbon::now()->diffInDays($record->due_date);
+                    })
+                    ->formatStateUsing(fn (int $state): string => abs($state).' '.(abs($state) === 1 ? 'dia' : 'dias'))
+                    ->color(fn (int $state): string => match (true) {
+                        abs($state) === 0 => 'gray',
+                        abs($state) <= 7 => 'warning',
+                        default => 'danger',
                     })
                     ->sortable(),
             ])

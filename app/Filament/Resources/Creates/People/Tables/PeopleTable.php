@@ -22,8 +22,17 @@ final class PeopleTable
 {
     public static function configure(Table $table): Table
     {
+        $query = Person::query()
+            ->where('is_client', true)
+            ->with(['phones', 'emails', 'addresses', 'categories']);
+
+        $tenant = Filament::getTenant();
+        if ($tenant !== null && $tenant->type->isAutomotive()) {
+            $query->with('vehicles');
+        }
+
         return $table
-            ->query(Person::query()->where('is_client', true))
+            ->query($query)
             ->columns([
                 TextColumn::make('name')
                     ->label('Nome')
