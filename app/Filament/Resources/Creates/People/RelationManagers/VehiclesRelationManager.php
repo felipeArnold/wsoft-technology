@@ -10,6 +10,7 @@ use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -28,6 +29,17 @@ final class VehiclesRelationManager extends RelationManager
     protected static ?string $title = 'Veículos';
 
     protected static string|BackedEnum|null $icon = Heroicon::OutlinedTruck;
+
+    public static function canViewForRecord(mixed $ownerRecord, string $pageClass): bool
+    {
+        $tenant = Filament::getTenant();
+
+        if ($tenant === null) {
+            return false;
+        }
+
+        return $tenant->type->isAutomotive();
+    }
 
     public function form(Schema $schema): Schema
     {
@@ -60,7 +72,7 @@ final class VehiclesRelationManager extends RelationManager
                             ->numeric()
                             ->placeholder('Ex: 2023')
                             ->minValue(1900)
-                            ->maxValue(date('Y') + 1)
+                            ->maxValue((int) date('Y') + 1)
                             ->columnSpan(1),
                         TextInput::make('color')
                             ->label('Cor')

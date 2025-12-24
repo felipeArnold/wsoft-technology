@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Enums;
+namespace App\Enum;
 
 enum TenantType: string
 {
@@ -98,6 +98,18 @@ enum TenantType: string
             ->mapWithKeys(fn (self $case) => [$case->value => $case->getLabel()])
             ->sortBy(fn ($label) => $label)
             ->toArray();
+    }
+
+    public function isAutomotive(): bool
+    {
+        return in_array($this, [
+            self::MECHANIC,
+            self::AUTO_REPAIR,
+            self::CAR_DEALERSHIP,
+            self::AUTO_PARTS,
+            self::CAR_WASH,
+            self::TIRE_SHOP,
+        ], strict: true);
     }
 
     public function getLabel(): string

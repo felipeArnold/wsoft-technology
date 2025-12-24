@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages\Auth;
 
-use App\Enums\TenantType;
+use App\Enum\TenantType;
 use App\Helpers\FormatterHelper;
 use App\Models\Tenant;
 use Carbon\Carbon;
@@ -77,7 +77,7 @@ final class RegisterTeam extends RegisterTenant
                 Select::make('type')
                     ->label('Tipo de Empresa')
                     ->options(TenantType::toSelectArray())
-                    ->default(TenantType::OTHER->value)
+                    ->default(TenantType::AUTO_REPAIR->value)
                     ->required()
                     ->searchable()
                     ->helperText('Selecione o tipo de negócio da sua empresa'),

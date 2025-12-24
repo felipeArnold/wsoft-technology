@@ -9,6 +9,7 @@ use App\Filament\Resources\Creates\Vehicles\Schemas\VehicleForm;
 use App\Filament\Resources\Creates\Vehicles\Tables\VehiclesTable;
 use App\Models\Vehicle;
 use BackedEnum;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -31,6 +32,17 @@ final class VehicleResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = 'Cadastros';
 
     protected static ?int $navigationSort = 2;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        $tenant = Filament::getTenant();
+
+        if ($tenant === null) {
+            return false;
+        }
+
+        return $tenant->type->isAutomotive();
+    }
 
     public static function getGloballySearchableAttributes(): array
     {
