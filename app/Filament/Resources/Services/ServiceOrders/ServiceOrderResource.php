@@ -52,6 +52,7 @@ final class ServiceOrderResource extends Resource
     {
         return [
             RelationManagers\WarrantiesRelationManager::class,
+            RelationManagers\AccountsReceivablesRelationManager::class,
         ];
     }
 
