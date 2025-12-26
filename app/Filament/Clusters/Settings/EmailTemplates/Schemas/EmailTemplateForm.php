@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Filament\Clusters\Settings\EmailTemplates\Schemas;
 
 use App\Enum\Template\TemplateContext;
+use App\Filament\Clusters\Settings\EmailTemplates\Actions\GenerateEmailTemplateWithAI;
 use App\Services\Template\TemplateVariableRegistry;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Components\ViewField;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -24,10 +25,17 @@ final class EmailTemplateForm
                 Section::make('Template de E-mail')
                     ->description('Configure o template de e-mail usando as variáveis disponíveis.')
                     ->schema([
+                        ToggleButtons::make('is_active')
+                            ->label('Ativo')
+                            ->boolean()
+                            ->inline()
+                            ->grouped()
+                            ->default(true)
+                            ->required()
+                            ->columnSpan(2),
                         TextInput::make('name')
                             ->label('Nome')
                             ->required(),
-
                         TextInput::make('subject')
                             ->label('Assunto')
                             ->required()
@@ -67,21 +75,15 @@ final class EmailTemplateForm
                                     ->toolbarButtons([
                                         'bold', 'italic', 'underline', 'strike', 'link', 'redo', 'undo', 'bulletList', 'orderedList', 'blockquote', 'codeBlock',
                                     ])
-                                    ->helperText('Insira o corpo do e-mail usando as variáveis disponíveis na aba "Variáveis".'),
-                            ]),
+                                    ->helperText('Insira o corpo do e-mail usando as variáveis disponíveis na aba "Variáveis".')
+                                    ->hintActions([
+                                        GenerateEmailTemplateWithAI::make(),
+                                    ]),
+                            ])
+                            ->description('Use o botão "Gerar com IA" para criar um template automaticamente.'),
 
                     ])
                     ->columns(2)
-                    ->columnSpanFull(),
-
-                Section::make('Status')
-                    ->description('Ative ou desative este template de e-mail.')
-                    ->schema([
-                        Toggle::make('is_active')
-                            ->label('Ativo')
-                            ->default(true)
-                            ->required(),
-                    ])
                     ->columnSpanFull(),
 
             ]);

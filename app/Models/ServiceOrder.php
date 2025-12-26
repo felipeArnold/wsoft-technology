@@ -176,11 +176,10 @@ final class ServiceOrder extends Model implements Eventable
                                 ->schema([
                                     DateTimePicker::make('scheduled_start_at')
                                         ->label('Data e Hora de Início')
-                                        ->native(false)
+                                        ->native(true)
                                         ->seconds(false)
                                         ->timezone('America/Sao_Paulo')
                                         ->displayFormat('d/m/Y H:i')
-                                        ->minDate(now())
                                         ->helperText('Defina o horário exato para o cliente trazer o veículo')
                                         ->reactive()
                                         ->afterStateUpdated(function ($state, $set, $get) {
@@ -194,7 +193,7 @@ final class ServiceOrder extends Model implements Eventable
 
                                     DateTimePicker::make('scheduled_end_at')
                                         ->label('Data e Hora de Término (Previsão)')
-                                        ->native(false)
+                                        ->native(true)
                                         ->seconds(false)
                                         ->timezone('America/Sao_Paulo')
                                         ->displayFormat('d/m/Y H:i')
@@ -503,6 +502,11 @@ final class ServiceOrder extends Model implements Eventable
     public function commission(): HasOne
     {
         return $this->hasOne(Commission::class);
+    }
+
+    public function warranties(): HasMany
+    {
+        return $this->hasMany(Warranty::class);
     }
 
     public function hasCommission(): bool

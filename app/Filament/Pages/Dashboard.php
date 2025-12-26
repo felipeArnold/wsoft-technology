@@ -21,8 +21,8 @@ use App\Filament\Widgets\RecentStockMovementsWidget;
 use App\Filament\Widgets\SalesByCategoryWidget;
 use App\Filament\Widgets\SalesOverviewWidget;
 use App\Filament\Widgets\SalesRevenueChart;
-use App\Filament\Widgets\ServiceOrdersByStatusChart;
 use App\Filament\Widgets\ServiceOrderCalendarWidget;
+use App\Filament\Widgets\ServiceOrdersByStatusChart;
 use App\Filament\Widgets\ServiceOrdersCompletionTrend;
 use App\Filament\Widgets\ServiceOrdersCreationByDayChart;
 use App\Filament\Widgets\ServiceOrdersOverview;
@@ -80,17 +80,6 @@ final class Dashboard extends BaseDashboard
                                 ])
                             ),
 
-                        Tabs\Tab::make('Vendas')
-                            ->icon('heroicon-o-shopping-cart')
-                            ->schema(
-                                $this->getWidgetsSchemaComponents([
-                                    SalesOverviewWidget::class,
-                                    SalesRevenueChart::class,
-                                    TopSellingProductsWidget::class,
-                                    SalesByCategoryWidget::class,
-                                ])
-                            ),
-
                         Tabs\Tab::make('Ordem de Serviço')
                             ->icon('heroicon-o-wrench-screwdriver')
                             ->schema(
@@ -123,9 +112,18 @@ final class Dashboard extends BaseDashboard
                                     RecentStockMovementsWidget::class,
                                 ])
                             ),
-                    ])
-                    ->persistTabInQueryString(),
 
+                        Tabs\Tab::make('Vendas')
+                            ->icon('heroicon-o-shopping-cart')
+                            ->schema(
+                                $this->getWidgetsSchemaComponents([
+                                    SalesOverviewWidget::class,
+                                    SalesRevenueChart::class,
+                                    TopSellingProductsWidget::class,
+                                    SalesByCategoryWidget::class,
+                                ])
+                            ),
+                    ])
             ]);
     }
 }

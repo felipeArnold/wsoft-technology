@@ -51,7 +51,7 @@ final class ServiceOrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\WarrantiesRelationManager::class,
         ];
     }
 

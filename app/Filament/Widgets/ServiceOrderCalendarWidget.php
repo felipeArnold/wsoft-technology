@@ -13,7 +13,6 @@ use Guava\Calendar\ValueObjects\FetchInfo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
-use Livewire\Features\SupportAttributes\AttributeCollection;
 
 final class ServiceOrderCalendarWidget extends CalendarWidget
 {

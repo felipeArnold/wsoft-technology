@@ -39,8 +39,6 @@ Route::post('/software-gestao-oficina-mecanica/lead', [MecanicaLeadController::c
 // 301 Redirect from old URL to new SEO-optimized URL
 Route::redirect('/mecanica', '/software-gestao-oficina-mecanica', 301);
 
-
-
 // Landing Page para Sistema de Funilaria
 Route::get('/funilaria', [FunilariaLeadController::class, 'index'])->name('landing.funilaria');
 Route::post('/funilaria/lead', [FunilariaLeadController::class, 'store'])->name('landing.funilaria.store');
@@ -159,6 +157,9 @@ Route::view('/software-sob-medida', 'site.software-sob-medida')->name('landing.s
 
 // Landing Page para Sistema White Label
 Route::view('/sistema-white-label-para-revenda', 'site.white-label')->name('landing.white-label');
+
+// Landing Page para Revenda Mecânica
+Route::view('/revenda-sistema-oficina', 'landing.revenda-mecanica')->name('landing.revenda-mecanica');
 
 
 // Landing Page para Oficina Automóvel (Portugal - PT-PT)

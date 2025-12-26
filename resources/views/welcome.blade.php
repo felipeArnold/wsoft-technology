@@ -3,9 +3,9 @@ $structuredData = [
     [
         '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
-        'name' => 'WSoft Tecnologia',
+        'name' => 'WSoft - Sistema para Oficina Mecânica e Ordem de Serviço',
         'url' => 'https://www.wsoft.dev.br/',
-        'description' => 'Sistema de gestão online com financeiro, contas a pagar e receber, ordem de serviço, controle de estoque e assinatura digital.',
+        'description' => 'Software para oficina mecânica completo. Emita ordem de serviço, controle contas a pagar e receber, estoque de peças e fluxo de caixa. Teste grátis!',
         'operatingSystem' => 'Web',
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
@@ -17,8 +17,8 @@ $structuredData = [
         ],
         'aggregateRating' => [
             '@type' => 'AggregateRating',
-            'ratingValue' => '4.8',
-            'ratingCount' => '124'
+            'ratingValue' => '4.9',
+            'ratingCount' => '150'
         ]
     ],
     [
@@ -27,66 +27,42 @@ $structuredData = [
         'mainEntity' => [
             [
                 '@type' => 'Question',
-                'name' => 'Como o WSoft ajuda no controle financeiro diário?',
+                'name' => 'O software emite ordem de serviço para oficina mecânica?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'O painel unifica entradas, saídas, projeções e limites para que você acompanhe o sistema de fluxo de caixa em tempo real.'
+                    'text' => 'Sim, o WSoft é um sistema especializado em ordem de serviço para oficinas, permitindo cadastrar peças, serviços, garantias e enviar via WhatsApp.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Posso controlar ordens de serviço e estoque?',
+                'name' => 'Como funciona o controle de contas a pagar e receber?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Sim, o sistema de ordem de serviço integra peças, mão de obra e controle de produtos para evitar erros e retrabalhos.'
+                    'text' => 'O sistema organiza todo seu financeiro. Lançamento de contas a pagar, controle de recebimentos, fluxo de caixa e relatórios de inadimplência.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Há recursos de contas a pagar e receber automáticos?',
+                'name' => 'Posso controlar o estoque de peças da oficina?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Alertas, conciliações e integrações bancárias reduzem esquecimentos e mantêm o financeiro organizado.'
+                    'text' => 'Sim! O software faz o controle de estoque de peças com baixa automática ao lançar na OS, gestão de inventário e alertas de estoque mínimo.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'O que muda para quem precisa de controle de inadimplência?',
+                'name' => 'O sistema possui agenda para serviços?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Você segmenta devedores, dispara lembretes e acompanha negociações diretamente do painel.'
+                    'text' => 'Sim, você conta com uma agenda integrada para organizar os serviços da oficina, controlando horários e evitando conflitos.'
                 ]
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Preciso de equipe grande para usar o sistema?',
+                'name' => 'Consigo gerenciar cadastros de clientes e fornecedores?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Não. O layout foi desenhado para pequenas empresas que querem profissionalizar processos sem burocracia. O sistema de gestão WSoft funciona perfeitamente para empresas com 1 a 50 funcionários, incluindo MEI e autônomos que trabalham sozinhos.'
-                ]
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'O que é um sistema de gestão financeira e para que serve?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Um sistema de gestão financeira é um software ERP (Enterprise Resource Planning) que centraliza todas as operações financeiras e administrativas da empresa em uma única plataforma. Serve para controlar fluxo de caixa, contas a pagar e receber, vendas, estoque, ordem de serviço e relatórios gerenciais, eliminando a necessidade de múltiplas planilhas e sistemas desconectados.'
-                ]
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'Qual a diferença entre sistema de gestão e ERP?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'ERP (Enterprise Resource Planning) é um tipo específico de sistema de gestão que integra todos os departamentos da empresa (financeiro, vendas, estoque, produção) em uma única plataforma. O WSoft é um ERP completo que unifica gestão financeira, controle de estoque, ordem de serviço e vendas, enquanto sistemas de gestão genéricos podem focar apenas em uma área específica.'
-                ]
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'Como funciona o controle de inadimplência no WSoft?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'O sistema identifica automaticamente contas em atraso, segmenta devedores por tempo de vencimento e dispara lembretes automáticos por e-mail e WhatsApp em intervalos configuráveis. Você acompanha negociações, histórico de cobranças e pode gerar relatórios de inadimplência para tomar decisões estratégicas sobre recuperação de crédito.'
+                    'text' => 'Com certeza. O WSoft oferece cadastro completo de clientes, veículos, fornecedores e produtos, mantendo todo o histórico de manutenções.'
                 ]
             ],
             [
@@ -103,14 +79,14 @@ $structuredData = [
 @endphp
 
 <x-site-layout
-    :title="'Sistema de Gestão Financeira para Pequenas Empresas | WSoft'"
-    :description="'WSoft - Sistema de gestão financeira simples para pequenas empresas e MEI. Controle contas a pagar, receber, estoque, OS e emita notas fiscais. Teste grátis!'"
-    :keywords="'sistema de gestão financeira, pequenas empresas, MEI, controle financeiro, ordem de serviço, emissão de notas, WSoft'"
+    :title="'Sistema para Oficina Mecânica e Ordem de Serviço | WSoft'"
+    :description="'WSoft - Software para oficina mecânica com emissão de Ordem de Serviço, controle de contas a pagar e receber, estoque de peças e cadastro de clientes. Teste grátis!'"
+    :keywords="'sistema para oficina mecânica, software para oficina mecânica, ordem de serviço, contas a pagar, contas a receber, fluxo de caixa, controle de estoque oficinas, sistema de gestão automotiva'"
     :canonical="'https://www.wsoft.dev.br/'"
-    :ogTitle="'Sistema de Gestão Financeira para Pequenas Empresas | WSoft'"
-    :ogDescription="'Controle financeiro, ordem de serviço, vendas, estoque e assinatura digital em um único sistema simples e eficiente. Teste grátis por 7 dias.'"
-    :twitterTitle="'WSoft - Sistema de Gestão Online'"
-    :twitterDescription="'Sistema de gestão com financeiro, OS, vendas e assinatura digital. Ideal para mecânicas e pequenas empresas.'"
+    :ogTitle="'Sistema para Oficina Mecânica e Gestão Financeira | WSoft'"
+    :ogDescription="'Software completo para sua oficina: Ordem de Serviço, Financeiro, Estoque e Cadastros. Teste grátis por 7 dias.'"
+    :twitterTitle="'WSoft - Sistema para Oficina Mecânica'"
+    :twitterDescription="'Emita Ordens de Serviço e organize o financeiro da sua oficina mecânica com o WSoft.'"
     :structuredData="$structuredData"
 >
 
@@ -123,14 +99,15 @@ $structuredData = [
             <div>
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-xs font-semibold uppercase tracking-wider mb-6">
                     <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                    Sistema Online para Pequenas Empresas
+                    Software para Oficina Mecânica
                 </div>
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                    Sistema de gestão financeira <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white"> para pequenas empresas e MEI</span>
+                    Sistema para Oficina Mecânica e <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Gestão Financeira</span>
                 </h1>
                 <p class="mt-6 text-lg md:text-xl text-blue-100 leading-relaxed max-w-lg">
-                    Abandone as planilhas complicadas e softwares caros. Centralize controle financeiro, gestão de vendas, administração de estoque e emissão de ordens de serviço em uma plataforma ERP online feita para quem quer crescer de verdade. Software de gestão empresarial completo, simples e acessível.
+                    Emita <strong>Ordens de Serviço</strong> ilimitadas, controle <strong>Contas a Pagar e Receber</strong>, gerencie seu <strong>Estoque de Peças</strong> e organize os <strong>Cadastros de Clientes</strong> em um só lugar. O software ideal para modernizar sua oficina.
                 </p>
+
                 <div class="mt-10 flex flex-col sm:flex-row gap-4">
                     <a href="/app/register" target="_blank" class="inline-flex justify-center items-center rounded-xl bg-green-500 text-white font-bold px-8 py-4 shadow-lg shadow-green-500/30 hover:bg-green-600 hover:-translate-y-1 transition transform duration-200">
                         Teste Grátis 7 Dias
@@ -953,58 +930,10 @@ $structuredData = [
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto">
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-[0.3em]">FAQ</p>
-                <h2 class="mt-4 text-3xl font-bold">Perguntas Frequentes: Sistema de Gestão Financeira, ERP e Controle Empresarial</h2>
-                <p class="mt-4 text-slate-600">Tire suas dúvidas sobre software de gestão, controle financeiro, fluxo de caixa e como o WSoft pode ajudar sua empresa a crescer de forma organizada.</p>
+                <h2 class="mt-4 text-3xl font-bold">Perguntas Frequentes: Sistema para Oficina e Gestão de Serviços</h2>
+                <p class="mt-4 text-slate-600">Tire suas dúvidas sobre software para oficina mecânica, ordem de serviço, controle de estoque e financeiro com o WSoft.</p>
             </div>
             <div class="mt-12 space-y-4">
-                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                        Como o WSoft ajuda no controle financeiro diário?
-                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                    </summary>
-                    <p class="mt-3 text-slate-600">O painel unifica entradas, saídas, projeções e limites para que você acompanhe o sistema de fluxo de caixa em tempo real.</p>
-                </details>
-                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                        Posso controlar ordens de serviço e estoque?
-                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                    </summary>
-                    <p class="mt-3 text-slate-600">Sim, o sistema de ordem de serviço integra peças, mão de obra e controle de produtos para evitar erros e retrabalhos.</p>
-                </details>
-                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                        Há recursos de contas a pagar e receber automáticos?
-                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                    </summary>
-                    <p class="mt-3 text-slate-600">Alertas, conciliações e integrações bancárias reduzem esquecimentos e mantêm o financeiro organizado.</p>
-                </details>
-                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                        O que muda para quem precisa de controle de inadimplência?
-                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                    </summary>
-                    <p class="mt-3 text-slate-600">Você segmenta devedores, dispara lembretes e acompanha negociações diretamente do painel.</p>
-                </details>
-                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                        Preciso de equipe grande para usar o sistema?
-                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                    </summary>
-                    <p class="mt-3 text-slate-600">Não. O layout foi desenhado para pequenas empresas que querem profissionalizar processos sem burocracia. O sistema de gestão WSoft funciona perfeitamente para empresas com 1 a 50 funcionários, incluindo MEI e autônomos que trabalham sozinhos.</p>
-                </details>
-                <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                    <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                        O que é um sistema de gestão financeira e para que serve?
-                        <span class="text-sm text-slate-500 group-open:hidden">+</span>
-                        <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
-                    </summary>
-                    <p class="mt-3 text-slate-600">Um sistema de gestão financeira é um software ERP (Enterprise Resource Planning) que centraliza todas as operações financeiras e administrativas da empresa em uma única plataforma. Serve para controlar fluxo de caixa, contas a pagar e receber, vendas, estoque, ordem de serviço e relatórios gerenciais, eliminando a necessidade de múltiplas planilhas e sistemas desconectados.</p>
-                </details>
                 <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                     <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
                         Qual a diferença entre sistema de gestão e ERP?
