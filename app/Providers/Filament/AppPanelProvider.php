@@ -122,6 +122,10 @@ final class AppPanelProvider extends PanelProvider
             ->plugins([
                 FilamentApexChartsPlugin::make(),
             ])
+            ->renderHook(
+                'panels::head.end',
+                fn (): string => view('filament.vite-assets')->render()
+            )
             ->pages([
                 Dashboard::class,
             ])

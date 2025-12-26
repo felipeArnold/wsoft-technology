@@ -21,7 +21,6 @@ final class ServiceOrderForm
         }
 
         if (is_string($value)) {
-            // Remove pontos de milhares e substitui vírgula por ponto
             $cleanValue = str_replace(['.', ','], ['', '.'], $value);
 
             return (float) $cleanValue;

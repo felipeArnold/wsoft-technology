@@ -177,6 +177,7 @@
                     <img src="{{ asset('images/logo.png') }}" alt="WSoft Tecnologia | Sistema de Gestão para Pequenas Empresas" class="h-16 w-auto" fetchpriority="high">
                 </a>
                 <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="{{ route('site.quem-somos') }}" class="hover:text-blue-600 transition">Quem Somos</a>
                     <a href="/#beneficios" class="hover:text-blue-600 transition">Benefícios</a>
                     <a href="/#porque" class="hover:text-blue-600 transition">Por que WSoft</a>
                     <a href="/#demo" class="hover:text-blue-600 transition">Demonstração</a>
@@ -190,6 +191,7 @@
             </div>
             <div id="mobile-nav" class="md:hidden hidden pb-4">
                 <nav class="flex flex-col space-y-2 text-sm font-semibold text-slate-700">
+                    <a href="{{ route('site.quem-somos') }}" class="py-2 border-b border-slate-100">Quem Somos</a>
                     <a href="/#beneficios" class="py-2 border-b border-slate-100">Benefícios</a>
                     <a href="/#porque" class="py-2 border-b border-slate-100">Por que WSoft</a>
                     <a href="/#demo" class="py-2 border-b border-slate-100">Demonstração</a>

@@ -1,4 +1,7 @@
 @import '../../vendor/filament/filament/resources/css/theme.css';
+@import '../../vendor/guava/calendar/resources/css/theme.css';
+
+@source '../../vendor/guava/calendar/resources/**/*';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -57,10 +60,6 @@ html, body {
     color: var(--app-primary);
 }
 
-/* Links & interactive accents */
-a, .fi-link, .fi-btn-primary:hover {
-    color: var(--app-primary-accent);
-}
 
 /* Dark mode */
 :root.dark, .dark {

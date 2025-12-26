@@ -22,6 +22,7 @@ use App\Filament\Widgets\SalesByCategoryWidget;
 use App\Filament\Widgets\SalesOverviewWidget;
 use App\Filament\Widgets\SalesRevenueChart;
 use App\Filament\Widgets\ServiceOrdersByStatusChart;
+use App\Filament\Widgets\ServiceOrderCalendarWidget;
 use App\Filament\Widgets\ServiceOrdersCompletionTrend;
 use App\Filament\Widgets\ServiceOrdersCreationByDayChart;
 use App\Filament\Widgets\ServiceOrdersOverview;
@@ -95,6 +96,7 @@ final class Dashboard extends BaseDashboard
                             ->schema(
                                 $this->getWidgetsSchemaComponents([
                                     ServiceOrdersOverview::class,
+                                    ServiceOrderCalendarWidget::class,
                                     ServiceOrdersCreationByDayChart::class,
                                     ServiceOrdersByStatusChart::class,
                                     ServiceOrdersCompletionTrend::class,

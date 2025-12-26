@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enum\ServiceOrderPriority;
+use App\Enum\ServiceOrderStatus;
 use App\Filament\Clusters\Settings\Services\ServiceResource;
 use App\Filament\Components\PtbrMoney;
 use App\Helpers\FormatterHelper;
@@ -15,8 +17,10 @@ use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Repeater\TableColumn;
 use Filament\Forms\Components\RichEditor;
@@ -27,6 +31,8 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
+use Guava\Calendar\Contracts\Eventable;
+use Guava\Calendar\ValueObjects\CalendarEvent;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +41,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[ObservedBy(ServiceOrderObserver::class)]
-final class ServiceOrder extends Model
+final class ServiceOrder extends Model implements Eventable
 {
     /** @use HasFactory<\Database\Factories\ServiceOrderFactory> */
     use Categorizable;
@@ -43,10 +49,19 @@ final class ServiceOrder extends Model
     use HasFactory;
 
     protected $casts = [
+        'status' => ServiceOrderStatus::class,
+        'priority' => ServiceOrderPriority::class,
         'opening_date' => 'date',
         'expected_completion_date' => 'date',
         'completion_date' => 'date',
         'completed_at' => 'datetime',
+        'scheduled_start_at' => 'datetime',
+        'scheduled_end_at' => 'datetime',
+        'appointment_confirmed' => 'boolean',
+        'appointment_confirmation_sent_at' => 'datetime',
+        'appointment_reminder_sent_at' => 'datetime',
+        'budget_valid_until' => 'date',
+        'budget_approved_at' => 'datetime',
         'total_value' => 'float',
         'labor_value' => 'float',
         'parts_value' => 'float',
@@ -74,25 +89,16 @@ final class ServiceOrder extends Model
                                         ->columnSpan(1),
                                     Select::make('status')
                                         ->label('Status')
-                                        ->options([
-                                            'draft' => 'Rascunho',
-                                            'in_progress' => 'Em Andamento',
-                                            'completed' => 'Concluída',
-                                            'cancelled' => 'Cancelada',
-                                        ])
-                                        ->default('draft')
+                                        ->options(ServiceOrderStatus::toSelectArray())
+                                        ->live()
+                                        ->default(ServiceOrderStatus::DRAFT->value)
                                         ->required()
                                         ->native(false)
                                         ->columnSpan(1),
                                     Select::make('priority')
                                         ->label('Prioridade')
-                                        ->options([
-                                            'low' => 'Baixa',
-                                            'medium' => 'Média',
-                                            'high' => 'Alta',
-                                            'urgent' => 'Urgente',
-                                        ])
-                                        ->default('medium')
+                                        ->options(ServiceOrderPriority::toSelectArray())
+                                        ->default(ServiceOrderPriority::MEDIUM->value)
                                         ->required()
                                         ->native(false)
                                         ->columnSpan(1),
@@ -163,6 +169,165 @@ final class ServiceOrder extends Model
                                 ])
                                 ->columns(2)
                                 ->columnSpanFull(),
+
+                            Section::make('Agendamento')
+                                ->icon('heroicon-o-calendar-days')
+                                ->description('Configure o horário de atendimento do cliente')
+                                ->schema([
+                                    DateTimePicker::make('scheduled_start_at')
+                                        ->label('Data e Hora de Início')
+                                        ->native(false)
+                                        ->seconds(false)
+                                        ->timezone('America/Sao_Paulo')
+                                        ->displayFormat('d/m/Y H:i')
+                                        ->minDate(now())
+                                        ->helperText('Defina o horário exato para o cliente trazer o veículo')
+                                        ->reactive()
+                                        ->afterStateUpdated(function ($state, $set, $get) {
+                                            // Auto-set end time to 2 hours after start if not set
+                                            if ($state && ! $get('scheduled_end_at')) {
+                                                $endTime = \Carbon\Carbon::parse($state)->addHours(2);
+                                                $set('scheduled_end_at', $endTime);
+                                            }
+                                        })
+                                        ->columnSpan(1),
+
+                                    DateTimePicker::make('scheduled_end_at')
+                                        ->label('Data e Hora de Término (Previsão)')
+                                        ->native(false)
+                                        ->seconds(false)
+                                        ->timezone('America/Sao_Paulo')
+                                        ->displayFormat('d/m/Y H:i')
+                                        ->helperText('Previsão de quando o serviço será concluído')
+                                        ->disabled(fn ($get) => ! $get('scheduled_start_at'))
+                                        ->minDate(fn ($get) => $get('scheduled_start_at'))
+                                        ->columnSpan(1),
+
+                                    Placeholder::make('appointment_duration')
+                                        ->label('Duração Estimada')
+                                        ->content(function ($get) {
+                                            $start = $get('scheduled_start_at');
+                                            $end = $get('scheduled_end_at');
+
+                                            if (! $start || ! $end) {
+                                                return 'Defina início e término';
+                                            }
+
+                                            $duration = \Carbon\Carbon::parse($start)->diffInMinutes(\Carbon\Carbon::parse($end));
+                                            $hours = floor($duration / 60);
+                                            $minutes = $duration % 60;
+
+                                            return $hours > 0
+                                                ? "{$hours}h {$minutes}min"
+                                                : "{$minutes} minutos";
+                                        })
+                                        ->columnSpan(1),
+
+                                    Placeholder::make('appointment_status')
+                                        ->label('Status do Agendamento')
+                                        ->content(function ($record) {
+                                            if (! $record || ! $record->hasScheduledAppointment()) {
+                                                return 'Não agendado';
+                                            }
+
+                                            $status = [];
+
+                                            if ($record->appointment_confirmed) {
+                                                $status[] = '✓ Confirmado';
+                                            }
+
+                                            if ($record->appointment_confirmation_sent_at) {
+                                                $status[] = 'Email enviado em '.$record->appointment_confirmation_sent_at->format('d/m/Y H:i');
+                                            }
+
+                                            if ($record->appointment_reminder_sent_at) {
+                                                $status[] = 'Lembrete enviado em '.$record->appointment_reminder_sent_at->format('d/m/Y H:i');
+                                            }
+
+                                            return $status ? implode(' | ', $status) : 'Pendente confirmação';
+                                        })
+                                        ->columnSpan(1)
+                                        ->hidden(fn ($context) => $context === 'create'),
+                                ])
+                                ->columns(3)
+                                ->columnSpanFull()
+                                ->collapsed(fn ($context) => $context === 'create'),
+
+                            Section::make('Validação de Orçamento')
+                                ->icon('heroicon-o-document-check')
+                                ->description('Gerencie a aprovação e validade do orçamento')
+                                ->schema([
+                                    DatePicker::make('budget_valid_until')
+                                        ->label('Válido Até')
+                                        ->native(false)
+                                        ->minDate(now())
+                                        ->required(fn ($get) => $get('status') === ServiceOrderStatus::BUDGET->value)
+                                        ->helperText('Data de validade deste orçamento')
+                                        ->columnSpan(1),
+
+                                    Select::make('budget_approval_status')
+                                        ->label('Status de Aprovação')
+                                        ->options([
+                                            'pending' => 'Pendente',
+                                            'approved' => 'Aprovado',
+                                            'rejected' => 'Rejeitado',
+                                        ])
+                                        ->default('pending')
+                                        ->native(false)
+                                        ->required(fn ($get) => $get('status') === ServiceOrderStatus::BUDGET->value)
+                                        ->reactive()
+                                        ->columnSpan(1),
+
+                                    DateTimePicker::make('budget_approved_at')
+                                        ->label('Data de Aprovação/Rejeição')
+                                        ->native(false)
+                                        ->seconds(false)
+                                        ->timezone('America/Sao_Paulo')
+                                        ->displayFormat('d/m/Y H:i')
+                                        ->disabled(fn ($get) => $get('budget_approval_status') === 'pending')
+                                        ->helperText('Preenchido automaticamente ao aprovar/rejeitar')
+                                        ->columnSpan(1),
+
+                                    Placeholder::make('budget_status_info')
+                                        ->label('Informação')
+                                        ->content(function ($get) {
+                                            $validUntil = $get('budget_valid_until');
+                                            $approvalStatus = $get('budget_approval_status');
+
+                                            if (! $validUntil) {
+                                                return 'Defina a data de validade';
+                                            }
+
+                                            $validUntilDate = \Carbon\Carbon::parse($validUntil);
+                                            $now = now();
+
+                                            if ($approvalStatus === 'approved') {
+                                                return '✓ Orçamento Aprovado';
+                                            }
+
+                                            if ($approvalStatus === 'rejected') {
+                                                return '✗ Orçamento Rejeitado';
+                                            }
+
+                                            if ($validUntilDate->isPast()) {
+                                                return '⚠ Orçamento Vencido';
+                                            }
+
+                                            $daysRemaining = $now->diffInDays($validUntilDate);
+
+                                            return "Válido por {$daysRemaining} dias";
+                                        })
+                                        ->columnSpan(1),
+
+                                    RichEditor::make('budget_notes')
+                                        ->label('Observações sobre o Orçamento')
+                                        ->helperText('Informações adicionais, condições especiais, motivo de aprovação/rejeição, etc.')
+                                        ->columnSpanFull(),
+                                ])
+                                ->columns(4)
+                                ->columnSpanFull()
+                                ->visible(fn ($get) => $get('status') === ServiceOrderStatus::BUDGET->value)
+                                ->collapsed(),
                         ]),
 
                     Tab::make('items')
@@ -249,33 +414,13 @@ final class ServiceOrder extends Model
             TextColumn::make('status')
                 ->label('Status')
                 ->badge()
-                ->color(fn (string $state): string => match ($state) {
-                    'draft' => 'gray',
-                    'in_progress' => 'warning',
-                    'completed' => 'success',
-                    'cancelled' => 'danger',
-                })
-                ->formatStateUsing(fn (string $state): string => match ($state) {
-                    'draft' => 'Rascunho',
-                    'in_progress' => 'Em Andamento',
-                    'completed' => 'Concluída',
-                    'cancelled' => 'Cancelada',
-                }),
+                ->color(fn (ServiceOrderStatus $state): string => $state->getColor())
+                ->formatStateUsing(fn (ServiceOrderStatus $state): string => $state->getLabel()),
             TextColumn::make('priority')
                 ->label('Prioridade')
                 ->badge()
-                ->color(fn (string $state): string => match ($state) {
-                    'low' => 'gray',
-                    'medium' => 'info',
-                    'high' => 'warning',
-                    'urgent' => 'danger',
-                })
-                ->formatStateUsing(fn (string $state): string => match ($state) {
-                    'low' => 'Baixa',
-                    'medium' => 'Média',
-                    'high' => 'Alta',
-                    'urgent' => 'Urgente',
-                }),
+                ->color(fn (ServiceOrderPriority $state): string => $state->getColor())
+                ->formatStateUsing(fn (ServiceOrderPriority $state): string => $state->getLabel()),
             TextColumn::make('opening_date')
                 ->label('Data de Abertura')
                 ->date('d/m/Y')
@@ -284,6 +429,16 @@ final class ServiceOrder extends Model
                 ->label('Data Prevista')
                 ->date('d/m/Y')
                 ->sortable(),
+            TextColumn::make('scheduled_start_at')
+                ->label('Agendamento')
+                ->dateTime('d/m/Y H:i')
+                ->sortable()
+                ->toggleable()
+                ->badge()
+                ->color(fn ($record) => $record->isAppointmentToday() ? 'success' : 'gray')
+                ->icon(fn ($record) => $record->hasScheduledAppointment() ? 'heroicon-o-calendar-days' : null)
+                ->formatStateUsing(fn ($record) => $record->getFormattedAppointmentTime() ?? 'Sem agendamento')
+                ->placeholder('Sem agendamento'),
             TextColumn::make('total_value')
                 ->label('Valor Total')
                 ->money('BRL')
@@ -353,6 +508,86 @@ final class ServiceOrder extends Model
     public function hasCommission(): bool
     {
         return $this->commission()->exists();
+    }
+
+    /**
+     * Check if this service order has an appointment scheduled
+     */
+    public function hasScheduledAppointment(): bool
+    {
+        return $this->scheduled_start_at !== null;
+    }
+
+    /**
+     * Check if appointment is today
+     */
+    public function isAppointmentToday(): bool
+    {
+        if (! $this->hasScheduledAppointment()) {
+            return false;
+        }
+
+        return $this->scheduled_start_at->isToday();
+    }
+
+    /**
+     * Check if appointment needs reminder (24h before, not sent yet)
+     */
+    public function needsAppointmentReminder(): bool
+    {
+        if (! $this->hasScheduledAppointment() || $this->appointment_reminder_sent_at) {
+            return false;
+        }
+
+        $hoursUntilAppointment = now()->diffInHours($this->scheduled_start_at, false);
+
+        return $hoursUntilAppointment <= 24 && $hoursUntilAppointment > 0;
+    }
+
+    /**
+     * Get formatted appointment time range
+     */
+    public function getFormattedAppointmentTime(): ?string
+    {
+        if (! $this->hasScheduledAppointment()) {
+            return null;
+        }
+
+        $start = $this->scheduled_start_at->timezone('America/Sao_Paulo')->format('d/m/Y H:i');
+        $end = $this->scheduled_end_at?->timezone('America/Sao_Paulo')->format('H:i') ?? '?';
+
+        return "{$start} - {$end}";
+    }
+
+    /**
+     * Get appointment duration in minutes
+     */
+    public function getAppointmentDuration(): ?int
+    {
+        if (! $this->hasScheduledAppointment() || ! $this->scheduled_end_at) {
+            return null;
+        }
+
+        return $this->scheduled_start_at->diffInMinutes($this->scheduled_end_at);
+    }
+
+    public function toCalendarEvent(): CalendarEvent
+    {
+        $colors = $this->status->getCalendarColor();
+        $borderWidth = $this->priority->getBorderWidth();
+        $priorityIcon = $this->priority->getIcon();
+
+        return CalendarEvent::make($this)
+            ->title($priorityIcon.$this->person->name.' - '.$this->number)
+            ->start($this->scheduled_start_at)
+            ->end($this->scheduled_end_at ?? $this->scheduled_start_at->addHours(1))
+            ->backgroundColor($colors['bg'])
+            ->textColor($colors['text'])
+            ->styles([
+                'border-left' => $borderWidth.' solid '.$colors['border'],
+                'border-radius' => '4px',
+                'font-weight' => $this->priority === ServiceOrderPriority::URGENT ? 'bold' : 'normal',
+            ]);
     }
 
     private static function getServicesSection(): Section

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enum\ServiceOrderPriority;
+use App\Enum\ServiceOrderStatus;
 use App\Models\Person\Person;
 use App\Models\ServiceOrder;
 use App\Models\Tenant;
@@ -29,8 +31,19 @@ final class ServiceOrderFactory extends Factory
             'user_id' => User::factory(),
             'person_id' => Person::factory(),
             'number' => $this->faker->unique()->numerify('OS-####'),
-            'status' => $this->faker->randomElement(['draft', 'in_progress', 'completed', 'cancelled']),
-            'priority' => $this->faker->randomElement(['low', 'medium', 'high', 'urgent']),
+            'status' => $this->faker->randomElement([
+                ServiceOrderStatus::DRAFT->value,
+                ServiceOrderStatus::BUDGET->value,
+                ServiceOrderStatus::IN_PROGRESS->value,
+                ServiceOrderStatus::COMPLETED->value,
+                ServiceOrderStatus::CANCELLED->value,
+            ]),
+            'priority' => $this->faker->randomElement([
+                ServiceOrderPriority::LOW->value,
+                ServiceOrderPriority::MEDIUM->value,
+                ServiceOrderPriority::HIGH->value,
+                ServiceOrderPriority::URGENT->value,
+            ]),
             'opening_date' => $this->faker->date(),
             'expected_completion_date' => $this->faker->optional()->date(),
             'completion_date' => $this->faker->optional()->date(),

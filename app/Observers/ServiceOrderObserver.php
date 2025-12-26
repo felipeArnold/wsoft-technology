@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace App\Observers;
 
 use App\Enum\Commission\CommissionStatusEnum;
+use App\Enum\ServiceOrderStatus;
 use App\Helpers\FormatterHelper;
 use App\Models\Commission;
 use App\Models\ServiceOrder;
+use App\Notifications\AppointmentConfirmationNotification;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 final class ServiceOrderObserver
@@ -16,6 +20,8 @@ final class ServiceOrderObserver
     {
         // Generate order number based on current month
         $prefix = '#OS-'.now()->format('Y-m').'-';
+
+        $prefix = Str::replace('##', '#', $prefix);
 
         // Get the last order number for the current month
         $lastOrder = ServiceOrder::query()
@@ -42,11 +48,47 @@ final class ServiceOrderObserver
         $serviceOrder->total_value = FormatterHelper::toDecimal(array_sum($values));
     }
 
+    /**
+     * Handle the ServiceOrder "created" event.
+     * Send appointment confirmation email if scheduled
+     */
+    public function created(ServiceOrder $serviceOrder): void
+    {
+        // Send appointment confirmation email if appointment is scheduled
+        if ($serviceOrder->hasScheduledAppointment() &&
+            ! $serviceOrder->appointment_confirmation_sent_at) {
+
+            // Queue notification for customer
+            if ($serviceOrder->person && $serviceOrder->person->email) {
+                try {
+                    $serviceOrder->person->notify(
+                        new AppointmentConfirmationNotification($serviceOrder)
+                    );
+
+                    $serviceOrder->appointment_confirmation_sent_at = now();
+                    $serviceOrder->appointment_confirmed = true;
+                    $serviceOrder->saveQuietly();
+
+                    Log::info('Appointment confirmation sent', [
+                        'service_order_id' => $serviceOrder->id,
+                        'person_email' => $serviceOrder->person->email,
+                        'scheduled_for' => $serviceOrder->scheduled_start_at->toIso8601String(),
+                    ]);
+                } catch (Exception $e) {
+                    Log::error('Failed to send appointment confirmation', [
+                        'service_order_id' => $serviceOrder->id,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+        }
+    }
+
     public function updated(ServiceOrder $serviceOrder): void
     {
         // Set completed_at timestamp when status changes to completed
         if ($serviceOrder->wasChanged('status') &&
-            $serviceOrder->status === 'completed' &&
+            $serviceOrder->status === ServiceOrderStatus::COMPLETED &&
             ! $serviceOrder->completed_at
         ) {
             $serviceOrder->completed_at = now();
@@ -55,12 +97,40 @@ final class ServiceOrderObserver
 
         // Generate commission when status changes to completed
         if ($serviceOrder->wasChanged('status') &&
-            $serviceOrder->status === 'completed' &&
+            $serviceOrder->status === ServiceOrderStatus::COMPLETED &&
             ! $serviceOrder->hasCommission() &&
             $serviceOrder->labor_value > 0 &&
             $serviceOrder->assigned_user_id
         ) {
             $this->generateCommission($serviceOrder);
+        }
+
+        // Resend confirmation if appointment datetime changed
+        if ($serviceOrder->wasChanged('scheduled_start_at') &&
+            $serviceOrder->hasScheduledAppointment() &&
+            $serviceOrder->person &&
+            $serviceOrder->person->email) {
+
+            try {
+                $serviceOrder->person->notify(
+                    new AppointmentConfirmationNotification($serviceOrder, true)
+                );
+
+                $serviceOrder->appointment_confirmation_sent_at = now();
+                $serviceOrder->appointment_reminder_sent_at = null; // Reset reminder
+                $serviceOrder->saveQuietly();
+
+                Log::info('Appointment reschedule confirmation sent', [
+                    'service_order_id' => $serviceOrder->id,
+                    'old_time' => $serviceOrder->getOriginal('scheduled_start_at'),
+                    'new_time' => $serviceOrder->scheduled_start_at->toIso8601String(),
+                ]);
+            } catch (Exception $e) {
+                Log::error('Failed to send reschedule confirmation', [
+                    'service_order_id' => $serviceOrder->id,
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
     }
 

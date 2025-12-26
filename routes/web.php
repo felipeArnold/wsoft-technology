@@ -26,6 +26,8 @@ Route::get('/faq', function () {
     return view('pages.faq');
 })->name('pages.faq');
 
+Route::view('/quem-somos', 'site.quem-somos')->name('site.quem-somos');
+
 // Landing Page para Software de Oficina
 Route::get('/oficina', [OficinaLeadController::class, 'index'])->name('landing.oficina');
 Route::post('/oficina/lead', [OficinaLeadController::class, 'store'])->name('landing.oficina.store');

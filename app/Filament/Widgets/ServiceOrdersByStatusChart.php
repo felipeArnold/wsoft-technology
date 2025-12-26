@@ -33,20 +33,6 @@ final class ServiceOrdersByStatusChart extends ApexChartWidget
             ->groupBy('status')
             ->get();
 
-        $statusLabels = [
-            'draft' => 'Rascunho',
-            'in_progress' => 'Em Andamento',
-            'completed' => 'Concluída',
-            'cancelled' => 'Cancelada',
-        ];
-
-        $statusColors = [
-            'draft' => '#6b7280',
-            'in_progress' => '#f59e0b',
-            'completed' => '#10b981',
-            'cancelled' => '#ef4444',
-        ];
-
         // Se não houver dados, retornar vazio
         if ($statusCounts->isEmpty()) {
             return [
@@ -70,8 +56,11 @@ final class ServiceOrdersByStatusChart extends ApexChartWidget
 
         foreach ($statusCounts as $statusCount) {
             $series[] = (int) $statusCount->total;
-            $labels[] = $statusLabels[$statusCount->status] ?? $statusCount->status;
-            $colors[] = $statusColors[$statusCount->status] ?? '#6b7280';
+            // Status is already cast to enum by Eloquent, so we can use it directly
+            $status = $statusCount->status;
+            $labels[] = $status->getLabel();
+            $calendarColors = $status->getCalendarColor();
+            $colors[] = $calendarColors['bg'];
         }
 
         return [
