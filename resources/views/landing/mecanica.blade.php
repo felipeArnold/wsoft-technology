@@ -311,7 +311,7 @@ $structuredData = [
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/os/os-digital.png') }}" alt="Tela de Ordem de Serviço" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <img src="{{ asset('images/sistema/ordem-servico/cadastro.png') }}" alt="Cadastro de Ordem de serviço" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
@@ -322,20 +322,24 @@ $structuredData = [
                     <p class="text-lg text-slate-600 mb-6">
                         Registre cada entrada de veículo com ordem de serviço profissional. Adicione fotos, descreva o defeito e acompanhe todo o processo de forma organizada. Acabe com papéis perdidos e OS rasgadas.
                     </p>
-                    <ul class="space-y-3">
+                    <ul class="space-y-3 mb-6">
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Checklist de entrada</span>
+                            <span>Adição de fotos na OS</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Fotos ilimitadas</span>
+                            <span>Histórico completo do veículo</span>
                         </li>
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
-                            <span>Cadastro rápido de cliente e veículo</span>
+                            <span>Impressão ou envio por E-mail/WhatsApp</span>
                         </li>
                     </ul>
+                    <a href="{{ route('landing.ordem-servico') }}" class="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors duration-200">
+                        Saiba mais
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
                 </div>
             </div>
 
@@ -349,7 +353,7 @@ $structuredData = [
                     <p class="text-lg text-slate-600 mb-6">
                         Lance peças e serviços direto na OS. O software para gerenciamento de oficina mecânica dá baixa automática no estoque e calcula o valor total na hora. Nunca mais esqueça de cobrar uma peça.
                     </p>
-                    <ul class="space-y-3">
+                    <ul class="space-y-3 mb-6">
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
                             <span>Controle de estoque de peças</span>
@@ -363,11 +367,15 @@ $structuredData = [
                             <span>Valor de custo e venda</span>
                         </li>
                     </ul>
+                    <a href="{{ route('landing.gestao-estoque') }}" class="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors duration-200">
+                        Saiba mais
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
                 </div>
                 <div class="order-2">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/financeiro/faturamento.png') }}" alt="Tela de Financeiro" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <img src="{{ asset('images/sistema/ordem-servico/estoque-servico.png') }}" alt="Controle de Estoque e Serviços"class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -377,7 +385,7 @@ $structuredData = [
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="{{ asset('images/sistema/os/whatsapp-share.png') }}" alt="Envio via WhatsApp" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <img src="{{ asset('images/sistema/ordem-servico/ordens.png') }}" alt="Ordens de serviço em um só lugar" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
@@ -388,7 +396,7 @@ $structuredData = [
                     <p class="text-lg text-slate-600 mb-6">
                         Envie a OS pelo WhatsApp, receba o pagamento e mantenha histórico completo do veículo. Seus clientes vão lembrar da sua oficina quando precisarem de manutenção novamente.
                     </p>
-                    <ul class="space-y-3">
+                    <ul class="space-y-3 mb-6">
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
                             <span>Envio PDF no WhatsApp</span>
@@ -402,6 +410,10 @@ $structuredData = [
                             <span>Lembretes de revisão</span>
                         </li>
                     </ul>
+                    <a href="{{ route('landing.gestao-clientes') }}" class="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors duration-200">
+                        Saiba mais
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
                 </div>
             </div>
 
@@ -415,7 +427,7 @@ $structuredData = [
                     <p class="text-lg text-slate-600 mb-6">
                         Tenha visão completa do financeiro da sua oficina. Veja faturamento, contas a pagar e receber, fluxo de caixa e muito mais. Um verdadeiro software de controle financeiro para oficina mecânica.
                     </p>
-                    <ul class="space-y-3">
+                    <ul class="space-y-3 mb-6">
                         <li class="flex items-center gap-3 text-slate-700">
                             <i class="fa-solid fa-check text-emerald-500"></i>
                             <span>Resumo financeiro diário</span>
@@ -429,12 +441,52 @@ $structuredData = [
                             <span>Alertas de pendências</span>
                         </li>
                     </ul>
+                    <a href="{{ route('landing.movimentacao-financeira') }}" class="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors duration-200">
+                        Saiba mais
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
                 </div>
                 <div class="order-2">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
                         <img src="{{ asset('images/sistema/dashboard/visao-geral.png') }}" alt="Dashboard Visão Geral" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
+                        <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
+                        <img src="{{ asset('images/sistema/dashboard/ordem-servico.png') }}" alt="Insights e Relatórios Detalhados de Ordens de serviço" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl">5</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Insights e Relatórios Detalhados de Ordens de serviço</h3>
+                    </div>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Tenha uma visão completa das OS realizadas, peças mais vendidas e desempenho da oficina. Use esses dados para tomar decisões estratégicas e aumentar a lucratividade.
+                    </p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Ordens de serviço por período</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Agendamento e controle de prazos</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Relatórios de desempenho da oficina</span>
+                        </li>
+                    </ul>
+                    <a href="{{ route('pages.demonstracao') }}" class="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors duration-200">
+                        Saiba mais
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -645,7 +697,7 @@ $structuredData = [
 
                 <div class="my-6">
                     <div class="flex items-baseline justify-center">
-                        <span class="text-5xl font-extrabold text-slate-900">R$ {{ $price_formatted ?? '29,90' }}</span>
+                        <span class="text-5xl font-extrabold text-slate-900">R$ 29,90</span>
                         <span class="text-slate-500 ml-2">/{{ $interval_label ?? 'mês' }}</span>
                     </div>
                 </div>
