@@ -2,37 +2,37 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\Services\ServiceOrders\Actions;
+namespace App\Filament\Resources\Financial\NonPayments\Actions;
 
 use App\Enum\Template\TemplateContext;
+use App\Models\Accounts\AccountsInstallments;
 use App\Models\EmailTemplate;
-use App\Models\ServiceOrder;
-use App\Notifications\SendEmailFromTemplateNotification;
+use App\Notifications\SendEmailFromTemplateGenericNotification;
 use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Support\Colors\Color;
 use Illuminate\Notifications\AnonymousNotifiable;
 
-final class SendServiceOrderEmailAction extends Action
+final class SendNonPaymentReminderAction extends Action
 {
     protected function setUp(): void
     {
         parent::setUp();
 
         $this
-            ->label('Enviar por Email')
-            ->color(Color::Emerald)
+            ->label('Enviar Lembrete')
+            ->color(Color::Gray)
             ->icon('heroicon-o-envelope')
-            ->modalHeading('Enviar por Email')
-            ->modalDescription('Selecione o template que deseja utilizar para enviar este e-mail:')
+            ->modalHeading('Enviar Lembrete de Pagamento')
+            ->modalDescription('Selecione o template que deseja utilizar para enviar este lembrete:')
             ->modalSubmitActionLabel('Enviar')
             ->modalWidth('md')
             ->form($this->getFormSchema())
             ->action(fn (array $data) => $this->execute($data));
     }
 
-    public static function make(?string $name = 'send_email'): static
+    public static function make(?string $name = 'send_reminder'): static
     {
         return parent::make($name);
     }
@@ -46,26 +46,26 @@ final class SendServiceOrderEmailAction extends Action
                 ->preload()
                 ->required()
                 ->options(fn (): array => EmailTemplate::query()
-                    ->where('context', TemplateContext::ServiceOrder->value)
+                    ->where('context', TemplateContext::Overdue->value)
                     ->where('is_active', true)
                     ->orderBy('name')
                     ->pluck('name', 'id')
                     ->all()
                 )
                 ->placeholder('Selecione um template')
-                ->helperText('Somente templates ativos do contexto "Ordem de Serviço" são listados.'),
+                ->helperText('Somente templates ativos do contexto "Inadimplência" são listados.'),
         ];
     }
 
     protected function execute(array $data): void
     {
-        /** @var ServiceOrder|null $record */
+        /** @var AccountsInstallments|null $record */
         $record = $this->getRecord();
 
         if (! $record) {
             Notification::make()
                 ->title('Erro')
-                ->body('Ordem de serviço não encontrada.')
+                ->body('Parcela não encontrada.')
                 ->danger()
                 ->send();
 
@@ -74,8 +74,8 @@ final class SendServiceOrderEmailAction extends Action
 
         $templateId = (int) ($data['email_template_id'] ?? 0);
 
-        // first email addresses from related person
-        $email = $record->person?->emails()
+        // Get email address from related person through accounts
+        $email = $record->accounts?->person?->emails()
             ->first()
             ->address ?? null;
 
@@ -91,33 +91,31 @@ final class SendServiceOrderEmailAction extends Action
 
         $template = EmailTemplate::query()
             ->where('id', $templateId)
-            ->where('context', TemplateContext::ServiceOrder->value)
+            ->where('context', TemplateContext::Overdue->value)
             ->first();
 
         if (! $template) {
             Notification::make()
                 ->title('Template inválido')
-                ->body('O template selecionado não é válido para Ordens de Serviço.')
+                ->body('O template selecionado não é válido para lembretes de inadimplência.')
                 ->danger()
                 ->send();
 
             return;
         }
 
-        $context = $template->body;
-
         // Send email using Laravel Notification
         (new AnonymousNotifiable)
             ->route('mail', $email)
-            ->notify(new SendEmailFromTemplateNotification(
+            ->notify(new SendEmailFromTemplateGenericNotification(
                 emailTemplateId: $templateId,
-                serviceOrderId: $record->id,
-                context: $context,
+                templateContext: TemplateContext::Overdue,
+                modelId: $record->accounts->id,
             ));
 
         Notification::make()
             ->title('E-mail enfileirado')
-            ->body('O envio foi adicionado à fila e será processado em breve.')
+            ->body('O lembrete foi adicionado à fila e será processado em breve.')
             ->success()
             ->send();
     }

@@ -6,7 +6,7 @@ namespace App\Filament\Resources\Services\ServiceOrders\RelationManagers;
 
 use App\Filament\Resources\Services\Warranties\Schemas\WarrantyForm;
 use App\Filament\Resources\Services\Warranties\Tables\WarrantiesTable;
-use App\Models\Warranty;
+use BackedEnum;
 use Filament\Facades\Filament;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -20,7 +20,7 @@ final class WarrantiesRelationManager extends RelationManager
 
     protected static ?string $title = 'Garantias';
 
-    protected static string | \BackedEnum | null $icon = 'heroicon-o-shield-check';
+    protected static string|BackedEnum|null $icon = 'heroicon-o-shield-check';
 
     public function form(Schema $schema): Schema
     {

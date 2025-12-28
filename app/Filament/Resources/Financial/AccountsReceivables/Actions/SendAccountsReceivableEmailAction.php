@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\Services\ServiceOrders\Actions;
+namespace App\Filament\Resources\Financial\AccountsReceivables\Actions;
 
 use App\Enum\Template\TemplateContext;
+use App\Models\Accounts\Accounts;
 use App\Models\EmailTemplate;
-use App\Models\ServiceOrder;
-use App\Notifications\SendEmailFromTemplateNotification;
+use App\Notifications\SendEmailFromTemplateGenericNotification;
 use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Support\Colors\Color;
 use Illuminate\Notifications\AnonymousNotifiable;
 
-final class SendServiceOrderEmailAction extends Action
+final class SendAccountsReceivableEmailAction extends Action
 {
     protected function setUp(): void
     {
@@ -24,7 +24,7 @@ final class SendServiceOrderEmailAction extends Action
             ->label('Enviar por Email')
             ->color(Color::Emerald)
             ->icon('heroicon-o-envelope')
-            ->modalHeading('Enviar por Email')
+            ->modalHeading('Enviar Email - Contas a Receber')
             ->modalDescription('Selecione o template que deseja utilizar para enviar este e-mail:')
             ->modalSubmitActionLabel('Enviar')
             ->modalWidth('md')
@@ -46,26 +46,26 @@ final class SendServiceOrderEmailAction extends Action
                 ->preload()
                 ->required()
                 ->options(fn (): array => EmailTemplate::query()
-                    ->where('context', TemplateContext::ServiceOrder->value)
+                    ->where('context', TemplateContext::AccountsReceivable->value)
                     ->where('is_active', true)
                     ->orderBy('name')
                     ->pluck('name', 'id')
                     ->all()
                 )
                 ->placeholder('Selecione um template')
-                ->helperText('Somente templates ativos do contexto "Ordem de Serviço" são listados.'),
+                ->helperText('Somente templates ativos do contexto "Contas a Receber" são listados.'),
         ];
     }
 
     protected function execute(array $data): void
     {
-        /** @var ServiceOrder|null $record */
+        /** @var Accounts|null $record */
         $record = $this->getRecord();
 
         if (! $record) {
             Notification::make()
                 ->title('Erro')
-                ->body('Ordem de serviço não encontrada.')
+                ->body('Conta a receber não encontrada.')
                 ->danger()
                 ->send();
 
@@ -74,7 +74,7 @@ final class SendServiceOrderEmailAction extends Action
 
         $templateId = (int) ($data['email_template_id'] ?? 0);
 
-        // first email addresses from related person
+        // Get email from person (customer)
         $email = $record->person?->emails()
             ->first()
             ->address ?? null;
@@ -91,28 +91,26 @@ final class SendServiceOrderEmailAction extends Action
 
         $template = EmailTemplate::query()
             ->where('id', $templateId)
-            ->where('context', TemplateContext::ServiceOrder->value)
+            ->where('context', TemplateContext::AccountsReceivable->value)
             ->first();
 
         if (! $template) {
             Notification::make()
                 ->title('Template inválido')
-                ->body('O template selecionado não é válido para Ordens de Serviço.')
+                ->body('O template selecionado não é válido para Contas a Receber.')
                 ->danger()
                 ->send();
 
             return;
         }
 
-        $context = $template->body;
-
         // Send email using Laravel Notification
         (new AnonymousNotifiable)
             ->route('mail', $email)
-            ->notify(new SendEmailFromTemplateNotification(
+            ->notify(new SendEmailFromTemplateGenericNotification(
                 emailTemplateId: $templateId,
-                serviceOrderId: $record->id,
-                context: $context,
+                templateContext: TemplateContext::AccountsReceivable,
+                modelId: $record->id,
             ));
 
         Notification::make()

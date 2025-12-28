@@ -56,9 +56,9 @@ final class ServiceOrdersTable
                 ViewAction::make(),
                 EditAction::make(),
                 ActionGroup::make([
-                    DownloadServiceOrderPdfAction::make(),
-                    CreateAccountReceivableAction::make()->color('success')->label('Criar Conta a Receber'),
-                    SendServiceOrderEmailAction::make()->color('primary')->label('Enviar E-mail'),
+                    DownloadServiceOrderPdfAction::make()->color('default')->label('Baixar PDF'),
+                    CreateAccountReceivableAction::make()->color('default')->label('Criar Conta a Receber'),
+                    SendServiceOrderEmailAction::make()->color('default')->label('Enviar E-mail'),
                     DeleteBulkAction::make(),
                 ]),
             ])

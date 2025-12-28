@@ -49,15 +49,14 @@ final class EmailTemplateForm
                             ->schema([
                                 Select::make('context')
                                     ->label('Contexto para variáveis')
-                                    ->options(collect(TemplateContext::cases())->mapWithKeys(fn ($c) => [$c->value => $c->name]))
-                                    ->default(TemplateContext::ServiceOrder->value)
+                                    ->enum(TemplateContext::class)
+                                    ->default(TemplateContext::ServiceOrder)
                                     ->native(false)
                                     ->live(),
                                 ViewField::make('variables_copy_list')
                                     ->view('filament.forms.components.template-variables-list')
                                     ->viewData(function (callable $get) {
-                                        $contextValue = $get('context') ?? TemplateContext::ServiceOrder->value;
-                                        $context = TemplateContext::from($contextValue);
+                                        $context = $get('context') ?? TemplateContext::ServiceOrder;
 
                                         return [
                                             'variables' => TemplateVariableRegistry::variablesFor($context),

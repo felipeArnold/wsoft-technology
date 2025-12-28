@@ -24,8 +24,8 @@ final class SendEmailFromTemplateNotification extends Notification implements Sh
         private readonly int $serviceOrderId,
         private readonly ?string $context = null
     ) {
-        $this->template = EmailTemplate::find($this->emailTemplateId);
-        $this->serviceOrder = ServiceOrder::with(['person', 'tenant', 'user'])
+        $this->template = EmailTemplate::query()->find($this->emailTemplateId);
+        $this->serviceOrder = ServiceOrder::query()->with(['person', 'tenant', 'user'])
             ->find($this->serviceOrderId);
     }
 
@@ -68,13 +68,27 @@ final class SendEmailFromTemplateNotification extends Notification implements Sh
         }
 
         $variables = [
-            '{{customer.name}}' => $this->serviceOrder->person?->name ?? '',
+            // Service Order variables
             '{{service_order.number}}' => $this->serviceOrder->number ?? '',
+            '{{service_order.status}}' => $this->serviceOrder->status?->getLabel() ?? '',
+            '{{service_order.priority}}' => $this->serviceOrder->priority?->getLabel() ?? '',
+            '{{service_order.opening_date}}' => $this->serviceOrder->opening_date?->format('d/m/Y') ?? '',
+            '{{service_order.expected_completion_date}}' => $this->serviceOrder->expected_completion_date?->format('d/m/Y') ?? '',
+            '{{service_order.completion_date}}' => $this->serviceOrder->completion_date?->format('d/m/Y') ?? '',
+            '{{service_order.total_value}}' => 'R$ '.number_format($this->serviceOrder->total_value ?? 0, 2, ',', '.'),
+            '{{service_order.labor_value}}' => 'R$ '.number_format($this->serviceOrder->labor_value ?? 0, 2, ',', '.'),
+            '{{service_order.parts_value}}' => 'R$ '.number_format($this->serviceOrder->parts_value ?? 0, 2, ',', '.'),
             '{{service_order.description}}' => $this->serviceOrder->description ?? '',
-            '{{total_value}}' => 'R$ '.number_format($this->serviceOrder->total_value ?? 0, 2, ',', '.'),
+            '{{service_order.observations}}' => $this->serviceOrder->observations ?? '',
+
+            // Customer variables
+            '{{customer.name}}' => $this->serviceOrder->person?->name ?? '',
+            '{{customer.email}}' => $this->serviceOrder->person?->emails?->first()?->address ?? '',
+
+            // Company variables
             '{{company.name}}' => $this->serviceOrder->tenant?->name ?? '',
-            '{{company.phone}}' => $this->serviceOrder->tenant?->phone ?? '',
             '{{company.email}}' => $this->serviceOrder->tenant?->email ?? '',
+            '{{company.phone}}' => $this->serviceOrder->tenant?->phone ?? '',
         ];
 
         return str_replace(

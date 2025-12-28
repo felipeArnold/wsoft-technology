@@ -8,6 +8,7 @@ use App\Enum\ServiceOrderPriority;
 use App\Enum\ServiceOrderStatus;
 use App\Filament\Clusters\Settings\Services\ServiceResource;
 use App\Filament\Components\PtbrMoney;
+use App\Filament\Resources\Creates\Products\ProductResource;
 use App\Helpers\FormatterHelper;
 use App\Models\Accounts\Accounts;
 use App\Models\Concerns\Categorizable;
@@ -732,6 +733,16 @@ final class ServiceOrder extends Model implements Eventable
     {
         return Section::make('Produtos/Peças')
             ->description('Adicione os produtos e peças utilizados nesta ordem')
+            ->afterHeader([
+                Action::make('settings')
+                    ->label('Configurar Produtos')
+                    ->color('default')
+                    ->outlined()
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->url(ProductResource::getUrl('index'))
+                    ->openUrlInNewTab(true)
+                    ->tooltip('Gerenciar Serviços'),
+            ])
             ->icon('heroicon-o-cube')
             ->schema([
                 Repeater::make('serviceOrderProducts')

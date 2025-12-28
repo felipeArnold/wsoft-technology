@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Financial\NonPayments\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use App\Filament\Resources\Financial\NonPayments\Actions\SendBulkNonPaymentRemindersAction;
+use App\Filament\Resources\Financial\NonPayments\Actions\SendNonPaymentReminderAction;
 use App\Helpers\FormatterHelper;
 use App\Models\Accounts\AccountsInstallments;
 use Filament\Actions\Action;
@@ -175,15 +177,9 @@ final class NonPaymentsTable
                             'paid_at' => now(),
                         ]);
                     }),
-                Action::make('send_reminder')
+                SendNonPaymentReminderAction::make()
                     ->hiddenLabel()
-                    ->tooltip('Enviar Lembrete')
-                    ->icon('heroicon-o-envelope')
-                    ->color('warning')
-                    ->requiresConfirmation()
-                    ->modalHeading('Enviar Lembrete')
-                    ->modalDescription('Enviar lembrete de pagamento para o cliente?')
-                    ->action(function ($record): void {}),
+                    ->tooltip('Enviar Lembrete'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -202,16 +198,7 @@ final class NonPaymentsTable
                                 ]);
                             });
                         }),
-                    Action::make('send_bulk_reminders')
-                        ->label('Enviar Lembretes')
-                        ->icon('heroicon-o-envelope')
-                        ->color('warning')
-                        ->requiresConfirmation()
-                        ->modalHeading('Enviar Lembretes em Lote')
-                        ->modalDescription('Enviar lembretes de pagamento para todos os clientes selecionados?')
-                        ->action(function ($records): void {
-                            // Implementar envio de lembretes em lote
-                        }),
+                    SendBulkNonPaymentRemindersAction::make(),
                     DeleteBulkAction::make(),
                 ]),
                 FilamentExportBulkAction::make('export')->label('Exportar'),
