@@ -4,13 +4,32 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Filament\Clusters\Settings\Categories\CategoryResource;
+use App\Filament\Clusters\Settings\Companies\CompanyResource;
+use App\Filament\Clusters\Settings\CRM\Funnels\FunnelResource;
+use App\Filament\Clusters\Settings\CRM\LossReasons\LossReasonResource;
+use App\Filament\Clusters\Settings\CRM\Sources\SourceResource;
+use App\Filament\Clusters\Settings\CRM\Teams\TeamResource;
+use App\Filament\Clusters\Settings\EmailTemplates\EmailTemplateResource;
+use App\Filament\Clusters\Settings\Services\ServiceResource;
 use App\Filament\Clusters\Settings\SettingsCluster;
+use App\Filament\Clusters\Settings\Users\UserResource;
 use App\Filament\Pages\Auth\RegisterTeam;
 use App\Filament\Pages\Auth\RegisterUser;
 use App\Filament\Pages\Dashboard;
+use App\Filament\Resources\Creates\Products\ProductResource;
+use App\Filament\Resources\Creates\Vehicles\VehicleResource;
+use App\Filament\Resources\Financial\Commissions\CommissionResource;
+use App\Filament\Resources\Financial\Extracts\ExtractResource;
+use App\Filament\Resources\Financial\NonPayments\NonPaymentResource;
+use App\Filament\Resources\Services\DigitalSignature\Envelopes\EnvelopeResource;
+use App\Filament\Resources\Services\Warranties\WarrantyResource;
+use App\Filament\Resources\Stock\StockInventories\StockInventoryResource;
+use App\Filament\Resources\Stock\StockMovements\StockMovementResource;
 use App\Filament\Resources\Suggestions\SuggestionResource;
 use App\Models\Tenant;
 use App\Notifications\MultiFactorAuthenticationCode;
+use Awcodes\QuickCreate\QuickCreatePlugin;
 use Filament\Actions\Action;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Enums\ThemeMode;
@@ -121,6 +140,27 @@ final class AppPanelProvider extends PanelProvider
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->plugins([
                 FilamentApexChartsPlugin::make(),
+                QuickCreatePlugin::make()
+                    ->excludes([
+                        CommissionResource::class,
+                        NonPaymentResource::class,
+                        EnvelopeResource::class,
+                        VehicleResource::class,
+                        CategoryResource::class,
+                        CompanyResource::class,
+                        FunnelResource::class,
+                        LossReasonResource::class,
+                        SourceResource::class,
+                        TeamResource::class,
+                        ServiceResource::class,
+                        UserResource::class,
+                        StockInventoryResource::class,
+                        StockMovementResource::class,
+                        WarrantyResource::class,
+                        EmailTemplateResource::class,
+                        ProductResource::class,
+                        ExtractResource::class
+                    ])
             ])
             ->renderHook(
                 'panels::head.end',
