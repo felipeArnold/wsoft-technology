@@ -35,7 +35,8 @@ $structuredData = [
         'keywords' => $post->meta_keywords,
         'wordCount' => str_word_count(strip_tags($post->content)),
         'timeRequired' => 'PT' . $post->reading_time . 'M',
-        'inLanguage' => 'pt-BR'
+        'inLanguage' => 'pt-BR',
+        'abstract' => $post->featured_snippet
     ],
     [
         '@context' => 'https://schema.org',
@@ -110,6 +111,46 @@ $structuredData = [
         ] : null
     ]
 ];
+
+// Add FAQPage schema if FAQ exists
+if ($post->faq && count($post->faq) > 0) {
+    $structuredData[] = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => array_map(function($item) {
+            return [
+                '@type' => 'Question',
+                'name' => $item['question'],
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $item['answer']
+                ]
+            ];
+        }, $post->faq)
+    ];
+}
+
+// Add enhanced snippet with featured snippet + discover context for better indexing
+if ($post->featured_snippet || $post->discover_context) {
+    $snippetText = '';
+    if ($post->featured_snippet) {
+        $snippetText .= $post->featured_snippet;
+    }
+    if ($post->discover_context) {
+        if ($snippetText) {
+            $snippetText .= ' ';
+        }
+        $snippetText .= $post->discover_context;
+    }
+
+    $structuredData[] = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebPageElement',
+        'name' => 'Featured Snippet',
+        'description' => $snippetText,
+        'cssSelector' => '.featured-snippet-enhanced'
+    ];
+}
 
 // Remove null values
 $structuredData = array_map(function($schema) {
@@ -455,10 +496,114 @@ $structuredData = array_map(function($schema) {
             </figure>
             @endif
 
+            <!-- Featured Snippet + Discover Context (Snippet Enriquecido para Indexação) -->
+            @if($post->featured_snippet || $post->discover_context)
+            <div class="featured-snippet-enhanced mb-10 space-y-4" itemscope itemtype="https://schema.org/WebPageElement">
+                <meta itemprop="name" content="Featured Snippet">
+                @php
+                    $snippetCombined = '';
+                    if ($post->featured_snippet) {
+                        $snippetCombined .= $post->featured_snippet;
+                    }
+                    if ($post->discover_context) {
+                        if ($snippetCombined) {
+                            $snippetCombined .= ' ';
+                        }
+                        $snippetCombined .= $post->discover_context;
+                    }
+                @endphp
+                <meta itemprop="description" content="{{ $snippetCombined }}">
+
+                @if($post->featured_snippet)
+                <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-2xl shadow-sm" itemscope itemtype="https://schema.org/Answer">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center shadow-md" aria-hidden="true">
+                            <i class="fa-solid fa-lightbulb text-white text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h2 class="text-sm font-bold text-blue-900 uppercase tracking-wide mb-2">Resumo Rápido</h2>
+                            <p class="text-base text-slate-700 leading-relaxed" itemprop="text">{{ $post->featured_snippet }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                @if($post->discover_context)
+                <div class="p-6 bg-gradient-to-br from-amber-50 to-orange-50 border-l-4 border-amber-600 rounded-r-2xl shadow-sm">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 w-10 h-10 bg-amber-600 rounded-full flex items-center justify-center shadow-md" aria-hidden="true">
+                            <i class="fa-solid fa-star text-white text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h2 class="text-sm font-bold text-amber-900 uppercase tracking-wide mb-2">Por que isso é importante agora?</h2>
+                            <p class="text-base text-slate-700 leading-relaxed">{{ $post->discover_context }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endif
+            </div>
+            @endif
+
+            <!-- AI Summary -->
+            @if($post->ai_summary && count($post->ai_summary) > 0)
+            <div class="mb-10 p-6 bg-gradient-to-br from-emerald-50 to-teal-50 border-l-4 border-emerald-600 rounded-r-2xl shadow-sm">
+                <div class="flex items-start gap-3">
+                    <div class="flex-shrink-0 w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-robot text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-sm font-bold text-emerald-900 uppercase tracking-wide mb-3">Principais Pontos</h2>
+                        <ul class="space-y-2">
+                            @foreach($post->ai_summary as $item)
+                            <li class="flex items-start gap-2 text-base text-slate-700">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1.5 flex-shrink-0"></i>
+                                <span>{{ $item['point'] }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @endif
+
             <!-- Conteúdo -->
             <div class="blog-content max-w-none prose prose-lg prose-slate prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-2xl prose-img:shadow-lg" itemprop="articleBody">
                 {!! $post->content !!}
             </div>
+
+            <!-- FAQ Section -->
+            @if($post->faq && count($post->faq) > 0)
+            <div class="mt-16 mb-12 bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden" itemscope itemtype="https://schema.org/FAQPage">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-circle-question text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">Perguntas Frequentes</h2>
+                            <p class="text-blue-100 text-sm">Tire suas dúvidas sobre o tema</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <div class="space-y-6">
+                        @foreach($post->faq as $index => $item)
+                        <div class="border-b border-slate-100 last:border-0 pb-6 last:pb-0" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <h3 class="text-lg font-bold text-slate-900 mb-3 flex items-start gap-3" itemprop="name">
+                                <span class="flex-shrink-0 w-7 h-7 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">
+                                    {{ $index + 1 }}
+                                </span>
+                                <span class="flex-1">{{ $item['question'] }}</span>
+                            </h3>
+                            <div class="ml-10 text-base text-slate-600 leading-relaxed" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p itemprop="text">{{ $item['answer'] }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endif
 
             <!-- Description meta -->
             <meta itemprop="description" content="{{ $post->effective_meta_description }}">

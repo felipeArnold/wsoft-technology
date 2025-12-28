@@ -11,6 +11,7 @@ use Exception;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -90,6 +91,13 @@ final class BlogPostForm
                                                             $set('content', $postData['content']);
                                                             $set('meta_title', $postData['meta_title']);
                                                             $set('meta_description', $postData['meta_description']);
+                                                            $set('meta_keywords', $postData['meta_keywords'] ?? '');
+                                                            $set('featured_snippet', $postData['featured_snippet'] ?? '');
+                                                            $set('ai_summary', $postData['ai_summary'] ?? []);
+                                                            $set('faq', $postData['faq'] ?? []);
+                                                            $set('discover_context', $postData['discover_context'] ?? '');
+                                                            $set('discover_image_prompt', $postData['discover_image_prompt'] ?? '');
+                                                            $set('internal_links_suggestions', $postData['internal_links_suggestions'] ?? []);
                                                             $set('ai_topic', '');
 
                                                             Notification::make()
@@ -266,6 +274,170 @@ final class BlogPostForm
                                                     </div>
                                                 ');
                                             }),
+                                    ])
+                                    ->collapsible(),
+                            ]),
+
+                        Tab::make('advanced_seo')
+                            ->label('SEO Avançado')
+                            ->icon('heroicon-o-sparkles')
+                            ->schema([
+                                Section::make('Featured Snippet')
+                                    ->description('Otimização para Posição Zero do Google (40-60 palavras)')
+                                    ->schema([
+                                        Textarea::make('featured_snippet')
+                                            ->label('Featured Snippet')
+                                            ->rows(3)
+                                            ->maxLength(400)
+                                            ->helperText('Resposta direta e objetiva, ideal para aparecer em destaque nos resultados (40-60 palavras)')
+                                            ->placeholder('Ex: Um sistema de gestão é uma ferramenta que centraliza operações, controla estoque, gerencia clientes e automatiza processos financeiros, aumentando eficiência e reduzindo erros operacionais.')
+                                            ->columnSpanFull(),
+                                    ]),
+
+                                Section::make('Resumo para IA')
+                                    ->description('Resumo estruturado para mecanismos de busca baseados em IA (Google SGE, ChatGPT, Perplexity)')
+                                    ->schema([
+                                        Repeater::make('ai_summary')
+                                            ->label('Bullet Points')
+                                            ->schema([
+                                                TextInput::make('point')
+                                                    ->label('Ponto')
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->placeholder('Ex: Reduz custos operacionais em até 30%'),
+                                            ])
+                                            ->minItems(3)
+                                            ->maxItems(5)
+                                            ->defaultItems(0)
+                                            ->helperText('De 3 a 5 pontos objetivos e afirmativos sobre o tema')
+                                            ->columnSpanFull()
+                                            ->addActionLabel('Adicionar ponto'),
+                                    ])
+                                    ->collapsible(),
+
+                                Section::make('FAQ (Perguntas Frequentes)')
+                                    ->description('Otimizado para Rich Results, Featured Snippets e respostas por IA')
+                                    ->schema([
+                                        Repeater::make('faq')
+                                            ->label('Perguntas e Respostas')
+                                            ->schema([
+                                                TextInput::make('question')
+                                                    ->label('Pergunta')
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->placeholder('Ex: Como funciona um sistema de gestão?')
+                                                    ->columnSpanFull(),
+
+                                                Textarea::make('answer')
+                                                    ->label('Resposta')
+                                                    ->required()
+                                                    ->rows(2)
+                                                    ->maxLength(500)
+                                                    ->helperText('Resposta direta e clara (até 50 palavras)')
+                                                    ->placeholder('Ex: É um software que centraliza operações, automatiza processos e fornece relatórios em tempo real.')
+                                                    ->columnSpanFull(),
+                                            ])
+                                            ->minItems(3)
+                                            ->maxItems(5)
+                                            ->defaultItems(0)
+                                            ->helperText('De 3 a 5 perguntas que as pessoas realmente fazem')
+                                            ->columnSpanFull()
+                                            ->addActionLabel('Adicionar pergunta')
+                                            ->itemLabel(fn (array $state): ?string => $state['question'] ?? null),
+                                    ])
+                                    ->collapsible(),
+
+                                Section::make('Google Discover')
+                                    ->description('Otimização para Google Discover e feeds personalizados')
+                                    ->schema([
+                                        Textarea::make('discover_context')
+                                            ->label('Por que isso é importante agora?')
+                                            ->rows(3)
+                                            ->maxLength(500)
+                                            ->helperText('Contexto atual, relevância temporal ou impacto imediato')
+                                            ->placeholder('Ex: Com o aumento da competitividade no mercado, empresas que não digitalizam seus processos perdem até 40% de eficiência operacional...')
+                                            ->columnSpanFull(),
+
+                                        TextInput::make('discover_image_prompt')
+                                            ->label('Prompt para Imagem Discover')
+                                            ->maxLength(255)
+                                            ->helperText('Descrição curta para gerar imagem otimizada (1200x628px, flat design, minimalista)')
+                                            ->placeholder('Ex: Ilustração flat de escritório moderno, dashboard em tela grande, fundo claro, estilo minimalista')
+                                            ->suffixActions([
+                                                \Filament\Actions\Action::make('generate_image')
+                                                    ->label('Gerar Imagem')
+                                                    ->icon('heroicon-o-photo')
+                                                    ->color('success')
+                                                    ->requiresConfirmation()
+                                                    ->modalHeading('Gerar imagem com IA?')
+                                                    ->modalDescription('Isso vai gerar uma imagem usando DALL-E 3 baseada no prompt fornecido. O processo pode levar alguns segundos.')
+                                                    ->modalSubmitActionLabel('Gerar Agora')
+                                                    ->action(function (Get $get, Set $set): void {
+                                                        $prompt = $get('discover_image_prompt');
+                                                        $title = $get('title') ?: 'blog-image';
+
+                                                        if (empty($prompt)) {
+                                                            Notification::make()
+                                                                ->title('Prompt obrigatório')
+                                                                ->body('Por favor, digite o prompt da imagem antes de gerar.')
+                                                                ->warning()
+                                                                ->send();
+
+                                                            return;
+                                                        }
+
+                                                        try {
+                                                            $generator = app(BlogPostGenerator::class);
+                                                            $imagePath = $generator->generateImage($prompt, $title);
+
+                                                            if ($imagePath) {
+                                                                $set('featured_image', $imagePath);
+                                                                $set('og_image', $imagePath);
+
+                                                                Notification::make()
+                                                                    ->title('Imagem gerada com sucesso!')
+                                                                    ->body('A imagem foi gerada e definida como imagem destaque.')
+                                                                    ->success()
+                                                                    ->duration(5000)
+                                                                    ->send();
+                                                            }
+                                                        } catch (Exception $e) {
+                                                            Notification::make()
+                                                                ->title('Erro ao gerar imagem')
+                                                                ->body($e->getMessage())
+                                                                ->danger()
+                                                                ->send();
+                                                        }
+                                                    }),
+                                            ])
+                                            ->columnSpanFull(),
+                                    ])
+                                    ->collapsible(),
+
+                                Section::make('Links Internos')
+                                    ->description('Sugestões de links internos para construção de autoridade')
+                                    ->schema([
+                                        Repeater::make('internal_links_suggestions')
+                                            ->label('Sugestões de Links')
+                                            ->schema([
+                                                TextInput::make('url')
+                                                    ->label('URL')
+                                                    ->required()
+                                                    ->prefix('/')
+                                                    ->placeholder('sistema-ordem-servico')
+                                                    ->columnSpan(1),
+
+                                                TextInput::make('anchor_text')
+                                                    ->label('Texto Âncora')
+                                                    ->required()
+                                                    ->placeholder('sistema de ordem de serviço')
+                                                    ->columnSpan(1),
+                                            ])
+                                            ->columns(2)
+                                            ->defaultItems(0)
+                                            ->helperText('Links para páginas pilares e conteúdos relacionados')
+                                            ->columnSpanFull()
+                                            ->addActionLabel('Adicionar link'),
                                     ])
                                     ->collapsible(),
                             ]),

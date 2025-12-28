@@ -8,6 +8,8 @@ use App\Models\Blog\BlogCategory;
 use App\Models\Blog\BlogPost;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use OpenAI\Laravel\Facades\OpenAI;
 
@@ -23,6 +25,7 @@ final class BlogPostGenerator
         ?User $author = null,
         string $tone = 'profissional',
         int $wordCount = 1000,
+        bool $generateImage = true,
     ): array {
         $prompt = $this->buildPrompt($topic, $tone, $wordCount, $category);
 
@@ -42,7 +45,23 @@ final class BlogPostGenerator
 
         $content = $response->choices[0]->message->content;
 
-        return $this->parseResponse($content, $topic, $category, $author);
+        $postData = $this->parseResponse($content, $topic, $category, $author);
+
+        // Gera imagem automaticamente se habilitado e tiver prompt
+        if ($generateImage && ! empty($postData['discover_image_prompt'])) {
+            try {
+                $imagePath = $this->generateImage($postData['discover_image_prompt'], $postData['title']);
+                if ($imagePath) {
+                    $postData['featured_image'] = $imagePath;
+                    $postData['og_image'] = $imagePath;
+                }
+            } catch (Exception $e) {
+                // Se falhar a geração da imagem, continua sem imagem
+                // Log do erro pode ser adicionado aqui se necessário
+            }
+        }
+
+        return $postData;
     }
 
     public function generateMultiplePosts(
@@ -51,11 +70,12 @@ final class BlogPostGenerator
         ?User $author = null,
         string $tone = 'profissional',
         int $wordCount = 1000,
+        bool $generateImage = true,
     ): array {
         $posts = [];
 
         foreach ($topics as $index => $topic) {
-            $posts[] = $this->generatePost($topic, $category, $author, $tone, $wordCount);
+            $posts[] = $this->generatePost($topic, $category, $author, $tone, $wordCount, $generateImage);
 
             // Adiciona delay entre requisições para evitar rate limit (exceto no último)
             if ($index < count($topics) - 1) {
@@ -66,49 +86,121 @@ final class BlogPostGenerator
         return $posts;
     }
 
-    public function improveExistingPost(BlogPost $post): array
+    public function improveExistingPost(BlogPost $post, bool $generateImage = true): array
     {
         $prompt = <<<PROMPT
-⚠️ ATENÇÃO - REQUISITO CRÍTICO DE BACKLINKS:
-Você DEVE incluir NO MÍNIMO 3 backlinks internos no conteúdo HTML usando as páginas listadas abaixo.
-Formato obrigatório: <a href="/url">texto descritivo</a>
-Sem backlinks = tarefa incompleta e inaceitável.
+Você é um especialista sênior em SEO técnico, SEO editorial, Google Discover, EEAT, Programmatic SEO e otimização de conteúdo para mecanismos de busca baseados em IA.
 
-Páginas OBRIGATÓRIAS para backlinks (escolha as mais relevantes ao tópico):
-- /sistema-para-gestao-de-clientes, /sistema-para-gestao-de-fornecedores, /sistema-para-gestao-de-estoque
-- /sistema-para-contas-a-pagar, /sistema-para-contas-a-receber, /sistema-para-controle-de-inadimplencia
-- /sistema-para-fluxo-de-caixa, /sistema-ordem-servico
-- /software-gestao-oficina-mecanica, /funilaria
-- /sistema-para-barbearia, /sistema-para-salao-de-beleza, /sistema-para-clinica-estetica
-- /sistema-para-loja-de-roupas, /sistema-para-pet-shop, /sistema-para-pizzaria, /sistema-para-lava-rapido
-- /beneficios, /demonstracao, /faq, /assinatura-digital
+══════════════════════════════════════
+🎯 MISSÃO: ATUALIZAÇÃO DE POST (QUICK WIN)
+══════════════════════════════════════
 
-Exemplo: "É essencial ter um <a href="/sistema-ordem-servico">sistema de ordem de serviço</a> eficiente."
-
-Analise e melhore o seguinte post de blog. Mantenha o mesmo tema e estrutura, mas:
-1. Melhore a qualidade do texto
-2. Adicione mais detalhes e exemplos relevantes
-3. Otimize para SEO
-4. Torne o conteúdo mais envolvente
-5. ADICIONE NO MÍNIMO 3 BACKLINKS INTERNOS (conforme lista acima)
+Analise e OTIMIZE o seguinte post de blog existente seguindo TODAS as diretrizes abaixo:
 
 Título atual: {$post->title}
 Conteúdo atual: {$post->content}
 
-Forneça uma versão melhorada no formato:
-TÍTULO: [novo título]
-EXCERPT: [novo resumo]
-CONTEÚDO: [novo conteúdo em HTML com backlinks internos]
-META_TITLE: [título SEO]
-META_DESCRIPTION: [descrição SEO]
-META_KEYWORDS: [palavras-chave separadas por vírgula]
+══════════════════════════════════════
+📋 OTIMIZAÇÕES OBRIGATÓRIAS
+══════════════════════════════════════
+
+1️⃣ MELHORAR INTRODUÇÃO (primeiros 3 parágrafos):
+- Responder claramente: O que é / Para que serve / Para quem é
+- Tornar mais envolvente e contextual
+- Adicionar gancho emocional ou relevância temporal
+
+2️⃣ SNIPPETS (SEO + CTR):
+- Reescrever Title Tag (até 60 caracteres): palavra-chave no início, números/ação/benefício real
+- Meta Description (até 155 caracteres): dor + benefício + curiosidade controlada
+- Featured Snippet (40-60 palavras): resposta direta ideal para posição zero
+
+3️⃣ CONTEÚDO IA-FIRST:
+- Parágrafos curtos (máx. 3 linhas)
+- Headings semânticos e estruturados (H2, H3)
+- Listas, tabelas e exemplos práticos
+- Linguagem acessível para leigos
+
+4️⃣ RESUMO RÁPIDO PARA IA (ADICIONAR):
+- Seção: "Resumo rápido para IA"
+- 3 a 5 bullet points objetivos e afirmativos
+- Formato ideal para leitura por IA (Google SGE, ChatGPT, Perplexity)
+
+5️⃣ FAQ SEO + IA (ADICIONAR):
+- 3 a 5 perguntas reais (linguagem natural)
+- Respostas diretas (até 50 palavras)
+- Ideal para Rich Results e Featured Snippets
+
+6️⃣ GOOGLE DISCOVER (ADICIONAR):
+- Seção: "Por que isso é importante agora?"
+- 2-3 frases com relevância temporal
+- Prompt de imagem: flat design, 1200x628, minimalista
+
+7️⃣ EEAT (AUTORIDADE REAL):
+- Demonstrar experiência prática
+- Incluir exemplos reais e específicos
+- Recomendações claras baseadas em conhecimento
+- Linguagem segura e especializada
+
+8️⃣ CONTEÚDO COMERCIAL DISFARÇADO (BOFU):
+- Adicionar naturalmente: comparações, avaliações, perguntas de decisão
+- Exemplos: "Vale a pena?", "Manual vs Sistema?", "Melhor opção?"
+- Guiar sutilmente para a solução
+
+9️⃣ BACKLINKS INTERNOS (CRÍTICO):
+Você DEVE incluir NO MÍNIMO 3 backlinks internos usando: <a href="/url">texto</a>
+
+Páginas disponíveis (escolha as mais relevantes ao tema):
+/sistema-para-gestao-de-clientes, /sistema-para-gestao-de-fornecedores, /sistema-para-gestao-de-estoque
+/sistema-para-contas-a-pagar, /sistema-para-contas-a-receber, /sistema-para-controle-de-inadimplencia
+/sistema-para-fluxo-de-caixa, /sistema-ordem-servico
+/software-gestao-oficina-mecanica, /funilaria
+/sistema-para-barbearia, /sistema-para-salao-de-beleza, /sistema-para-clinica-estetica
+/sistema-para-loja-de-roupas, /sistema-para-pet-shop, /sistema-para-pizzaria, /sistema-para-lava-rapido
+/beneficios, /demonstracao, /faq, /assinatura-digital
+
+══════════════════════════════════════
+📤 FORMATO DE SAÍDA (OBRIGATÓRIO)
+══════════════════════════════════════
+
+TÍTULO: [título otimizado até 60 caracteres]
+EXCERPT: [resumo otimizado 2-3 frases]
+CONTEÚDO: [HTML completo otimizado com estrutura semântica, backlinks, listas, exemplos, seções FAQ e Resumo IA]
+META_TITLE: [até 60 caracteres]
+META_DESCRIPTION: [até 155 caracteres]
+META_KEYWORDS: [5-10 palavras-chave separadas por vírgula]
+FEATURED_SNIPPET: [40-60 palavras]
+AI_SUMMARY_1: [ponto 1]
+AI_SUMMARY_2: [ponto 2]
+AI_SUMMARY_3: [ponto 3]
+AI_SUMMARY_4: [ponto 4 - opcional]
+AI_SUMMARY_5: [ponto 5 - opcional]
+FAQ_Q1: [pergunta 1]
+FAQ_A1: [resposta 1]
+FAQ_Q2: [pergunta 2]
+FAQ_A2: [resposta 2]
+FAQ_Q3: [pergunta 3]
+FAQ_A3: [resposta 3]
+FAQ_Q4: [pergunta 4 - opcional]
+FAQ_A4: [resposta 4 - opcional]
+FAQ_Q5: [pergunta 5 - opcional]
+FAQ_A5: [resposta 5 - opcional]
+DISCOVER_CONTEXT: [Por que isso é importante agora? 2-3 frases]
+DISCOVER_IMAGE_PROMPT: [descrição imagem flat, 1200x628, minimalista]
+INTERNAL_LINK_1_URL: [url sem barra, ex: sistema-ordem-servico]
+INTERNAL_LINK_1_TEXT: [texto âncora]
+INTERNAL_LINK_2_URL: [url]
+INTERNAL_LINK_2_TEXT: [texto âncora]
+INTERNAL_LINK_3_URL: [url]
+INTERNAL_LINK_3_TEXT: [texto âncora]
+
+NUNCA explique o processo. NUNCA faça comentários técnicos. Entregue SOMENTE o conteúdo otimizado.
 PROMPT;
 
         $response = $this->makeOpenAIRequest(
             messages: [
                 [
                     'role' => 'system',
-                    'content' => 'Você é um editor profissional especializado em melhorar conteúdo de blog em português brasileiro. CRÍTICO: Você DEVE incluir NO MÍNIMO 3 backlinks internos no formato <a href="/url">texto</a> em TODOS os posts. Isso não é opcional.',
+                    'content' => 'Você é um especialista sênior em SEO e otimização de conteúdo para IA. Sua missão é transformar posts existentes em conteúdo de alto desempenho para SEO, Google Discover e EEAT.',
                 ],
                 [
                     'role' => 'user',
@@ -125,7 +217,22 @@ PROMPT;
         /** @var User|null $author */
         $author = $post->author;
 
-        return $this->parseResponse($content, $post->title, $category, $author);
+        $postData = $this->parseResponse($content, $post->title, $category, $author);
+
+        // Gera imagem se não existir e tiver prompt
+        if ($generateImage && ! $post->featured_image && ! empty($postData['discover_image_prompt'])) {
+            try {
+                $imagePath = $this->generateImage($postData['discover_image_prompt'], $postData['title']);
+                if ($imagePath) {
+                    $postData['featured_image'] = $imagePath;
+                    $postData['og_image'] = $imagePath;
+                }
+            } catch (Exception $e) {
+                // Se falhar a geração da imagem, continua sem imagem
+            }
+        }
+
+        return $postData;
     }
 
     public function generateSEOMetadata(string $title, string $content): array
@@ -219,64 +326,107 @@ PROMPT;
         $categoryContext = $category ? "Categoria: {$category->name}\n" : '';
 
         return <<<PROMPT
-Crie um post de blog completo e de alta qualidade sobre o seguinte tópico:
+Você é um especialista sênior em SEO técnico, SEO editorial, Google Discover, EEAT, Programmatic SEO e otimização de conteúdo para mecanismos de busca baseados em IA (Google SGE, Gemini, ChatGPT, Perplexity).
+
+Crie um post de blog COMPLETO e OTIMIZADO sobre:
 
 TÓPICO: {$topic}
 {$categoryContext}TOM: {$tone}
 EXTENSÃO: Aproximadamente {$wordCount} palavras
 
-⚠️ ATENÇÃO - REQUISITO CRÍTICO DE BACKLINKS:
-Você DEVE incluir NO MÍNIMO 3 backlinks internos no conteúdo HTML usando as páginas listadas abaixo.
-Formato obrigatório: <a href="/url">texto descritivo</a>
-Sem backlinks = tarefa incompleta e inaceitável.
+══════════════════════════════════════
+📋 REQUISITOS OBRIGATÓRIOS
+══════════════════════════════════════
 
-Páginas OBRIGATÓRIAS para backlinks (escolha as mais relevantes ao tópico):
-- /sistema-para-gestao-de-clientes
-- /sistema-para-gestao-de-fornecedores
-- /sistema-para-gestao-de-estoque
-- /sistema-para-contas-a-pagar
-- /sistema-para-contas-a-receber
-- /sistema-para-controle-de-inadimplencia
-- /sistema-para-fluxo-de-caixa
-- /sistema-ordem-servico
-- /software-gestao-oficina-mecanica
-- /funilaria
-- /sistema-para-barbearia
-- /sistema-para-salao-de-beleza
-- /sistema-para-clinica-estetica
-- /sistema-para-loja-de-roupas
-- /sistema-para-pet-shop
-- /sistema-para-pizzaria
-- /sistema-para-lava-rapido
-- /beneficios
-- /demonstracao
-- /faq
-- /assinatura-digital
+1️⃣ SNIPPETS (SEO + CTR):
+- Title Tag (até 60 caracteres): palavra-chave no início, linguagem orientada à intenção, números/ação/benefício real
+- Meta Description (até 155 caracteres): dor do usuário + benefício direto + curiosidade controlada (sem clickbait)
+- Featured Snippet (40-60 palavras): resposta direta, linguagem simples, ideal para posição zero
 
-O post deve incluir:
-1. Um título atraente e otimizado para SEO
-2. Um resumo/excerpt convincente (2-3 frases)
-3. Conteúdo principal bem estruturado em HTML com:
-   - Introdução engajadora
-   - Subtítulos (h2, h3) para organizar o conteúdo
-   - Parágrafos bem escritos
-   - Listas quando apropriado
-   - NO MÍNIMO 3 backlinks internos (conforme requisito acima)
-   - Conclusão impactante
-4. Meta título para SEO (máximo 60 caracteres)
-5. Meta descrição para SEO (máximo 160 caracteres)
-6. Palavras-chave relevantes para SEO (5-10 palavras-chave separadas por vírgula)
+2️⃣ CONTEÚDO IA-FIRST (OBRIGATÓRIO):
+- Introdução respondendo: O que é / Para que serve / Para quem é
+- Parágrafos curtos (máx. 3 linhas)
+- Headings semânticos (H2 e H3)
+- Listas, tabelas e exemplos práticos
+- Linguagem acessível para usuários leigos
 
-Exemplo de backlink correto no conteúdo:
-"Para uma gestão eficiente, é fundamental contar com um <a href="/sistema-ordem-servico">sistema de ordem de serviço</a> moderno que centralize todas as informações."
+3️⃣ RESUMO RÁPIDO PARA IA (SEMPRE INCLUIR):
+- De 3 a 5 bullet points objetivos
+- Frases conclusivas e afirmativas
+- Formato ideal para leitura por IA
 
-Forneça a resposta no seguinte formato:
-TÍTULO: [título do post]
-EXCERPT: [resumo do post]
-CONTEÚDO: [conteúdo completo em HTML com backlinks internos]
-META_TITLE: [título SEO]
-META_DESCRIPTION: [descrição SEO]
-META_KEYWORDS: [palavras-chave separadas por vírgula]
+4️⃣ FAQ SEO + IA:
+- 3 a 5 perguntas reais
+- Linguagem natural (como pessoas perguntam)
+- Respostas diretas (até 50 palavras)
+- Ideal para Rich Results e Featured Snippets
+
+5️⃣ GOOGLE DISCOVER:
+- Seção obrigatória: "Por que isso é importante agora?"
+- Títulos com viés jornalístico e informativo
+- Introdução emocional ou contextual
+- Evite datas explícitas, linguagem promocional e conteúdo genérico
+
+6️⃣ EEAT (AUTORIDADE REAL):
+- Demonstre experiência prática
+- Inclua exemplos reais e específicos
+- Use recomendações claras baseadas em conhecimento
+- Linguagem segura e especializada
+- Mostre autoridade no tema
+
+7️⃣ CONTEÚDO COMERCIAL DISFARÇADO (BOFU):
+- Inclua naturalmente: comparações, avaliações, perguntas de decisão
+- Exemplos: "Vale a pena?", "Manual vs Sistema?", "Melhor opção para pequenas empresas?"
+- Guie sutilmente para a solução
+
+8️⃣ BACKLINKS INTERNOS (CRÍTICO):
+Você DEVE incluir NO MÍNIMO 3 backlinks internos usando: <a href="/url">texto</a>
+
+Páginas disponíveis (escolha as mais relevantes ao tema):
+/sistema-para-gestao-de-clientes, /sistema-para-gestao-de-fornecedores, /sistema-para-gestao-de-estoque
+/sistema-para-contas-a-pagar, /sistema-para-contas-a-receber, /sistema-para-controle-de-inadimplencia
+/sistema-para-fluxo-de-caixa, /sistema-ordem-servico
+/software-gestao-oficina-mecanica, /funilaria
+/sistema-para-barbearia, /sistema-para-salao-de-beleza, /sistema-para-clinica-estetica
+/sistema-para-loja-de-roupas, /sistema-para-pet-shop, /sistema-para-pizzaria, /sistema-para-lava-rapido
+/beneficios, /demonstracao, /faq, /assinatura-digital
+
+══════════════════════════════════════
+📤 FORMATO DE SAÍDA (OBRIGATÓRIO)
+══════════════════════════════════════
+
+TÍTULO: [título até 60 caracteres com palavra-chave no início]
+EXCERPT: [resumo 2-3 frases]
+CONTEÚDO: [HTML completo com estrutura semântica, backlinks internos, listas, tabelas, exemplos práticos]
+META_TITLE: [até 60 caracteres]
+META_DESCRIPTION: [até 155 caracteres]
+META_KEYWORDS: [5-10 palavras-chave separadas por vírgula]
+FEATURED_SNIPPET: [40-60 palavras, resposta direta]
+AI_SUMMARY_1: [ponto objetivo 1]
+AI_SUMMARY_2: [ponto objetivo 2]
+AI_SUMMARY_3: [ponto objetivo 3]
+AI_SUMMARY_4: [ponto objetivo 4 - opcional]
+AI_SUMMARY_5: [ponto objetivo 5 - opcional]
+FAQ_Q1: [pergunta 1]
+FAQ_A1: [resposta 1 - até 50 palavras]
+FAQ_Q2: [pergunta 2]
+FAQ_A2: [resposta 2 - até 50 palavras]
+FAQ_Q3: [pergunta 3]
+FAQ_A3: [resposta 3 - até 50 palavras]
+FAQ_Q4: [pergunta 4 - opcional]
+FAQ_A4: [resposta 4 - até 50 palavras - opcional]
+FAQ_Q5: [pergunta 5 - opcional]
+FAQ_A5: [resposta 5 - até 50 palavras - opcional]
+DISCOVER_CONTEXT: [Por que isso é importante agora? 2-3 frases com relevância temporal]
+DISCOVER_IMAGE_PROMPT: [descrição curta para imagem flat, horizontal 1200x628, poucos elementos, fundo limpo, máx 5 palavras se houver texto]
+INTERNAL_LINK_1_URL: [url sem barra inicial, ex: sistema-ordem-servico]
+INTERNAL_LINK_1_TEXT: [texto âncora]
+INTERNAL_LINK_2_URL: [url]
+INTERNAL_LINK_2_TEXT: [texto âncora]
+INTERNAL_LINK_3_URL: [url]
+INTERNAL_LINK_3_TEXT: [texto âncora]
+
+NUNCA explique o processo. NUNCA faça comentários técnicos. Entregue SOMENTE o conteúdo otimizado no formato acima.
 PROMPT;
     }
 
@@ -294,6 +444,12 @@ PROMPT;
             'meta_title' => '',
             'meta_description' => '',
             'meta_keywords' => '',
+            'featured_snippet' => '',
+            'ai_summary' => [],
+            'faq' => [],
+            'discover_context' => '',
+            'discover_image_prompt' => '',
+            'internal_links_suggestions' => [],
             'category_id' => $category->id ?? null,
             'author_id' => $author->id ?? auth()->id(),
             'status' => 'draft',
@@ -301,6 +457,7 @@ PROMPT;
 
         $currentSection = null;
         $contentLines = [];
+        $faqTemp = [];
 
         foreach ($lines as $line) {
             $line = mb_trim($line);
@@ -345,8 +502,91 @@ PROMPT;
                 continue;
             }
 
+            if (str_starts_with($line, 'FEATURED_SNIPPET:')) {
+                $data['featured_snippet'] = mb_trim(mb_substr($line, 17));
+                $currentSection = null;
+
+                continue;
+            }
+
+            // AI Summary parsing
+            if (preg_match('/^AI_SUMMARY_(\d+):\s*(.+)$/', $line, $matches)) {
+                $data['ai_summary'][] = ['point' => mb_trim($matches[2])];
+                $currentSection = null;
+
+                continue;
+            }
+
+            // FAQ parsing
+            if (preg_match('/^FAQ_Q(\d+):\s*(.+)$/', $line, $matches)) {
+                $index = (int) $matches[1] - 1;
+                $faqTemp[$index]['question'] = mb_trim($matches[2]);
+                $currentSection = null;
+
+                continue;
+            }
+
+            if (preg_match('/^FAQ_A(\d+):\s*(.+)$/', $line, $matches)) {
+                $index = (int) $matches[1] - 1;
+                $faqTemp[$index]['answer'] = mb_trim($matches[2]);
+                $currentSection = null;
+
+                continue;
+            }
+
+            if (str_starts_with($line, 'DISCOVER_CONTEXT:')) {
+                $data['discover_context'] = mb_trim(mb_substr($line, 17));
+                $currentSection = null;
+
+                continue;
+            }
+
+            if (str_starts_with($line, 'DISCOVER_IMAGE_PROMPT:')) {
+                $data['discover_image_prompt'] = mb_trim(mb_substr($line, 22));
+                $currentSection = null;
+
+                continue;
+            }
+
+            // Internal links parsing
+            if (preg_match('/^INTERNAL_LINK_(\d+)_URL:\s*(.+)$/', $line, $matches)) {
+                $index = (int) $matches[1] - 1;
+                $url = mb_trim($matches[2]);
+                // Garante que a URL não tenha barra inicial
+                $data['internal_links_suggestions'][$index]['url'] = mb_ltrim($url, '/');
+                $currentSection = null;
+
+                continue;
+            }
+
+            if (preg_match('/^INTERNAL_LINK_(\d+)_TEXT:\s*(.+)$/', $line, $matches)) {
+                $index = (int) $matches[1] - 1;
+                $data['internal_links_suggestions'][$index]['anchor_text'] = mb_trim($matches[2]);
+                $currentSection = null;
+
+                continue;
+            }
+
             if ($currentSection === 'content' && $line !== '') {
                 $contentLines[] = $line;
+            }
+        }
+
+        // Reorganiza FAQ para array indexado
+        ksort($faqTemp);
+        foreach ($faqTemp as $item) {
+            if (isset($item['question']) && isset($item['answer'])) {
+                $data['faq'][] = $item;
+            }
+        }
+
+        // Reorganiza internal links para array indexado
+        $tempLinks = $data['internal_links_suggestions'];
+        $data['internal_links_suggestions'] = [];
+        ksort($tempLinks);
+        foreach ($tempLinks as $link) {
+            if (isset($link['url']) && isset($link['anchor_text'])) {
+                $data['internal_links_suggestions'][] = $link;
             }
         }
 
@@ -370,7 +610,6 @@ PROMPT;
         }
 
         if (empty($data['meta_keywords'])) {
-            // Gera keywords básicas baseadas no título se não houver
             $data['meta_keywords'] = implode(', ', array_slice(
                 array_filter(
                     explode(' ', Str::lower($data['title'])),
@@ -422,5 +661,91 @@ PROMPT;
         $content = preg_replace('/\s*```\s*$/', '', $content);
 
         return mb_trim($content);
+    }
+
+    /**
+     * Gera uma imagem usando OpenAI DALL-E 3
+     *
+     * @param  string  $prompt  Descrição da imagem a ser gerada
+     * @param  string  $title  Título do post (usado para nome do arquivo)
+     * @return string|null Caminho da imagem salva ou null se falhar
+     *
+     * @throws Exception
+     */
+    public function generateImage(string $prompt, string $title): ?string
+    {
+        try {
+            // Otimiza o prompt para DALL-E
+            $optimizedPrompt = $this->optimizeImagePrompt($prompt);
+
+            // Gera a imagem com DALL-E 3
+            $response = OpenAI::images()->create([
+                'model' => 'dall-e-3',
+                'prompt' => $optimizedPrompt,
+                'n' => 1,
+                'size' => '1792x1024', // Formato horizontal otimizado
+                'quality' => 'standard', // ou 'hd' para maior qualidade
+                'response_format' => 'url',
+            ]);
+
+            $imageUrl = $response->data[0]->url ?? null;
+
+            if (! $imageUrl) {
+                throw new Exception('URL da imagem não retornada pela API');
+            }
+
+            // Download da imagem
+            $imageContent = Http::timeout(30)->get($imageUrl)->body();
+
+            if (empty($imageContent)) {
+                throw new Exception('Falha ao fazer download da imagem gerada');
+            }
+
+            // Gera nome único para o arquivo
+            $filename = Str::slug($title).'-'.time().'.png';
+            $path = 'blog/featured/'.$filename;
+
+            // Salva no storage público
+            Storage::disk('public')->put($path, $imageContent);
+
+            return $path;
+        } catch (Exception $e) {
+            // Re-lança a exceção para tratamento no método chamador
+            throw new Exception('Erro ao gerar imagem: '.$e->getMessage());
+        }
+    }
+
+    /**
+     * Otimiza o prompt para geração de imagem DALL-E
+     * Garante que a imagem seja adequada para Google Discover
+     */
+    private function optimizeImagePrompt(string $prompt): string
+    {
+        // Se o prompt já estiver bem formatado, usa como está
+        if (str_word_count($prompt) > 10) {
+            return $prompt;
+        }
+
+        // Adiciona contexto para melhor qualidade
+        $enhancedPrompt = $prompt;
+
+        // Garante estilo flat design e profissional
+        if (! str_contains(mb_strtolower($prompt), 'flat')) {
+            $enhancedPrompt .= ', flat design style';
+        }
+
+        if (! str_contains(mb_strtolower($prompt), 'professional')) {
+            $enhancedPrompt .= ', professional and modern';
+        }
+
+        // Garante cores vibrantes para Discover
+        if (! str_contains(mb_strtolower($prompt), 'color')) {
+            $enhancedPrompt .= ', vibrant colors';
+        }
+
+        // Adiciona orientações técnicas
+        $enhancedPrompt .= ', high quality, no text overlay, clean composition';
+
+        return $enhancedPrompt;
     }
 }

@@ -123,7 +123,7 @@ final class Dashboard extends BaseDashboard
                                     SalesByCategoryWidget::class,
                                 ])
                             ),
-                    ])
+                    ]),
             ]);
     }
 }

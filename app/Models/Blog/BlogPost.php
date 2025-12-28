@@ -38,12 +38,21 @@ final class BlogPost extends Model
         'meta_description',
         'meta_keywords',
         'og_image',
+        'featured_snippet',
+        'ai_summary',
+        'faq',
+        'discover_context',
+        'discover_image_prompt',
+        'internal_links_suggestions',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
         'is_featured' => 'boolean',
         'view_count' => 'integer',
+        'ai_summary' => 'array',
+        'faq' => 'array',
+        'internal_links_suggestions' => 'array',
     ];
 
     public static function generateUniqueSlug(string $title): string

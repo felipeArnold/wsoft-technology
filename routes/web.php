@@ -161,7 +161,6 @@ Route::view('/sistema-white-label-para-revenda', 'site.white-label')->name('land
 // Landing Page para Revenda Mecânica
 Route::view('/revenda-sistema-oficina', 'landing.revenda-mecanica')->name('landing.revenda-mecanica');
 
-
 // Landing Page para Oficina Automóvel (Portugal - PT-PT)
 Route::get('/pt-pt/software-gestao-oficina-automovel', function () {
     return view('landing.pt-pt.software-gestao-oficina-automovel');
