@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Contas a Receber',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-contas-a-receber'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -100,8 +118,8 @@ $structuredData = [
 
 <x-site.hero
     badge="Controle de Contas a Receber"
-    highlight="Receba em Dia"
-    title="e Cresça"
+    highlight="Sistema de Contas a Receber"
+    title=""
     description="Controle todos os seus recebimentos em um só lugar. Automatize cobranças, reduza a inadimplência e tenha previsibilidade de caixa. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"

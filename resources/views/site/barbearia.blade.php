@@ -23,6 +23,23 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Início',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Sistema para Barbearia',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-barbearia'
+            ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -117,7 +134,7 @@ $structuredData = [
                 Sistema para Barbearia por Assinatura
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Escolha um sistema completo para <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-200">Gestão de Barbearia</span>
+                Sistema para <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-200">Barbearia Integrado</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-lg">
                 Agenda organizada, comissões automáticas e financeiro em dia. O melhor <strong>sistema para barbearia por assinatura</strong> do mercado. <span class="text-orange-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>

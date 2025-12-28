@@ -2,6 +2,24 @@
 $structuredData = [
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Assinatura Digital',
+                'item' => 'https://www.wsoft.dev.br/assinatura-digital'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
         'name' => 'WSoft - Sistema com Assinatura Digital',
         'url' => 'https://www.wsoft.dev.br/assinatura-digital',

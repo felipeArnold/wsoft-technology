@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Controle de Estoque',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-gestao-de-estoque'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -106,10 +124,10 @@ $structuredData = [
         <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-xs font-semibold uppercase tracking-wider mb-6">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                Sistema de Controle de Estoque
+                Software Online
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Controle de Estoque</span> para Pequenas Empresas
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Sistema de Controle de Estoque</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
                 O sistema completo para você gerenciar seu estoque, controlar a validade dos produtos e evitar perdas. <span class="text-emerald-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>

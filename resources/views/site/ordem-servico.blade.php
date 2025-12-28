@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Ordem de Serviço',
+                'item' => 'https://www.wsoft.dev.br/sistema-ordem-servico'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -75,7 +93,7 @@ $structuredData = [
                 Sistema de Ordem de Serviço
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Ordem de Serviço</span> Profissional e Digital
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Sistema de Ordem de Serviço</span> Online
             </h1>
             <p class="mt-6 text-lg md:text-xl text-blue-100 leading-relaxed max-w-lg">
                 Automatize processos, elimine papeladas e profissionalize seu atendimento com o <strong>sistema de OS</strong> mais completo.

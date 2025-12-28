@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Contas a Pagar',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-contas-a-pagar'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -112,8 +130,8 @@ $structuredData = [
 
 <x-site.hero
     badge="Controle de Contas a Pagar"
-    highlight="Contas a Pagar"
-    title="sob Controle"
+    highlight="Sistema de Contas a Pagar"
+    title=""
     description="Organize suas contas a pagar e evite multas e juros. Tenha visão total das suas despesas e mantenha seu financeiro sempre em dia. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"

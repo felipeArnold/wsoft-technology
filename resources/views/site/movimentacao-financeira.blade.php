@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Fluxo de Caixa',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-fluxo-de-caixa'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -100,8 +118,8 @@ $structuredData = [
 
 <x-site.hero
     badge="Fluxo de Caixa"
-    title="Movimentação Financeira em Tempo Real"
-    highlight="Controle sua "
+    title=""
+    highlight="Sistema de Fluxo de Caixa"
     description="Tenha o controle total do seu dinheiro. Acompanhe entradas, saídas e saiba exatamente qual é o lucro da sua empresa em tempo real. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"

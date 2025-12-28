@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Gestão de Clientes',
+                'item' => 'https://www.wsoft.dev.br/gestao-clientes'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -107,9 +125,9 @@ $structuredData = [
 >
 
 <x-site.hero
-    badge="Sistema de Gestão de Clientes"
-    highlight="Gestão de Clientes"
-    title="Simples e Inteligente"
+    badge="Software CRM"
+    highlight="Sistema de Gestão de Clientes"
+    title=""
     description="Centralize cadastros, histórico de vendas e atendimentos em um único lugar. O sistema de gestão de clientes ideal para quem quer crescer. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     :idealFor="['Lojas e Comércio', 'Prestadores de Serviço', 'Oficinas e Mecânicas', 'Consultórios']"
     idealForTitle="Perfeito para:"

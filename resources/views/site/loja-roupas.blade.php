@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Loja de Roupas',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-loja-de-roupas'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -109,7 +127,7 @@ $structuredData = [
                 Sistema para Varejo de Moda
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Estilo e gestão para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-300">Loja de Roupas</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-300">Sistema de Gestão</span> para Loja de Roupas
             </h1>
             <p class="mt-6 text-lg md:text-xl text-violet-100/80 leading-relaxed max-w-lg">
                 Controle de estoque, impressão de etiquetas e gestão financeira em um único lugar. O sistema perfeito para sua boutique ou loja. <span class="text-violet-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>

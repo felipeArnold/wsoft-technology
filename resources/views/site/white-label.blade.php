@@ -2,6 +2,24 @@
 $structuredData = [
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'White Label',
+                'item' => 'https://www.wsoft.dev.br/sistema-white-label-para-revenda'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
         'name' => 'WSoft - Sistema White Label para Revenda',
         'url' => 'https://www.wsoft.dev.br/sistema-white-label-para-revenda',

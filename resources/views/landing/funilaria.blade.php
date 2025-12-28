@@ -41,6 +41,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Sistema para Funilaria',
+                'item' => 'https://www.wsoft.dev.br/landing/funilaria'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -134,8 +152,8 @@ $structuredData = [
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                 Sistema para Funilaria
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Gestão Profissional para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Funilaria e Pintura</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
+                Sistema de Gestão para <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Funilaria e Pintura</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
                 Ordem de serviço digital, controle financeiro e estoque de peças. O sistema ideal para mecânicas e auto centers.

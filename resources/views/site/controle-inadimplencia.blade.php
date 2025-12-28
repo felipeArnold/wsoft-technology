@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Controle de Inadimplência',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-controle-de-inadimplencia'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -100,8 +118,8 @@ $structuredData = [
 
 <x-site.hero
     badge="Controle de Inadimplência"
-    title="na Sua Empresa"
-    highlight="Zero Inadimplência"
+    title=""
+    highlight="Sistema de Controle de Inadimplência"
     description="Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"

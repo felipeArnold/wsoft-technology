@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Clínica de Estética',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-clinica-estetica'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -109,7 +127,7 @@ $structuredData = [
                 Sistema para Clínica de Estética
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Gestão completa para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-300">Clínica de Estética</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-300">Sistema de Gestão</span> para Clínica de Estética
             </h1>
             <p class="mt-6 text-lg md:text-xl text-teal-100/80 leading-relaxed max-w-lg">
                 Controle sessões, pacotes, anamnese digital e agenda. Organize seu negócio e proporcione a melhor experiência aos pacientes. <span class="text-teal-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>

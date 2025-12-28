@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Início',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Software para Oficina Mecânica',
+                'item' => 'https://www.wsoft.dev.br/software-gestao-oficina-mecanica'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'AutoRepair',
         'name' => 'WSoft Tecnologia - Software para Oficina Mecânica',
         'image' => 'https://www.wsoft.dev.br/images/logo.png',

@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Pet Shop',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-pet-shop'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -109,7 +127,7 @@ $structuredData = [
                 Sistema para Pet Shop
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Cuidado e gestão para seu <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">Pet Shop</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">Sistema de Gestão</span> para Pet Shop
             </h1>
             <p class="mt-6 text-lg md:text-xl text-sky-100/80 leading-relaxed max-w-lg">
                 Agenda de banho e tosa, carteira de vacinação digital e controle de vendas. Tudo o que seu negócio precisa para crescer. <span class="text-sky-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>

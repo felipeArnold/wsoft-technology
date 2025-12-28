@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Salão de Beleza',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-salao-de-beleza'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -109,7 +127,7 @@ $structuredData = [
                 Sistema para Salão de Beleza
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Beleza e organização em <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-300">Sintonia</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-300">Sistema de Gestão</span> para Salão de Beleza
             </h1>
             <p class="mt-6 text-lg md:text-xl text-rose-100/80 leading-relaxed max-w-lg">
                 Agenda organizada, comissões automáticas, confirmação via WhatsApp e financeiro em dia. O sistema ideal para <strong>salões de beleza e esmalterias</strong>. <span class="text-rose-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>

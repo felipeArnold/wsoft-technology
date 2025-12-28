@@ -23,6 +23,23 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Início',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Sistema para Pizzaria',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-pizzaria'
+            ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -109,7 +126,7 @@ $structuredData = [
                 Sistema para Delivery e Salão
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Mais agilidade para sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">Pizzaria</span>
+                Sistema para <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">Pizzaria e Delivery</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-red-100/80 leading-relaxed max-w-lg">
                 Atenda mais rápido, elimine erros nos pedidos e controle suas entregas e motoboys com eficiência. O sistema ideal para seu delivery. <span class="text-red-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>

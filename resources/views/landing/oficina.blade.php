@@ -41,6 +41,54 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Sistema para Oficina Mecânica',
+                'item' => 'https://www.wsoft.dev.br/landing/oficina'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            [
+                '@type' => 'Question',
+                'name' => 'O sistema emite Ordem de Serviço?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Sim! Emita ordens de serviço profissionais com fotos, checklist, peças e serviços. Envie PDF direto pelo WhatsApp.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Como funciona o controle financeiro?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Controle completo de contas a pagar e receber, fluxo de caixa e relatórios de lucratividade em tempo real.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'O sistema tem baixa de estoque automática?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Sim. Ao adicionar uma peça na OS, ela é automaticamente descontada do seu estoque.'
+                ]
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'HowTo',
         'name' => 'Como organizar sua Oficina Mecânica com WSoft',
         'description' => 'Passo a passo para emitir OS, controlar financeiro e crescer seu negócio.',
@@ -86,12 +134,15 @@ $structuredData = [
         <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-xs font-semibold uppercase tracking-wider mb-6">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                Sistema de Gestão para Oficinas
+                Software Online
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Pare de Perder Dinheiro com <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Desorganização</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight mb-4">
+                Sistema de Gestão para <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Oficinas Mecânicas</span>
             </h1>
+            <h2 class="text-xl md:text-2xl font-bold text-blue-200 mb-6">
+                Pare de perder dinheiro com desorganização
+            </h2>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
                 Sistema de Gestão Empresarial que organiza seu financeiro, elimina inadimplência e aumenta seus lucros. O <strong>sistema de gestão para pequenas empresas</strong> ideal para oficinas mecânicas. <span class="text-emerald-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
             </p>

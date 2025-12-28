@@ -60,6 +60,23 @@
                 }
             },
             {
+                "@@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.wsoft.dev.br/"
+                    },
+                    {
+                        "@@type": "ListItem",
+                        "position": 2,
+                        "name": "Oferta Especial",
+                        "item": "https://www.wsoft.dev.br/sales"
+                    }
+                ]
+            },
+            {
                 "@@type": "FAQPage",
                 "mainEntity": [
                     {

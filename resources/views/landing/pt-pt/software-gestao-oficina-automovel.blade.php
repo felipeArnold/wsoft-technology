@@ -2,6 +2,24 @@
 $structuredData = [
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Oficina Automóvel PT',
+                'item' => 'https://www.wsoft.dev.br/pt-pt/software-gestao-oficina-automovel'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
         'name' => 'WSoft - Software de Gestão para Oficina Automóvel',
         'url' => 'https://www.wsoft.dev.br/pt-pt/software-gestao-oficina-automovel',

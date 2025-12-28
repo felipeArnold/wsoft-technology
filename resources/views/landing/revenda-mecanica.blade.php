@@ -2,6 +2,24 @@
 $structuredData = [
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Revenda Oficina',
+                'item' => 'https://www.wsoft.dev.br/revenda-sistema-oficina'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
         'name' => 'WSoft - Revenda de Sistema para Oficina Mecânica',
         'url' => 'https://www.wsoft.dev.br/revenda-sistema-oficina',

@@ -2,6 +2,24 @@
 $structuredData = [
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'CRM e Gestão',
+                'item' => 'https://www.wsoft.dev.br/landing/crm-gestao'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
         'name' => 'WSoft - CRM e Gestão Empresarial',
         'url' => 'https://www.wsoft.dev.br/landing/crm-gestao',
@@ -68,7 +86,7 @@ $structuredData = [
 
 <x-site.hero
     badge="Gestão Completa e Simplificada"
-    highlight="O CRM Definitivo para"
+    highlight="Sistema de CRM e"
     title="Gestão Financeira"
     description="Centralize clientes, vendas, financeiro e estoque em uma única plataforma. Diga adeus às planilhas e assuma o controle do seu negócio. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"

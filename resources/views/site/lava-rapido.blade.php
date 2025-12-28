@@ -23,6 +23,24 @@ $structuredData = [
     ],
     [
         '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => 'https://www.wsoft.dev.br/'
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Lava Rápido',
+                'item' => 'https://www.wsoft.dev.br/sistema-para-lava-rapido'
+            ]
+        ]
+    ],
+    [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => [
             [
@@ -109,7 +127,7 @@ $structuredData = [
                 Sistema Automotivo
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                Brilho e organização para seu <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Lava Rápido</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Sistema de Gestão</span> para Lava Rápido
             </h1>
             <p class="mt-6 text-lg md:text-xl text-blue-100/80 leading-relaxed max-w-lg">
                 Gerencie lavagens, controle a fila de espera, checklist de entrada e comissões. O sistema feito para otimizar seu tempo. <span class="text-blue-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
