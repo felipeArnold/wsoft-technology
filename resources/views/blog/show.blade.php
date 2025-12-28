@@ -376,34 +376,30 @@ $structuredData = array_map(function($schema) {
     <!-- Breadcrumb -->
     <section class="bg-white border-b border-slate-100 py-4">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav class="text-sm text-slate-500" aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <nav class="text-sm text-slate-500" aria-label="Breadcrumb">
                 <ol class="flex items-center space-x-2">
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a href="/" itemprop="item" class="hover:text-blue-600 transition-colors">
-                            <span itemprop="name">Home</span>
+                    <li>
+                        <a href="/" class="hover:text-blue-600 transition-colors">
+                            <span>Home</span>
                         </a>
-                        <meta itemprop="position" content="1" />
                     </li>
                     <li><span class="text-slate-300">/</span></li>
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a href="{{ route('blog.index') }}" itemprop="item" class="hover:text-blue-600 transition-colors">
-                            <span itemprop="name">Blog</span>
+                    <li>
+                        <a href="{{ route('blog.index') }}" class="hover:text-blue-600 transition-colors">
+                            <span>Blog</span>
                         </a>
-                        <meta itemprop="position" content="2" />
                     </li>
                     @if($post->category)
                     <li><span class="text-slate-300">/</span></li>
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a href="{{ route('blog.category', $post->category->slug) }}" itemprop="item" class="hover:text-blue-600 transition-colors">
-                            <span itemprop="name">{{ $post->category->name }}</span>
+                    <li>
+                        <a href="{{ route('blog.category', $post->category->slug) }}" class="hover:text-blue-600 transition-colors">
+                            <span>{{ $post->category->name }}</span>
                         </a>
-                        <meta itemprop="position" content="3" />
                     </li>
                     @endif
                     <li><span class="text-slate-300">/</span></li>
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-slate-900 font-medium truncate max-w-[200px] md:max-w-none">
-                        <span itemprop="name">{{ Str::limit($post->title, 40) }}</span>
-                        <meta itemprop="position" content="{{ $post->category ? 4 : 3 }}" />
+                    <li class="text-slate-900 font-medium truncate max-w-[200px] md:max-w-none">
+                        <span>{{ Str::limit($post->title, 40) }}</span>
                     </li>
                 </ol>
             </nav>
@@ -411,11 +407,7 @@ $structuredData = array_map(function($schema) {
     </section>
 
     <!-- Artigo -->
-    <article class="py-12 md:py-16 bg-slate-50/30" itemscope itemtype="https://schema.org/BlogPosting">
-        <meta itemprop="datePublished" content="{{ $post->published_at->toIso8601String() }}">
-        <meta itemprop="dateModified" content="{{ $post->updated_at->toIso8601String() }}">
-        <meta itemprop="inLanguage" content="pt-BR">
-        <meta itemprop="wordCount" content="{{ str_word_count(strip_tags($post->content)) }}">
+    <article class="py-12 md:py-16 bg-slate-50/30">
 
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header do Post -->
@@ -423,29 +415,26 @@ $structuredData = array_map(function($schema) {
                 @if($post->category)
                 <a href="{{ route('blog.category', $post->category->slug) }}"
                     class="inline-block px-4 py-1.5 text-sm font-semibold text-blue-700 bg-blue-50 rounded-full mb-6 hover:bg-blue-100 transition-colors"
-                    aria-label="Ver mais artigos sobre {{ $post->category->name }}"
-                    itemprop="articleSection">
+                    aria-label="Ver mais artigos sobre {{ $post->category->name }}">
                     {{ $post->category->name }}
                 </a>
                 @endif
 
-                <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight mb-8" itemprop="headline name">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight mb-8">
                     {{ $post->title }}
                 </h1>
 
                 <div class="flex flex-wrap items-center justify-center md:justify-start gap-6 text-sm text-slate-600 border-y border-slate-100 py-6">
                     @if($post->author)
-                    <div class="flex items-center gap-3" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md shadow-blue-500/20 text-white font-bold text-lg">
                             {{ substr($post->author->name, 0, 1) }}
                         </div>
                         <div class="flex flex-col text-left">
                             <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Autor</span>
-                            <span class="font-semibold text-slate-900" itemprop="name">{{ $post->author->name }}</span>
+                            <span class="font-semibold text-slate-900">{{ $post->author->name }}</span>
                         </div>
                     </div>
-                    @else
-                    <meta itemprop="author" content="WSoft Tecnologia">
                     @endif
 
                     <div class="hidden md:block w-px h-10 bg-slate-200" aria-hidden="true"></div>
@@ -468,61 +457,34 @@ $structuredData = array_map(function($schema) {
                         </div>
                         <div class="flex flex-col text-left">
                             <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Leitura</span>
-                            <span class="font-semibold text-slate-900" itemprop="timeRequired" content="PT{{ $post->reading_time }}M">{{ $post->reading_time }} min</span>
+                            <span class="font-semibold text-slate-900">{{ $post->reading_time }} min</span>
                         </div>
                     </div>
                 </div>
             </header>
 
-            <!-- Publisher meta -->
-            <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style="display:none;">
-                <span itemprop="name">WSoft Tecnologia</span>
-                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
-                    <meta itemprop="url" content="{{ asset('images/logo.png') }}">
-                </div>
-            </div>
-
             <!-- Imagem Destaque -->
             @if($post->featured_image)
-            <figure class="mb-12 relative group" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <figure class="mb-12 relative group">
                 <div class="absolute inset-0 bg-blue-600/5 rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500" aria-hidden="true"></div>
                 <img src="{{ Storage::url($post->featured_image) }}"
                      alt="{{ $post->title }} - Artigo sobre {{ $post->category?->name ?? 'gestão empresarial' }}"
-                     itemprop="url contentUrl"
                      class="relative w-full rounded-3xl shadow-2xl shadow-slate-200/50">
-                <meta itemprop="width" content="1200">
-                <meta itemprop="height" content="630">
-                <meta itemprop="description" content="{{ $post->title }}">
             </figure>
             @endif
 
             <!-- Featured Snippet + Discover Context (Snippet Enriquecido para Indexação) -->
             @if($post->featured_snippet || $post->discover_context)
-            <div class="featured-snippet-enhanced mb-10 space-y-4" itemscope itemtype="https://schema.org/WebPageElement">
-                <meta itemprop="name" content="Featured Snippet">
-                @php
-                    $snippetCombined = '';
-                    if ($post->featured_snippet) {
-                        $snippetCombined .= $post->featured_snippet;
-                    }
-                    if ($post->discover_context) {
-                        if ($snippetCombined) {
-                            $snippetCombined .= ' ';
-                        }
-                        $snippetCombined .= $post->discover_context;
-                    }
-                @endphp
-                <meta itemprop="description" content="{{ $snippetCombined }}">
-
+            <div class="featured-snippet-enhanced mb-10 space-y-4">
                 @if($post->featured_snippet)
-                <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-2xl shadow-sm" itemscope itemtype="https://schema.org/Answer">
+                <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-2xl shadow-sm">
                     <div class="flex items-start gap-3">
                         <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center shadow-md" aria-hidden="true">
                             <i class="fa-solid fa-lightbulb text-white text-lg"></i>
                         </div>
                         <div class="flex-1">
                             <h2 class="text-sm font-bold text-blue-900 uppercase tracking-wide mb-2">Resumo Rápido</h2>
-                            <p class="text-base text-slate-700 leading-relaxed" itemprop="text">{{ $post->featured_snippet }}</p>
+                            <p class="text-base text-slate-700 leading-relaxed">{{ $post->featured_snippet }}</p>
                         </div>
                     </div>
                 </div>
@@ -567,13 +529,13 @@ $structuredData = array_map(function($schema) {
             @endif
 
             <!-- Conteúdo -->
-            <div class="blog-content max-w-none prose prose-lg prose-slate prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-2xl prose-img:shadow-lg" itemprop="articleBody">
+            <div class="blog-content max-w-none prose prose-lg prose-slate prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-2xl prose-img:shadow-lg">
                 {!! $post->content !!}
             </div>
 
             <!-- FAQ Section -->
             @if($post->faq && count($post->faq) > 0)
-            <div class="mt-16 mb-12 bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden" itemscope itemtype="https://schema.org/FAQPage">
+            <div class="mt-16 mb-12 bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
                 <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
                     <div class="flex items-center gap-3">
                         <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
@@ -588,15 +550,15 @@ $structuredData = array_map(function($schema) {
                 <div class="p-8">
                     <div class="space-y-6">
                         @foreach($post->faq as $index => $item)
-                        <div class="border-b border-slate-100 last:border-0 pb-6 last:pb-0" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 class="text-lg font-bold text-slate-900 mb-3 flex items-start gap-3" itemprop="name">
+                        <div class="border-b border-slate-100 last:border-0 pb-6 last:pb-0">
+                            <h3 class="text-lg font-bold text-slate-900 mb-3 flex items-start gap-3">
                                 <span class="flex-shrink-0 w-7 h-7 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">
                                     {{ $index + 1 }}
                                 </span>
                                 <span class="flex-1">{{ $item['question'] }}</span>
                             </h3>
-                            <div class="ml-10 text-base text-slate-600 leading-relaxed" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <p itemprop="text">{{ $item['answer'] }}</p>
+                            <div class="ml-10 text-base text-slate-600 leading-relaxed">
+                                <p>{{ $item['answer'] }}</p>
                             </div>
                         </div>
                         @endforeach
@@ -604,13 +566,6 @@ $structuredData = array_map(function($schema) {
                 </div>
             </div>
             @endif
-
-            <!-- Description meta -->
-            <meta itemprop="description" content="{{ $post->effective_meta_description }}">
-            @if($post->meta_keywords)
-            <meta itemprop="keywords" content="{{ $post->meta_keywords }}">
-            @endif
-            <link itemprop="mainEntityOfPage" href="{{ route('blog.show', $post->slug) }}">
 
             <!-- CTA Inline -->
             <div class="mt-16 mb-12 p-8 md:p-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl text-white shadow-xl shadow-blue-600/20 relative overflow-hidden group">
@@ -708,13 +663,12 @@ $structuredData = array_map(function($schema) {
             <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center">Continue Lendo</h2>
             <div class="grid gap-8 md:grid-cols-3" role="feed" aria-label="Lista de artigos relacionados">
                 @foreach($relatedPosts as $relatedPost)
-                <article class="group flex flex-col bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300" itemscope itemtype="https://schema.org/BlogPosting">
+                <article class="group flex flex-col bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     @if($relatedPost->featured_image)
                     <a href="{{ route('blog.show', $relatedPost->slug) }}" class="relative overflow-hidden aspect-video" aria-label="Ler artigo: {{ $relatedPost->title }}">
                         <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors z-10" aria-hidden="true"></div>
                         <img src="{{ Storage::url($relatedPost->featured_image) }}"
                              alt="{{ $relatedPost->title }} - Artigo sobre {{ $relatedPost->category?->name ?? 'gestão empresarial' }}"
-                             itemprop="image"
                              class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
                     </a>
                     @else
@@ -723,17 +677,16 @@ $structuredData = array_map(function($schema) {
                     </div>
                     @endif
                     <div class="flex-1 p-6 flex flex-col">
-                        <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2" itemprop="headline">
-                            <a href="{{ route('blog.show', $relatedPost->slug) }}" itemprop="url">{{ $relatedPost->title }}</a>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                            <a href="{{ route('blog.show', $relatedPost->slug) }}">{{ $relatedPost->title }}</a>
                         </h3>
-                        <p class="text-sm text-slate-600 line-clamp-3 mb-4 flex-1" itemprop="description">
+                        <p class="text-sm text-slate-600 line-clamp-3 mb-4 flex-1">
                             {{ $relatedPost->excerpt ?: Str::limit(strip_tags($relatedPost->content), 100) }}
                         </p>
                         <div class="pt-4 border-t border-slate-50 text-xs font-medium text-slate-500 flex items-center gap-2">
                             <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-                            <time datetime="{{ $relatedPost->published_at->toIso8601String() }}" itemprop="datePublished">{{ $relatedPost->published_at->format('d M, Y') }}</time>
+                            <time datetime="{{ $relatedPost->published_at->toIso8601String() }}">{{ $relatedPost->published_at->format('d M, Y') }}</time>
                         </div>
-                        <meta itemprop="author" content="WSoft Tecnologia">
                     </div>
                 </article>
                 @endforeach
