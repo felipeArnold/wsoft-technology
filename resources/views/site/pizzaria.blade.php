@@ -37,6 +37,7 @@ $structuredData = [
                 'name' => 'Sistema para Pizzaria',
                 'item' => 'https://www.wsoft.dev.br/sistema-para-pizzaria'
             ]
+        ]
     ],
     [
         '@context' => 'https://schema.org',
