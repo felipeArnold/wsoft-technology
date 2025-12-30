@@ -37,6 +37,7 @@ $structuredData = [
                 'name' => 'Sistema para Barbearia',
                 'item' => 'https://www.wsoft.dev.br/sistema-para-barbearia'
             ]
+        ]
     ],
     [
         '@context' => 'https://schema.org',
