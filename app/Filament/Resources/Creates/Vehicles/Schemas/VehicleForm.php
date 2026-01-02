@@ -57,7 +57,10 @@ final class VehicleForm
                             ->required()
                             ->placeholder('ABC1234')
                             ->maxLength(7)
-                            ->unique(ignoreRecord: true)
+                            ->unique(
+                                ignoreRecord: true,
+                                modifyRuleUsing: fn ($rule) => $rule->where('tenant_id', Filament::getTenant()->id)
+                            )
                             ->columnSpan(1),
                         TextInput::make('brand')
                             ->label('Marca')
@@ -87,13 +90,19 @@ final class VehicleForm
                             ->label('Chassi')
                             ->placeholder('17 caracteres')
                             ->maxLength(17)
-                            ->unique(ignoreRecord: true)
+                            ->unique(
+                                ignoreRecord: true,
+                                modifyRuleUsing: fn ($rule) => $rule->where('tenant_id', Filament::getTenant()->id)
+                            )
                             ->columnSpan(1),
                         TextInput::make('renavam')
                             ->label('Renavam')
                             ->placeholder('11 dígitos')
                             ->maxLength(11)
-                            ->unique(ignoreRecord: true)
+                            ->unique(
+                                ignoreRecord: true,
+                                modifyRuleUsing: fn ($rule) => $rule->where('tenant_id', Filament::getTenant()->id)
+                            )
                             ->columnSpan(1),
                         Textarea::make('notes')
                             ->label('Observações')
