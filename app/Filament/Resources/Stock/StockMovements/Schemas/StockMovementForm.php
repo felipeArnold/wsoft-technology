@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Stock\StockMovements\Schemas;
 
 use App\Filament\Components\PtbrMoney;
+use App\Models\Product;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -31,7 +32,7 @@ final class StockMovementForm
                             ->reactive()
                             ->afterStateUpdated(function ($state, callable $set): void {
                                 if ($state) {
-                                    $product = \App\Models\Product::find($state);
+                                    $product = Product::find($state);
                                     if ($product) {
                                         $set('stock_before', $product->stock);
                                     }

@@ -6,23 +6,26 @@ namespace App\Models\DigitalSignature;
 
 use App\Models\Tenant;
 use App\Models\User;
+use Database\Factories\DigitalSignature\EnvelopeFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * @property array<int, string>|null $documents
- * @property \Illuminate\Support\Carbon|null $deadline
+ * @property Carbon|null $deadline
  * @property string|null $name
  * @property string|null $status
  *
- * @method static \Illuminate\Database\Eloquent\Builder where($column, $operator = null, $value = null, $boolean = 'and')
- * @method static \App\Models\DigitalSignature\Envelope|null find($id, $columns = ['*'])
+ * @method static Builder where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static Envelope|null find($id, $columns = ['*'])
  */
 final class Envelope extends Model
 {
-    /** @use HasFactory<\Database\Factories\DigitalSignature\EnvelopeFactory> */
+    /** @use HasFactory<EnvelopeFactory> */
     use HasFactory;
 
     protected $fillable = [

@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace App\Models\Person;
 
+use Eloquent;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property string $photoable_type
  * @property int $photoable_id
  * @property string $path
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 final class Photos extends Model
 {

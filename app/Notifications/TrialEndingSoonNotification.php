@@ -38,7 +38,7 @@ final class TrialEndingSoonNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $trialEndsAt = $this->subscription->trial_ends_at;
-        $daysRemaining = $trialEndsAt ? now()->diffInDays($trialEndsAt, false) : 0;
+        $daysRemaining = $trialEndsAt ? (int) now()->diffInDays($trialEndsAt, false) : 0;
 
         return (new MailMessage)
             ->subject('Seu período de teste está acabando')

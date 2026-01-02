@@ -14,6 +14,8 @@ use App\Models\Accounts\Accounts;
 use App\Models\Concerns\Categorizable;
 use App\Models\Person\Person;
 use App\Observers\ServiceOrderObserver;
+use Carbon\Carbon;
+use Database\Factories\ServiceOrderFactory;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\CheckboxList;
@@ -44,7 +46,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 #[ObservedBy(ServiceOrderObserver::class)]
 final class ServiceOrder extends Model implements Eventable
 {
-    /** @use HasFactory<\Database\Factories\ServiceOrderFactory> */
+    /** @use HasFactory<ServiceOrderFactory> */
     use Categorizable;
 
     use HasFactory;
@@ -186,7 +188,7 @@ final class ServiceOrder extends Model implements Eventable
                                         ->afterStateUpdated(function ($state, $set, $get) {
                                             // Auto-set end time to 2 hours after start if not set
                                             if ($state && ! $get('scheduled_end_at')) {
-                                                $endTime = \Carbon\Carbon::parse($state)->addHours(2);
+                                                $endTime = Carbon::parse($state)->addHours(2);
                                                 $set('scheduled_end_at', $endTime);
                                             }
                                         })
@@ -213,7 +215,7 @@ final class ServiceOrder extends Model implements Eventable
                                                 return 'Defina início e término';
                                             }
 
-                                            $duration = \Carbon\Carbon::parse($start)->diffInMinutes(\Carbon\Carbon::parse($end));
+                                            $duration = Carbon::parse($start)->diffInMinutes(Carbon::parse($end));
                                             $hours = floor($duration / 60);
                                             $minutes = $duration % 60;
 
@@ -298,7 +300,7 @@ final class ServiceOrder extends Model implements Eventable
                                                 return 'Defina a data de validade';
                                             }
 
-                                            $validUntilDate = \Carbon\Carbon::parse($validUntil);
+                                            $validUntilDate = Carbon::parse($validUntil);
                                             $now = now();
 
                                             if ($approvalStatus === 'approved') {

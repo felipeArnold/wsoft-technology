@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 use Livewire\Component;
 
 final class LandingRegisterForm extends Component
@@ -59,7 +60,7 @@ final class LandingRegisterForm extends Component
         $this->redirect(route('filament.app.tenant.registration'), navigate: false);
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.landing-register-form');
     }

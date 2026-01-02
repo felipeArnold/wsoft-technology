@@ -6,6 +6,7 @@ namespace App\Observers;
 
 use App\Models\Accounts\Accounts;
 use App\Models\Accounts\AccountsInstallments;
+use App\Models\Product;
 use App\Models\Sale;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -64,7 +65,7 @@ final class SaleObserver
 
         foreach ($sale->items as $item) {
             if ($item->product_id) {
-                $product = \App\Models\Product::find($item->product_id);
+                $product = Product::find($item->product_id);
                 if ($product) {
                     $product->stock = max(0, $product->stock - $item->quantity);
                     $product->save();

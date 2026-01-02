@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Financial\Sales\Widgets;
 
+use App\Filament\Resources\Financial\Sales\Pages\ListSales;
 use Filament\Widgets\Concerns\InteractsWithPageTable;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -24,7 +25,7 @@ final class SalesOverview extends BaseWidget
 
     protected function getTablePage(): string
     {
-        return \App\Filament\Resources\Financial\Sales\Pages\ListSales::class;
+        return ListSales::class;
     }
 
     protected function getStats(): array

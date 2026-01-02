@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Stock\StockInventories\RelationManagers;
 
+use App\Models\Product;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -41,7 +42,7 @@ final class StockInventoryItemsRelationManager extends RelationManager
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set): void {
                         if ($state) {
-                            $product = \App\Models\Product::find($state);
+                            $product = Product::find($state);
                             if ($product) {
                                 $set('system_quantity', $product->stock);
                             }

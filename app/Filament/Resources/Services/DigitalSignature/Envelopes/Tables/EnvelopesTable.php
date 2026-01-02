@@ -16,6 +16,7 @@ use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 final class EnvelopesTable
@@ -236,7 +237,7 @@ final class EnvelopesTable
                     }),
             ])
             ->filters([
-                \Filament\Tables\Filters\SelectFilter::make('status')
+                SelectFilter::make('status')
                     ->label('Status')
                     ->options([
                         'draft' => 'Rascunho',
@@ -246,7 +247,7 @@ final class EnvelopesTable
                         'cancelled' => 'Cancelado',
                     ])
                     ->multiple(),
-                \Filament\Tables\Filters\SelectFilter::make('signer_status')
+                SelectFilter::make('signer_status')
                     ->label('Status do Signatário')
                     ->options([
                         'pending' => 'Pendente',

@@ -6,6 +6,7 @@ namespace App\Models\DigitalSignature;
 
 use App\Enum\DigitalSignature\SignatarioType;
 use App\Models\Tenant;
+use Database\Factories\DigitalSignature\SignatarioFactory;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Signer extends Model
 {
-    /** @use HasFactory<\Database\Factories\DigitalSignature\SignatarioFactory> */
+    /** @use HasFactory<SignatarioFactory> */
     use HasFactory;
 
     protected $fillable = [
