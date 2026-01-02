@@ -6,10 +6,12 @@ namespace App\Models\Accounts;
 
 use App\Enum\AccountsReceivable\PaymentMethodEnum;
 use App\Helpers\FormatterHelper;
+use App\Models\Category;
 use App\Models\Person\Person;
 use App\Models\ServiceOrder;
 use App\Models\Tenant;
 use App\Models\User;
+use Database\Factories\Accounts\AccountsFactory;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 final class Accounts extends Model
 {
-    /** @use HasFactory<\Database\Factories\Accounts\AccountsFactory> */
+    /** @use HasFactory<AccountsFactory> */
     use HasFactory;
 
     protected $casts = [
@@ -95,7 +97,7 @@ final class Accounts extends Model
 
     public function categories(): MorphToMany
     {
-        return $this->morphToMany(\App\Models\Category::class, 'categorizable');
+        return $this->morphToMany(Category::class, 'categorizable');
     }
 
     protected function amount(): Attribute

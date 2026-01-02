@@ -8,6 +8,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Leandrocfe\FilamentPtbrFormFields\Cep;
 
 /**
@@ -21,8 +22,8 @@ use Leandrocfe\FilamentPtbrFormFields\Cep;
  * @property string $district
  * @property string $city
  * @property string $state
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 final class Addresses extends Model
 {

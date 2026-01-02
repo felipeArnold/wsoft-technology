@@ -11,16 +11,16 @@ Artisan::command('inspire', function (): void {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-// Agenda geração diária de posts de blog para atrair leads
+// Agenda geração de posts de blog para atrair leads (2x ao dia)
 Schedule::command('blog:generate-daily --publish')
-    ->dailyAt('09:00')
+    ->twiceDaily(9, 15)
     ->timezone('America/Sao_Paulo')
     ->withoutOverlapping()
     ->onSuccess(function (): void {
-        Log::info('Post de blog diário gerado com sucesso via schedule');
+        Log::info('Post de blog gerado com sucesso via schedule');
     })
     ->onFailure(function (): void {
-        Log::error('Falha ao gerar post de blog diário via schedule');
+        Log::error('Falha ao gerar post de blog via schedule');
     });
 
 // Agenda envio de notificações de trial e cadastro incompleto

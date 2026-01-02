@@ -8,6 +8,7 @@ use App\Models\Blog\BlogCategory;
 use App\Models\Blog\BlogPost;
 use App\Services\AI\BlogPostGenerator;
 use Exception;
+use Filament\Actions\Action;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
@@ -49,7 +50,7 @@ final class BlogPostForm
                                             ->helperText('Digite o tema e clique no botão para gerar todo o conteúdo automaticamente')
                                             ->dehydrated(false)
                                             ->suffixActions([
-                                                \Filament\Actions\Action::make('generate_content')
+                                                Action::make('generate_content')
                                                     ->label('Gerar')
                                                     ->icon('heroicon-o-sparkles')
                                                     ->color('primary')
@@ -96,8 +97,9 @@ final class BlogPostForm
                                                             $set('ai_summary', $postData['ai_summary'] ?? []);
                                                             $set('faq', $postData['faq'] ?? []);
                                                             $set('discover_context', $postData['discover_context'] ?? '');
-                                                            $set('discover_image_prompt', $postData['discover_image_prompt'] ?? '');
                                                             $set('internal_links_suggestions', $postData['internal_links_suggestions'] ?? []);
+                                                            $set('featured_image', $postData['featured_image'] ?? 'images/logo.png');
+                                                            $set('og_image', $postData['og_image'] ?? 'images/logo.png');
                                                             $set('ai_topic', '');
 
                                                             Notification::make()
@@ -356,60 +358,6 @@ final class BlogPostForm
                                             ->maxLength(500)
                                             ->helperText('Contexto atual, relevância temporal ou impacto imediato')
                                             ->placeholder('Ex: Com o aumento da competitividade no mercado, empresas que não digitalizam seus processos perdem até 40% de eficiência operacional...')
-                                            ->columnSpanFull(),
-
-                                        TextInput::make('discover_image_prompt')
-                                            ->label('Prompt para Imagem Discover')
-                                            ->maxLength(255)
-                                            ->helperText('Descrição curta para gerar imagem otimizada (1200x628px, flat design, minimalista)')
-                                            ->placeholder('Ex: Ilustração flat de escritório moderno, dashboard em tela grande, fundo claro, estilo minimalista')
-                                            ->suffixActions([
-                                                \Filament\Actions\Action::make('generate_image')
-                                                    ->label('Gerar Imagem')
-                                                    ->icon('heroicon-o-photo')
-                                                    ->color('success')
-                                                    ->requiresConfirmation()
-                                                    ->modalHeading('Gerar imagem com IA?')
-                                                    ->modalDescription('Isso vai gerar uma imagem usando DALL-E 3 baseada no prompt fornecido. O processo pode levar alguns segundos.')
-                                                    ->modalSubmitActionLabel('Gerar Agora')
-                                                    ->action(function (Get $get, Set $set): void {
-                                                        $prompt = $get('discover_image_prompt');
-                                                        $title = $get('title') ?: 'blog-image';
-
-                                                        if (empty($prompt)) {
-                                                            Notification::make()
-                                                                ->title('Prompt obrigatório')
-                                                                ->body('Por favor, digite o prompt da imagem antes de gerar.')
-                                                                ->warning()
-                                                                ->send();
-
-                                                            return;
-                                                        }
-
-                                                        try {
-                                                            $generator = app(BlogPostGenerator::class);
-                                                            $imagePath = $generator->generateImage($prompt, $title);
-
-                                                            if ($imagePath) {
-                                                                $set('featured_image', $imagePath);
-                                                                $set('og_image', $imagePath);
-
-                                                                Notification::make()
-                                                                    ->title('Imagem gerada com sucesso!')
-                                                                    ->body('A imagem foi gerada e definida como imagem destaque.')
-                                                                    ->success()
-                                                                    ->duration(5000)
-                                                                    ->send();
-                                                            }
-                                                        } catch (Exception $e) {
-                                                            Notification::make()
-                                                                ->title('Erro ao gerar imagem')
-                                                                ->body($e->getMessage())
-                                                                ->danger()
-                                                                ->send();
-                                                        }
-                                                    }),
-                                            ])
                                             ->columnSpanFull(),
                                     ])
                                     ->collapsible(),

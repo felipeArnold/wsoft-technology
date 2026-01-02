@@ -8,8 +8,6 @@ use App\Models\Blog\BlogCategory;
 use App\Models\Blog\BlogPost;
 use App\Models\User;
 use Exception;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use OpenAI\Laravel\Facades\OpenAI;
 
@@ -47,19 +45,9 @@ final class BlogPostGenerator
 
         $postData = $this->parseResponse($content, $topic, $category, $author);
 
-        // Gera imagem automaticamente se habilitado e tiver prompt
-        if ($generateImage && ! empty($postData['discover_image_prompt'])) {
-            try {
-                $imagePath = $this->generateImage($postData['discover_image_prompt'], $postData['title']);
-                if ($imagePath) {
-                    $postData['featured_image'] = $imagePath;
-                    $postData['og_image'] = $imagePath;
-                }
-            } catch (Exception $e) {
-                // Se falhar a geração da imagem, continua sem imagem
-                // Log do erro pode ser adicionado aqui se necessário
-            }
-        }
+        // Define a logo do sistema como imagem padrão
+        $postData['featured_image'] = 'images/logo.png';
+        $postData['og_image'] = 'images/logo.png';
 
         return $postData;
     }
@@ -133,7 +121,6 @@ Conteúdo atual: {$post->content}
 6️⃣ GOOGLE DISCOVER (ADICIONAR):
 - Seção: "Por que isso é importante agora?"
 - 2-3 frases com relevância temporal
-- Prompt de imagem: flat design, 1200x628, minimalista
 
 7️⃣ EEAT (AUTORIDADE REAL):
 - Demonstrar experiência prática
@@ -185,7 +172,6 @@ FAQ_A4: [resposta 4 - opcional]
 FAQ_Q5: [pergunta 5 - opcional]
 FAQ_A5: [resposta 5 - opcional]
 DISCOVER_CONTEXT: [Por que isso é importante agora? 2-3 frases]
-DISCOVER_IMAGE_PROMPT: [descrição imagem flat, 1200x628, minimalista]
 INTERNAL_LINK_1_URL: [url sem barra, ex: sistema-ordem-servico]
 INTERNAL_LINK_1_TEXT: [texto âncora]
 INTERNAL_LINK_2_URL: [url]
@@ -219,17 +205,10 @@ PROMPT;
 
         $postData = $this->parseResponse($content, $post->title, $category, $author);
 
-        // Gera imagem se não existir e tiver prompt
-        if ($generateImage && ! $post->featured_image && ! empty($postData['discover_image_prompt'])) {
-            try {
-                $imagePath = $this->generateImage($postData['discover_image_prompt'], $postData['title']);
-                if ($imagePath) {
-                    $postData['featured_image'] = $imagePath;
-                    $postData['og_image'] = $imagePath;
-                }
-            } catch (Exception $e) {
-                // Se falhar a geração da imagem, continua sem imagem
-            }
+        // Define a logo do sistema se não houver imagem
+        if (! $post->featured_image) {
+            $postData['featured_image'] = 'images/logo.png';
+            $postData['og_image'] = 'images/logo.png';
         }
 
         return $postData;
@@ -366,6 +345,7 @@ EXTENSÃO: Aproximadamente {$wordCount} palavras
 - Títulos com viés jornalístico e informativo
 - Introdução emocional ou contextual
 - Evite datas explícitas, linguagem promocional e conteúdo genérico
+- Não é necessário gerar prompt de imagem
 
 6️⃣ EEAT (AUTORIDADE REAL):
 - Demonstre experiência prática
@@ -418,7 +398,6 @@ FAQ_A4: [resposta 4 - até 50 palavras - opcional]
 FAQ_Q5: [pergunta 5 - opcional]
 FAQ_A5: [resposta 5 - até 50 palavras - opcional]
 DISCOVER_CONTEXT: [Por que isso é importante agora? 2-3 frases com relevância temporal]
-DISCOVER_IMAGE_PROMPT: [descrição curta para imagem flat, horizontal 1200x628, poucos elementos, fundo limpo, máx 5 palavras se houver texto]
 INTERNAL_LINK_1_URL: [url sem barra inicial, ex: sistema-ordem-servico]
 INTERNAL_LINK_1_TEXT: [texto âncora]
 INTERNAL_LINK_2_URL: [url]
@@ -477,6 +456,12 @@ PROMPT;
             if (str_starts_with($line, 'CONTEÚDO:')) {
                 $currentSection = 'content';
                 $contentLines = [];
+
+                // Captura conteúdo que pode vir na mesma linha após "CONTEÚDO:"
+                $contentOnSameLine = mb_trim(mb_substr($line, 9));
+                if ($contentOnSameLine !== '') {
+                    $contentLines[] = $contentOnSameLine;
+                }
 
                 continue;
             }
@@ -567,7 +552,7 @@ PROMPT;
                 continue;
             }
 
-            if ($currentSection === 'content' && $line !== '') {
+            if ($currentSection === 'content') {
                 $contentLines[] = $line;
             }
         }
@@ -591,6 +576,13 @@ PROMPT;
         }
 
         $data['content'] = $this->cleanContent(implode("\n", $contentLines));
+
+        // Valida se o conteúdo foi gerado
+        if (empty(trim(strip_tags($data['content'])))) {
+            throw new Exception(
+                'Conteúdo vazio gerado pela IA. Resposta completa: '.mb_substr($content, 0, 500)
+            );
+        }
 
         if (empty($data['title'])) {
             $data['title'] = $fallbackTitle;
@@ -663,89 +655,4 @@ PROMPT;
         return mb_trim($content);
     }
 
-    /**
-     * Gera uma imagem usando OpenAI DALL-E 3
-     *
-     * @param  string  $prompt  Descrição da imagem a ser gerada
-     * @param  string  $title  Título do post (usado para nome do arquivo)
-     * @return string|null Caminho da imagem salva ou null se falhar
-     *
-     * @throws Exception
-     */
-    public function generateImage(string $prompt, string $title): ?string
-    {
-        try {
-            // Otimiza o prompt para DALL-E
-            $optimizedPrompt = $this->optimizeImagePrompt($prompt);
-
-            // Gera a imagem com DALL-E 3
-            $response = OpenAI::images()->create([
-                'model' => 'dall-e-3',
-                'prompt' => $optimizedPrompt,
-                'n' => 1,
-                'size' => '1792x1024', // Formato horizontal otimizado
-                'quality' => 'standard', // ou 'hd' para maior qualidade
-                'response_format' => 'url',
-            ]);
-
-            $imageUrl = $response->data[0]->url ?? null;
-
-            if (! $imageUrl) {
-                throw new Exception('URL da imagem não retornada pela API');
-            }
-
-            // Download da imagem
-            $imageContent = Http::timeout(30)->get($imageUrl)->body();
-
-            if (empty($imageContent)) {
-                throw new Exception('Falha ao fazer download da imagem gerada');
-            }
-
-            // Gera nome único para o arquivo
-            $filename = Str::slug($title).'-'.time().'.png';
-            $path = 'blog/featured/'.$filename;
-
-            // Salva no storage público
-            Storage::disk('public')->put($path, $imageContent);
-
-            return $path;
-        } catch (Exception $e) {
-            // Re-lança a exceção para tratamento no método chamador
-            throw new Exception('Erro ao gerar imagem: '.$e->getMessage());
-        }
-    }
-
-    /**
-     * Otimiza o prompt para geração de imagem DALL-E
-     * Garante que a imagem seja adequada para Google Discover
-     */
-    private function optimizeImagePrompt(string $prompt): string
-    {
-        // Se o prompt já estiver bem formatado, usa como está
-        if (str_word_count($prompt) > 10) {
-            return $prompt;
-        }
-
-        // Adiciona contexto para melhor qualidade
-        $enhancedPrompt = $prompt;
-
-        // Garante estilo flat design e profissional
-        if (! str_contains(mb_strtolower($prompt), 'flat')) {
-            $enhancedPrompt .= ', flat design style';
-        }
-
-        if (! str_contains(mb_strtolower($prompt), 'professional')) {
-            $enhancedPrompt .= ', professional and modern';
-        }
-
-        // Garante cores vibrantes para Discover
-        if (! str_contains(mb_strtolower($prompt), 'color')) {
-            $enhancedPrompt .= ', vibrant colors';
-        }
-
-        // Adiciona orientações técnicas
-        $enhancedPrompt .= ', high quality, no text overlay, clean composition';
-
-        return $enhancedPrompt;
-    }
 }
