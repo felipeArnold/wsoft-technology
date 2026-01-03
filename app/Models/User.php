@@ -6,6 +6,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Observers\UserObserver;
+use Database\Factories\UserFactory;
 use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Filament\Facades\Filament;
 use Filament\Models\Contracts\FilamentUser;
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,18 +30,18 @@ use Illuminate\Support\Facades\Storage;
  * @property string $name
  * @property string $email
  * @property string|null $phone
- * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property Carbon|null $email_verified_at
  * @property mixed $password
  * @property string $role
  * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  */
 #[ObservedBy(UserObserver::class)]
 final class User extends Authenticatable implements FilamentUser, HasAvatar, HasEmailAuthentication, HasTenants
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**

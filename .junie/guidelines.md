@@ -8,7 +8,7 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 ## Foundational Context
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.4.15
+- php - 8.4.16
 - filament/filament (FILAMENT) - v4
 - laravel/cashier (CASHIER) - v15
 - laravel/framework (LARAVEL) - v12
@@ -16,6 +16,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - laravel/nightwatch (NIGHTWATCH) - v1
 - laravel/prompts (PROMPTS) - v0
 - laravel/sanctum (SANCTUM) - v4
+- laravel/socialite (SOCIALITE) - v5
 - livewire/livewire (LIVEWIRE) - v3
 - larastan/larastan (LARASTAN) - v3
 - laravel/mcp (MCP) - v0
@@ -116,14 +117,6 @@ protected function isAccessible(User $user, ?string $path = null): bool
 
 ## Enums
 - Typically, keys in an Enum should be TitleCase. For example: `FavoritePerson`, `BestLake`, `Monthly`.
-
-
-=== herd rules ===
-
-## Laravel Herd
-
-- The application is served by Laravel Herd and will be available at: https?://[kebab-case-project-dir].test. Use the `get-absolute-url` tool to generate URLs for the user to ensure valid URLs.
-- You must not run any commands to make the site available via HTTP(s). It is _always_ available through Laravel Herd.
 
 
 === tests rules ===

@@ -47,12 +47,16 @@ final class Dashboard extends BaseDashboard
             ->components([
                 Tabs::make('Dashboard')
                     ->tabs([
-                        Tabs\Tab::make('Visão Geral')
-                            ->icon('heroicon-o-chart-bar')
+                        Tabs\Tab::make('Financeiro')
+                            ->icon('heroicon-o-currency-dollar')
                             ->schema(
                                 $this->getWidgetsSchemaComponents([
                                     FinancialDashboardOverview::class,
                                     MonthlyCashFlow::class,
+                                    ExpensesByCategoryWidget::class,
+                                    MonthlyExpensesDistributionWidget::class,
+                                    PaymentMethodsChart::class,
+                                    OverdueAccounts::class,
                                 ])
                             ),
 
@@ -64,19 +68,6 @@ final class Dashboard extends BaseDashboard
                                     MrrTrendChart::class,
                                     LtvTrendChart::class,
                                     ChurnRateChart::class,
-                                ])
-                            ),
-
-                        Tabs\Tab::make('Financeiro')
-                            ->icon('heroicon-o-currency-dollar')
-                            ->schema(
-                                $this->getWidgetsSchemaComponents([
-                                    FinancialDashboardOverview::class,
-                                    MonthlyCashFlow::class,
-                                    ExpensesByCategoryWidget::class,
-                                    MonthlyExpensesDistributionWidget::class,
-                                    PaymentMethodsChart::class,
-                                    OverdueAccounts::class,
                                 ])
                             ),
 

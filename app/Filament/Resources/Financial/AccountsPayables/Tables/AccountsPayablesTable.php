@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Financial\AccountsPayables\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use App\Enum\AccountsReceivable\PaymentMethodEnum;
+use App\Filament\Resources\Financial\AccountsPayables\Actions\SendAccountsPayableEmailAction;
+use App\Filament\Resources\Financial\AccountsPayables\Actions\SendOverdueEmailAction;
 use App\Models\Accounts\AccountsInstallments;
+use App\Models\Category;
+use App\Models\Person\Person;
 use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -15,6 +20,7 @@ use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -30,7 +36,10 @@ final class AccountsPayablesTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->query(AccountsInstallments::query()->whereHas('accounts', fn ($q) => $q->where('type', 'payables')))
+            ->query(AccountsInstallments::query()
+                ->with('accounts.person.emails')
+                ->whereHas('accounts', fn ($q) => $q->where('type', 'payables'))
+            )
             ->columns([
                 TextColumn::make('accounts.person.name')
                     ->label('Fornecedor')
@@ -209,14 +218,14 @@ final class AccountsPayablesTable
                             return null;
                         }
 
-                        $person = \App\Models\Person\Person::find($data['value']);
+                        $person = Person::find($data['value']);
 
                         return $person ? 'Fornecedor: '.$person->name : null;
                     }),
 
                 SelectFilter::make('payment_method')
                     ->label('Forma de Pagamento')
-                    ->options(\App\Enum\AccountsReceivable\PaymentMethodEnum::class)
+                    ->options(PaymentMethodEnum::class)
                     ->query(function ($query, array $data): void {
                         if (filled($data['value'])) {
                             $query->whereHas('accounts', fn ($q) => $q->where('payment_method', $data['value']));
@@ -229,7 +238,7 @@ final class AccountsPayablesTable
                             return null;
                         }
 
-                        $paymentMethod = \App\Enum\AccountsReceivable\PaymentMethodEnum::tryFrom($data['value']);
+                        $paymentMethod = PaymentMethodEnum::tryFrom($data['value']);
 
                         return $paymentMethod ? 'Forma: '.$paymentMethod->getLabel() : null;
                     }),
@@ -247,7 +256,7 @@ final class AccountsPayablesTable
                             return null;
                         }
 
-                        $categories = \App\Models\Category::whereIn('id', $data['values'])->pluck('name')->toArray();
+                        $categories = Category::whereIn('id', $data['values'])->pluck('name')->toArray();
 
                         return 'Categorias: '.implode(', ', $categories);
                     }),
@@ -370,6 +379,8 @@ final class AccountsPayablesTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                SendAccountsPayableEmailAction::make()->record(fn ($record) => $record->accounts),
+//                SendOverdueEmailAction::make()->record(fn ($record) => $record->accounts),
                 Action::make('mark_as_received')
                     ->label('Marcar como Pago')
                     ->icon('heroicon-o-check-circle')
@@ -507,7 +518,7 @@ final class AccountsPayablesTable
                 FilamentExportBulkAction::make('export')->label('Exportar'),
             ])
             ->striped()
-            ->emptyStateIcon('heroicon-o-arrow-down-circle')
+            ->emptyStateIcon(Heroicon::ArrowTrendingDown)
             ->emptyStateHeading('Nenhuma conta a pagar encontrada')
             ->emptyStateDescription('Crie uma nova conta a pagar para começar.')
             ->emptyStateActions([

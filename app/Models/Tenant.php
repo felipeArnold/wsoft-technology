@@ -11,9 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Cashier\Billable;
-use Str;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -33,8 +34,9 @@ use Str;
  * @property string|null $state
  * @property string|null $website
  * @property TenantType $type
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $max_users
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 #[ObservedBy(TenantObserver::class)]
 final class Tenant extends Model
@@ -43,6 +45,26 @@ final class Tenant extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'avatar',
+        'document',
+        'email',
+        'phone',
+        'mobile',
+        'zip_code',
+        'street',
+        'number',
+        'complement',
+        'neighborhood',
+        'city',
+        'state',
+        'website',
+        'type',
+        'max_users',
+    ];
 
     protected $casts = [
         'type' => TenantType::class,
