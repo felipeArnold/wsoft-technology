@@ -7,12 +7,14 @@ namespace App\Models\Person;
 use App\Filament\Components\CnpjComponent;
 use App\Models\Accounts\Accounts;
 use App\Models\Concerns\Categorizable;
+use App\Models\Sale;
 use App\Models\ServiceOrder;
 use App\Models\Tenant;
 use App\Models\Vehicle;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -170,14 +172,16 @@ final class Person extends Model
                 ->icon('heroicon-o-chat-bubble-left-right')
 
                 ->schema([
-                    Section::make('Telefones')
-                        ->icon('heroicon-o-phone')
-                        ->schema([Phones::getForm()])
-                        ->columnSpanFull(),
-                    Section::make('E-mails')
-                        ->icon('heroicon-o-envelope')
-                        ->schema([Emails::getForm()])
-                        ->columnSpanFull(),
+                    Flex::make([
+                        Section::make('Telefones')
+                            ->icon('heroicon-o-phone')
+                            ->schema([Phones::getForm()])
+                            ->columnSpanFull(),
+                        Section::make('E-mails')
+                            ->icon('heroicon-o-envelope')
+                            ->schema([Emails::getForm()])
+                            ->columnSpanFull(),
+                    ])->from('md')->columns(2)->columnSpanFull(),
                 ])
                 ->columnSpanFull()
                 ->columns(2),
@@ -444,5 +448,10 @@ final class Person extends Model
     public function vehicles(): HasMany
     {
         return $this->hasMany(Vehicle::class);
+    }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class);
     }
 }

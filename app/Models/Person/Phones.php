@@ -49,10 +49,6 @@ final class Phones extends Model
         return Repeater::make('phones')
             ->relationship()
             ->hiddenLabel()
-            ->table([
-                TableColumn::make('Número'),
-            ])
-            ->compact(true)
             ->schema([
                 PtbrPhone::make('number')
                     ->label('Telefone')

@@ -10,6 +10,7 @@ use BackedEnum;
 use Filament\Facades\Filament;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 final class WarrantiesRelationManager extends RelationManager
@@ -30,7 +31,10 @@ final class WarrantiesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return WarrantiesTable::configure($table)
-            ->modifyQueryUsing(fn ($query) => $query->withCount('warrantyClaims'));
+            ->modifyQueryUsing(fn ($query) => $query->withCount('warrantyClaims'))
+            ->emptyStateHeading('Nenhuma garantia')
+            ->emptyStateDescription('Esta ordem de serviço ainda não possui garantias.')
+            ->emptyStateIcon(Heroicon::ShieldCheck);
     }
 
     protected function mutateFormDataBeforeCreate(array $data): array

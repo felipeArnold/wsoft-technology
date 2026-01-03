@@ -37,10 +37,6 @@ final class Emails extends Model
         return Repeater::make('emails')
             ->relationship('emails')
             ->hiddenLabel()
-            ->compact(true)
-            ->table([
-                TableColumn::make('E-mail'),
-            ])
             ->schema([
                 TextInput::make('address')
                     ->label('E-mail')

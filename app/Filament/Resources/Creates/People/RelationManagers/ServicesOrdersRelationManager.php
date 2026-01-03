@@ -54,6 +54,11 @@ final class ServicesOrdersRelationManager extends RelationManager
                     DissociateBulkAction::make(),
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->emptyStateIcon(Heroicon::ClipboardDocumentList)
+            ->emptyStateHeading('Nenhuma ordem de serviço vinculada')
+            ->emptyStateDescription('Crie ordens de serviço para que elas apareçam aqui.')
+            ->defaultSort('created_at', 'desc')
+            ->paginated([10, 25, 50]);
     }
 }

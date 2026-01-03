@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Creates\Products\Schemas;
 
 use App\Filament\Components\PtbrMoney;
-use App\Helpers\FormatterHelper;
 use App\Models\Category;
 use App\Models\Person\Person;
 use Filament\Facades\Filament;
@@ -94,20 +93,6 @@ final class ProductForm
                             ->label('Valor de Custo')
                             ->default(0)
                             ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(function ($state, callable $set, callable $get): void {
-                                $cost = FormatterHelper::toDecimal($state);
-                                $sale = FormatterHelper::toDecimal($get('price_sale') ?? 0);
-
-                                $profit = $sale - $cost;
-                                $set('net_profit', FormatterHelper::money($profit));
-
-                                // Calcula margem de lucro em %
-                                if ($sale > 0) {
-                                    $margin = ($profit / $sale) * 100;
-                                    $set('profit_margin', number_format($margin, 2, '.', ''));
-                                }
-                            })
                             ->columnSpan(1),
                         PtbrMoney::make('average_cost')
                             ->label('Custo Médio')
@@ -119,31 +104,6 @@ final class ProductForm
                             ->label('Valor de Venda')
                             ->default(0)
                             ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(function ($state, callable $set, callable $get): void {
-                                $sale = FormatterHelper::toDecimal($state);
-                                $cost = FormatterHelper::toDecimal($get('price_cost') ?? 0);
-
-                                $profit = $sale - $cost;
-                                $set('net_profit', FormatterHelper::money($profit));
-
-                                // Calcula margem de lucro em %
-                                if ($sale > 0) {
-                                    $margin = ($profit / $sale) * 100;
-                                    $set('profit_margin', number_format($margin, 2, '.', ''));
-                                }
-                            })
-                            ->columnSpan(1),
-                        PtbrMoney::make('net_profit')
-                            ->label('Lucro Líquido')
-                            ->default(0)
-                            ->disabled()
-                            ->columnSpan(1),
-                        TextInput::make('profit_margin')
-                            ->label('Margem de Lucro (%)')
-                            ->numeric()
-                            ->disabled()
-                            ->suffix('%')
                             ->columnSpan(1),
                     ])
                     ->columns(3)

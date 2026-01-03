@@ -150,11 +150,6 @@ final class VehiclesRelationManager extends RelationManager
             ])
             ->emptyStateIcon('heroicon-o-truck')
             ->emptyStateHeading('Nenhum veículo cadastrado')
-            ->emptyStateDescription('Cadastre o primeiro veículo deste cliente.')
-            ->emptyStateActions([
-                CreateAction::make()
-                    ->icon('heroicon-s-plus')
-                    ->label('Novo Veículo'),
-            ]);
+            ->emptyStateDescription('Cadastre o primeiro veículo deste cliente.');
     }
 }

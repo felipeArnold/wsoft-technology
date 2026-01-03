@@ -9,6 +9,7 @@ use App\Models\Accounts\Accounts;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -35,6 +36,9 @@ final class AccountsReceivableRelationManager extends RelationManager
                     ->icon('heroicon-o-pencil')
                     ->url(fn (Action $action) => AccountsReceivableResource::getUrl('edit', ['record' => $action->getRecord()])),
             ])
+            ->emptyStateIcon(Heroicon::ArrowTrendingDown)
+            ->emptyStateHeading('Nenhuma conta a receber vinculada')
+            ->emptyStateDescription('Crie contas a receber para que elas apareçam aqui.')
             ->defaultSort('due_date', 'desc')
             ->paginated([10, 25, 50]);
     }

@@ -21,6 +21,8 @@ final class Product extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $guarded = ['net_profit', 'profit_margin'];
+
     protected $casts = [
         'price_sale' => 'float',
         'price_cost' => 'float',

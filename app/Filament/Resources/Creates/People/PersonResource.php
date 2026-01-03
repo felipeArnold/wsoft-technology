@@ -8,6 +8,7 @@ use App\Filament\Resources\Creates\People\Pages\CreatePerson;
 use App\Filament\Resources\Creates\People\Pages\EditPerson;
 use App\Filament\Resources\Creates\People\Pages\ListPeople;
 use App\Filament\Resources\Creates\People\RelationManagers\AccountsReceivableRelationManager;
+use App\Filament\Resources\Creates\People\RelationManagers\SalesRelationManager;
 use App\Filament\Resources\Creates\People\RelationManagers\ServicesOrdersRelationManager;
 use App\Filament\Resources\Creates\People\RelationManagers\VehiclesRelationManager;
 use App\Filament\Resources\Creates\People\Schemas\PersonForm;
@@ -68,9 +69,10 @@ final class PersonResource extends Resource
     public static function getRelations(): array
     {
         return [
+            VehiclesRelationManager::class,
             AccountsReceivableRelationManager::class,
             ServicesOrdersRelationManager::class,
-            VehiclesRelationManager::class,
+            SalesRelationManager::class,
         ];
     }
 
