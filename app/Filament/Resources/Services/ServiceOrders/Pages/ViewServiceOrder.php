@@ -20,14 +20,13 @@ final class ViewServiceOrder extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            DownloadServiceOrderPdfAction::make(),
             EditAction::make()
                 ->label('Editar')
-                ->icon('heroicon-o-pencil')
-                ->modalWidth('2xl'),
+                ->icon('heroicon-o-pencil'),
             ActionGroup::make([
-                CreateAccountReceivableAction::make()->color('success')->label('Criar Conta a Receber'),
-                SendServiceOrderEmailAction::make()->color('primary')->label('Enviar E-mail'),
+                CreateAccountReceivableAction::make()->color('default')->label('Criar Conta a Receber'),
+                SendServiceOrderEmailAction::make()->color('default')->label('Enviar E-mail'),
+                DownloadServiceOrderPdfAction::make()->color('default')->label('Baixar PDF'),
                 DeleteAction::make()
                     ->label('Excluir Ordem')
                     ->icon('heroicon-o-trash')
@@ -39,6 +38,7 @@ final class ViewServiceOrder extends ViewRecord
             ])
                 ->label('Ações')
                 ->button()
+                ->iconPosition('after')
                 ->color('gray'),
 
         ];

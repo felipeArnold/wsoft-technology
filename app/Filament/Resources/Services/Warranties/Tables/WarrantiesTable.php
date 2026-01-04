@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Services\Warranties\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
@@ -129,6 +131,13 @@ final class WarrantiesTable
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
                 ]),
+            ])
+            ->striped()
+            ->emptyStateIcon(Heroicon::OutlinedShieldCheck)
+            ->emptyStateHeading('Nenhuma garantia encontrada')
+            ->emptyStateDescription('Nenhuma garantia foi criada ainda.')
+            ->emptyStateActions([
+                CreateAction::make()->label('Nova Garantia')->icon('heroicon-o-plus'),
             ])
             ->defaultSort('end_date', 'asc');
     }

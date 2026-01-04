@@ -6,6 +6,7 @@ namespace App\Filament\Resources\Services\ServiceOrders\Pages;
 
 use App\Filament\Resources\Services\ServiceOrders\Actions\CreateAccountReceivableAction;
 use App\Filament\Resources\Services\ServiceOrders\Actions\DownloadServiceOrderPdfAction;
+use App\Filament\Resources\Services\ServiceOrders\Actions\GenerateCommissionAction;
 use App\Filament\Resources\Services\ServiceOrders\Actions\SendServiceOrderEmailAction;
 use App\Filament\Resources\Services\ServiceOrders\ServiceOrderResource;
 use Filament\Actions\ActionGroup;
@@ -24,10 +25,11 @@ final class EditServiceOrder extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DownloadServiceOrderPdfAction::make(),
+
             ActionGroup::make([
-                CreateAccountReceivableAction::make()->color('success')->label('Criar Conta a Receber'),
-                SendServiceOrderEmailAction::make()->color('primary')->label('Enviar E-mail'),
+                CreateAccountReceivableAction::make()->color('default')->label('Criar Conta a Receber'),
+                SendServiceOrderEmailAction::make()->color('default')->label('Enviar E-mail'),
+                DownloadServiceOrderPdfAction::make()->color('default')->label('Baixar PDF'),
                 DeleteAction::make()
                     ->label('Excluir Ordem')
                     ->icon('heroicon-o-trash')
@@ -39,6 +41,7 @@ final class EditServiceOrder extends EditRecord
             ])
                 ->label('Ações')
                 ->button()
+                ->iconPosition('after')
                 ->color('gray'),
         ];
     }

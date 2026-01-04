@@ -22,99 +22,6 @@
 
 ---~~
 
-#### 1.2 Validação de Uploads de Arquivo
-**Status:** ⚠️ Implementação parcial
-**Impacto:** Alto - Risco de upload de arquivos maliciosos
-
-**Problema:**
-- Validações de tipo MIME podem ser burladas
-- Sem verificação de assinaturas de arquivo
-- Falta validação de tamanho máximo consistente
-
-**Solução:**
-```php
-// Criar validator customizado
-class SecureFileValidator
-{
-    public static function validate(UploadedFile $file): bool
-    {
-        // Verificar extensão real do arquivo
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mimeType = finfo_file($finfo, $file->getRealPath());
-        finfo_close($finfo);
-
-        // Validar contra whitelist
-        $allowedMimes = ['image/jpeg', 'image/png', 'application/pdf'];
-
-        return in_array($mimeType, $allowedMimes);
-    }
-}
-```
-
-**Arquivos afetados:**
-- `app/Filament/Resources/Services/ServiceOrders/` (attachments)
-- `app/Filament/Resources/Services/DigitalSignature/Envelopes/` (documents)
-- `app/Models/Product.php` (attachment field)
-
----
-
-#### 1.3 Sanitização de Inputs
-**Status:** ⚠️ Implementação parcial
-**Impacto:** Médio - XSS possível em alguns campos
-
-**Problema:**
-- RichEditor pode permitir JavaScript em alguns contextos
-- Campos de texto livre sem sanitização adequada
-- Falta proteção contra SQL Injection em queries raw
-
-**Solução:**
-```php
-// Usar sempre prepared statements
-DB::raw('SUM(products.stock * products.price_cost)')
-// Melhor:
-DB::table('products')->selectRaw('SUM(stock * price_cost) as total_value')
-
-// Sanitizar RichEditor
-use Illuminate\Support\Str;
-
-$cleanHtml = Str::of($dirtyHtml)->stripTags(['p', 'br', 'strong', 'em', 'ul', 'ol', 'li']);
-```
-
-**Arquivos afetados:**
-- Todos os widgets com `DB::raw()`
-- `app/Filament/Resources/Services/ServiceOrders/Schemas/ServiceOrderForm.php`
-- Campos com RichEditor
-
----
-
-
----
-
-#### 1.5 Logs de Auditoria
-**Status:** ⚠️ Implementação básica
-**Impacto:** Médio - Dificulta rastreamento de problemas
-
-**Problema:**
-- Sem log de ações críticas (exclusões, mudanças de senha)
-- Falta rastreamento de quem fez o quê
-- Sem retenção de logs configurada
-
-**Solução:**
-```php
-// Instalar spatie/laravel-activitylog
-composer require spatie/laravel-activitylog
-
-// Usar em modelos críticos
-use Spatie\Activitylog\Traits\LogsActivity;
-
-class ServiceOrder extends Model
-{
-    use LogsActivity;
-
-    protected static $logAttributes = ['*'];
-    protected static $logOnlyDirty = true;
-}
-```
 
 ---
 
@@ -171,206 +78,11 @@ Sale::with(['items.product.category', 'person', 'user'])
     ->get();
 ```
 
----
 
-### 🟡 Importante
-
-#### 2.4 Índices de Banco de Dados
-**Status:** ✅ Implementado
-**Impacto:** Médio - Consultas lentas com crescimento de dados
-
-**Implementação:**
-Criada migration `2025_12_17_144724_add_additional_database_indexes.php` com índices estratégicos para otimização de consultas frequentes.
-
-**Índices adicionados:**
-
-**service_orders:**
-- `status` - Filtros por status
-- `created_at` - Ordenação temporal
-- `[tenant_id, created_at]` - Queries de timeline por tenant
-- `[person_id, status]` - Busca de ordens por cliente e status
-
-**products:**
-- `barcode` - Busca rápida por código de barras
-- `[tenant_id, stock]` - Controle de estoque por tenant
-
-**stock_movements (crítico - não tinha índices):**
-- `[tenant_id, product_id]` - Histórico de movimentações por produto
-- `[tenant_id, type]` - Filtro de movimentações por tipo (entrada/saída)
-- `[tenant_id, created_at]` - Timeline de movimentações
-- `[product_id, created_at]` - Histórico temporal por produto
-- `type` - Filtro simples por tipo de movimentação
-
-**accounts:**
-- `status` - Filtros por status de pagamento
-- `type` - Separação rápida entre receitas/despesas
-
-**accounts_installments:**
-- `status` - Filtros de parcelas pagas/pendentes
-- `[tenant_id, status]` - Controle de parcelas por tenant
-
-**Benefícios:**
-- Redução significativa no tempo de resposta de queries com filtros
-- Melhoria na performance de listagens e relatórios
-- Otimização crítica na tabela stock_movements que não tinha nenhum índice
-
----
-
-#### 2.5 Paginação de Resultados
-**Status:** ✅ Implementado, mas inconsistente
-**Impacto:** Médio
-
-**Problema:**
-- Alguns widgets carregam todos os registros (`->get()`)
-- Falta paginação em algumas listagens
-
-**Solução:**
-```php
-// Em vez de
-$products = Product::all();
-
-// Usar
-$products = Product::paginate(50);
-
-// Ou em widgets
-Product::query()->limit(100)->get();
-```
-
----
-
-#### 2.6 Lazy Loading de Imagens
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio - Carregamento lento de páginas com imagens
-
-**Solução:**
-- Implementar lazy loading nativo do browser
-- Usar CDN para assets estáticos
-- Comprimir imagens automaticamente
-
----
-
-## 3. Experiência do Usuário (UX/UI)
-
-
-#### 3.4 Tour Guiado (Onboarding)
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio - Facilita adoção
-
-**Sugestão:**
-- Tour para novo usuário
-- Explicar dashboard
-- Guiar criação da primeira OS
-- Tooltips contextuais
-
-**Biblioteca sugerida:**
-```bash
-npm install driver.js
-```
-
----
-
-
-#### 3.6 Notificações em Tempo Real
-**Status:** ⚠️ Não implementado
-**Impacto:** Médio
-
-**Sugestão:**
-- Implementar Laravel Echo + Pusher/Soketi
-- Notificar quando:
-  - Nova OS atribuída
-  - Pagamento recebido
-  - Estoque baixo
-  - Documento assinado
-
----
 
 ## 4. Testes e Qualidade
 
 ### 🔴 Crítico
-
-#### 4.1 Cobertura de Testes
-**Status:** ⚠️ Muito baixa ou inexistente
-**Impacto:** Alto - Regressões não detectadas
-
-**Problema:**
-- Sem testes unitários
-- Sem testes de integração
-- Sem testes E2E
-
-**Solução:**
-```php
-// Testes unitários (models)
-test('service order calculates total correctly', function () {
-    $serviceOrder = ServiceOrder::factory()->create();
-    $serviceOrder->serviceOrderServices()->create([
-        'quantity' => 2,
-        'unit_price' => 100,
-        'discount' => 10,
-    ]);
-
-    expect($serviceOrder->total_value)->toBe(190);
-});
-
-// Testes de feature (resources)
-test('can create service order', function () {
-    $user = User::factory()->create();
-    $tenant = Tenant::factory()->create();
-
-    actingAs($user)
-        ->post(route('filament.app.resources.service-orders.store'), [
-            'person_id' => Person::factory()->create()->id,
-            'status' => 'draft',
-            // ...
-        ])
-        ->assertSuccessful();
-});
-
-// Testes de browser (E2E)
-test('can complete service order workflow', function () {
-    $this->browse(function (Browser $browser) {
-        $browser->loginAs(User::factory()->create())
-                ->visit('/app/service-orders/create')
-                ->type('number', '12345')
-                ->select('status', 'in_progress')
-                ->press('Salvar')
-                ->assertSee('Ordem criada com sucesso');
-    });
-});
-```
-
-**Meta:**
-- 80% de cobertura em models
-- 60% em resources
-- Testes E2E para fluxos críticos
-
----
-
-#### 4.2 CI/CD Pipeline
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto
-
-**Sugestão:**
-```yaml
-# .github/workflows/tests.yml
-name: Tests
-
-on: [push, pull_request]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-      - run: composer install
-      - run: php artisan test
-      - run: ./vendor/bin/phpstan analyse
-      - run: ./vendor/bin/pint --test
-```
-
----
 
 ## 5. Documentação
 
@@ -467,17 +179,6 @@ public function export(): BinaryFileResponse
 
 ---
 
-#### 6.6 Gestão de Orçamentos
-**Status:** ⚠️ Não implementado
-**Impacto:** Alto
-
-**Sugestão:**
-- Criar orçamento antes da OS
-- Aprovar/Reprovar orçamento
-- Converter orçamento em OS
-- Validade do orçamento
-
----
 
 #### 6.7 Portal do Cliente
 **Status:** ⚠️ Não implementado
@@ -490,22 +191,7 @@ public function export(): BinaryFileResponse
 - Faturas
 
 ---
-
----
-
-#### 6.9 Gestão de Garantias
-**Status:** ⚠️ Parcial (apenas campo de prazo)
-**Impacto:** Médio
-
-**Melhorias:**
-- Rastreamento de itens em garantia
-- Alertas de vencimento
-- Histórico de acionamentos
-
----
-
 ## 7. Integrações
----
 
 #### 7.1 Nota Fiscal Eletrônica
 **Status:** ⚠️ Não implementado
@@ -528,26 +214,6 @@ public function export(): BinaryFileResponse
 
 ---
 
-## 8. DevOps e Infraestrutura
-
----
-
-## 9. Acessibilidade
-
-### 🟡 Importante
-
-#### 9.1 WCAG 2.1 Compliance
-**Status:** ⚠️ Não verificado
-**Impacto:** Médio
-
-**Checklist:**
-- ✅ Contraste de cores adequado
-- ✅ Labels em todos os inputs
-- ✅ Alt text em imagens
-- ✅ Navegação por teclado
-- ✅ Screen reader friendly
-
----
 
 #### 9.2 Internacionalização (i18n)
 **Status:** ⚠️ Não implementado
@@ -560,71 +226,8 @@ public function export(): BinaryFileResponse
 
 ---
 
-## 10. Arquitetura e Código
-
-### 🟡 Importante
-
 
 ---
-
-#### 10.2 DTOs (Data Transfer Objects)
-**Status:** ⚠️ Não implementado
-**Impacto:** Baixo
-
-**Sugestão:**
-```php
-class CreateServiceOrderDTO
-{
-    public function __construct(
-        public readonly int $personId,
-        public readonly string $status,
-        public readonly array $services,
-        public readonly array $products,
-    ) {}
-
-    public static function fromRequest(Request $request): self
-    {
-        return new self(
-            personId: $request->input('person_id'),
-            status: $request->input('status'),
-            services: $request->input('services', []),
-            products: $request->input('products', []),
-        );
-    }
-}
-```
-
----
-
-#### 10.3 Enums para Constantes
-**Status:** ✅ Parcialmente implementado
-**Impacto:** Baixo
-
-**Melhorias:**
-- Converter strings mágicas em Enums
-- Exemplo: status de OS, tipos de movimentação
-
----
-
-#### 10.4 Query Scopes
-**Status:** ⚠️ Pouco usado
-**Impacto:** Baixo
-
-**Sugestão:**
-```php
-// Em Product.php
-public function scopeLowStock(Builder $query): void
-{
-    $query->whereNotNull('stock_alert')
-          ->whereRaw('stock <= stock_alert');
-}
-
-// Uso
-Product::lowStock()->get();
-```
-
----
-
 
 ## 12. Backup e Recuperação
 
@@ -660,13 +263,6 @@ composer require spatie/laravel-backup
         'disks' => ['s3'],
     ],
 ],
-```
-
-**Agendar:**
-```php
-// app/Console/Kernel.php
-$schedule->command('backup:run')->daily()->at('01:00');
-$schedule->command('backup:clean')->daily()->at('01:30');
 ```
 
 ---

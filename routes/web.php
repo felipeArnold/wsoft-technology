@@ -147,6 +147,10 @@ Route::get('/robots.txt', function () {
     return response()->view('seo.robots')->header('Content-Type', 'text/plain');
 });
 
+Route::get('/llms.txt', function () {
+    return response()->view('seo.llms')->header('Content-Type', 'text/plain; charset=utf-8');
+});
+
 Route::view('/oferta-especial', 'landing.sales')->name('landing.sales');
 
 // Landing Page para CRM e Gestão Empresarial
