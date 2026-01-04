@@ -29,6 +29,7 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@wsofttecnologia" />
     <meta name="twitter:title" content="@yield('twitter_title', 'Blog | WSoft Tecnologia')" />
     <meta name="twitter:description" content="@yield('twitter_description', 'Blog da WSoft Tecnologia - Dicas e conteúdos sobre gestão empresarial.')" />
     @if(View::hasSection('og_image'))
@@ -36,6 +37,28 @@
     @else
     <meta name="twitter:image" content="{{ asset('images/og-default.jpg') }}" />
     @endif
+
+    <!-- AI-Friendly Article Metadata -->
+    @if(View::hasSection('article_author'))
+    <meta name="article:author" content="@yield('article_author')" />
+    @endif
+    @if(View::hasSection('article_published_time'))
+    <meta name="article:published_time" content="@yield('article_published_time')" />
+    @endif
+    @if(View::hasSection('article_modified_time'))
+    <meta name="article:modified_time" content="@yield('article_modified_time')" />
+    @endif
+    @if(View::hasSection('article_section'))
+    <meta name="article:section" content="@yield('article_section')" />
+    @endif
+    @if(View::hasSection('article_tag'))
+    <meta name="article:tag" content="@yield('article_tag')" />
+    @endif
+    <meta name="article:publisher" content="WSoft Tecnologia" />
+
+    <!-- AI Search Optimization -->
+    <meta name="searchgpt:content-type" content="@yield('content_type', 'blog-article')" />
+    <meta name="perplexity:primary-topic" content="@yield('primary_topic', 'Gestão Empresarial')" />
 
     <!-- Structured Data -->
     <script type="application/ld+json">

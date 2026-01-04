@@ -151,6 +151,17 @@ Route::get('/llms.txt', function () {
     return response()->view('seo.llms')->header('Content-Type', 'text/plain; charset=utf-8');
 });
 
+// IndexNow verification file
+Route::get('/{key}.txt', function (string $key) {
+    $indexNowKey = config('services.indexnow.key', '');
+
+    if ($key === $indexNowKey) {
+        return response($indexNowKey, 200)->header('Content-Type', 'text/plain');
+    }
+
+    abort(404);
+})->where('key', '[a-f0-9]{32}');
+
 Route::view('/oferta-especial', 'landing.sales')->name('landing.sales');
 
 // Landing Page para CRM e Gestão Empresarial

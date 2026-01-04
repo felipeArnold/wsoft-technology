@@ -33,20 +33,65 @@
     <meta property="og:title" content="{{ $ogTitle ?? $title ?? 'Sistema de Gestão para Pequenas Empresas | WSoft' }}" />
     <meta property="og:description" content="{{ $ogDescription ?? $description ?? 'Controle financeiro, ordem de serviço, vendas, estoque e assinatura digital em um único sistema. Teste grátis!' }}" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ $canonical ?? url()->current() }}" />
+    <meta property="og:image" content="{{ $ogImage ?? asset('images/og-image.png') }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{{ $ogImageAlt ?? 'WSoft - Sistema de Gestão Empresarial' }}" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@wsofttecnologia" />
     <meta name="twitter:title" content="{{ $twitterTitle ?? $title ?? 'WSoft - Sistema de Gestão Online' }}" />
     <meta name="twitter:description" content="{{ $twitterDescription ?? $description ?? 'Sistema de gestão com financeiro, OS, vendas e assinatura digital.' }}" />
+    <meta name="twitter:image" content="{{ $twitterImage ?? $ogImage ?? asset('images/og-image.png') }}" />
+    <meta name="twitter:image:alt" content="{{ $twitterImageAlt ?? $ogImageAlt ?? 'WSoft - Sistema de Gestão Empresarial' }}" />
+
+    <!-- AI-Friendly Metadata for LLM Search Engines -->
+    <meta name="article:publisher" content="WSoft Tecnologia" />
+    <meta name="article:author" content="WSoft Tecnologia" />
+    <meta name="abstract" content="{{ $description ?? 'Sistema de gestão completo para pequenas empresas e MEI.' }}" />
+    <meta name="summary" content="{{ $description ?? 'Sistema de gestão completo para pequenas empresas e MEI.' }}" />
+    <meta name="topic" content="Sistema de Gestão Empresarial, ERP, SaaS, Software de Gestão" />
+    <meta name="classification" content="Business Software, SaaS, Enterprise Resource Planning" />
+    <meta name="target" content="Pequenas Empresas, MEI, Oficinas, Salões, Pet Shops, Restaurantes" />
+    <meta name="coverage" content="Brasil" />
+    <meta name="ai-content-declaration" content="no-ai-content" />
+
+    <!-- SearchGPT / ChatGPT Optimization -->
+    <meta name="searchgpt:content-type" content="business-software" />
+    <meta name="searchgpt:category" content="saas, erp, business-management" />
+    <meta name="chatgpt:description" content="{{ $description ?? 'Sistema de gestão completo para pequenas empresas e MEI. Controle financeiro, clientes, estoque e OS. Teste grátis!' }}" />
+
+    <!-- Perplexity AI Optimization -->
+    <meta name="perplexity:primary-topic" content="Sistema de Gestão Empresarial" />
+    <meta name="perplexity:industry" content="Software, SaaS, Business Management" />
 
     <!-- Structured Data -->
     @php
         $globalSchema = [
             '@context' => 'https://schema.org',
-            '@type' => 'Organization',
+            '@type' => ['Organization', 'LocalBusiness', 'SoftwareCompany'],
             'name' => 'WSoft Tecnologia',
+            'legalName' => 'WSoft Tecnologia',
             'url' => 'https://www.wsoft.dev.br',
             'logo' => asset('images/logo.png'),
+            'image' => asset('images/og-image.png'),
+            'description' => 'Empresa de software especializada em sistemas de gestão empresarial para pequenas empresas, MEI e diversos segmentos de negócios.',
+            'foundingDate' => '2023',
+            'email' => 'contato@wsoft.com.br',
+            'taxID' => '58.622.735/0001-37',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'addressLocality' => 'Rolante',
+                'addressRegion' => 'RS',
+                'addressCountry' => 'BR'
+            ],
+            'geo' => [
+                '@type' => 'GeoCoordinates',
+                'latitude' => '-29.65056',
+                'longitude' => '-50.57583'
+            ],
             'sameAs' => [
                 'https://www.instagram.com/wsoft.tecnologia?igsh=MWlzdmZlYXhzcmlzYQ%3D%3D&utm_source=qr',
                 'https://www.facebook.com/wsoft.tecnologia'
@@ -56,8 +101,15 @@
                 'telephone' => '+55-51-99999-9999',
                 'contactType' => 'customer service',
                 'areaServed' => 'BR',
-                'availableLanguage' => 'Portuguese'
-            ]
+                'availableLanguage' => ['Portuguese', 'pt-BR'],
+                'email' => 'contato@wsoft.com.br'
+            ],
+            'priceRange' => 'R$29,90 - R$199,90',
+            'areaServed' => [
+                '@type' => 'Country',
+                'name' => 'Brasil'
+            ],
+            'slogan' => 'Sistema de gestão completo para pequenas empresas'
         ];
 
         if(isset($structuredData)) {
@@ -117,7 +169,14 @@
     <link rel="prefetch" href="/app/register" as="document">
     <link rel="prefetch" href="/app/login" as="document">
 
+    <!-- Search Engine Verification -->
     <meta name="google-site-verification" content="kHvaTl5DHIzqDIdHK0WctKwaxOcLvpCKu9FZWGD6Yg8" />
+    <!-- Adicione as tags abaixo após configurar em cada plataforma:
+    <meta name="msvalidate.01" content="SEU_CÓDIGO_BING_AQUI" />
+    <meta name="yandex-verification" content="SEU_CÓDIGO_YANDEX_AQUI" />
+    <meta name="alexaVerifyID" content="SEU_CÓDIGO_ALEXA_AQUI" />
+    <meta name="p:domain_verify" content="SEU_CÓDIGO_PINTEREST_AQUI" />
+    -->
 
     <!-- Google Analytics - Lazy loaded for better performance -->
     <script>
