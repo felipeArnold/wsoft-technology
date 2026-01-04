@@ -135,7 +135,7 @@ $structuredData = [
                         <article class="group flex flex-col bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300" itemscope itemtype="https://schema.org/BlogPosting">
                             @if($post->featured_image)
                             <a href="{{ route('blog.show', $post->slug) }}" class="relative overflow-hidden aspect-video" aria-label="Ler artigo: {{ $post->title }}">
-                                <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }} - Artigo sobre {{ $post->category?->name ?? 'gestão empresarial' }}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" itemprop="image">
+                                <img src="{{ asset('images/logo-white.png') }}" alt="{{ $post->title }} - Artigo sobre {{ $post->category?->name ?? 'gestão empresarial' }}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500 bg-gray-200" itemprop="image">
                             </a>
                             @else
                             <div class="w-full aspect-video bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center">

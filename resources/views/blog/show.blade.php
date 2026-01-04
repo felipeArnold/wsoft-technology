@@ -363,6 +363,121 @@ $structuredData = array_map(function($schema) {
         color: #e2e8f0;
         font-size: 0.875rem;
     }
+
+    .blog-content table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 2rem 0;
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .blog-content table thead {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        color: white;
+    }
+
+    .blog-content table th {
+        padding: 1rem 1.25rem;
+        text-align: left;
+        font-weight: 700;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 2px solid #3b82f6;
+    }
+
+    .blog-content table tbody tr {
+        transition: all 0.2s ease;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .blog-content table tbody tr:hover {
+        background: #f8fafc;
+        transform: scale(1.01);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .blog-content table tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    .blog-content table td {
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
+        color: #475569;
+        line-height: 1.6;
+        vertical-align: top;
+    }
+
+    .blog-content table tbody tr:nth-child(even) {
+        background: #fafbfc;
+    }
+
+    .blog-content table tbody tr:nth-child(even):hover {
+        background: #f1f5f9;
+    }
+
+    @media (max-width: 768px) {
+        .blog-content table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-radius: 0.75rem;
+        }
+
+        .blog-content table thead,
+        .blog-content table tbody,
+        .blog-content table th,
+        .blog-content table td,
+        .blog-content table tr {
+            display: block;
+            white-space: normal;
+        }
+
+        .blog-content table thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        .blog-content table tr {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .blog-content table td {
+            border: none;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            padding-left: 8rem;
+            padding-right: 1rem;
+        }
+
+        .blog-content table td:before {
+            content: attr(data-label) ": ";
+            position: absolute;
+            left: 1rem;
+            width: 6rem;
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .blog-content table td:last-child {
+            border-bottom: none;
+        }
+    }
 </style>
 @endpush
 
@@ -655,6 +770,27 @@ $structuredData = array_map(function($schema) {
             </div>
         </div>
     </article>
+
+    <!-- Script para tornar tabelas responsivas -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tables = document.querySelectorAll('.blog-content table');
+        
+        tables.forEach(table => {
+            const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+            const rows = table.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                cells.forEach((cell, index) => {
+                    if (headers[index]) {
+                        cell.setAttribute('data-label', headers[index]);
+                    }
+                });
+            });
+        });
+    });
+    </script>
 
     <!-- Posts Relacionados -->
     @if($relatedPosts->count() > 0)
