@@ -41,7 +41,15 @@ final class BlogPostGenerator
             maxTokens: 4000,
         );
 
-        $content = $response->choices[0]->message->content;
+        $content = $response->choices[0]->message->content ?? '';
+
+
+        // Valida se a resposta não está vazia
+        if (empty(trim($content))) {
+            throw new Exception(
+                'A OpenAI retornou uma resposta vazia. Possíveis causas: limite de tokens, erro na API ou problema com o prompt. Por favor, tente novamente ou reduza o tamanho do post.'
+            );
+        }
 
         $postData = $this->parseResponse($content, $topic, $category, $author);
 
@@ -179,7 +187,8 @@ INTERNAL_LINK_2_TEXT: [texto âncora]
 INTERNAL_LINK_3_URL: [url]
 INTERNAL_LINK_3_TEXT: [texto âncora]
 
-NUNCA explique o processo. NUNCA faça comentários técnicos. Entregue SOMENTE o conteúdo otimizado.
+IMPORTANTE: Use EXATAMENTE este formato texto (não use comentários HTML como <!-- -->).
+NUNCA use comentários HTML. NUNCA explique o processo. NUNCA faça comentários técnicos. Entregue SOMENTE o conteúdo otimizado.
 PROMPT;
 
         $response = $this->makeOpenAIRequest(
@@ -263,12 +272,29 @@ PROMPT;
         try {
             while ($attempt < $this->maxRetries) {
                 try {
-                    return OpenAI::chat()->create([
+                    // Log do tamanho do prompt para debug
+                    $promptLength = strlen($messages[array_key_last($messages)]['content'] ?? '');
+
+                    $response = OpenAI::chat()->create([
                         'model' => 'gpt-4o-mini',
                         'messages' => $messages,
                         'temperature' => $temperature,
                         'max_completion_tokens' => $maxTokens,
                     ]);
+
+                    // Log da resposta para debug
+                    $contentLength = strlen($response->choices[0]->message->content ?? '');
+                    $finishReason = $response->choices[0]->finishReason ?? 'unknown';
+
+                    // Se a resposta foi truncada, tenta novamente com mais tokens
+                    if ($finishReason === 'length' && $attempt === 0) {
+                        $maxTokens = min($maxTokens * 1.5, 8000); // Aumenta até 8000 tokens
+                        $attempt++;
+
+                        continue;
+                    }
+
+                    return $response;
                 } catch (Exception $e) {
                     $attempt++;
 
@@ -375,6 +401,8 @@ Páginas disponíveis (escolha as mais relevantes ao tema):
 📤 FORMATO DE SAÍDA (OBRIGATÓRIO)
 ══════════════════════════════════════
 
+IMPORTANTE: Use EXATAMENTE este formato texto (não use comentários HTML como <!-- -->):
+
 TÍTULO: [título até 60 caracteres com palavra-chave no início]
 EXCERPT: [resumo 2-3 frases]
 CONTEÚDO: [HTML completo com estrutura semântica, backlinks internos, listas, tabelas, exemplos práticos]
@@ -405,7 +433,7 @@ INTERNAL_LINK_2_TEXT: [texto âncora]
 INTERNAL_LINK_3_URL: [url]
 INTERNAL_LINK_3_TEXT: [texto âncora]
 
-NUNCA explique o processo. NUNCA faça comentários técnicos. Entregue SOMENTE o conteúdo otimizado no formato acima.
+NUNCA use comentários HTML (<!-- -->). NUNCA explique o processo. NUNCA faça comentários técnicos. Entregue SOMENTE o conteúdo otimizado no formato acima.
 PROMPT;
     }
 
@@ -415,6 +443,15 @@ PROMPT;
         ?BlogCategory $category,
         ?User $author,
     ): array {
+        // Se a resposta começar com ``` (markdown code block), remove
+        $content = preg_replace('/^```(?:html|xml|htm)?\s*\n/i', '', $content);
+        $content = preg_replace('/\n```\s*$/i', '', $content);
+
+        // Se a IA retornou em formato HTML com comentários, extrai o conteúdo diretamente
+        if (preg_match('/<!--\s*TÍTULO\s*-->/', $content)) {
+            return $this->parseHtmlResponse($content, $fallbackTitle, $category, $author);
+        }
+
         $lines = explode("\n", $content);
         $data = [
             'title' => '',
@@ -459,6 +496,10 @@ PROMPT;
 
                 // Captura conteúdo que pode vir na mesma linha após "CONTEÚDO:"
                 $contentOnSameLine = mb_trim(mb_substr($line, 9));
+
+                // Remove marcadores markdown se estiverem na mesma linha
+                $contentOnSameLine = preg_replace('/^```(?:html|xml|htm)?\s*/i', '', $contentOnSameLine);
+
                 if ($contentOnSameLine !== '') {
                     $contentLines[] = $contentOnSameLine;
                 }
@@ -553,7 +594,10 @@ PROMPT;
             }
 
             if ($currentSection === 'content') {
-                $contentLines[] = $line;
+                // Ignora linhas que são apenas marcadores markdown
+                if ($line !== '```' && $line !== '```html' && $line !== '```xml' && $line !== '```htm') {
+                    $contentLines[] = $line;
+                }
             }
         }
 
@@ -576,6 +620,8 @@ PROMPT;
         }
 
         $data['content'] = $this->cleanContent(implode("\n", $contentLines));
+
+
 
         // Valida se o conteúdo foi gerado
         if (empty(trim(strip_tags($data['content'])))) {
@@ -653,6 +699,96 @@ PROMPT;
         $content = preg_replace('/\s*```\s*$/', '', $content);
 
         return mb_trim($content);
+    }
+
+    private function parseHtmlResponse(
+        string $content,
+        string $fallbackTitle,
+        ?BlogCategory $category,
+        ?User $author,
+    ): array {
+        $data = [
+            'title' => '',
+            'excerpt' => '',
+            'content' => '',
+            'meta_title' => '',
+            'meta_description' => '',
+            'meta_keywords' => '',
+            'featured_snippet' => '',
+            'ai_summary' => [],
+            'faq' => [],
+            'discover_context' => '',
+            'discover_image_prompt' => '',
+            'internal_links_suggestions' => [],
+            'category_id' => $category->id ?? null,
+            'author_id' => $author->id ?? auth()->id(),
+            'status' => 'draft',
+        ];
+
+        // Extrai título do <h1>
+        if (preg_match('/<h1[^>]*>(.*?)<\/h1>/is', $content, $matches)) {
+            $data['title'] = strip_tags($matches[1]);
+        }
+
+        // Extrai excerpt do primeiro <p> após <!-- EXCERPT -->
+        if (preg_match('/<!--\s*EXCERPT\s*-->.*?<p[^>]*>(.*?)<\/p>/is', $content, $matches)) {
+            $data['excerpt'] = strip_tags($matches[1]);
+        }
+
+        // Extrai o conteúdo completo (tudo que está entre os comentários HTML)
+        // Remove os comentários HTML mas mantém todo o HTML dentro
+        $cleanedContent = $content;
+        $cleanedContent = preg_replace('/<!--.*?-->/s', '', $cleanedContent);
+        $cleanedContent = preg_replace('/<h1[^>]*>.*?<\/h1>/is', '', $cleanedContent, 1); // Remove o primeiro h1 (título)
+
+        // Procura por links internos e extrai
+        if (preg_match_all('/<a\s+href=["\']\/([^"\']+)["\']\s*>([^<]+)<\/a>/i', $content, $matches, PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $data['internal_links_suggestions'][] = [
+                    'url' => $match[1],
+                    'anchor_text' => strip_tags($match[2]),
+                ];
+            }
+        }
+
+        $data['content'] = mb_trim($cleanedContent);
+
+        // Valida se o conteúdo foi gerado
+        if (empty(trim(strip_tags($data['content'])))) {
+            throw new Exception(
+                'Conteúdo vazio após parse HTML. Resposta: '.mb_substr($content, 0, 500)
+            );
+        }
+
+        if (empty($data['title'])) {
+            $data['title'] = $fallbackTitle;
+        }
+
+        $data['slug'] = BlogPost::generateUniqueSlug($data['title']);
+
+        if (empty($data['meta_title'])) {
+            $data['meta_title'] = Str::limit($data['title'], 60);
+        }
+
+        if (empty($data['meta_description'])) {
+            $data['meta_description'] = Str::limit(
+                strip_tags($data['excerpt'] ?: $data['content']),
+                160
+            );
+        }
+
+        if (empty($data['meta_keywords'])) {
+            $data['meta_keywords'] = implode(', ', array_slice(
+                array_filter(
+                    explode(' ', Str::lower($data['title'])),
+                    fn ($word) => mb_strlen($word) > 3
+                ),
+                0,
+                5
+            ));
+        }
+
+        return $data;
     }
 
 }
