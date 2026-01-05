@@ -16,6 +16,7 @@ use Filament\Schemas\Components\Section as SchemaSection;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use STS\FilamentImpersonate\Actions\Impersonate;
 
 final class UserResource extends Resource
 {
@@ -103,6 +104,10 @@ final class UserResource extends Resource
             ->actions([
                 ViewAction::make(),
                 EditAction::make(),
+                Impersonate::make()
+                    ->redirectTo(fn ($record) => $record->tenants()->exists()
+                        ? route('filament.app.pages.dashboard', ['tenant' => $record->tenants()->first()])
+                        : route('filament.admin.pages.dashboard')),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
