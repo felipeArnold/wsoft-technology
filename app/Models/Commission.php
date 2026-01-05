@@ -24,8 +24,10 @@ final class Commission extends Model
         'tenant_id',
         'user_id',
         'service_order_id',
+        'sale_id',
+        'type',
         'commission_percentage',
-        'labor_value_base',
+        'base_value',
         'commission_amount',
         'status',
         'paid_at',
@@ -35,7 +37,7 @@ final class Commission extends Model
 
     protected $casts = [
         'commission_percentage' => 'decimal:2',
-        'labor_value_base' => 'decimal:2',
+        'base_value' => 'decimal:2',
         'commission_amount' => 'decimal:2',
         'status' => CommissionStatusEnum::class,
         'paid_at' => 'datetime',
@@ -54,6 +56,11 @@ final class Commission extends Model
     public function serviceOrder(): BelongsTo
     {
         return $this->belongsTo(ServiceOrder::class);
+    }
+
+    public function sale(): BelongsTo
+    {
+        return $this->belongsTo(Sale::class);
     }
 
     public function paidBy(): BelongsTo
@@ -89,12 +96,22 @@ final class Commission extends Model
         ]);
     }
 
+    public function isServiceOrderCommission(): bool
+    {
+        return $this->type === 'service_order';
+    }
+
+    public function isSaleCommission(): bool
+    {
+        return $this->type === 'sale';
+    }
+
     protected function commissionPercentage(): Attribute
     {
         return Attribute::set(fn (null|string|int|float $value): float => FormatterHelper::toDecimal($value));
     }
 
-    protected function laborValueBase(): Attribute
+    protected function baseValue(): Attribute
     {
         return Attribute::set(fn (null|string|int|float $value): float => FormatterHelper::toDecimal($value));
     }

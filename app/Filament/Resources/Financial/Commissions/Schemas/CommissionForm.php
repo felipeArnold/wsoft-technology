@@ -22,24 +22,40 @@ final class CommissionForm
                 Section::make('Informações da Comissão')
                     ->icon('heroicon-o-banknotes')
                     ->schema([
+                        Placeholder::make('type_display')
+                            ->label('Tipo de Comissão')
+                            ->content(fn ($record) => $record ? match ($record->type) {
+                                'service_order' => '🔧 Ordem de Serviço',
+                                'sale' => '🛒 Venda',
+                                default => '—',
+                            } : '—')
+                            ->columnSpan(1),
                         Select::make('service_order_id')
                             ->label('Ordem de Serviço')
                             ->relationship('serviceOrder', 'number')
                             ->searchable()
                             ->preload()
-                            ->required()
                             ->disabled()
+                            ->visible(fn ($record) => $record && $record->type === 'service_order')
+                            ->columnSpan(1),
+                        Select::make('sale_id')
+                            ->label('Venda')
+                            ->relationship('sale', 'sale_number')
+                            ->searchable()
+                            ->preload()
+                            ->disabled()
+                            ->visible(fn ($record) => $record && $record->type === 'sale')
                             ->columnSpan(1),
                         Select::make('user_id')
-                            ->label('Técnico')
+                            ->label('Responsável')
                             ->relationship('user', 'name')
                             ->searchable()
                             ->preload()
                             ->required()
                             ->disabled()
                             ->columnSpan(1),
-                        PtbrMoney::make('labor_value_base')
-                            ->label('Valor Base (Mão de Obra)')
+                        PtbrMoney::make('base_value')
+                            ->label('Valor Base')
                             ->required()
                             ->disabled()
                             ->columnSpan(1),

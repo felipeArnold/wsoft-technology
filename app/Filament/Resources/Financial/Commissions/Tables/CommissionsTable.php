@@ -6,11 +6,14 @@ namespace App\Filament\Resources\Financial\Commissions\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Enum\Commission\CommissionStatusEnum;
+use App\Filament\Resources\Financial\Sales\SaleResource;
 use App\Filament\Resources\Services\ServiceOrders\ServiceOrderResource;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
@@ -18,6 +21,8 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 final class CommissionsTable
 {
@@ -25,17 +30,46 @@ final class CommissionsTable
     {
         return $table
             ->columns([
+                TextColumn::make('type')
+                    ->label('Tipo')
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'service_order' => 'Ordem de Serviço',
+                        'sale' => 'Venda',
+                        default => $state,
+                    })
+                    ->color(fn ($state) => match ($state) {
+                        'service_order' => 'info',
+                        'sale' => 'success',
+                        default => 'gray',
+                    })
+                    ->icon(fn ($state) => match ($state) {
+                        'service_order' => 'heroicon-o-wrench-screwdriver',
+                        'sale' => 'heroicon-o-shopping-cart',
+                        default => null,
+                    })
+                    ->sortable(),
                 TextColumn::make('serviceOrder.number')
-                    ->label('Ordem de Serviço')
+                    ->label('OS')
                     ->searchable()
                     ->sortable()
-                    ->url(fn ($record) => $record->service_order ? ServiceOrderResource::getUrl('view', ['record' => $record->service_order]) : null)
-                    ->color('primary'),
+                    ->url(fn ($record) => $record->service_order_id ? ServiceOrderResource::getUrl('view', ['record' => $record->service_order_id]) : null)
+                    ->color('primary')
+                    ->placeholder('—')
+                    ->toggleable(),
+                TextColumn::make('sale.sale_number')
+                    ->label('Venda')
+                    ->searchable()
+                    ->sortable()
+                    ->url(fn ($record) => $record->sale_id ? SaleResource::getUrl('view', ['record' => $record->sale_id]) : null)
+                    ->color('primary')
+                    ->placeholder('—')
+                    ->toggleable(),
                 TextColumn::make('user.name')
                     ->label('Responsável')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('labor_value_base')
+                TextColumn::make('base_value')
                     ->label('Valor Base')
                     ->money('BRL')
                     ->sortable(),
@@ -72,6 +106,13 @@ final class CommissionsTable
                 Group::make('user.name')->label('Responsável')->collapsible(),
             ])
             ->filters([
+                SelectFilter::make('type')
+                    ->label('Tipo')
+                    ->options([
+                        'service_order' => 'Ordem de Serviço',
+                        'sale' => 'Venda',
+                    ])
+                    ->native(false),
                 SelectFilter::make('status')
                     ->label('Status')
                     ->options([
@@ -80,7 +121,7 @@ final class CommissionsTable
                     ])
                     ->native(false),
                 SelectFilter::make('user_id')
-                    ->label('Técnico')
+                    ->label('Responsável')
                     ->relationship('user', 'name')
                     ->searchable()
                     ->preload()
@@ -135,6 +176,53 @@ final class CommissionsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    BulkAction::make('markAsPaid')
+                        ->label('Marcar como Pago')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->requiresConfirmation()
+                        ->modalHeading('Marcar comissões como pagas')
+                        ->modalDescription('Tem certeza que deseja marcar as comissões selecionadas como pagas?')
+                        ->modalSubmitActionLabel('Sim, marcar como pagas')
+                        ->action(function (Collection $records) {
+                            $user = Auth::user();
+                            $count = 0;
+
+                            foreach ($records as $record) {
+                                if ($record->isPending()) {
+                                    $record->markAsPaid($user);
+                                    $count++;
+                                }
+                            }
+
+                            Notification::make()
+                                ->title("{$count} comissões marcadas como pagas")
+                                ->success()
+                                ->send();
+                        }),
+                    BulkAction::make('markAsPending')
+                        ->label('Marcar como Pendente')
+                        ->icon('heroicon-o-clock')
+                        ->color('warning')
+                        ->requiresConfirmation()
+                        ->modalHeading('Marcar comissões como pendentes')
+                        ->modalDescription('Tem certeza que deseja reverter o pagamento das comissões selecionadas?')
+                        ->modalSubmitActionLabel('Sim, marcar como pendentes')
+                        ->action(function (Collection $records) {
+                            $count = 0;
+
+                            foreach ($records as $record) {
+                                if ($record->isPaid()) {
+                                    $record->markAsPending();
+                                    $count++;
+                                }
+                            }
+
+                            Notification::make()
+                                ->title("{$count} comissões revertidas para pendente")
+                                ->warning()
+                                ->send();
+                        }),
                     DeleteBulkAction::make(),
                 ]),
                 FilamentExportBulkAction::make('export')->label('Exportar'),

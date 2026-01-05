@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[ObservedBy(SaleObserver::class)]
@@ -20,6 +21,21 @@ final class Sale extends Model
     use Categorizable;
     use HasFactory;
     use SoftDeletes;
+
+    protected $fillable = [
+        'tenant_id',
+        'user_id',
+        'person_id',
+        'sale_number',
+        'subtotal',
+        'discount_amount',
+        'total',
+        'payment_method',
+        'installments',
+        'status',
+        'notes',
+        'completed_at',
+    ];
 
     protected $casts = [
         'subtotal' => 'float',
@@ -47,6 +63,21 @@ final class Sale extends Model
     public function items(): HasMany
     {
         return $this->hasMany(SaleItem::class);
+    }
+
+    public function commissions(): HasMany
+    {
+        return $this->hasMany(Commission::class);
+    }
+
+    public function commission(): HasOne
+    {
+        return $this->hasOne(Commission::class);
+    }
+
+    public function hasCommission(): bool
+    {
+        return $this->commission()->exists();
     }
 
     public function calculateTotals(): void

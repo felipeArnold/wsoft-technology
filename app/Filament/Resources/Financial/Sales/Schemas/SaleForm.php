@@ -38,7 +38,7 @@ final class SaleForm
                             ->icon('heroicon-o-shopping-bag')
                             ->schema([
                                 Section::make('Cliente')
-                                    ->description('Selecione o cliente para esta venda')
+                                    ->description('Selecione o cliente e responsável pela venda')
                                     ->icon('heroicon-o-user')
                                     ->schema([
                                         Select::make('person_id')
@@ -47,10 +47,19 @@ final class SaleForm
                                             ->options(fn () => Person::query()->where('is_client', true)->pluck('name', 'id'))
                                             ->native(false)
                                             ->searchable()
+                                            ->required()
                                             ->createOptionForm(Person::getFormSimple())
                                             ->createOptionUsing(function (array $data): int {
                                                 return Person::query()->create($data)->getKey();
                                             }),
+                                        Select::make('user_id')
+                                            ->label('Responsável pela Venda')
+                                            ->placeholder('Selecione o responsável')
+                                            ->relationship('user', 'name')
+                                            ->native(false)
+                                            ->searchable()
+                                            ->required()
+                                            ->helperText('Usuário que receberá a comissão desta venda'),
                                         TextInput::make('sale_number')
                                             ->label('Número da Venda')
                                             ->placeholder('Gerado automaticamente')
@@ -102,14 +111,18 @@ final class SaleForm
                                                     ->native(false)
                                                     ->searchable()
                                                     ->required()
-                                                    ->reactive()
-                                                    ->afterStateUpdated(function ($state, $set): void {
+                                                    ->live()
+                                                    ->afterStateUpdated(function ($state, $set, $get): void {
                                                         if ($state) {
                                                             $product = Product::find($state);
                                                             if ($product) {
                                                                 $set('product_name', $product->name);
                                                                 $set('unit_price', FormatterHelper::money($product->price_sale));
-                                                                $total = $product->price_sale;
+
+                                                                // Recalcular total do item
+                                                                $quantity = (int) $get('quantity') ?: 1;
+                                                                $discount = FormatterHelper::toDecimal($get('discount'));
+                                                                $total = ($product->price_sale * $quantity) - $discount;
                                                                 $set('total', FormatterHelper::money($total));
                                                             }
                                                         }
@@ -124,6 +137,7 @@ final class SaleForm
                                                     ->required()
                                                     ->live(onBlur: true)
                                                     ->afterStateUpdated(function ($state, $get, $set): void {
+                                                        // Recalcular total do item
                                                         $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
                                                         $discount = FormatterHelper::toDecimal($get('discount'));
                                                         $total = ($unitPrice * (int) $state) - $discount;
@@ -136,6 +150,7 @@ final class SaleForm
                                                     ->required()
                                                     ->live(onBlur: true)
                                                     ->afterStateUpdated(function ($state, $get, $set): void {
+                                                        // Recalcular total do item
                                                         $unitPrice = FormatterHelper::toDecimal($state);
                                                         $quantity = (int) $get('quantity');
                                                         $discount = FormatterHelper::toDecimal($get('discount'));
@@ -148,6 +163,7 @@ final class SaleForm
                                                     ->default('0,00')
                                                     ->live(onBlur: true)
                                                     ->afterStateUpdated(function ($state, $get, $set): void {
+                                                        // Recalcular total do item
                                                         $unitPrice = FormatterHelper::toDecimal($get('unit_price'));
                                                         $quantity = (int) $get('quantity');
                                                         $discount = FormatterHelper::toDecimal($state);
@@ -186,20 +202,45 @@ final class SaleForm
                                             ->defaultItems(1)
                                             ->live()
                                             ->afterStateUpdated(function ($get, $set): void {
-                                                $items = $get('items') ?? [];
-                                                $subtotal = 0;
-                                                foreach ($items as $item) {
-                                                    if (isset($item['total'])) {
-                                                        $subtotal += FormatterHelper::toDecimal($item['total']);
-                                                    }
-                                                }
-                                                $discountAmount = FormatterHelper::toDecimal($get('discount_amount'));
-                                                $total = $subtotal - $discountAmount;
-                                                $set('subtotal', FormatterHelper::money($subtotal));
-                                                $set('total', FormatterHelper::money($total));
+                                                self::recalculateTotals($get, $set);
                                             })
                                             ->columnSpanFull(),
                                     ]),
+
+                                Section::make('Resumo Financeiro')
+                                    ->description('Valores calculados automaticamente')
+                                    ->icon('heroicon-o-calculator')
+                                    ->schema([
+                                        PtbrMoney::make('subtotal')
+                                            ->label('Subtotal')
+                                            ->default('0,00')
+                                            ->disabled()
+                                            ->dehydrated()
+                                            ->live()
+                                            ->afterStateHydrated(function ($state, $get, $set): void {
+                                                // Recalculate when form loads
+                                                self::recalculateTotals($get, $set);
+                                            })
+                                            ->helperText('Soma de todos os itens da venda'),
+                                        PtbrMoney::make('discount_amount')
+                                            ->label('Desconto Geral')
+                                            ->default('0,00')
+                                            ->live(onBlur: true)
+                                            ->afterStateUpdated(function ($state, $get, $set): void {
+                                                // Recalculate total when discount changes
+                                                self::recalculateTotals($get, $set);
+                                            })
+                                            ->helperText('Desconto adicional sobre o total'),
+                                        PtbrMoney::make('total')
+                                            ->label('Total da Venda')
+                                            ->default('0,00')
+                                            ->disabled()
+                                            ->dehydrated()
+                                            ->live()
+                                            ->extraAttributes(['class' => 'font-bold'])
+                                            ->helperText('Subtotal - Desconto'),
+                                    ])
+                                    ->columns(3),
 
                                 Section::make('Etiquetas')
                                     ->description('Classifique esta venda com etiquetas')
@@ -304,5 +345,31 @@ final class SaleForm
                             ]),
                     ]),
             ]);
+    }
+
+    /**
+     * Recalculate sale totals based on items
+     */
+    private static function recalculateTotals($get, $set): void
+    {
+        $items = $get('items') ?? [];
+        $subtotal = 0;
+
+        // Calculate subtotal from all items
+        foreach ($items as $item) {
+            if (isset($item['total'])) {
+                $subtotal += FormatterHelper::toDecimal($item['total']);
+            }
+        }
+
+        // Get discount amount
+        $discountAmount = FormatterHelper::toDecimal($get('discount_amount') ?? '0,00');
+
+        // Calculate final total
+        $total = $subtotal - $discountAmount;
+
+        // Update fields
+        $set('subtotal', FormatterHelper::money($subtotal));
+        $set('total', FormatterHelper::money($total));
     }
 }
