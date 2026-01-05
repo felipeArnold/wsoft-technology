@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Filament\Clusters\Settings\Services\Schemas;
 
 use App\Filament\Components\PtbrMoney;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Validation\Rule;
 
 final class ServiceForm
 {
@@ -21,7 +23,16 @@ final class ServiceForm
                         TextInput::make('name')
                             ->label('Nome')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->unique(
+                                table: 'services',
+                                column: 'name',
+                                ignoreRecord: true,
+                                modifyRuleUsing: fn ($rule) => $rule->where('tenant_id', Filament::getTenant()->id)
+                            )
+                            ->validationMessages([
+                                'unique' => 'Já existe um serviço com este nome.',
+                            ]),
                         PtbrMoney::make('price')
                             ->label('Preço')
                             ->default('0,00')
