@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Filament\Components\PtbrMoney;
 use App\Models\Concerns\Categorizable;
 use App\Models\Person\Person;
 use Database\Factories\ProductFactory;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,6 +36,43 @@ final class Product extends Model
         'stock_alert' => 'integer',
         'attachment' => 'array',
     ];
+
+    public static function getFormFields(bool $useRelationship = true): array
+    {
+        $categoryField = Select::make('category_id')
+            ->label('Categoria')
+            ->searchable()
+            ->preload()
+            ->columnSpan(1);
+
+        if ($useRelationship) {
+            $categoryField->relationship('category', 'name');
+        } else {
+            $categoryField->options(fn () => Category::pluck('name', 'id'));
+        }
+
+        return [
+            TextInput::make('name')
+                ->label('Nome do Produto')
+                ->required()
+                ->maxLength(255)
+                ->columnSpan(2),
+            $categoryField,
+            TextInput::make('sku')
+                ->label('Código SKU')
+                ->maxLength(50)
+                ->columnSpan(1),
+            PtbrMoney::make('price_cost')
+                ->label('Valor de Custo')
+                ->default('0,00')
+                ->columnSpan(1),
+            PtbrMoney::make('price_sale')
+                ->label('Valor de Venda')
+                ->default('0,00')
+                ->required()
+                ->columnSpan(1),
+        ];
+    }
 
     public function tenant(): BelongsTo
     {

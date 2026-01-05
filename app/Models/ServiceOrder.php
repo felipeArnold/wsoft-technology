@@ -650,6 +650,24 @@ final class ServiceOrder extends Model implements Eventable
                                     }
                                 }
                             })
+                            ->createOptionForm([
+                                Section::make('Informações do Serviço')
+                                    ->description('Preencha os dados para criar um novo serviço')
+                                    ->schema(Service::getFormFields())
+                                    ->columns(3)
+                                    ->columnSpanFull(),
+                            ])
+                            ->createOptionUsing(function (array $data): int {
+                                $service = Service::query()->create([
+                                    'tenant_id' => Filament::getTenant()->id,
+                                    'name' => $data['name'],
+                                    'price' => FormatterHelper::toDecimal($data['price'] ?? 0),
+                                    'discount' => FormatterHelper::toDecimal($data['discount'] ?? 0),
+                                    'description' => $data['description'] ?? null,
+                                ]);
+
+                                return $service->id;
+                            })
                             ->columnSpan(4),
                         Hidden::make('service_name'),
                         TextInput::make('quantity')
@@ -778,6 +796,24 @@ final class ServiceOrder extends Model implements Eventable
                                         self::recalculateTotals($get, $set);
                                     }
                                 }
+                            })
+                            ->createOptionForm([
+                                Section::make('Informações do Produto')
+                                    ->schema(Product::getFormFields(useRelationship: false))
+                                    ->columns(3)
+                                    ->columnSpanFull(),
+                            ])
+                            ->createOptionUsing(function (array $data): int {
+                                $product = Product::create([
+                                    'tenant_id' => Filament::getTenant()->id,
+                                    'name' => $data['name'],
+                                    'category_id' => $data['category_id'] ?? null,
+                                    'sku' => $data['sku'] ?? null,
+                                    'price_cost' => FormatterHelper::toDecimal($data['price_cost'] ?? 0),
+                                    'price_sale' => FormatterHelper::toDecimal($data['price_sale'] ?? 0),
+                                ]);
+
+                                return $product->id;
                             })
                             ->columnSpan(4),
                         Hidden::make('product_name'),
