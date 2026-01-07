@@ -15,6 +15,7 @@ use App\Filament\Widgets\LtvTrendChart;
 use App\Filament\Widgets\MonthlyCashFlow;
 use App\Filament\Widgets\MonthlyExpensesDistributionWidget;
 use App\Filament\Widgets\MrrTrendChart;
+use App\Filament\Widgets\OnboardingWidget;
 use App\Filament\Widgets\OverdueAccounts;
 use App\Filament\Widgets\PaymentMethodsChart;
 use App\Filament\Widgets\RecentStockMovementsWidget;
@@ -45,6 +46,9 @@ final class Dashboard extends BaseDashboard
     {
         return $schema
             ->components([
+                ...$this->getWidgetsSchemaComponents([
+                    OnboardingWidget::class,
+                ]),
                 Tabs::make('Dashboard')
                     ->tabs([
                         Tabs\Tab::make('Financeiro')

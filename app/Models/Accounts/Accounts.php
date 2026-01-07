@@ -11,8 +11,10 @@ use App\Models\Person\Person;
 use App\Models\ServiceOrder;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Observers\AccountsObserver;
 use Database\Factories\Accounts\AccountsFactory;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
+#[ObservedBy(AccountsObserver::class)]
 final class Accounts extends Model
 {
     /** @use HasFactory<AccountsFactory> */

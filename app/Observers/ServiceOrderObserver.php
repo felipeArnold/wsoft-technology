@@ -10,12 +10,18 @@ use App\Helpers\FormatterHelper;
 use App\Models\Commission;
 use App\Models\ServiceOrder;
 use App\Notifications\AppointmentConfirmationNotification;
+use App\Services\Onboarding\OnboardingService;
 use Exception;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 final class ServiceOrderObserver
 {
+    public function __construct(
+        private readonly OnboardingService $onboardingService
+    ) {}
+
     public function creating(ServiceOrder $serviceOrder)
     {
         // Generate order number based on current month
@@ -54,6 +60,12 @@ final class ServiceOrderObserver
      */
     public function created(ServiceOrder $serviceOrder): void
     {
+        // Mark onboarding step
+        if (Filament::auth()->check()) {
+            $user = Filament::auth()->user();
+            $this->onboardingService->completeStep($user, 'create_os');
+        }
+
         // Send appointment confirmation email if appointment is scheduled
         if ($serviceOrder->hasScheduledAppointment() &&
             ! $serviceOrder->appointment_confirmation_sent_at) {
@@ -93,6 +105,12 @@ final class ServiceOrderObserver
         ) {
             $serviceOrder->completed_at = now();
             $serviceOrder->saveQuietly();
+
+            // Mark onboarding step when OS is finalized
+            if (Filament::auth()->check()) {
+                $user = Filament::auth()->user();
+                $this->onboardingService->completeStep($user, 'finalize_os');
+            }
         }
 
         // Generate commission when status changes to completed
