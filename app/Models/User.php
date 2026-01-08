@@ -6,6 +6,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Observers\UserObserver;
+use App\Services\Onboarding\OnboardingService;
 use Database\Factories\UserFactory;
 use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Filament\Facades\Filament;
@@ -57,6 +58,7 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
         'avatar',
         'has_email_authentication',
         'commission_percentage',
+        'is_activated',
     ];
 
     /**
@@ -135,6 +137,38 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
         return $this->hasMany(ServiceOrder::class);
     }
 
+    public function onboardingSteps(): HasMany
+    {
+        return $this->hasMany(UserOnboardingStep::class);
+    }
+
+    public function getOnboardingProgress(): float
+    {
+        $totalSteps = 6; // Total de steps obrigatórios
+        $completedSteps = $this->onboardingSteps()->where('completed', true)->count();
+
+        return $totalSteps > 0 ? ($completedSteps / $totalSteps) * 100 : 0;
+    }
+
+    public function hasCompletedOnboarding(): bool
+    {
+        return $this->getOnboardingProgress() === 100.0;
+    }
+
+    public function checkAndActivate(): void
+    {
+        $requiredSteps = OnboardingService::getActivationRequiredStepIds();
+
+        $completedRequired = $this->onboardingSteps()
+            ->whereIn('step_id', $requiredSteps)
+            ->where('completed', true)
+            ->count();
+
+        if ($completedRequired === count($requiredSteps) && ! $this->is_activated) {
+            $this->update(['is_activated' => true]);
+        }
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -147,6 +181,7 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
             'password' => 'hashed',
             'has_email_authentication' => 'boolean',
             'commission_percentage' => 'decimal:2',
+            'is_activated' => 'boolean',
         ];
     }
 }

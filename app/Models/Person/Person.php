@@ -11,11 +11,13 @@ use App\Models\Sale;
 use App\Models\ServiceOrder;
 use App\Models\Tenant;
 use App\Models\Vehicle;
+use App\Observers\PersonObserver;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -40,6 +42,7 @@ use Leandrocfe\FilamentPtbrFormFields\Document;
  * @property Carbon|null $deleted_at
  * @property-read Tenant $tenant
  */
+#[ObservedBy(PersonObserver::class)]
 final class Person extends Model
 {
     use Categorizable;

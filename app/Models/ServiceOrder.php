@@ -157,6 +157,7 @@ final class ServiceOrder extends Model implements Eventable
                                         ->columnSpan(1),
                                     Select::make('user_id')
                                         ->label('Responsável')
+                                        ->default(fn () => Filament::auth()->user()?->id)
                                         ->relationship('user', 'name')
                                         ->searchable()
                                         ->preload()

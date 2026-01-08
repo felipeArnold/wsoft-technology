@@ -87,6 +87,7 @@ final class MarkAsReceivedAction extends Action
         $account->update([
             'parcels' => $account->parcels + 1,
             'amount' => $account->amount + $newInstallmentAmount,
+            'paid_at' => null,
         ]);
 
         Notification::make()
