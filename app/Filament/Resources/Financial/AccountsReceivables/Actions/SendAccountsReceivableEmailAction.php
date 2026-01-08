@@ -43,7 +43,7 @@ final class SendAccountsReceivableEmailAction extends Action
             Forms\Components\Select::make('email_template_id')
                 ->label('Template de E-mail')
                 ->searchable()
-                ->preload()
+                ->lazy()
                 ->required()
                 ->options(fn (): array => EmailTemplate::query()
                     ->where('context', TemplateContext::AccountsReceivable->value)
