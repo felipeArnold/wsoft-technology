@@ -6,6 +6,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Observers\UserObserver;
+use App\Services\Onboarding\OnboardingService;
 use Database\Factories\UserFactory;
 use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Filament\Facades\Filament;
@@ -156,7 +157,7 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
 
     public function checkAndActivate(): void
     {
-        $requiredSteps = ['create_os', 'register_payment', 'view_dashboard'];
+        $requiredSteps = OnboardingService::getActivationRequiredStepIds();
 
         $completedRequired = $this->onboardingSteps()
             ->whereIn('step_id', $requiredSteps)

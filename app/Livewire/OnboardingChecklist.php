@@ -37,6 +37,11 @@ final class OnboardingChecklist extends Component
     public function dismiss(): void
     {
         $user = Filament::auth()->user();
+
+        if (! $user) {
+            return;
+        }
+
         session()->put('onboarding_dismissed_'.$user->id, true);
         $this->dismissed = true;
     }
@@ -45,7 +50,6 @@ final class OnboardingChecklist extends Component
     {
         $this->linkCopied = true;
 
-        // Reset após 3 segundos
         $this->dispatch('reset-link-copied');
     }
 
@@ -72,7 +76,6 @@ final class OnboardingChecklist extends Component
 
         $this->progress = $onboardingService->getProgress($user);
 
-        // Gerar URLs para cada step com o tenant correto
         foreach ($this->progress['steps'] as &$step) {
             $step['action_url'] = $this->generateActionUrl($step);
         }
@@ -88,7 +91,7 @@ final class OnboardingChecklist extends Component
                 return Filament::getUrl();
             }
         } catch (Exception $e) {
-            // Se falhar, retorna null
+            report($e);
         }
 
         return null;

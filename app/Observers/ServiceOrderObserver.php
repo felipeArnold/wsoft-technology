@@ -12,7 +12,6 @@ use App\Models\ServiceOrder;
 use App\Notifications\AppointmentConfirmationNotification;
 use App\Services\Onboarding\OnboardingService;
 use Exception;
-use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -60,10 +59,9 @@ final class ServiceOrderObserver
      */
     public function created(ServiceOrder $serviceOrder): void
     {
-        // Mark onboarding step
-        if (Filament::auth()->check()) {
-            $user = Filament::auth()->user();
-            $this->onboardingService->completeStep($user, 'create_os');
+        // Mark onboarding step for the service order owner
+        if ($serviceOrder->user) {
+            $this->onboardingService->completeStep($serviceOrder->user, 'create_os');
         }
 
         // Send appointment confirmation email if appointment is scheduled
@@ -106,10 +104,9 @@ final class ServiceOrderObserver
             $serviceOrder->completed_at = now();
             $serviceOrder->saveQuietly();
 
-            // Mark onboarding step when OS is finalized
-            if (Filament::auth()->check()) {
-                $user = Filament::auth()->user();
-                $this->onboardingService->completeStep($user, 'finalize_os');
+            // Mark onboarding step when OS is finalized for the service order owner
+            if ($serviceOrder->user) {
+                $this->onboardingService->completeStep($serviceOrder->user, 'finalize_os');
             }
         }
 

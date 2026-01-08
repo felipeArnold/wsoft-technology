@@ -6,8 +6,8 @@ namespace App\Filament\Resources\Financial\AccountsReceivables\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Enum\AccountsReceivable\PaymentMethodEnum;
+use App\Filament\Resources\Financial\AccountsReceivables\Actions\MarkAccountsInstallmentAsReceivedAction;
 use App\Filament\Resources\Financial\AccountsReceivables\Actions\SendAccountsReceivableEmailAction;
-use App\Filament\Resources\Financial\AccountsReceivables\Actions\SendOverdueEmailAction;
 use App\Models\Accounts\AccountsInstallments;
 use App\Models\Category;
 use App\Models\Person\Person;
@@ -19,7 +19,6 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
@@ -381,57 +380,9 @@ final class AccountsReceivablesTable
                 EditAction::make(),
                 SendAccountsReceivableEmailAction::make()
                     ->record(fn ($record) => $record->accounts),
-//                SendOverdueEmailAction::make()
-//                    ->record(fn ($record) => $record->accounts),
-                Action::make('mark_as_received')
-                    ->label('Marcar como Recebido')
-                    ->icon('heroicon-o-check-circle')
-                    ->color('success')
-                    ->visible(fn ($record) => ! $record->status->value)
-                    ->requiresConfirmation()
-                    ->action(function ($record): void {
-                        $record->update([
-                            'status' => 1,
-                            'paid_at' => now(),
-                        ]);
-
-                        $account = $record->accounts;
-
-                        if ($account && $account->recurring && $record->installment_number === $account->parcels) {
-
-                            $newDueDate = $record->due_date->copy()->addMonth();
-
-                            // Valor da nova parcela
-                            $newInstallmentAmount = $record->amount;
-
-                            // Resetar o valor da última parcela paga
-                            $record->update([
-                                'amount' => 0,
-                            ]);
-
-                            // Criar nova parcela
-                            AccountsInstallments::create([
-                                'tenant_id' => $record->tenant_id,
-                                'accounts_id' => $account->id,
-                                'installment_number' => $record->installment_number + 1,
-                                'amount' => $newInstallmentAmount,
-                                'due_date' => $newDueDate,
-                                'status' => 0,
-                            ]);
-
-                            // Atualizar parcelas e valor total da conta
-                            $account->update([
-                                'parcels' => $account->parcels + 1,
-                                'amount' => $account->amount + $newInstallmentAmount,
-                            ]);
-
-                            Notification::make()
-                                ->title('Conta recorrente criada!')
-                                ->success()
-                                ->body('Uma nova parcela foi criada para a conta recorrente.')
-                                ->send();
-                        }
-                    }),
+                //                SendOverdueEmailAction::make()
+                //                    ->record(fn ($record) => $record->accounts),
+                MarkAccountsInstallmentAsReceivedAction::make(),
                 Action::make('mark_as_pending')
                     ->label('Marcar como Pendente')
                     ->icon('heroicon-o-x-circle')
@@ -458,49 +409,7 @@ final class AccountsReceivablesTable
                         ->color('success')
                         ->requiresConfirmation()
                         ->action(function ($records): void {
-                            $records->each(function ($record): void {
-                                $record->update([
-                                    'status' => 1,
-                                    'paid_at' => now(),
-                                ]);
-
-                                $account = $record->accounts;
-
-                                if ($account && $account->recurring && $record->installment_number === $account->parcels) {
-
-                                    $newDueDate = $record->due_date->copy()->addMonth();
-
-                                    // Valor da nova parcela
-                                    $newInstallmentAmount = $record->amount;
-
-                                    // Resetar o valor da última parcela paga
-                                    $record->update([
-                                        'amount' => 0,
-                                    ]);
-
-                                    // Criar nova parcela
-                                    AccountsInstallments::create([
-                                        'tenant_id' => $record->tenant_id,
-                                        'accounts_id' => $account->id,
-                                        'installment_number' => $record->installment_number + 1,
-                                        'amount' => $newInstallmentAmount,
-                                        'due_date' => $newDueDate,
-                                        'status' => 0,
-                                    ]);
-
-                                    // Atualizar parcelas e valor total da conta
-                                    $account->update([
-                                        'parcels' => $account->parcels + 1,
-                                        'amount' => $account->amount + $newInstallmentAmount,
-                                    ]);
-
-                                    Notification::make()
-                                        ->title('Conta recorrente criada!')
-                                        ->success()
-                                        ->body('Uma nova parcela foi criada para a conta recorrente.')
-                                        ->send();
-                                }
-                            });
+                            $records->each(fn ($record) => MarkAccountsInstallmentAsReceivedAction::execute($record));
                         }),
                     Action::make('mark_all_pending')
                         ->label('Marcar como Pendente')

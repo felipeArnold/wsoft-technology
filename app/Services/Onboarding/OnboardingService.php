@@ -92,6 +92,27 @@ final class OnboardingService
         ],
     ];
 
+    /**
+     * Get the list of step IDs that are required for account activation.
+     *
+     * @return array<string>
+     */
+    public static function getActivationRequiredStepIds(): array
+    {
+        // These are the critical steps that must be completed for activation
+        return ['create_os', 'register_payment', 'view_dashboard'];
+    }
+
+    /**
+     * Get all mandatory step IDs (steps with mandatory = true).
+     *
+     * @return array<string>
+     */
+    public static function getMandatoryStepIds(): array
+    {
+        return array_keys(array_filter(self::STEPS, fn ($step) => $step['mandatory'] ?? false));
+    }
+
     public function completeStep(User $user, string $stepId): void
     {
         if (! $this->isValidStep($stepId)) {

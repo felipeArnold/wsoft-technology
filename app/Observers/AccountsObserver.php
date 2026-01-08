@@ -6,7 +6,6 @@ namespace App\Observers;
 
 use App\Models\Accounts\Accounts;
 use App\Services\Onboarding\OnboardingService;
-use Filament\Facades\Filament;
 
 final class AccountsObserver
 {
@@ -19,9 +18,9 @@ final class AccountsObserver
      */
     public function created(Accounts $accounts): void
     {
-        if ($accounts->paid_at && Filament::auth()->check()) {
-            $user = Filament::auth()->user();
-            $this->onboardingService->completeStep($user, 'register_payment');
+        // Mark onboarding step for the account owner when payment is registered
+        if ($accounts->paid_at && $accounts->user) {
+            $this->onboardingService->completeStep($accounts->user, 'register_payment');
         }
     }
 
@@ -30,9 +29,9 @@ final class AccountsObserver
      */
     public function updated(Accounts $accounts): void
     {
-        if ($accounts->wasChanged('paid_at') && $accounts->paid_at && Filament::auth()->check()) {
-            $user = Filament::auth()->user();
-            $this->onboardingService->completeStep($user, 'register_payment');
+        // Mark onboarding step when status is set to paid for the account owner
+        if ($accounts->wasChanged('status') && $accounts->status === 'paid' && $accounts->user) {
+            $this->onboardingService->completeStep($accounts->user, 'register_payment');
         }
     }
 
