@@ -117,7 +117,7 @@ $structuredData = [
         'name' => 'Como Funciona o Sistema de Gestão de Clientes WSoft',
         'description' => 'Demonstração prática do sistema de gestão de clientes WSoft. Veja como cadastrar clientes, acompanhar histórico de vendas e gerenciar seu CRM de forma simples e profissional.',
         'thumbnailUrl' => 'https://img.youtube.com/vi/5SufzoP1Toc/maxresdefault.jpg',
-        'uploadDate' => '2026-01-08',
+        'uploadDate' => '2026-01-08T00:00:00-03:00',
         'contentUrl' => 'https://www.youtube.com/watch?v=5SufzoP1Toc',
         'embedUrl' => 'https://www.youtube.com/embed/5SufzoP1Toc',
         'duration' => 'PT5M',
