@@ -62,16 +62,4 @@ final class CommissionResource extends Resource
             'edit' => EditCommission::route('/{record}/edit'),
         ];
     }
-
-    public static function getNavigationBadge(): ?string
-    {
-        return (string) self::getModel()::query()->where('status', 'pending')->count();
-    }
-
-    public static function getNavigationBadgeColor(): ?string
-    {
-        $pendingCount = self::getModel()::query()->where('status', 'pending')->count();
-
-        return $pendingCount > 0 ? 'warning' : 'success';
-    }
 }

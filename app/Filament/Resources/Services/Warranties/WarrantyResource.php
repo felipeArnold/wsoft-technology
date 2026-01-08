@@ -75,22 +75,4 @@ final class WarrantyResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-
-    public static function getNavigationBadge(): ?string
-    {
-        return self::getModel()::expiring(30)->count() > 0
-            ? (string) self::getModel()::expiring(30)->count()
-            : null;
-    }
-
-    public static function getNavigationBadgeColor(): string|array|null
-    {
-        $count = self::getModel()::expiring(30)->count();
-
-        return match (true) {
-            $count > 10 => 'danger',
-            $count > 5 => 'warning',
-            default => 'success',
-        };
-    }
 }
