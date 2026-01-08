@@ -377,12 +377,12 @@ final class AccountsReceivablesTable
                     ->icon('heroicon-o-funnel')
             )
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->hiddenLabel()->tooltip('Visualizar detalhes'),
+                EditAction::make()->hiddenLabel()->tooltip('Editar conta a receber'),
                 SendAccountsReceivableEmailAction::make()
                     ->record(fn ($record) => $record->accounts),
-//                SendOverdueEmailAction::make()
-//                    ->record(fn ($record) => $record->accounts),
+                //                SendOverdueEmailAction::make()
+                //                    ->record(fn ($record) => $record->accounts),
                 Action::make('mark_as_received')
                     ->label('Marcar como Recebido')
                     ->icon('heroicon-o-check-circle')
@@ -403,11 +403,6 @@ final class AccountsReceivablesTable
 
                             // Valor da nova parcela
                             $newInstallmentAmount = $record->amount;
-
-                            // Resetar o valor da última parcela paga
-                            $record->update([
-                                'amount' => 0,
-                            ]);
 
                             // Criar nova parcela
                             AccountsInstallments::create([
@@ -457,6 +452,7 @@ final class AccountsReceivablesTable
                         ->icon('heroicon-o-check-circle')
                         ->color('success')
                         ->requiresConfirmation()
+                        ->accessSelectedRecords()
                         ->action(function ($records): void {
                             $records->each(function ($record): void {
                                 $record->update([
@@ -472,11 +468,6 @@ final class AccountsReceivablesTable
 
                                     // Valor da nova parcela
                                     $newInstallmentAmount = $record->amount;
-
-                                    // Resetar o valor da última parcela paga
-                                    $record->update([
-                                        'amount' => 0,
-                                    ]);
 
                                     // Criar nova parcela
                                     AccountsInstallments::create([
@@ -507,6 +498,7 @@ final class AccountsReceivablesTable
                         ->icon('heroicon-o-x-circle')
                         ->color('warning')
                         ->requiresConfirmation()
+                        ->accessSelectedRecords()
                         ->action(function ($records): void {
                             $records->each(function ($record): void {
                                 $record->update([
