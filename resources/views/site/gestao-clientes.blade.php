@@ -110,6 +110,25 @@ $structuredData = [
                 'position' => 3
             ]
         ]
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'VideoObject',
+        'name' => 'Como Funciona o Sistema de Gestão de Clientes WSoft',
+        'description' => 'Demonstração prática do sistema de gestão de clientes WSoft. Veja como cadastrar clientes, acompanhar histórico de vendas e gerenciar seu CRM de forma simples e profissional.',
+        'thumbnailUrl' => 'https://img.youtube.com/vi/5SufzoP1Toc/maxresdefault.jpg',
+        'uploadDate' => '2026-01-08',
+        'contentUrl' => 'https://www.youtube.com/watch?v=5SufzoP1Toc',
+        'embedUrl' => 'https://www.youtube.com/embed/5SufzoP1Toc',
+        'duration' => 'PT5M',
+        'publisher' => [
+            '@type' => 'Organization',
+            'name' => 'WSoft',
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => 'https://www.wsoft.dev.br/logo.png'
+            ]
+        ]
     ]
 ];
 @endphp
@@ -124,16 +143,20 @@ $structuredData = [
     :structuredData="$structuredData"
 >
 
-<x-site.hero
-    badge="Software CRM"
-    highlight="Sistema de Gestão de Clientes"
-    title=""
-    description="Centralize cadastros, histórico de vendas e atendimentos em um único lugar. O sistema de gestão de clientes ideal para quem quer crescer. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
-    :idealFor="['Lojas e Comércio', 'Prestadores de Serviço', 'Oficinas e Mecânicas', 'Consultórios']"
-    idealForTitle="Perfeito para:"
-    primaryButtonText="Teste grátis por 7 dias"
-    primaryButtonUrl="/app/register"
->
+<div x-data="{ videoModal: false }" @open-video-modal.window="videoModal = true">
+    <x-site.hero
+        badge="Software CRM"
+        highlight="Sistema de Gestão de Clientes"
+        title=""
+        description="Centralize cadastros, histórico de vendas e atendimentos em um único lugar. O sistema de gestão de clientes ideal para quem quer crescer. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
+        :idealFor="['Lojas e Comércio', 'Prestadores de Serviço', 'Oficinas e Mecânicas', 'Consultórios']"
+        idealForTitle="Perfeito para:"
+        primaryButtonText="Teste grátis por 7 dias"
+        primaryButtonUrl="/app/register"
+        secondaryButtonText="Ver Demonstração"
+        secondaryButtonUrl="#video-demo"
+        secondaryButtonIcon="fa-solid fa-play"
+    >
     <div class="relative">
         <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
         <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
@@ -173,6 +196,65 @@ $structuredData = [
         </div>
     </div>
 </x-site.hero>
+
+    <!-- Video Modal -->
+    <div
+        x-show="videoModal"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        @click.self="videoModal = false"
+        @keydown.escape.window="videoModal = false"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+        style="display: none;"
+    >
+        <div
+            x-show="videoModal"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+            class="relative w-full max-w-5xl bg-slate-900 rounded-2xl shadow-2xl overflow-hidden"
+        >
+            <!-- Close Button -->
+            <button
+                @click="videoModal = false"
+                class="absolute top-4 right-4 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-colors"
+            >
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Video Container -->
+            <div class="relative" style="padding-bottom: 56.25%;">
+                <iframe
+                    x-show="videoModal"
+                    :src="videoModal ? 'https://www.youtube.com/embed/5SufzoP1Toc?autoplay=1' : ''"
+                    class="absolute top-0 left-0 w-full h-full border-0"
+                    title="Demonstração - Sistema de Gestão de Clientes WSoft"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to open video modal -->
+    <script>
+        document.addEventListener('click', function(e) {
+            // Check if clicked element is the video demo button
+            if (e.target.closest('a[href="#video-demo"]')) {
+                e.preventDefault();
+                // Dispatch custom event to trigger modal
+                window.dispatchEvent(new CustomEvent('open-video-modal'));
+            }
+        });
+    </script>
+</div>
 
 <!-- Pain vs Gain -->
 <x-site.comparison

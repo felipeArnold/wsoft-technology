@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enum\TenantType;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,7 @@ final class DatabaseSeeder extends Seeder
             'name' => 'WSoft Technology',
             'slug' => Tenant::generateUniqueSlug('WSoft Technology'),
             'stripe_id' => 'cus_test_'.uniqid(),
+            'type' => TenantType::AUTO_REPAIR
         ]);
 
         // Criar usuário
