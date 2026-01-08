@@ -216,7 +216,7 @@ final class AccountsPayableForm
                                                 ToggleButtons::make('recurring')
                                                     ->label('Recorrente')
                                                     ->boolean()
-                                                    ->default('no')
+                                                    ->default(false)
                                                     ->inline()
                                                     ->grouped()
                                                     ->required(),
