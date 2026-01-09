@@ -54,7 +54,7 @@ final class AccountsPayableForm
                                                     ->native(false)
                                                     ->searchable()
                                                     ->preload()
-                                                    ->createOptionForm(Person::getFormSuppliersSimple())
+                                                    ->createOptionForm(Person::getFormSimple())
                                                     ->createOptionUsing(function (array $data): int {
                                                         return Person::query()->create($data)->getKey();
                                                     })

@@ -15,6 +15,7 @@ use App\Observers\PersonObserver;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -319,7 +320,39 @@ final class Person extends Model
                     ? 'heroicon-o-building-storefront'
                     : 'heroicon-o-user')
                 ->schema([
+                    ToggleButtons::make('person_type')
+                        ->label('Tipo de cadastro')
+                        ->options([
+                            'client' => 'Cliente',
+                            'supplier' => 'Fornecedor',
+                            'both' => 'Ambos'
+                        ])
+                        ->default('client')
+                        ->inline()
+                        ->grouped()
+                        ->required()
+                        ->reactive()
+                        ->columnSpanFull()
+                        ->afterStateHydrated(function ($state, callable $set, callable $get) {
+                            $isClient = $get('is_client');
+                            $isSupplier = $get('is_supplier');
+
+                            if ($isClient && $isSupplier) {
+                                $set('person_type', 'both');
+                            } elseif ($isSupplier) {
+                                $set('person_type', 'supplier');
+                            } else {
+                                $set('person_type', 'client');
+                            }
+                        })
+                        ->afterStateUpdated(function ($state, callable $set) {
+                            $set('is_client', in_array($state, ['client', 'both']));
+                            $set('is_supplier', in_array($state, ['supplier', 'both']));
+                        })
+                        ->dehydrated(false),
+
                     Hidden::make('is_client')->default(true),
+                    Hidden::make('is_supplier')->default(false),
 
                     // Campo para CNPJ - usa CnpjComponent com auto-preenchimento
                     CnpjComponent::make('document')
