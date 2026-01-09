@@ -117,9 +117,9 @@ $structuredData = [
 @endphp
 
 <x-site-layout
-    :title="'Sistema de Gestão para Oficinas Mecânicas | WSoft Tecnologia'"
-    :description="'Sistema completo para gestão de oficinas mecânicas. Controle de OS, financeiro, estoque, cadastro de clientes e fornecedores. Teste grátis!'"
-    :keywords="'sistema de gestão para pequenas empresas, software de gestão empresarial, sistema para microempresa, sistema financeiro online, sistema de ordem de serviço, controle financeiro, contas a pagar e receber, controle de inadimplência, cadastro de clientes e fornecedores, sistema de fluxo de caixa, ERP simples, sistema sem mensalidade, controle de clientes, organização empresarial, controle de produtos'"
+    :title="'Sistema para Oficina Mecânica: Gestão Completa e Fácil | Wsoft'"
+    :description="'Controle estoque, ordens de serviço, financeiro e clientes em um só lugar. Teste o software para oficina mecânica da Wsoft grátis e modernize sua gestão hoje!'"
+    :keywords="'sistema para oficina mecânica, software para oficina mecânica, gestão de oficina, ordem de serviço digital, OS digital, controle financeiro oficina, estoque de peças, cadastro de clientes oficina, sistema de gestão oficina, auto center, funilaria, controle de inadimplência, fluxo de caixa oficina, software oficina grátis'"
     :canonical="'https://www.wsoft.dev.br/landing/oficina'"
     :ogTitle="'Sistema de Gestão para Oficinas Mecânicas | WSoft'"
     :ogDescription="'Pare de Perder Dinheiro com Desorganização. Sistema de Gestão Empresarial que organiza seu financeiro, elimina inadimplência e aumenta seus lucros.'"
@@ -137,18 +137,18 @@ $structuredData = [
                 Software Online
             </div>
             <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight mb-4">
-                Sistema de Gestão para <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Oficinas Mecânicas</span>
+                Pare de perder dinheiro com desorganização. <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">O software que sua oficina precisava chegou</span>
             </h1>
             <h2 class="text-xl md:text-2xl font-bold text-blue-200 mb-6">
-                Pare de perder dinheiro com desorganização
+                Sistema completo para gestão de oficinas mecânicas
             </h2>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
                 Sistema de Gestão Empresarial que organiza seu financeiro, elimina inadimplência e aumenta seus lucros. O <strong>sistema de gestão para pequenas empresas</strong> ideal para oficinas mecânicas. <span class="text-emerald-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
-                <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
-                    Teste grátis por 7 dias
+                <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-emerald-500 text-white font-bold px-8 py-4 shadow-lg shadow-emerald-500/30 hover:bg-emerald-600 hover:-translate-y-1 transition transform duration-200">
+                    Começar Teste Grátis Agora
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
                 <a href="#como-funciona" class="inline-flex justify-center items-center rounded-xl border border-white/30 text-white font-semibold px-8 py-4 hover:bg-white/10 transition backdrop-blur-sm">
