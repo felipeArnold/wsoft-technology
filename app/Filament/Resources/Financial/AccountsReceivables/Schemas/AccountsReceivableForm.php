@@ -48,9 +48,9 @@ final class AccountsReceivableForm
                                         Grid::make(3)
                                             ->schema([
                                                 Select::make('person_id')
-                                                    ->label('Cliente')
-                                                    ->placeholder('Selecione o cliente')
-                                                    ->options(fn () => Person::query()->where('is_client', true)->pluck('name', 'id'))
+                                                    ->label('Cliente/Fornecedor')
+                                                    ->placeholder('Selecione o cliente/fornecedor')
+                                                    ->options(fn () => Person::query()->pluck('name', 'id'))
                                                     ->native(false)
                                                     ->searchable()
                                                     ->createOptionForm(Person::getFormSimple())

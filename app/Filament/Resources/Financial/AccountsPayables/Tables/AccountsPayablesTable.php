@@ -42,7 +42,7 @@ final class AccountsPayablesTable
             )
             ->columns([
                 TextColumn::make('accounts.person.name')
-                    ->label('Fornecedor')
+                    ->label('Cliente/Fornecedor')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('installment_number')

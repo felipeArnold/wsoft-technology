@@ -48,9 +48,9 @@ final class AccountsPayableForm
                                         Grid::make(3)
                                             ->schema([
                                                 Select::make('person_id')
-                                                    ->label('Fornecedor')
-                                                    ->placeholder('Selecione o fornecedor')
-                                                    ->options(fn () => Person::query()->where('people.is_supplier', true)->pluck('name', 'id'))
+                                                    ->label('Cliente/Fornecedor')
+                                                    ->placeholder('Selecione o cliente/fornecedor')
+                                                    ->options(fn () => Person::query()->pluck('name', 'id'))
                                                     ->native(false)
                                                     ->searchable()
                                                     ->preload()

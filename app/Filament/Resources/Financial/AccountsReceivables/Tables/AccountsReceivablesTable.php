@@ -45,7 +45,7 @@ final class AccountsReceivablesTable
             )
             ->columns([
                 TextColumn::make('accounts.person.name')
-                    ->label('Cliente')
+                    ->label('Cliente/Fornecedor')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('installment_number')
