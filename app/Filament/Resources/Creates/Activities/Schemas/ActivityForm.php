@@ -100,39 +100,11 @@ final class ActivityForm
                     ->icon('heroicon-o-link')
                     ->description('Vincule a atividade a clientes e responsáveis')
                     ->schema([
-                        Select::make('person_id')
-                            ->label('Cliente/Contato')
-                            ->relationship('person', 'name')
-                            ->searchable()
-                            ->preload()
-                            ->placeholder('Selecione um cliente')
-                            ->createOptionForm([
-                                TextInput::make('name')
-                                    ->label('Nome')
-                                    ->required(),
-                                TextInput::make('cpf_cnpj')
-                                    ->label('CPF/CNPJ')
-                                    ->required(),
-                                TextInput::make('mobile_phone')
-                                    ->label('Telefone'),
-                                TextInput::make('email')
-                                    ->label('E-mail')
-                                    ->email(),
-                            ])
-                            ->createOptionUsing(function (array $data): int {
-                                $person = Person::create([
-                                    'client_or_supplier' => 'client',
-                                    'name' => $data['name'],
-                                    'cpf_cnpj' => $data['cpf_cnpj'],
-                                    'mobile_phone' => $data['mobile_phone'] ?? null,
-                                    'email' => $data['email'] ?? null,
-                                    'type' => 'PF',
-                                    'tenant_id' => Filament::getTenant()->id,
-                                ]);
-
-                                return $person->id;
-                            })
-                            ->columnSpan(1),
+                        Person::getSelectComponent(
+                            label: 'Cliente/Contato',
+                            placeholder: 'Selecione um cliente',
+                            columnSpan: 1
+                        ),
                         Select::make('assigned_to')
                             ->label('Responsável')
                             ->relationship('assignedTo', 'name')

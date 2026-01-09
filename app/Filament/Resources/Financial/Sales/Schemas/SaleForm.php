@@ -41,17 +41,12 @@ final class SaleForm
                                     ->description('Selecione o cliente e responsável pela venda')
                                     ->icon('heroicon-o-user')
                                     ->schema([
-                                        Select::make('person_id')
-                                            ->label('Cliente')
-                                            ->placeholder('Selecione o cliente')
-                                            ->options(fn () => Person::query()->where('is_client', true)->pluck('name', 'id'))
-                                            ->native(false)
-                                            ->searchable()
-                                            ->required()
-                                            ->createOptionForm(Person::getFormSimple())
-                                            ->createOptionUsing(function (array $data): int {
-                                                return Person::query()->create($data)->getKey();
-                                            }),
+                                        Person::getSelectComponent(
+                                            label: 'Cliente',
+                                            placeholder: 'Selecione o cliente',
+                                            columnSpan: 1,
+                                            required: true
+                                        ),
                                         Select::make('user_id')
                                             ->label('Responsável pela Venda')
                                             ->placeholder('Selecione o responsável')

@@ -14,6 +14,7 @@ use App\Models\Vehicle;
 use App\Observers\PersonObserver;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Flex;
@@ -489,5 +490,35 @@ final class Person extends Model
     public function sales(): HasMany
     {
         return $this->hasMany(Sale::class);
+    }
+
+    /**
+     * Get a reusable Select component for Person with create option
+     *
+     * @param string $label The label for the select field
+     * @param string $placeholder The placeholder text
+     * @param int $columnSpan The column span for the field
+     * @param bool $required Whether the field is required
+     * @return Select
+     */
+    public static function getSelectComponent(
+        string $label = 'Cliente/Fornecedor',
+        string $placeholder = 'Selecione o cliente/fornecedor',
+        int $columnSpan = 1,
+        bool $required = false
+    ): Select {
+        return Select::make('person_id')
+            ->label($label)
+            ->placeholder($placeholder)
+            ->relationship('person', 'name')
+            ->searchable()
+            ->preload()
+            ->native(false)
+            ->createOptionForm(self::getFormSimple())
+            ->createOptionUsing(function (array $data): int {
+                return self::query()->create($data)->getKey();
+            })
+            ->required($required)
+            ->columnSpan($columnSpan);
     }
 }

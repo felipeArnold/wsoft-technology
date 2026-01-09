@@ -47,18 +47,12 @@ final class AccountsReceivableForm
                                     ->schema([
                                         Grid::make(3)
                                             ->schema([
-                                                Select::make('person_id')
-                                                    ->label('Cliente/Fornecedor')
-                                                    ->placeholder('Selecione o cliente/fornecedor')
-                                                    ->options(fn () => Person::query()->pluck('name', 'id'))
-                                                    ->native(false)
-                                                    ->searchable()
-                                                    ->createOptionForm(Person::getFormSimple())
-                                                    ->createOptionUsing(function (array $data): int {
-                                                        return Person::query()->create($data)->getKey();
-                                                    })
-                                                    ->required()
-                                                    ->columnSpan(2),
+                                                Person::getSelectComponent(
+                                                    label: 'Cliente/Fornecedor',
+                                                    placeholder: 'Selecione o cliente/fornecedor',
+                                                    columnSpan: 2,
+                                                    required: true
+                                                ),
                                                 Select::make('user_id')
                                                     ->label('Responsável')
                                                     ->placeholder('Selecione o responsável')
