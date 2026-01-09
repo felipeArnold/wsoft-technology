@@ -433,7 +433,7 @@ $structuredData = [
                     <span>Teste Grátis por 7 Dias</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
-                <p class="mt-4 text-sm text-slate-500">Sem cartão de crédito • Cancele quando quiser</p>
+                <p class="mt-4 text-sm text-slate-500">Cancele quando quiser</p>
             </div>
         </div>
     </div>
