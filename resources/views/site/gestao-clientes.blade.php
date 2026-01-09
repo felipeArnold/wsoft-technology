@@ -354,7 +354,7 @@ $structuredData = [
                 <div class="order-2">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="/images/crm/history.png" alt="Tela de Histórico do Cliente" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <img src="{{ asset('images/sistema/clientes/historico-cliente.png') }}" alt="Tela de Histórico do Cliente" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -364,7 +364,7 @@ $structuredData = [
                 <div class="order-2 lg:order-1">
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-500"></div>
-                        <img src="/images/crm/reports.png" alt="Relatórios de Gestão" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
+                        <img src="{{ asset('images/sistema/dashboard/metricas.png') }}" alt="Relatórios de Gestão" class="w-full h-auto transform group-hover:scale-105 transition duration-700" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
@@ -422,6 +422,18 @@ $structuredData = [
                         <img src="{{ asset('images/sistema/dashboard/visao-geral.png') }}" alt="Dashboard Visão Geral" class="w-full h-auto transform group-hover:scale-105 transition duration-700 rounded-xl shadow-2xl" loading="lazy" decoding="async">
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-20 text-center">
+            <div class="inline-block">
+                <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-4">Pronto para começar?</p>
+                <a href="/app/register" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-10 py-5 rounded-xl shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/40 transform hover:-translate-y-1 transition-all duration-300 text-lg">
+                    <span>Teste Grátis por 7 Dias</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <p class="mt-4 text-sm text-slate-500">Sem cartão de crédito • Cancele quando quiser</p>
             </div>
         </div>
     </div>
