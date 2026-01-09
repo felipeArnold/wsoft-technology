@@ -17,6 +17,8 @@ final class LowStockProductsWidget extends BaseWidget
 
     protected static ?int $sort = 1;
 
+    protected ?string $pollingInterval = null;
+
     public function table(Table $table): Table
     {
         return $table

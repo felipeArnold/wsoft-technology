@@ -16,6 +16,8 @@ final class TopSellingProductsWidget extends ApexChartWidget
 
     protected int|string|array $columnSpan = 'full';
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $tenant = Filament::getTenant();

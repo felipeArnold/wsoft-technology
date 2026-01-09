@@ -18,6 +18,8 @@ final class FinancialDashboardOverview extends BaseWidget
 
     protected static bool $isLazy = true;
 
+    protected ?string $pollingInterval = null;
+
     protected function getStats(): array
     {
         $today = Date::now();

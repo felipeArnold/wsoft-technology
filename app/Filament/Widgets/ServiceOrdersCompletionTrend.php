@@ -18,6 +18,8 @@ final class ServiceOrdersCompletionTrend extends ApexChartWidget
 
     protected int|string|array $columnSpan = 2;
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $tenant = Filament::getTenant();

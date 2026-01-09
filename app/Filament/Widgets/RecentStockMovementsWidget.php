@@ -17,6 +17,8 @@ final class RecentStockMovementsWidget extends BaseWidget
 
     protected static ?int $sort = 4;
 
+    protected ?string $pollingInterval = null;
+
     public function table(Table $table): Table
     {
         return $table

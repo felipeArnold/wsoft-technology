@@ -24,6 +24,8 @@ final class ServiceOrderCalendarWidget extends CalendarWidget
 
     protected bool $dateClickEnabled = true;
 
+    protected ?string $pollingInterval = null;
+
     protected function getEvents(FetchInfo $info): Collection|array|Builder
     {
         return ServiceOrder::query()

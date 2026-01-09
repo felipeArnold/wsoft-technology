@@ -22,6 +22,8 @@ final class ChurnRateChart extends ApexChartWidget
 
     protected static ?string $subheading = 'Percentual de clientes inativos por mês';
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $tenant = Filament::getTenant();

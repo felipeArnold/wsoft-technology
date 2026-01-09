@@ -16,6 +16,8 @@ final class CommissionsOverview extends BaseWidget
 
     protected int|string|array $columnSpan = 'full';
 
+    protected ?string $pollingInterval = null;
+
     protected function getStats(): array
     {
         $today = Date::now();

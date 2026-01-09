@@ -23,6 +23,8 @@ final class MonthlyCashFlow extends ApexChartWidget
 
     protected static ?string $subheading = 'Comparativo de receitas e despesas';
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $months = [];

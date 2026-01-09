@@ -23,6 +23,8 @@ final class LtvTrendChart extends ApexChartWidget
 
     protected static ?string $subheading = 'Lifetime Value por coorte de clientes';
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $tenant = Filament::getTenant();

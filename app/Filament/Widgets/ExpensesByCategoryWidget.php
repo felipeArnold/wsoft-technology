@@ -22,6 +22,8 @@ final class ExpensesByCategoryWidget extends ApexChartWidget
 
     protected static ?string $subheading = 'Distribuição de gastos por categoria';
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $tenant = Filament::getTenant();

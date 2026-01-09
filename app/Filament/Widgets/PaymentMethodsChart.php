@@ -19,6 +19,8 @@ final class PaymentMethodsChart extends ApexChartWidget
 
     protected int|string|array $columnSpan = 1;
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $tenant = Filament::getTenant();

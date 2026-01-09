@@ -15,6 +15,8 @@ final class SalesOverviewWidget extends BaseWidget
 
     protected static bool $isLazy = true;
 
+    protected ?string $pollingInterval = null;
+
     protected function getStats(): array
     {
         $tenant = Filament::getTenant();

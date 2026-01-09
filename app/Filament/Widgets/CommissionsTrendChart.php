@@ -22,6 +22,8 @@ final class CommissionsTrendChart extends ApexChartWidget
 
     protected static ?string $subheading = 'Últimos 30 dias';
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $days = [];

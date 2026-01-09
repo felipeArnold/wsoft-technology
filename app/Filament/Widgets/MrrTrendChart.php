@@ -23,6 +23,8 @@ final class MrrTrendChart extends ApexChartWidget
 
     protected static ?string $subheading = 'Monthly Recurring Revenue - Últimos 12 meses';
 
+    protected ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         $tenant = Filament::getTenant();
