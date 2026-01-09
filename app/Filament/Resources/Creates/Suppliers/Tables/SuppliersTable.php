@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Creates\Suppliers\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use App\Helpers\FormatterHelper;
 use App\Models\Person\Person;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -41,7 +42,9 @@ final class SuppliersTable
                 TextColumn::make('phones.number')
                     ->label('Telefone')
                     ->icon('heroicon-m-phone')
-                    ->getStateUsing(fn ($record) => $record->phones->first()?->number ?? 'Não informado')
+                    ->getStateUsing(fn ($record) => $record->phones->first()?->number
+                        ? FormatterHelper::phone($record->phones->first()->number)
+                        : 'Não informado')
                     ->url(fn ($record) => $record->phones->first() ? 'tel:'.$record->phones->first()->number : null)
                     ->searchable()
                     ->toggleable(),

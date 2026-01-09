@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models\Person;
 
+use App\Filament\Components\PhoneComponent;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Repeater\TableColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
-use Leandrocfe\FilamentPtbrFormFields\PtbrPhone;
 
 /**
  * @property int $id
@@ -50,12 +50,10 @@ final class Phones extends Model
             ->relationship()
             ->hiddenLabel()
             ->schema([
-                PtbrPhone::make('number')
+                PhoneComponent::make('number')
                     ->label('Telefone')
                     ->placeholder('(00) 00000-0000')
-                    ->tel()
-                    ->required()
-                    ->default(null),
+                    ->required(),
             ])
             ->defaultItems(1)
             ->columnSpan(1)

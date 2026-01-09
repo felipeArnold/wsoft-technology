@@ -14,7 +14,7 @@ final class PhoneComponent extends TextInput
     {
         $this
             ->inputMode('tel')
-            ->maxLength(15)
+            ->maxLength(16)
             ->mask(RawJs::make(<<<'JS'
                 (value) => {
                     if (value == null) return '';
@@ -35,9 +35,33 @@ final class PhoneComponent extends TextInput
                 }
             JS))
             ->default(null)
+            ->formatStateUsing(fn ($state) => self::formatPhone($state))
             ->dehydrateStateUsing(fn ($state) => self::toDigits($state))
             ->dehydrated(true)
             ->rule(['nullable']);
+    }
+
+    public static function formatPhone(?string $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        // Remove todos os caracteres não numéricos
+        $digits = Str::of($value)->replaceMatches('/\D/', '')->toString();
+
+        if (empty($digits)) {
+            return null;
+        }
+
+        // Formata de acordo com a quantidade de dígitos
+        if (mb_strlen($digits) <= 10) {
+            // Formato (XX) XXXX-XXXX
+            return preg_replace('/(\d{2})(\d{4})(\d{0,4})/', '($1) $2-$3', $digits);
+        }
+
+        // Formato (XX) XXXXX-XXXX
+        return preg_replace('/(\d{2})(\d{5})(\d{0,4})/', '($1) $2-$3', $digits);
     }
 
     public static function toDigits(?string $value): ?string

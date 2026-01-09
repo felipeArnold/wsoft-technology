@@ -10,7 +10,11 @@ abstract class FormatterHelper
 {
     final public static function onlyNumbers(mixed $value): ?string
     {
-        return preg_replace('/\D/', '', $value);
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        return preg_replace('/\D/', '', (string) $value);
     }
 
     final public static function cpfCnpj(mixed $value): string
