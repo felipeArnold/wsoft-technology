@@ -63,6 +63,9 @@ final readonly class RedirectIfUserNotSubscribed
             ],
         ];
 
+        // Verificar se o tenant já teve uma subscription anteriormente (trial expirado)
+        $hadPreviousSubscription = $tenant->subscriptions()->count() > 0;
+
         return $tenant
             ->newSubscription(type: $plan->type, prices: $plan->isMeteredPrice ? [] : $plan->priceId)
             ->when(
@@ -70,7 +73,7 @@ final readonly class RedirectIfUserNotSubscribed
                 callback: static fn (SubscriptionBuilder $subscription): SubscriptionBuilder => $subscription->meteredPrice(price: $plan->priceId),
             )
             ->when(
-                value: $plan->hasGenericTrial === false && $plan->trialDays !== false,
+                value: $plan->hasGenericTrial === false && $plan->trialDays !== false && ! $hadPreviousSubscription,
                 callback: static fn (SubscriptionBuilder $subscription): SubscriptionBuilder => $subscription->trialDays(trialDays: $plan->trialDays),
             )
             ->when(
