@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -98,7 +98,7 @@ $structuredData = [
                 'name' => 'Quanto custa o sistema para oficina?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem taxa de adesão e com todas as funcionalidades liberadas.'
+                    'text' => 'O WSoft custa apenas R$ 79,90 por mês no plano vitalício. Sem taxa de adesão e com todas as funcionalidades liberadas.'
                 ]
             ]
         ]
@@ -524,7 +524,7 @@ $structuredData = [
 
                 <div class="my-6">
                     <div class="flex items-baseline justify-center">
-                        <span class="text-5xl font-extrabold text-slate-900">R$ {{ $price_formatted ?? '29,90' }}</span>
+                        <span class="text-5xl font-extrabold text-slate-900">R$ {{ $price_formatted ?? '79,90' }}</span>
                         <span class="text-slate-500 ml-2">/{{ $interval_label ?? 'mês' }}</span>
                     </div>
                 </div>
@@ -623,7 +623,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Escolha um sistema completo para gestão de funilaria e pintura'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para funilaria e pintura</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para funilaria e pintura</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de funilarias que usam WSoft'"
     :gradient="'bg-gradient-to-br from-emerald-600 to-blue-600'"
     :textColor="'text-emerald-50'"
@@ -677,7 +677,7 @@ $structuredData = [
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês no plano vitalício. Sem taxa de adesão e com todas as funcionalidades liberadas.</p>
+                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 79,90 por mês no plano vitalício. Sem taxa de adesão e com todas as funcionalidades liberadas.</p>
             </details>
         </div>
     </div>

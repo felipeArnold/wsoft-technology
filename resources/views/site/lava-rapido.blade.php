@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'AutomotiveApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -130,7 +130,7 @@ $structuredData = [
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Sistema de Gestão</span> para Lava Rápido
             </h1>
             <p class="mt-6 text-lg md:text-xl text-blue-100/80 leading-relaxed max-w-lg">
-                Gerencie lavagens, controle a fila de espera, checklist de entrada e comissões. O sistema feito para otimizar seu tempo. <span class="text-blue-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Gerencie lavagens, controle a fila de espera, checklist de entrada e comissões. O sistema feito para otimizar seu tempo. <span class="text-blue-400 font-bold block mt-2">Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-blue-600 text-white font-bold px-8 py-4 shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:-translate-y-1 transition transform duration-200">
@@ -342,7 +342,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Agilize seu Lava Rápido'"
-    :description="'Comece agora com 7 dias de teste grátis. Organização profissional por apenas <span class=\'text-blue-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Organização profissional por apenas <span class=\'text-blue-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Usado por Lava Rápidos em todo o Brasil'"
     :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
     :textColor="'text-blue-50'"

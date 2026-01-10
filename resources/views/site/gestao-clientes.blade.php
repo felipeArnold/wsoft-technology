@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/sistema-para-gestao-de-clientes',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -80,7 +80,7 @@ $structuredData = [
                 'name' => 'Quanto custa o sistema de gestão de clientes WSoft?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'O WSoft custa apenas R$ 29,90 por mês com todas as funcionalidades incluídas: cadastro ilimitado de clientes, CRM, vendas, financeiro, estoque e ordem de serviço. Teste grátis por 7 dias.'
+                    'text' => 'O WSoft custa apenas R$ 79,90 por mês com todas as funcionalidades incluídas: cadastro ilimitado de clientes, CRM, vendas, financeiro, estoque e ordem de serviço. Teste grátis por 7 dias.'
                 ]
             ]
         ]
@@ -148,7 +148,7 @@ $structuredData = [
         badge="Software CRM"
         highlight="Sistema de Gestão de Clientes"
         title=""
-        description="Centralize cadastros, histórico de vendas e atendimentos em um único lugar. O sistema de gestão de clientes ideal para quem quer crescer. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
+        description="Centralize cadastros, histórico de vendas e atendimentos em um único lugar. O sistema de gestão de clientes ideal para quem quer crescer. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 79,90/mês.</span>"
         :idealFor="['Lojas e Comércio', 'Prestadores de Serviço', 'Oficinas e Mecânicas', 'Consultórios']"
         idealForTitle="Perfeito para:"
         primaryButtonText="Teste grátis por 7 dias"
@@ -599,7 +599,7 @@ $structuredData = [
 
 <x-site.cta-final
     :title="'Escolha um sistema completo para gestão de clientes'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para gestão de clientes e CRM</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para gestão de clientes e CRM</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de empresas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
     :textColor="'text-blue-50'"
@@ -632,7 +632,7 @@ $structuredData = [
         ],
         [
             'question' => 'O WSoft é adequado para pequenas empresas e MEI?',
-            'answer' => 'Sim! O WSoft foi desenvolvido especialmente para <strong>pequenas empresas, MEI e autônomos</strong>. Oferecemos um <strong>CRM simples e completo</strong> com interface intuitiva, preço acessível (R$ 29,90/mês) e todas as funcionalidades que você precisa para profissionalizar a gestão de clientes sem complexidade.'
+            'answer' => 'Sim! O WSoft foi desenvolvido especialmente para <strong>pequenas empresas, MEI e autônomos</strong>. Oferecemos um <strong>CRM simples e completo</strong> com interface intuitiva, preço acessível (R$ 79,90/mês) e todas as funcionalidades que você precisa para profissionalizar a gestão de clientes sem complexidade.'
         ],
         [
             'question' => 'Posso integrar o cadastro de clientes com vendas e financeiro?',
@@ -652,7 +652,7 @@ $structuredData = [
         ],
         [
             'question' => 'Quanto custa um sistema de gestão de clientes profissional?',
-            'answer' => 'O WSoft oferece um <strong>sistema completo de gestão de clientes e CRM</strong> a partir de <strong>R$ 29,90/mês</strong>, com <strong>7 dias de teste grátis</strong> e sem necessidade de cartão de crédito. Inclui cadastro ilimitado, histórico de interações, segmentação, relatórios, integração com vendas e financeiro, e suporte técnico.'
+            'answer' => 'O WSoft oferece um <strong>sistema completo de gestão de clientes e CRM</strong> a partir de <strong>R$ 79,90/mês</strong>, com <strong>7 dias de teste grátis</strong> e sem necessidade de cartão de crédito. Inclui cadastro ilimitado, histórico de interações, segmentação, relatórios, integração com vendas e financeiro, e suporte técnico.'
         ]
     ]"
 />

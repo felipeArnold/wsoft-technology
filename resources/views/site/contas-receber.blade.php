@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'FinanceApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/sistema-para-contas-a-receber',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -120,7 +120,7 @@ $structuredData = [
     badge="Controle de Contas a Receber"
     highlight="Sistema de Contas a Receber"
     title=""
-    description="Controle todos os seus recebimentos em um só lugar. Automatize cobranças, reduza a inadimplência e tenha previsibilidade de caixa. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
+    description="Controle todos os seus recebimentos em um só lugar. Automatize cobranças, reduza a inadimplência e tenha previsibilidade de caixa. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 79,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
 >
@@ -377,7 +377,7 @@ $structuredData = [
 
 <x-site.cta-final
     :title="'Escolha um sistema completo para gestão de contas a receber'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de recebimentos</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de recebimentos</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de empresas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
     :textColor="'text-blue-50'"
@@ -426,7 +426,7 @@ $structuredData = [
         ],
         [
             'question' => 'Quanto custa um sistema de contas a receber?',
-            'answer' => 'O WSoft oferece um plano completo de <strong>gestão de contas a receber</strong> a partir de <strong>R$ 29,90/mês</strong>, com <strong>7 dias de teste grátis</strong> e sem necessidade de cartão de crédito. Inclui controle de recebimentos, cobrança automática, fluxo de caixa, relatórios gerenciais e suporte técnico.'
+            'answer' => 'O WSoft oferece um plano completo de <strong>gestão de contas a receber</strong> a partir de <strong>R$ 79,90/mês</strong>, com <strong>7 dias de teste grátis</strong> e sem necessidade de cartão de crédito. Inclui controle de recebimentos, cobrança automática, fluxo de caixa, relatórios gerenciais e suporte técnico.'
         ]
     ]"
 />

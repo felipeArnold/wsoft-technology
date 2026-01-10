@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'FinanceApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/sistema-para-fluxo-de-caixa',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -120,7 +120,7 @@ $structuredData = [
     badge="Fluxo de Caixa"
     title=""
     highlight="Sistema de Fluxo de Caixa"
-    description="Tenha o controle total do seu dinheiro. Acompanhe entradas, saídas e saiba exatamente qual é o lucro da sua empresa em tempo real. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
+    description="Tenha o controle total do seu dinheiro. Acompanhe entradas, saídas e saiba exatamente qual é o lucro da sua empresa em tempo real. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 79,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
     secondaryButtonText="Como Funciona"
@@ -388,7 +388,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Escolha um sistema completo para controle de movimentação financeira'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de fluxo de caixa</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de fluxo de caixa</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de empresas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
     :textColor="'text-blue-50'"
@@ -437,7 +437,7 @@ $structuredData = [
         ],
         [
             'question' => 'Qual o melhor sistema para controle financeiro?',
-            'answer' => 'O <strong>WSoft</strong> é ideal para pequenas empresas que buscam um sistema completo de controle financeiro com fluxo de caixa, DRE automático, controle de contas a pagar e receber, múltiplas contas bancárias e relatórios gerenciais por apenas R$ 29,90/mês.'
+            'answer' => 'O <strong>WSoft</strong> é ideal para pequenas empresas que buscam um sistema completo de controle financeiro com fluxo de caixa, DRE automático, controle de contas a pagar e receber, múltiplas contas bancárias e relatórios gerenciais por apenas R$ 79,90/mês.'
         ]
     ]"
 />

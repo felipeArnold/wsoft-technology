@@ -44,7 +44,7 @@ final class RegisterTeam extends RegisterTenant
 
                 TextEntry::make('pricing_info')
                     ->hiddenLabel()
-                    ->state('Após o período de teste: R$ 29,90/mês (sem contratos ou taxas ocultas)')
+                    ->state('Após o período de teste: R$ 79,90/mês (sem contratos ou taxas ocultas)')
                     ->extraAttributes(['class' => 'text-center text-sm text-gray-600 dark:text-gray-400 font-medium'])
                     ->columnSpanFull(),
 

@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -364,7 +364,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Escolha um sistema completo para gestão de ordens de serviço'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de OS e serviços</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de OS e serviços</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de prestadores de serviço que usam WSoft'"
     :gradient="'bg-gradient-to-br from-indigo-600 to-blue-600'"
     :textColor="'text-indigo-50'"

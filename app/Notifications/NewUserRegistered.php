@@ -49,7 +49,7 @@ final class NewUserRegistered extends Notification implements ShouldQueue
             ->line('**Você tem 7 dias para testar TODAS as funcionalidades, sem limitações**')
             ->line('---')
             ->line('**💳 IMPORTANTE: Primeira cobrança somente em '.$formattedDate.' (daqui a 7 dias)**')
-            ->line('Valor: **R$ 29,90/mês** (sem contratos ou taxas ocultas)')
+            ->line('Valor: **R$ 79,90/mês** (sem contratos ou taxas ocultas)')
             ->line('---')
             ->line('Durante este período de teste, você pode:')
             ->line('✓ Criar e gerenciar Ordens de Serviço')

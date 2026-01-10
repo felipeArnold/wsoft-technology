@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'MedicalApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -130,7 +130,7 @@ $structuredData = [
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-300">Sistema de Gestão</span> para Clínica de Estética
             </h1>
             <p class="mt-6 text-lg md:text-xl text-teal-100/80 leading-relaxed max-w-lg">
-                Controle sessões, pacotes, anamnese digital e agenda. Organize seu negócio e proporcione a melhor experiência aos pacientes. <span class="text-teal-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Controle sessões, pacotes, anamnese digital e agenda. Organize seu negócio e proporcione a melhor experiência aos pacientes. <span class="text-teal-400 font-bold block mt-2">Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-teal-600 text-white font-bold px-8 py-4 shadow-lg shadow-teal-600/30 hover:bg-teal-700 hover:-translate-y-1 transition transform duration-200">
@@ -343,7 +343,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Modernize sua Clínica de Estética'"
-    :description="'Comece agora com 7 dias de teste grátis. Gestão profissional de estética por apenas <span class=\'text-teal-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Gestão profissional de estética por apenas <span class=\'text-teal-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Usado por clínicas e esteticistas em todo Brasil'"
     :gradient="'bg-gradient-to-br from-teal-950 to-teal-700'"
     :textColor="'text-teal-50'"

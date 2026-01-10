@@ -104,7 +104,7 @@
                 'availableLanguage' => ['Portuguese', 'pt-BR'],
                 'email' => 'contato@wsoft.com.br'
             ],
-            'priceRange' => 'R$29,90 - R$199,90',
+            'priceRange' => 'R$79,90 - R$199,90',
             'areaServed' => [
                 '@type' => 'Country',
                 'name' => 'Brasil'

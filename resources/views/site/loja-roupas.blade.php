@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'RetailApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -130,7 +130,7 @@ $structuredData = [
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-300">Sistema de Gestão</span> para Loja de Roupas
             </h1>
             <p class="mt-6 text-lg md:text-xl text-violet-100/80 leading-relaxed max-w-lg">
-                Controle de estoque, impressão de etiquetas e gestão financeira em um único lugar. O sistema perfeito para sua boutique ou loja. <span class="text-violet-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Controle de estoque, impressão de etiquetas e gestão financeira em um único lugar. O sistema perfeito para sua boutique ou loja. <span class="text-violet-400 font-bold block mt-2">Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-violet-600 text-white font-bold px-8 py-4 shadow-lg shadow-violet-600/30 hover:bg-violet-700 hover:-translate-y-1 transition transform duration-200">
@@ -342,7 +342,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'A solução completa para sua Loja de Roupas'"
-    :description="'Comece agora com 7 dias de teste grátis. Aumente suas vendas por apenas <span class=\'text-violet-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Aumente suas vendas por apenas <span class=\'text-violet-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a lojistas de sucesso'"
     :gradient="'bg-gradient-to-br from-violet-950 to-violet-700'"
     :textColor="'text-violet-50'"

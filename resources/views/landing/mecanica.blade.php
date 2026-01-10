@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -106,7 +106,7 @@ $structuredData = [
                 'name' => 'Quanto custa o software para oficina mecânica?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'O WSoft custa apenas R$ 29,90 por mês. Sem taxa de adesão, sem letras miúdas. Todas as funcionalidades estão incluídas: ordem de serviço, controle financeiro, estoque, cadastro de clientes e suporte via WhatsApp.'
+                    'text' => 'O WSoft custa apenas R$ 79,90 por mês. Sem taxa de adesão, sem letras miúdas. Todas as funcionalidades estão incluídas: ordem de serviço, controle financeiro, estoque, cadastro de clientes e suporte via WhatsApp.'
                 ]
             ]
         ]
@@ -146,7 +146,7 @@ $structuredData = [
     :keywords="'software de gestão para oficina mecânica, software para oficina mecânica, sistema para oficina mecânica, software de controle financeiro para oficina mecânica, software para gerenciamento de oficina mecânica, software para oficina mecânica com NFE'"
     :canonical="'https://www.wsoft.dev.br/software-gestao-oficina-mecanica'"
     :ogTitle="'Software de Gestão para Oficina Mecânica | WSoft'"
-    :ogDescription="'Controle financeiro, ordens de serviço e estoque de peças em um só sistema. Teste grátis por 7 dias. Apenas R$ 29,90/mês'"
+    :ogDescription="'Controle financeiro, ordens de serviço e estoque de peças em um só sistema. Teste grátis por 7 dias. Apenas R$ 79,90/mês'"
     :structuredData="$structuredData"
 >
 
@@ -164,7 +164,7 @@ $structuredData = [
                 Software de Gestão para <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">Oficina Mecânica</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
-                Controle financeiro completo, ordem de serviço digital e gestão de estoque de peças. Tudo que sua oficina mecânica precisa para crescer. <span class="text-emerald-400 font-bold block mt-2">Teste grátis por 7 dias. Apenas R$ 29,90/mês.</span>
+                Controle financeiro completo, ordem de serviço digital e gestão de estoque de peças. Tudo que sua oficina mecânica precisa para crescer. <span class="text-emerald-400 font-bold block mt-2">Teste grátis por 7 dias. Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="#cadastro" class="inline-flex justify-center items-center rounded-xl bg-white text-emerald-700 font-bold px-8 py-4 shadow-lg shadow-white/30 hover:bg-emerald-50 hover:-translate-y-1 transition transform duration-200">
@@ -276,7 +276,7 @@ $structuredData = [
                 </div>
                 <h3 class="text-2xl md:text-3xl font-bold mb-4">Comece a organizar sua oficina hoje mesmo</h3>
                 <p class="text-lg text-emerald-50 mb-6">
-                    Teste todas as funcionalidades por 7 dias, sem compromisso. Depois, apenas <span class="font-bold text-yellow-300">R$ 29,90/mês</span> para ter controle total da sua oficina mecânica.
+                    Teste todas as funcionalidades por 7 dias, sem compromisso. Depois, apenas <span class="font-bold text-yellow-300">R$ 79,90/mês</span> para ter controle total da sua oficina mecânica.
                 </p>
                 <a href="#cadastro" class="inline-flex items-center gap-3 bg-white text-emerald-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-emerald-50 transform hover:-translate-y-0.5 transition-all duration-300">
                     <span>Começar Teste Grátis</span>
@@ -715,7 +715,7 @@ $structuredData = [
 
                 <div class="my-6">
                     <div class="flex items-baseline justify-center">
-                        <span class="text-5xl font-extrabold text-slate-900">R$ 29,90</span>
+                        <span class="text-5xl font-extrabold text-slate-900">R$ 79,90</span>
                         <span class="text-slate-500 ml-2">/{{ $interval_label ?? 'mês' }}</span>
                     </div>
                 </div>
@@ -762,7 +762,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Comece a usar o melhor software de gestão para oficina mecânica'"
-    :description="'Teste grátis por 7 dias sem cartão de crédito. Depois apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span> para ter controle total da sua oficina.'"
+    :description="'Teste grátis por 7 dias sem cartão de crédito. Depois apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span> para ter controle total da sua oficina.'"
     :footer="'Junte-se a mais de 500 oficinas mecânicas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-emerald-600 to-blue-600'"
     :textColor="'text-emerald-50'"
@@ -832,7 +832,7 @@ $structuredData = [
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês. Sem taxa de adesão, sem letras miúdas. Todas as funcionalidades estão incluídas: ordem de serviço, controle financeiro, estoque, cadastro de clientes e suporte via WhatsApp.</p>
+                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 79,90 por mês. Sem taxa de adesão, sem letras miúdas. Todas as funcionalidades estão incluídas: ordem de serviço, controle financeiro, estoque, cadastro de clientes e suporte via WhatsApp.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">

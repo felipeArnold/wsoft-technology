@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'FinanceApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/sistema-para-controle-de-inadimplencia',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -120,7 +120,7 @@ $structuredData = [
     badge="Controle de Inadimplência"
     title=""
     highlight="Sistema de Controle de Inadimplência"
-    description="Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
+    description="Pare de vender para quem não paga. Identifique devedores, automatize cobranças e recupere seu dinheiro de forma profissional. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 79,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
     secondaryButtonText="Como Funciona"
@@ -374,7 +374,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Escolha um sistema completo para controle de inadimplência'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para cobrança e recuperação</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para cobrança e recuperação</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de empresas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
     :textColor="'text-blue-50'"
@@ -423,7 +423,7 @@ $structuredData = [
         ],
         [
             'question' => 'Qual o melhor software para controle de inadimplência?',
-            'answer' => 'O <strong>WSoft</strong> é um dos melhores softwares para controle de inadimplência do Brasil, oferecendo bloqueio automático, cobrança via WhatsApp, régua de cobrança automatizada, renegociação de dívidas e relatórios completos por apenas R$ 29,90/mês com 7 dias de teste grátis.'
+            'answer' => 'O <strong>WSoft</strong> é um dos melhores softwares para controle de inadimplência do Brasil, oferecendo bloqueio automático, cobrança via WhatsApp, régua de cobrança automatizada, renegociação de dívidas e relatórios completos por apenas R$ 79,90/mês com 7 dias de teste grátis.'
         ]
     ]"
 />

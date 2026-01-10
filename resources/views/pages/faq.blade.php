@@ -110,7 +110,7 @@
                         <span class="text-sm text-slate-500 group-open:hidden">+</span>
                         <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                     </summary>
-                    <p class="mt-3 text-slate-600">O plano completo custa a partir de R$ 29,90/mês e inclui todas as funcionalidades: cadastros ilimitados, controle financeiro, ordens de serviço, dashboard e suporte humano.</p>
+                    <p class="mt-3 text-slate-600">O plano completo custa a partir de R$ 79,90/mês e inclui todas as funcionalidades: cadastros ilimitados, controle financeiro, ordens de serviço, dashboard e suporte humano.</p>
                 </details>
 
                 <!-- Ordens de Serviço -->

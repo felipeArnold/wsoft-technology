@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -80,7 +80,7 @@ $structuredData = [
                 'name' => 'Quanto custa o sistema para barbearia?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'O WSoft custa apenas R$ 29,90 por mês com todas as funcionalidades incluídas: agenda, comissões, financeiro e estoque. Teste grátis por 7 dias.'
+                    'text' => 'O WSoft custa apenas R$ 79,90 por mês com todas as funcionalidades incluídas: agenda, comissões, financeiro e estoque. Teste grátis por 7 dias.'
                 ]
             ]
         ]
@@ -138,7 +138,7 @@ $structuredData = [
                 Sistema para <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-200">Barbearia Integrado</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-lg">
-                Agenda organizada, comissões automáticas e financeiro em dia. O melhor <strong>sistema para barbearia por assinatura</strong> do mercado. <span class="text-orange-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Agenda organizada, comissões automáticas e financeiro em dia. O melhor <strong>sistema para barbearia por assinatura</strong> do mercado. <span class="text-orange-400 font-bold block mt-2">Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-orange-500 text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:-translate-y-1 transition transform duration-200">
@@ -460,7 +460,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Escolha um sistema completo para gestão de barbearia'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para barbearia por assinatura</strong> por apenas <span class=\'text-orange-400 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para barbearia por assinatura</strong> por apenas <span class=\'text-orange-400 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de barbearias que usam WSoft'"
 />
 
@@ -511,7 +511,7 @@ $structuredData = [
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês com todas as funcionalidades incluídas: agenda, comissões, financeiro e estoque. Teste grátis por 7 dias.</p>
+                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 79,90 por mês com todas as funcionalidades incluídas: agenda, comissões, financeiro e estoque. Teste grátis por 7 dias.</p>
             </details>
         </div>
     </div>

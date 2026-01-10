@@ -704,8 +704,8 @@ $structuredData = array_map(function($schema) {
                             Tenha controle total do seu negócio com o WSoft.
                         </p>
                         <div class="flex items-center justify-center md:justify-start gap-3">
-                            <span class="text-blue-200 line-through text-lg">de R$ 47,00</span>
-                            <span class="text-white font-extrabold text-3xl">por R$ 29,90</span>
+                            <span class="text-blue-200 line-through text-lg">de R$ 129,00</span>
+                            <span class="text-white font-extrabold text-3xl">por R$ 79,90</span>
                             <span class="text-xs font-medium bg-white/20 px-2 py-1 rounded text-blue-50">/mês</span>
                         </div>
                     </div>

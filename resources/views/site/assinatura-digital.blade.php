@@ -28,7 +28,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -405,7 +405,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Escolha um sistema completo para assinatura digital de documentos'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema com assinatura eletrônica integrada</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema com assinatura eletrônica integrada</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de empresas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-emerald-600 to-green-600'"
     :textColor="'text-emerald-50'"

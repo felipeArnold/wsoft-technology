@@ -28,7 +28,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/landing/crm-gestao',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -88,7 +88,7 @@ $structuredData = [
     badge="Gestão Completa e Simplificada"
     highlight="Sistema de CRM e"
     title="Gestão Financeira"
-    description="Centralize clientes, vendas, financeiro e estoque em uma única plataforma. Diga adeus às planilhas e assuma o controle do seu negócio. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
+    description="Centralize clientes, vendas, financeiro e estoque em uma única plataforma. Diga adeus às planilhas e assuma o controle do seu negócio. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 79,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
 >
@@ -429,7 +429,7 @@ $structuredData = [
 
 <x-site.cta-final
     :title="'Escolha a melhor gestão para sua empresa'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema de CRM e Gestão Empresarial</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema de CRM e Gestão Empresarial</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de empresas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
     :textColor="'text-blue-50'"

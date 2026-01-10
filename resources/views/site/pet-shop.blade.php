@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -130,7 +130,7 @@ $structuredData = [
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">Sistema de Gestão</span> para Pet Shop
             </h1>
             <p class="mt-6 text-lg md:text-xl text-sky-100/80 leading-relaxed max-w-lg">
-                Agenda de banho e tosa, carteira de vacinação digital e controle de vendas. Tudo o que seu negócio precisa para crescer. <span class="text-sky-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Agenda de banho e tosa, carteira de vacinação digital e controle de vendas. Tudo o que seu negócio precisa para crescer. <span class="text-sky-400 font-bold block mt-2">Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-sky-600 text-white font-bold px-8 py-4 shadow-lg shadow-sky-600/30 hover:bg-sky-700 hover:-translate-y-1 transition transform duration-200">
@@ -342,7 +342,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'A melhor solução para seu Pet Shop'"
-    :description="'Comece agora com 7 dias de teste grátis. Gerencie banho, tosa e loja por apenas <span class=\'text-sky-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Gerencie banho, tosa e loja por apenas <span class=\'text-sky-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Usado por Pet Shops em todo o Brasil'"
     :gradient="'bg-gradient-to-br from-sky-950 to-sky-700'"
     :textColor="'text-sky-50'"

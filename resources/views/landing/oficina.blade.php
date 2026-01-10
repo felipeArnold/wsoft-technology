@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -144,7 +144,7 @@ $structuredData = [
                 Sistema completo para gestão de oficinas mecânicas
             </h2>
             <p class="mt-6 text-lg md:text-xl text-emerald-100 leading-relaxed max-w-lg">
-                Sistema de Gestão Empresarial que organiza seu financeiro, elimina inadimplência e aumenta seus lucros. O <strong>sistema de gestão para pequenas empresas</strong> ideal para oficinas mecânicas. <span class="text-emerald-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Sistema de Gestão Empresarial que organiza seu financeiro, elimina inadimplência e aumenta seus lucros. O <strong>sistema de gestão para pequenas empresas</strong> ideal para oficinas mecânicas. <span class="text-emerald-400 font-bold block mt-2">Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-emerald-500 text-white font-bold px-8 py-4 shadow-lg shadow-emerald-500/30 hover:bg-emerald-600 hover:-translate-y-1 transition transform duration-200">
@@ -555,7 +555,7 @@ $structuredData = [
                 <h3 class="text-2xl font-bold text-slate-900 mb-2 mt-4">Plano Mensal</h3>
                 <div class="mb-6">
                     <div class="flex items-baseline gap-1">
-                        <span class="text-5xl font-extrabold text-emerald-600">R$ 29</span>
+                        <span class="text-5xl font-extrabold text-emerald-600">R$ 79</span>
                         <span class="text-2xl font-bold text-emerald-600">,90</span>
                         <span class="text-slate-600 text-lg">/mês</span>
                     </div>
@@ -639,7 +639,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Escolha um sistema completo para gestão de oficina mecânica'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para oficina mecânica</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para oficina mecânica</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de oficinas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-emerald-600 to-blue-600'"
     :textColor="'text-emerald-50'"
@@ -701,7 +701,7 @@ $structuredData = [
                     <span class="text-sm text-slate-500 group-open:hidden">+</span>
                     <span class="text-sm text-slate-500 hidden group-open:inline">−</span>
                 </summary>
-                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 29,90 por mês com todas as funcionalidades incluídas: sistema de ordem de serviço, controle financeiro, cadastro de clientes e fornecedores, controle de produtos, sistema de fluxo de caixa e controle de inadimplência. Teste grátis por 7 dias.</p>
+                <p class="mt-3 text-slate-600">O WSoft custa apenas R$ 79,90 por mês com todas as funcionalidades incluídas: sistema de ordem de serviço, controle financeiro, cadastro de clientes e fornecedores, controle de produtos, sistema de fluxo de caixa e controle de inadimplência. Teste grátis por 7 dias.</p>
             </details>
             <details class="group rounded-2xl border border-slate-100 bg-white p-6">
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">

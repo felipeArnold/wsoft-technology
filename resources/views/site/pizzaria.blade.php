@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'FoodServiceApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -130,7 +130,7 @@ $structuredData = [
                 Sistema para <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">Pizzaria e Delivery</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-red-100/80 leading-relaxed max-w-lg">
-                Atenda mais rápido, elimine erros nos pedidos e controle suas entregas e motoboys com eficiência. O sistema ideal para seu delivery. <span class="text-red-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Atenda mais rápido, elimine erros nos pedidos e controle suas entregas e motoboys com eficiência. O sistema ideal para seu delivery. <span class="text-red-400 font-bold block mt-2">Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-red-600 text-white font-bold px-8 py-4 shadow-lg shadow-red-600/30 hover:bg-red-700 hover:-translate-y-1 transition transform duration-200">
@@ -342,7 +342,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'O sistema que sua Pizzaria precisa'"
-    :description="'Comece agora com 7 dias de teste grátis. Delivery organizado por apenas <span class=\'text-red-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Delivery organizado por apenas <span class=\'text-red-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Especialista em Food Service'"
     :gradient="'bg-gradient-to-br from-red-950 to-red-700'"
     :textColor="'text-red-50'"

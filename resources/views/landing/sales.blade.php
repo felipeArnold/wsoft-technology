@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Oferta Especial WSoft Tecnologia. Sistema de gestão completo por apenas R$ 29,90/mês. Organize sua empresa hoje mesmo.">
+    <meta name="description" content="Oferta Especial WSoft Tecnologia. Sistema de gestão completo por apenas R$ 79,90/mês. Organize sua empresa hoje mesmo.">
     <title>Oferta Especial | WSoft Tecnologia</title>
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
@@ -48,7 +48,7 @@
                 "applicationCategory": "BusinessApplication",
                 "offers": {
                     "@@type": "Offer",
-                    "price": "29.90",
+                    "price": "79.90",
                     "priceCurrency": "BRL",
                     "url": "https://www.wsoft.dev.br/sales",
                     "description": "Oferta Especial Limitada: Sistema Completo + Bônus"
@@ -327,7 +327,7 @@
                             <p class="text-slate-500 text-lg mb-2">De <span class="line-through text-red-400">R$ 47,00</span> por apenas:</p>
                             <div class="flex items-center justify-center gap-1 mb-2">
                                 <span class="text-3xl font-bold text-slate-700">R$</span>
-                                <span class="text-7xl font-extrabold text-blue-600">29</span>
+                                <span class="text-7xl font-extrabold text-blue-600">79</span>
                                 <div class="flex flex-col items-start">
                                     <span class="text-3xl font-bold text-blue-600">,90</span>
                                     <span class="text-sm text-slate-500 font-medium">/mês</span>

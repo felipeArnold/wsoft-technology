@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Teste grátis por 7 dias'
@@ -450,12 +450,12 @@ $structuredData = [
                         </a>
                         <div class="text-left border-l-2 border-slate-100 pl-6 hidden sm:block">
                             <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide">Plano Completo</p>
-                            <p class="text-2xl font-bold text-slate-900">R$ 29,90<span class="text-sm text-slate-500 font-normal">/mês</span></p>
+                            <p class="text-2xl font-bold text-slate-900">R$ 79,90<span class="text-sm text-slate-500 font-normal">/mês</span></p>
                         </div>
                          <!-- Mobile Price -->
                         <div class="text-center sm:hidden">
                             <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide">Depois apenas</p>
-                            <p class="text-xl font-bold text-slate-900">R$ 29,90<span class="text-sm text-slate-500 font-normal">/mês</span></p>
+                            <p class="text-xl font-bold text-slate-900">R$ 79,90<span class="text-sm text-slate-500 font-normal">/mês</span></p>
                         </div>
                      </div>
                      <p class="text-xs text-slate-400 mt-2 relative z-10">Sem fidelidade. Cancele quando quiser.</p>
@@ -876,10 +876,10 @@ $structuredData = [
                     </div>
                     <div class="p-8">
                         <div class="text-center">
-                            <p class="text-sm text-slate-500 mb-2">De <span class="line-through text-red-400">R$ 47,90</span> por apenas:</p>
+                            <p class="text-sm text-slate-500 mb-2">De <span class="line-through text-red-400">R$ 129,90</span> por apenas:</p>
                             <div class="flex items-center justify-center gap-1">
                                 <span class="text-2xl font-bold text-slate-700 mt-2">R$</span>
-                                <span class="text-6xl font-extrabold text-blue-600">29</span>
+                                <span class="text-6xl font-extrabold text-blue-600">79</span>
                                 <div class="flex flex-col items-start">
                                     <span class="text-2xl font-bold text-blue-600">,90</span>
                                     <span class="text-xs text-slate-500">/mês</span>

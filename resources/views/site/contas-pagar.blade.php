@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'FinanceApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/sistema-para-contas-a-pagar',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -132,7 +132,7 @@ $structuredData = [
     badge="Controle de Contas a Pagar"
     highlight="Sistema de Contas a Pagar"
     title=""
-    description="Organize suas contas a pagar e evite multas e juros. Tenha visão total das suas despesas e mantenha seu financeiro sempre em dia. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 29,90/mês.</span>"
+    description="Organize suas contas a pagar e evite multas e juros. Tenha visão total das suas despesas e mantenha seu financeiro sempre em dia. <span class='text-emerald-400 font-bold block mt-2'>Apenas R$ 79,90/mês.</span>"
     primaryButtonText="Teste grátis por 7 dias"
     primaryButtonUrl="/app/register"
 >
@@ -572,7 +572,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Escolha um sistema completo para gestão de contas a pagar'"
-    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de contas a pagar</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. Use o melhor <strong>sistema para controle de contas a pagar</strong> por apenas <span class=\'text-yellow-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se a centenas de empresas que usam WSoft'"
     :gradient="'bg-gradient-to-br from-blue-950 to-blue-700'"
     :textColor="'text-blue-50'"
@@ -621,7 +621,7 @@ $structuredData = [
         ],
         [
             'question' => 'Quanto custa um sistema de contas a pagar?',
-            'answer' => 'O WSoft oferece um plano completo de <strong>gestão de contas a pagar</strong> a partir de <strong>R$ 29,90/mês</strong>, com <strong>7 dias de teste grátis</strong> e sem necessidade de cartão de crédito. Inclui contas a pagar e receber, fluxo de caixa, relatórios financeiros, alertas automáticos e suporte técnico.'
+            'answer' => 'O WSoft oferece um plano completo de <strong>gestão de contas a pagar</strong> a partir de <strong>R$ 79,90/mês</strong>, com <strong>7 dias de teste grátis</strong> e sem necessidade de cartão de crédito. Inclui contas a pagar e receber, fluxo de caixa, relatórios financeiros, alertas automáticos e suporte técnico.'
         ]
     ]"
 />

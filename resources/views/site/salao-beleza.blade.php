@@ -10,7 +10,7 @@ $structuredData = [
         'applicationCategory' => 'BusinessApplication',
         'offers' => [
             '@type' => 'Offer',
-            'price' => '29.90',
+            'price' => '79.90',
             'priceCurrency' => 'BRL',
             'url' => 'https://www.wsoft.dev.br/app/register',
             'description' => 'Plano mensal com todas as funcionalidades'
@@ -130,7 +130,7 @@ $structuredData = [
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-300">Sistema de Gestão</span> para Salão de Beleza
             </h1>
             <p class="mt-6 text-lg md:text-xl text-rose-100/80 leading-relaxed max-w-lg">
-                Agenda organizada, comissões automáticas, confirmação via WhatsApp e financeiro em dia. O sistema ideal para <strong>salões de beleza e esmalterias</strong>. <span class="text-rose-400 font-bold block mt-2">Apenas R$ 29,90/mês.</span>
+                Agenda organizada, comissões automáticas, confirmação via WhatsApp e financeiro em dia. O sistema ideal para <strong>salões de beleza e esmalterias</strong>. <span class="text-rose-400 font-bold block mt-2">Apenas R$ 79,90/mês.</span>
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href="/app/register" class="inline-flex justify-center items-center rounded-xl bg-rose-600 text-white font-bold px-8 py-4 shadow-lg shadow-rose-600/30 hover:bg-rose-700 hover:-translate-y-1 transition transform duration-200">
@@ -342,7 +342,7 @@ $structuredData = [
 <!-- CTA Section -->
 <x-site.cta-final
     :title="'Transforme a gestão do seu Salão de Beleza'"
-    :description="'Comece agora com 7 dias de teste grátis. O melhor sistema para salões e esmalterias por apenas <span class=\'text-rose-300 font-bold\'>R$ 29,90/mês</span>.'"
+    :description="'Comece agora com 7 dias de teste grátis. O melhor sistema para salões e esmalterias por apenas <span class=\'text-rose-300 font-bold\'>R$ 79,90/mês</span>.'"
     :footer="'Junte-se aos melhores salões do Brasil'"
     :gradient="'bg-gradient-to-br from-rose-950 to-rose-700'"
     :textColor="'text-rose-50'"
