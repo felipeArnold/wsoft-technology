@@ -9,6 +9,7 @@ use App\Filament\Clusters\Settings\CRM\LossReasons\LossReasonResource;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -96,9 +97,9 @@ final class LossReasonsTable
             ->emptyStateHeading('No loss reasons found')
             ->emptyStateDescription('Create a new loss reason to start tracking lead losses.')
             ->emptyStateActions([
-                Action::make('create')
-                    ->label('Create Loss Reason')
-                    ->url(fn (): string => LossReasonResource::getUrl('create')),
+                CreateAction::make()
+                    ->label('Novo Motivo')
+                    ->icon('heroicon-o-plus'),
             ]);
     }
 }

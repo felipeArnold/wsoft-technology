@@ -9,6 +9,7 @@ use App\Filament\Clusters\Settings\CRM\Sources\SourceResource;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -96,9 +97,9 @@ final class SourcesTable
             ->emptyStateHeading('No sources found')
             ->emptyStateDescription('Create a new source to start tracking your leads.')
             ->emptyStateActions([
-                Action::make('create')
-                    ->label('Create Source')
-                    ->url(fn (): string => SourceResource::getUrl('create')),
+                CreateAction::make()
+                    ->label('Nova Origem')
+                    ->icon('heroicon-o-plus'),
             ]);
     }
 }
