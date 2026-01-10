@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enum\TenantType;
+use App\Models\Person\Addresses;
+use App\Models\Person\Emails;
+use App\Models\Person\Phones;
 use App\Observers\TenantObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -97,6 +101,21 @@ final class Tenant extends Model
     public function emailTemplates(): HasMany
     {
         return $this->hasMany(EmailTemplate::class);
+    }
+
+    public function phones(): MorphMany
+    {
+        return $this->morphMany(Phones::class, 'phonable');
+    }
+
+    public function addresses(): MorphMany
+    {
+        return $this->morphMany(Addresses::class, 'addressable');
+    }
+
+    public function emails(): MorphMany
+    {
+        return $this->morphMany(Emails::class, 'emailable');
     }
 
     public function getFilamentAvatarUrl(): ?string
