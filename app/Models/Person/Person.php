@@ -499,18 +499,20 @@ final class Person extends Model
      * @param string $placeholder The placeholder text
      * @param int $columnSpan The column span for the field
      * @param bool $required Whether the field is required
+     * @param callable|null $modifyQueryUsing Optional callback to modify the relationship query
      * @return Select
      */
     public static function getSelectComponent(
         string $label = 'Cliente/Fornecedor',
         string $placeholder = 'Selecione o cliente/fornecedor',
         int $columnSpan = 1,
-        bool $required = false
+        bool $required = false,
+        ?callable $modifyQueryUsing = null
     ): Select {
         return Select::make('person_id')
             ->label($label)
             ->placeholder($placeholder)
-            ->relationship('person', 'name')
+            ->relationship('person', 'name', $modifyQueryUsing)
             ->searchable()
             ->preload()
             ->native(false)

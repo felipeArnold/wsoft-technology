@@ -30,11 +30,6 @@ use App\Filament\Resources\Suggestions\SuggestionResource;
 use App\Models\Tenant;
 use App\Notifications\MultiFactorAuthenticationCode;
 use Awcodes\QuickCreate\QuickCreatePlugin;
-use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
-use DutchCodingCompany\FilamentSocialite\Provider;
-use Filament\Support\Colors;
-use Laravel\Socialite\Contracts\User as SocialiteUserContract;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Filament\Actions\Action;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Enums\ThemeMode;
@@ -127,7 +122,7 @@ final class AppPanelProvider extends PanelProvider
             ->maxContentWidth(Width::Full)
             ->tenantBillingProvider(new BillingProvider('default'))
             ->requiresTenantSubscription()
-            ->errorNotifications(false)
+            ->errorNotifications(true)
             ->databaseNotifications()
             ->sidebarFullyCollapsibleOnDesktop()
             ->brandLogo(fn () => view('components.logo'))
@@ -164,7 +159,7 @@ final class AppPanelProvider extends PanelProvider
                         WarrantyResource::class,
                         EmailTemplateResource::class,
                         ProductResource::class,
-                        ExtractResource::class
+                        ExtractResource::class,
                     ]),
             ])
             ->renderHook(

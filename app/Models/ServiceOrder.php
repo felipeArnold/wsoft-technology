@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\DTOs\VehicleData;
 use App\Enum\ServiceOrderPriority;
 use App\Enum\ServiceOrderStatus;
 use App\Filament\Clusters\Settings\Services\ServiceResource;
@@ -14,6 +15,7 @@ use App\Models\Accounts\Accounts;
 use App\Models\Concerns\Categorizable;
 use App\Models\Person\Person;
 use App\Observers\ServiceOrderObserver;
+use App\Repositories\VehicleRepository;
 use Carbon\Carbon;
 use Database\Factories\ServiceOrderFactory;
 use Filament\Actions\Action;
@@ -152,8 +154,28 @@ final class ServiceOrder extends Model implements Eventable
                                         ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->plate} - {$record->brand} {$record->model}")
                                         ->searchable()
                                         ->preload()
-                                        ->helperText('Selecione o veículo do cliente')
                                         ->disabled(fn ($get) => ! $get('person_id'))
+                                        ->createOptionForm([
+                                            Section::make('Informações do Veículo')
+                                                ->description('Preencha os dados do veículo')
+                                                ->icon('heroicon-o-truck')
+                                                ->schema(Vehicle::getFormFields(includePersonField: false))
+                                                ->columns(3)
+                                                ->columnSpanFull(),
+                                        ])
+                                        ->createOptionUsing(function (array $data, $get): int {
+                                            $repository = app(VehicleRepository::class);
+
+                                            $vehicleData = VehicleData::fromArray(
+                                                data: $data,
+                                                tenantId: Filament::getTenant()->id,
+                                                personId: $get('person_id')
+                                            );
+
+                                            $vehicle = $repository->create($vehicleData);
+
+                                            return $vehicle->id;
+                                        })
                                         ->columnSpan(1),
                                     Select::make('user_id')
                                         ->label('Responsável')
