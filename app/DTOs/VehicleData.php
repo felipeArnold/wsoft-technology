@@ -30,7 +30,7 @@ final readonly class VehicleData
             plate: $data['plate'],
             brand: $data['brand'],
             model: $data['model'],
-            year: $data['year'] ?? null,
+            year: isset($data['year']) ? (int) $data['year'] : null,
             color: $data['color'] ?? null,
             chassis: $data['chassis'] ?? null,
             renavam: $data['renavam'] ?? null,
