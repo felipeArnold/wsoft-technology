@@ -31,6 +31,7 @@ use App\Models\Tenant;
 use App\Notifications\MultiFactorAuthenticationCode;
 use Awcodes\QuickCreate\QuickCreatePlugin;
 use Filament\Actions\Action;
+use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Enums\ThemeMode;
 use Filament\Facades\Filament;
@@ -72,8 +73,11 @@ final class AppPanelProvider extends PanelProvider
             )
             ->tenantRegistration(RegisterTeam::class)
             ->multiFactorAuthentication([
+                AppAuthentication::make()
+                    ->recoverable()
+                    ->recoveryCodeCount(5),
                 EmailAuthentication::make()
-                    ->codeExpiryMinutes(2)
+                    ->codeExpiryMinutes(5)
                     ->codeNotification(MultiFactorAuthenticationCode::class),
             ])
             ->navigationGroups([

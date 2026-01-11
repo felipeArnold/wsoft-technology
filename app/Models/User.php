@@ -8,12 +8,17 @@ namespace App\Models;
 use App\Observers\UserObserver;
 use App\Services\Onboarding\OnboardingService;
 use Database\Factories\UserFactory;
+use Filament\Auth\MultiFactor\App\Concerns\InteractsWithAppAuthentication;
+use Filament\Auth\MultiFactor\App\Concerns\InteractsWithAppAuthenticationRecovery;
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthentication;
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthenticationRecovery;
 use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Filament\Facades\Filament;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,10 +45,13 @@ use Illuminate\Support\Facades\Storage;
  * @property Carbon|null $deleted_at
  */
 #[ObservedBy(UserObserver::class)]
-final class User extends Authenticatable implements FilamentUser, HasAvatar, HasEmailAuthentication, HasTenants
+final class User extends Authenticatable implements FilamentUser, HasAvatar, HasEmailAuthentication, HasTenants, HasAppAuthenticationRecovery, MustVerifyEmail, HasAppAuthentication
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+
+    use InteractsWithAppAuthentication;
+    use InteractsWithAppAuthenticationRecovery;
 
     /**
      * The attributes that are mass assignable.
