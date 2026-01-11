@@ -39,6 +39,10 @@ use Illuminate\Support\Str;
  * @property string|null $website
  * @property TenantType $type
  * @property int $max_users
+ * @property string|null $stripe_id
+ * @property string|null $pm_type
+ * @property string|null $pm_last_four
+ * @property Carbon|null $trial_ends_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
@@ -68,10 +72,15 @@ final class Tenant extends Model
         'website',
         'type',
         'max_users',
+        'stripe_id',
+        'pm_type',
+        'pm_last_four',
+        'trial_ends_at',
     ];
 
     protected $casts = [
         'type' => TenantType::class,
+        'trial_ends_at' => 'datetime',
     ];
 
     public static function generateUniqueSlug(string $name): string
@@ -121,5 +130,92 @@ final class Tenant extends Model
     public function getFilamentAvatarUrl(): ?string
     {
         return Storage::url($this->avatar);
+    }
+
+    /**
+     * Check if this tenant is eligible for a free trial
+     * Prevents abuse by checking multiple anti-fraud rules
+     */
+    public function isEligibleForTrial(?User $user = null): bool
+    {
+        // Rule 1: Tenant already had a subscription/trial
+        // This includes active subscriptions, canceled (ends_at filled), or any subscription record
+        // We check subscriptions table directly to catch all cases
+        if ($this->subscriptions()->exists()) {
+            return false;
+        }
+
+        // Additional check: Tenant has trial_ends_at filled (from webhook)
+        // This catches cases where subscription was created but might not be in subscriptions table yet
+        if ($this->trial_ends_at !== null) {
+            return false;
+        }
+
+        // Rule 2: User already had trial in another tenant
+        // Check both: tenant's trial_ends_at field AND subscriptions table
+        if ($user) {
+            $userTenantIds = $user->tenants()->pluck('id');
+
+            // Check if any other tenant has trial_ends_at filled
+            $userHadTrialBefore = self::whereIn('id', $userTenantIds)
+                ->whereNotNull('trial_ends_at')
+                ->exists();
+
+            // Also check if user's other tenants have any subscriptions (active or canceled)
+            $userHadSubscriptionBefore = self::whereIn('id', $userTenantIds)
+                ->whereHas('subscriptions')
+                ->exists();
+
+            if ($userHadTrialBefore || $userHadSubscriptionBefore) {
+                return false;
+            }
+        }
+
+        // Rule 3: Document (CPF/CNPJ) already used in another trial
+        // Check both: trial_ends_at field AND subscriptions table
+        if ($this->document) {
+            // Check if document was used in another tenant with trial_ends_at
+            $documentHadTrialBefore = self::where('document', $this->document)
+                ->where('id', '!=', $this->id)
+                ->whereNotNull('trial_ends_at')
+                ->exists();
+
+            // Also check if document was used in tenant with any subscription (active or canceled)
+            $documentHadSubscriptionBefore = self::where('document', $this->document)
+                ->where('id', '!=', $this->id)
+                ->whereHas('subscriptions')
+                ->exists();
+
+            if ($documentHadTrialBefore || $documentHadSubscriptionBefore) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if tenant ever had a trial (even if canceled)
+     * This is useful to prevent re-enabling trials on existing subscriptions
+     */
+    public function hasEverHadTrial(): bool
+    {
+        // Check tenant's trial_ends_at field
+        if ($this->trial_ends_at !== null) {
+            return true;
+        }
+
+        // Check if any subscription has trial_ends_at filled
+        return $this->subscriptions()
+            ->whereNotNull('trial_ends_at')
+            ->exists();
+    }
+
+    /**
+     * Check if tenant has any subscription (active or canceled)
+     */
+    public function hasEverHadSubscription(): bool
+    {
+        return $this->subscriptions()->exists();
     }
 }
