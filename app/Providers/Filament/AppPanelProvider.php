@@ -122,7 +122,7 @@ final class AppPanelProvider extends PanelProvider
             ->maxContentWidth(Width::Full)
             ->tenantBillingProvider(new BillingProvider('default'))
             ->requiresTenantSubscription()
-            ->errorNotifications(true)
+            ->errorNotifications(false)
             ->databaseNotifications()
             ->sidebarFullyCollapsibleOnDesktop()
             ->brandLogo(fn () => view('components.logo'))

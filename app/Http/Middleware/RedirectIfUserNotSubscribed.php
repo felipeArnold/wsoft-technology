@@ -42,8 +42,68 @@ final readonly class RedirectIfUserNotSubscribed
                 return $next($request);
             }
 
+            // IMPORTANT FIX: Check if tenant has ACTIVE subscription by stripe_status
+            // This is more reliable than subscribedToProduct() which depends on subscription_items
+
+            // Check for active or trialing subscriptions
+            $activeSubscription = $tenant->subscriptions()
+                ->where('type', $plan->type)
+                ->whereIn('stripe_status', ['active', 'trialing'])
+                ->exists();
+
+            if ($activeSubscription) {
+                \Log::info('Tenant has active subscription, allowing access', [
+                    'tenant_id' => $tenant->id,
+                    'plan_type' => $plan->type,
+                ]);
+
+                return $next($request);
+            }
+
+            // Check for past_due subscriptions with grace period
+            // Allow access if payment failed but still within grace period
+            $pastDueSubscription = $tenant->subscriptions()
+                ->where('type', $plan->type)
+                ->where('stripe_status', 'past_due')
+                ->first();
+
+            if ($pastDueSubscription) {
+                $gracePeriodDays = config('cashier.past_due_grace_period', 7);
+
+                // If ends_at is set and in the future, allow access (grace period active)
+                if ($pastDueSubscription->ends_at && $pastDueSubscription->ends_at->isFuture()) {
+                    \Log::info('Tenant has past_due subscription within grace period, allowing access', [
+                        'tenant_id' => $tenant->id,
+                        'plan_type' => $plan->type,
+                        'ends_at' => $pastDueSubscription->ends_at->format('Y-m-d H:i:s'),
+                        'days_remaining' => now()->diffInDays($pastDueSubscription->ends_at, false),
+                    ]);
+
+                    return $next($request);
+                }
+
+                // Grace period expired, log and continue to checkout
+                \Log::warning('Tenant has past_due subscription with expired grace period, redirecting to checkout', [
+                    'tenant_id' => $tenant->id,
+                    'plan_type' => $plan->type,
+                    'ends_at' => $pastDueSubscription->ends_at?->format('Y-m-d H:i:s'),
+                ]);
+            }
+
+            // Fallback: Check if tenant is subscribed using Laravel Cashier method
+            // This requires subscription_items to be populated
             if ($tenant->subscribedToProduct(products: $plan->productId, type: $plan->type) === true) {
                 return $next($request);
+            }
+
+            // Additional check: if tenant has any subscription (even canceled/expired)
+            // Log this for debugging
+            if ($tenant->subscriptions()->exists() && ! $activeSubscription) {
+                \Log::info('Tenant has subscription but not active, will redirect to checkout', [
+                    'tenant_id' => $tenant->id,
+                    'subscriptions_count' => $tenant->subscriptions()->count(),
+                    'has_trial_ends_at' => $tenant->trial_ends_at !== null,
+                ]);
             }
         }
 
@@ -64,6 +124,19 @@ final readonly class RedirectIfUserNotSubscribed
         ];
 
         $isEligibleForTrial = $tenant->isEligibleForTrial($request->user());
+
+        // Log detalhado para debug de trial eligibility
+        \Log::info('Trial eligibility check', [
+            'tenant_id' => $tenant->id,
+            'tenant_name' => $tenant->name,
+            'is_eligible' => $isEligibleForTrial,
+            'subscriptions_count' => $tenant->subscriptions()->count(),
+            'has_trial_ends_at' => $tenant->trial_ends_at !== null,
+            'trial_ends_at_value' => $tenant->trial_ends_at?->format('Y-m-d H:i:s'),
+            'user_id' => $request->user()?->id,
+            'plan_trial_days' => $plan->trialDays,
+            'will_apply_trial' => ($plan->hasGenericTrial === false && $plan->trialDays !== false && $isEligibleForTrial),
+        ]);
 
         return $tenant
             ->newSubscription(type: $plan->type, prices: $plan->isMeteredPrice ? [] : $plan->priceId)
