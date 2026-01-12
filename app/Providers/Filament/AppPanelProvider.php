@@ -31,9 +31,9 @@ use App\Models\Tenant;
 use App\Notifications\MultiFactorAuthenticationCode;
 use Awcodes\QuickCreate\QuickCreatePlugin;
 use Filament\Actions\Action;
-use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Enums\ThemeMode;
+use Filament\Enums\UserMenuPosition;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -73,9 +73,6 @@ final class AppPanelProvider extends PanelProvider
             )
             ->tenantRegistration(RegisterTeam::class)
             ->multiFactorAuthentication([
-                AppAuthentication::make()
-                    ->recoverable()
-                    ->recoveryCodeCount(5),
                 EmailAuthentication::make()
                     ->codeExpiryMinutes(5)
                     ->codeNotification(MultiFactorAuthenticationCode::class),
@@ -87,6 +84,7 @@ final class AppPanelProvider extends PanelProvider
                 'Vendas',
                 'Estoque',
             ])
+            ->userMenu(position: UserMenuPosition::Topbar)
             ->userMenuItems([
                 Action::make('settings')
                     ->label('Configuração')
