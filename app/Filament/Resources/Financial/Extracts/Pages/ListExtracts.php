@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -61,15 +63,153 @@ final class ListExtracts extends ListRecords
     {
         return [
             Action::make('export_extract')
-                ->label('Exportar Extrato PDF')
+                ->label('Exportar Extrato')
                 ->icon('heroicon-o-document-arrow-down')
-                ->color(Color::Gray)
-                ->action(function (): Response {
-                    $tenant = Filament::getTenant();
+                ->color('primary')
+                ->modalHeading('Exportar Extrato Financeiro')
+                ->modalDescription('Configure o período e o tipo de movimentação para exportar o extrato.')
+                ->modalIcon('heroicon-o-document-chart-bar')
+                ->modalWidth('md')
+                ->form([
+                    Section::make('Configurações do Extrato')
+                        ->description('Personalize o extrato conforme sua necessidade')
+                        ->icon('heroicon-o-adjustments-horizontal')
+                        ->schema([
+                            DatePicker::make('start_date')
+                                ->label('Data Inicial')
+                                ->helperText('Data de início do período')
+                                ->default(now()->startOfMonth())
+                                ->native(false)
+                                ->displayFormat('d/m/Y')
+                                ->maxDate(now())
+                                ->required()
+                                ->columnSpan(1),
+                            DatePicker::make('end_date')
+                                ->label('Data Final')
+                                ->helperText('Data de término do período')
+                                ->default(now())
+                                ->native(false)
+                                ->displayFormat('d/m/Y')
+                                ->maxDate(now())
+                                ->afterOrEqual('start_date')
+                                ->required()
+                                ->columnSpan(1),
+                            Select::make('filter_type')
+                                ->label('Tipo de Movimentação')
+                                ->helperText('Filtre por tipo de movimentação')
+                                ->options([
+                                    'all' => 'Todas',
+                                    'receivables' => 'Apenas Receitas',
+                                    'payables' => 'Apenas Despesas',
+                                ])
+                                ->default('all')
+                                ->native(false)
+                                ->required()
+                                ->columnSpan(1),
+                            Select::make('filter_status')
+                                ->label('Status de Pagamento')
+                                ->helperText('Filtre por status de pagamento')
+                                ->options([
+                                    'all' => 'Todos',
+                                    'paid' => 'Apenas Pagas',
+                                    'pending' => 'Apenas Pendentes',
+                                    'overdue' => 'Apenas Vencidas',
+                                ])
+                                ->default('all')
+                                ->native(false)
+                                ->required()
+                                ->columnSpan(1),
+                        ])
+                        ->columns(1)
+                        ->columnSpanFull(),
 
-                    // Obtém a query filtrada da tabela respeitando todos os filtros aplicados
-                    $query = $this->getFilteredTableQuery()
-                        ->with(['accounts.person', 'accounts.user']);
+                    Section::make('Resumo da Seleção')
+                        ->description('Prévia das movimentações que serão exportadas')
+                        ->icon('heroicon-o-chart-bar')
+                        ->schema([
+                            Placeholder::make('preview_stats')
+                                ->label('')
+                                ->content(function ($get) {
+                                    $startDate = $get('start_date') ? Carbon::parse($get('start_date'))->startOfDay() : now()->startOfMonth();
+                                    $endDate = $get('end_date') ? Carbon::parse($get('end_date'))->endOfDay() : now()->endOfMonth();
+                                    $filterType = $get('filter_type') ?? 'all';
+                                    $filterStatus = $get('filter_status') ?? 'all';
+
+                                    $query = AccountsInstallments::query()
+                                        ->with(['accounts'])
+                                        ->where('tenant_id', Filament::getTenant()->id)
+                                        ->whereBetween('due_date', [$startDate, $endDate]);
+
+                                    // Aplicar filtro de tipo
+                                    if ($filterType !== 'all') {
+                                        $query->whereHas('accounts', fn ($q) => $q->where('type', $filterType));
+                                    }
+
+                                    // Aplicar filtro de status
+                                    if ($filterStatus === 'paid') {
+                                        $query->where('status', 1);
+                                    } elseif ($filterStatus === 'pending') {
+                                        $query->where('status', 0)->where('due_date', '>=', now());
+                                    } elseif ($filterStatus === 'overdue') {
+                                        $query->where('status', 0)->where('due_date', '<', now());
+                                    }
+
+                                    $installments = $query->get();
+                                    $totalReceivables = $installments->filter(fn ($i) => $i->accounts->type === 'receivables')->sum('amount');
+                                    $totalPayables = $installments->filter(fn ($i) => $i->accounts->type === 'payables')->sum('amount');
+                                    $balance = $totalReceivables - $totalPayables;
+                                    $count = $installments->count();
+
+                                    return new \Illuminate\Support\HtmlString("
+                                        <div style='display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px;'>
+                                            <div style='background: #dbeafe; padding: 12px; border-radius: 6px; text-align: center;'>
+                                                <div style='font-size: 11px; color: #1e40af; font-weight: 600; margin-bottom: 4px;'>MOVIMENTAÇÕES</div>
+                                                <div style='font-size: 24px; font-weight: bold; color: #3b82f6;'>{$count}</div>
+                                            </div>
+                                            <div style='background: #dcfce7; padding: 12px; border-radius: 6px; text-align: center;'>
+                                                <div style='font-size: 11px; color: #166534; font-weight: 600; margin-bottom: 4px;'>RECEITAS</div>
+                                                <div style='font-size: 18px; font-weight: bold; color: #16a34a;'>R$ ".number_format($totalReceivables, 2, ',', '.')."</div>
+                                            </div>
+                                            <div style='background: #fee2e2; padding: 12px; border-radius: 6px; text-align: center;'>
+                                                <div style='font-size: 11px; color: #991b1b; font-weight: 600; margin-bottom: 4px;'>DESPESAS</div>
+                                                <div style='font-size: 18px; font-weight: bold; color: #dc2626;'>R$ ".number_format($totalPayables, 2, ',', '.')."</div>
+                                            </div>
+                                            <div style='background: ".($balance >= 0 ? '#dcfce7' : '#fee2e2')."; padding: 12px; border-radius: 6px; text-align: center;'>
+                                                <div style='font-size: 11px; color: ".($balance >= 0 ? '#166534' : '#991b1b')."; font-weight: 600; margin-bottom: 4px;'>SALDO</div>
+                                                <div style='font-size: 18px; font-weight: bold; color: ".($balance >= 0 ? '#16a34a' : '#dc2626').";'>R$ ".number_format($balance, 2, ',', '.')."</div>
+                                            </div>
+                                        </div>
+                                    ");
+                                })
+                                ->columnSpanFull(),
+                        ])
+                        ->columnSpanFull()
+                        ->collapsed(),
+                ])
+                ->action(function (array $data): Response {
+                    $tenant = Filament::getTenant();
+                    $startDate = Carbon::parse($data['start_date'])->startOfDay();
+                    $endDate = Carbon::parse($data['end_date'])->endOfDay();
+                    $filterType = $data['filter_type'];
+                    $filterStatus = $data['filter_status'];
+
+                    $query = AccountsInstallments::query()
+                        ->with(['accounts.person', 'accounts.user'])
+                        ->where('tenant_id', $tenant->id)
+                        ->whereBetween('due_date', [$startDate, $endDate]);
+
+                    // Aplicar filtros
+                    if ($filterType !== 'all') {
+                        $query->whereHas('accounts', fn ($q) => $q->where('type', $filterType));
+                    }
+
+                    if ($filterStatus === 'paid') {
+                        $query->where('status', 1);
+                    } elseif ($filterStatus === 'pending') {
+                        $query->where('status', 0)->where('due_date', '>=', now());
+                    } elseif ($filterStatus === 'overdue') {
+                        $query->where('status', 0)->where('due_date', '<', now());
+                    }
 
                     $installments = $query->orderBy('due_date', 'asc')->get();
 
@@ -77,16 +217,23 @@ final class ListExtracts extends ListRecords
                     $totalReceivables = $installments->filter(fn ($i) => $i->accounts->type === 'receivables')->sum('amount');
                     $totalPayables = $installments->filter(fn ($i) => $i->accounts->type === 'payables')->sum('amount');
                     $totalPaid = $installments->where('status', 1)->sum('amount');
-                    $totalPending = $installments->where('status', 0)->sum('amount');
+                    $totalPending = $installments->where('status', 0)->where('due_date', '>=', now())->sum('amount');
+                    $totalOverdue = $installments->where('status', 0)->where('due_date', '<', now())->sum('amount');
+                    $balance = $totalReceivables - $totalPayables;
 
                     $pdf = Pdf::loadView('pdf.extract', [
                         'tenant' => $tenant,
+                        'startDate' => $startDate,
+                        'endDate' => $endDate,
                         'installments' => $installments,
-                        'activeTab' => $this->activeTab ?? 'all',
+                        'filterType' => $filterType,
+                        'filterStatus' => $filterStatus,
                         'totalReceivables' => $totalReceivables,
                         'totalPayables' => $totalPayables,
                         'totalPaid' => $totalPaid,
                         'totalPending' => $totalPending,
+                        'totalOverdue' => $totalOverdue,
+                        'balance' => $balance,
                     ])
                         ->setPaper('a4', 'landscape')
                         ->setOption('margin-top', 10)
@@ -94,11 +241,18 @@ final class ListExtracts extends ListRecords
                         ->setOption('margin-left', 10)
                         ->setOption('margin-right', 10);
 
+                    $fileName = sprintf(
+                        'extrato-financeiro-%s-a-%s.pdf',
+                        $startDate->format('d-m-Y'),
+                        $endDate->format('d-m-Y')
+                    );
+
                     return response()->streamDownload(
                         fn () => print ($pdf->output()),
-                        'extrato-financeiro-'.now()->format('Y-m-d').'.pdf'
+                        $fileName
                     );
-                }),
+                })
+                ->successNotificationTitle('Extrato gerado com sucesso!'),
             Action::make('generate_report')
                 ->label('Gerar Relatório')
                 ->icon('heroicon-o-chart-bar')
