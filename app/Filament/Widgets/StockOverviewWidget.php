@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Filament\Widgets;
 
 use App\Models\Product;
-use DB;
 use Filament\Facades\Filament;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\Facades\DB;
 
 final class StockOverviewWidget extends BaseWidget
 {
