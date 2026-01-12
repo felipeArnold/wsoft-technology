@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Landing\FunilariaLeadController;
 use App\Http\Controllers\Landing\MecanicaLeadController;
 use App\Http\Controllers\Landing\OficinaLeadController;
+use App\Http\Controllers\ServiceOrderPdfController;
 use App\Http\Controllers\Stripe\StripeBillingController;
 use Illuminate\Support\Facades\Route;
 
@@ -122,6 +123,11 @@ Route::get('/sistema-para-lava-rapido', function () {
 Route::get('/assinatura-digital', function () {
     return view('site.assinatura-digital');
 })->name('landing.assinatura-digital');
+
+// Service Orders PDF Routes
+Route::middleware(['auth'])->prefix('service-orders')->name('service-orders.')->group(function (): void {
+    Route::get('/{serviceOrder}/pdf/download', [ServiceOrderPdfController::class, 'download'])->name('pdf.download');
+});
 
 // Stripe Billing Routes
 Route::middleware(['auth'])->prefix('stripe')->name('stripe.')->group(function (): void {
