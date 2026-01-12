@@ -126,7 +126,7 @@ $structuredData = [
 
                     <div class="flex items-center justify-between mb-8">
                         <h2 class="text-2xl font-bold text-slate-900">Últimos Artigos</h2>
-                        <p class="text-sm text-slate-500">{{ $posts->total() }} {{ Str::plural('artigo', $posts->total()) }}</p>
+                        <p class="text-sm text-slate-500">{{ $posts->total() }} {{ \Illuminate\Support\Str::plural('artigo', $posts->total()) }}</p>
                     </div>
 
                     @if($posts->count() > 0)
@@ -149,7 +149,7 @@ $structuredData = [
                                 <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2" itemprop="headline">
                                     <a href="{{ route('blog.show', $post->slug) }}" itemprop="url">{{ $post->title }}</a>
                                 </h3>
-                                <p class="text-sm text-slate-600 line-clamp-3 mb-4 flex-1" itemprop="description">{{ $post->excerpt ?: Str::limit(strip_tags($post->content), 100) }}</p>
+                                <p class="text-sm text-slate-600 line-clamp-3 mb-4 flex-1" itemprop="description">{{ $post->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($post->content), 100) }}</p>
                                 <div class="pt-4 border-t border-slate-50 flex items-center justify-between">
                                     <div class="text-xs font-medium text-slate-500 flex items-center gap-2">
                                         <i class="fa-regular fa-calendar" aria-hidden="true"></i>

@@ -514,7 +514,7 @@ $structuredData = array_map(function($schema) {
                     @endif
                     <li><span class="text-slate-300">/</span></li>
                     <li class="text-slate-900 font-medium truncate max-w-[200px] md:max-w-none">
-                        <span>{{ Str::limit($post->title, 40) }}</span>
+                        <span>{{ \Illuminate\Support\Str::limit($post->title, 40) }}</span>
                     </li>
                 </ol>
             </nav>
@@ -817,7 +817,7 @@ $structuredData = array_map(function($schema) {
                             <a href="{{ route('blog.show', $relatedPost->slug) }}">{{ $relatedPost->title }}</a>
                         </h3>
                         <p class="text-sm text-slate-600 line-clamp-3 mb-4 flex-1">
-                            {{ $relatedPost->excerpt ?: Str::limit(strip_tags($relatedPost->content), 100) }}
+                            {{ $relatedPost->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($relatedPost->content), 100) }}
                         </p>
                         <div class="pt-4 border-t border-slate-50 text-xs font-medium text-slate-500 flex items-center gap-2">
                             <i class="fa-regular fa-calendar" aria-hidden="true"></i>

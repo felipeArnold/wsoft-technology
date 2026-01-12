@@ -9,7 +9,7 @@
     <meta name="description" content="@yield('meta_description', 'Blog da WSoft Tecnologia - Dicas e conteúdos sobre gestão empresarial, controle financeiro, ordem de serviço e muito mais.')" />
     <link rel="canonical" href="{{ url()->current() }}" />
 
-    @if(View::hasSection('meta_keywords'))
+    @if(\Illuminate\Support\Facades\View::hasSection('meta_keywords'))
     <meta name="keywords" content="@yield('meta_keywords')" />
     @endif
 
@@ -20,7 +20,7 @@
     <meta property="og:description" content="@yield('og_description', 'Blog da WSoft Tecnologia - Dicas e conteúdos sobre gestão empresarial.')" />
     <meta property="og:type" content="@yield('og_type', 'website')" />
     <meta property="og:url" content="{{ url()->current() }}" />
-    @if(View::hasSection('og_image'))
+    @if(\Illuminate\Support\Facades\View::hasSection('og_image'))
     <meta property="og:image" content="@yield('og_image')" />
     <meta property="og:image:alt" content="@yield('og_title', 'Blog WSoft Tecnologia')" />
     @else
@@ -32,26 +32,26 @@
     <meta name="twitter:site" content="@wsofttecnologia" />
     <meta name="twitter:title" content="@yield('twitter_title', 'Blog | WSoft Tecnologia')" />
     <meta name="twitter:description" content="@yield('twitter_description', 'Blog da WSoft Tecnologia - Dicas e conteúdos sobre gestão empresarial.')" />
-    @if(View::hasSection('og_image'))
+    @if(\Illuminate\Support\Facades\View::hasSection('og_image'))
     <meta name="twitter:image" content="@yield('og_image')" />
     @else
     <meta name="twitter:image" content="{{ asset('images/og-default.jpg') }}" />
     @endif
 
     <!-- AI-Friendly Article Metadata -->
-    @if(View::hasSection('article_author'))
+    @if(\Illuminate\Support\Facades\View::hasSection('article_author'))
     <meta name="article:author" content="@yield('article_author')" />
     @endif
-    @if(View::hasSection('article_published_time'))
+    @if(\Illuminate\Support\Facades\View::hasSection('article_published_time'))
     <meta name="article:published_time" content="@yield('article_published_time')" />
     @endif
-    @if(View::hasSection('article_modified_time'))
+    @if(\Illuminate\Support\Facades\View::hasSection('article_modified_time'))
     <meta name="article:modified_time" content="@yield('article_modified_time')" />
     @endif
-    @if(View::hasSection('article_section'))
+    @if(\Illuminate\Support\Facades\View::hasSection('article_section'))
     <meta name="article:section" content="@yield('article_section')" />
     @endif
-    @if(View::hasSection('article_tag'))
+    @if(\Illuminate\Support\Facades\View::hasSection('article_tag'))
     <meta name="article:tag" content="@yield('article_tag')" />
     @endif
     <meta name="article:publisher" content="WSoft Tecnologia" />

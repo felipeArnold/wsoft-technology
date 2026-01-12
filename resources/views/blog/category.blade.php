@@ -61,7 +61,7 @@
                                     <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a>
                                 </h3>
                                 <p class="text-sm text-slate-600 line-clamp-3">
-                                    {{ $post->excerpt ?: Str::limit(strip_tags($post->content), 150) }}
+                                    {{ $post->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($post->content), 150) }}
                                 </p>
                                 <div class="mt-4 flex items-center justify-between">
                                     <div class="flex items-center text-xs text-slate-500">
