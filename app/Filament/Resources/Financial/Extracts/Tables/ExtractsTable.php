@@ -13,6 +13,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -29,23 +30,6 @@ final class ExtractsTable
         return $table
             ->query(AccountsInstallments::query())
             ->columns([
-                TextColumn::make('accounts.type')
-                    ->label('Tipo')
-                    ->formatStateUsing(function ($state, $record) {
-                        return $state === 'receivables' ? 'Receita' : 'Despesa';
-                    })
-                    ->badge()
-                    ->colors([
-                        'success' => fn ($state) => $state === 'receivables',
-                        'danger' => fn ($state) => $state === 'payables',
-                    ])
-                    ->icons([
-                        'heroicon-o-arrow-up-circle' => fn ($state) => $state === 'receivables',
-                        'heroicon-o-arrow-down-circle' => fn ($state) => $state === 'payables',
-                    ])
-                    ->searchable()
-                    ->sortable()
-                    ->toggleable(),
                 TextColumn::make('accounts.person.name')
                     ->label('Cliente/Fornecedor')
                     ->searchable()
@@ -65,31 +49,39 @@ final class ExtractsTable
                     ->color('gray')
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('amount')
-                    ->label('Valor')
+                TextColumn::make('receivables')
+                    ->label('Receitas')
+                    ->getStateUsing(fn ($record) => $record->accounts->type === 'receivables' ? $record->amount : null)
                     ->money('BRL')
-                    ->color(fn ($record) => $record->accounts->type === 'receivables' ? 'success' : 'danger')
+                    ->color('success')
+                    ->icon(Heroicon::ArrowTrendingUp)
                     ->alignEnd()
-                    ->toggleable()
-                    ->summarize([
-                        Sum::make()
-                            ->label('Total Receitas')
-                            ->money('BRL')
-                            ->using(fn ($query) => $query->whereHas('accounts', fn ($q) => $q->where('type', 'receivables'))->sum('amount')),
-                        Sum::make()
-                            ->label('Total Despesas')
-                            ->money('BRL')
-                            ->using(fn ($query) => $query->whereHas('accounts', fn ($q) => $q->where('type', 'payables'))->sum('amount')),
-                        Sum::make()
-                            ->label('Saldo')
-                            ->money('BRL')
-                            ->using(function ($query) {
-                                $receitas = $query->whereHas('accounts', fn ($q) => $q->where('type', 'receivables'))->sum('amount');
-                                $despesas = $query->whereHas('accounts', fn ($q) => $q->where('type', 'payables'))->sum('amount');
-
-                                return $receitas - $despesas;
-                            }),
-                    ]),
+                    ->toggleable(),
+                TextColumn::make('payables')
+                    ->label('Despesas')
+                    ->getStateUsing(fn ($record) => $record->accounts->type === 'payables' ? $record->amount : null)
+                    ->money('BRL')
+                    ->color('danger')
+                    ->icon(Heroicon::ArrowTrendingDown)
+                    ->alignEnd()
+                    ->toggleable(),
+                TextColumn::make('created_at')
+                    ->label('')
+                    ->getStateUsing(fn () => '')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('accounts.type')
+                    ->label('Tipo')
+                    ->formatStateUsing(function ($state) {
+                        return $state === 'receivables' ? 'Receita' : 'Despesa';
+                    })
+                    ->badge()
+                    ->colors([
+                        'success' => fn ($state) => $state === 'receivables',
+                        'danger' => fn ($state) => $state === 'payables',
+                    ])
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('due_date')
                     ->label('Vencimento')
                     ->date('d/m/Y')

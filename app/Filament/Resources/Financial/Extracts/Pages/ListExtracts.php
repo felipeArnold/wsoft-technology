@@ -69,7 +69,7 @@ final class ListExtracts extends ListRecords
                 ->modalHeading('Exportar Extrato Financeiro')
                 ->modalDescription('Configure o período e o tipo de movimentação para exportar o extrato.')
                 ->modalIcon('heroicon-o-document-chart-bar')
-                ->modalWidth('md')
+                ->modalWidth('3xl')
                 ->form([
                     Section::make('Configurações do Extrato')
                         ->description('Personalize o extrato conforme sua necessidade')
@@ -120,7 +120,7 @@ final class ListExtracts extends ListRecords
                                 ->required()
                                 ->columnSpan(1),
                         ])
-                        ->columns(1)
+                        ->columns(2)
                         ->columnSpanFull(),
 
                     Section::make('Resumo da Seleção')
