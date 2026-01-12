@@ -1,4 +1,7 @@
-<x-layouts.pdf :title="'Ordem de Serviço #' . $serviceOrder->number">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
     <style>
         .invoice-box {
             width: 100%;
@@ -67,7 +70,7 @@
         .text-right { text-align: right; }
         .text-center { text-align: center; }
         .font-bold { font-weight: bold; }
-        
+
         .border-right { border-right: 1px solid #000; }
         .border-bottom { border-bottom: 1px solid #000; }
         .no-border { border: none !important; }
@@ -78,7 +81,7 @@
             border: 1px solid #000;
             margin-top: 10px;
         }
-        
+
         .total-row td {
             border-top: 1px solid #000;
             font-weight: bold;
@@ -91,8 +94,10 @@
             display: table;
         }
     </style>
-
+</head>
+<body>
     @php
+        use Illuminate\Support\Facades\Storage;
         $person = $serviceOrder->person;
         $primaryPhone = $person->phones->first();
         $primaryAddress = $person->addresses->first();
@@ -121,12 +126,12 @@
                     </div>
                 @endif
             </td>
-            
+
             <!-- COMPANY INFO -->
             <td width="50%" class="border-right">
                 <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">{{ $tenant->name }}</div>
                 @if($tenant->document)<div class="info-value"><span class="info-label">CNPJ/CPF:</span> {{ $tenant->document }}</div>@endif
-                
+
                 @if($tenantAddress)
                 <div class="info-value">
                     {{ $tenantAddress->street }}{{ $tenantAddress->number ? ', ' . $tenantAddress->number : '' }}
@@ -139,7 +144,7 @@
                 @endif
 
                 <div class="info-value">
-                    @if($tenantPhone)<span class="info-label">Tel:</span> {{ $tenantPhone->number }} @endif
+                    @if($tenantPhone)<span class="info-label">Tel:</span> {{ Formatter::phone($tenantPhone->number) }} @endif
                     @if($tenantEmail) <br><span class="info-label">Email:</span> {{ $tenantEmail->address }} @elseif($tenant->email) <br><span class="info-label">Email:</span> {{ $tenant->email }} @endif
                 </div>
             </td>
@@ -150,7 +155,7 @@
                 <div style="text-align: center; padding: 10px;">
                     <div style="font-size: 18px; font-weight: bold;">Nº {{ $serviceOrder->number }}</div>
                     <div style="margin-top: 10px; font-size: 11px;">
-                        <div style="margin-bottom: 3px;"><span class="info-label">EMISSÃO:</span> {{ $serviceOrder->opening_date->format('d/m/Y H:i') }}</div>
+                        <div style="margin-bottom: 3px;"><span class="info-label">EMISSÃO:</span> {{ $serviceOrder->opening_date->format('d/m/Y') }}</div>
                         @if($serviceOrder->completion_date)
                         <div><span class="info-label">SAÍDA:</span> {{ $serviceOrder->completion_date->format('d/m/Y') }}</div>
                         @endif
@@ -253,7 +258,7 @@
     <!-- PRODUCTS -->
     @if($serviceOrder->serviceOrderProducts->count() > 0)
     <div style="margin-bottom: 10px;">
-        <div class="section-header" style="border: 1px solid #000; border-bottom: none;">PEÇAS EMATERIAIS APLICADOS</div>
+        <div class="section-header" style="border: 1px solid #000; border-bottom: none;">PEÇAS E MATERIAIS APLICADOS</div>
         <table class="table-datagrid">
             <thead>
                 <tr>
@@ -300,7 +305,7 @@
                     {!! nl2br(strip_tags($serviceOrder->observations)) !!}
                 </div>
                 @endif
-                
+
                 @if($serviceOrder->warranty_period)
                 <div style="margin-top: 8px; padding-top: 5px; border-top: 1px dashed #ccc;">
                     <strong>GARANTIA:</strong> {{ $serviceOrder->warranty_period }}
@@ -319,7 +324,6 @@
                     $totalServices = $serviceOrder->serviceOrderServices->sum('total');
                     $totalProducts = $serviceOrder->serviceOrderProducts->sum('total');
                     $totalDiscount = $serviceOrder->discount ?? ($serviceOrder->serviceOrderServices->sum('discount') + $serviceOrder->serviceOrderProducts->sum('discount'));
-                    // Recalculating totals if needed, or using stored values
                 @endphp
                 <tr>
                     <td width="60%" class="text-right">TOTAL SERVIÇOS:</td>
@@ -344,17 +348,19 @@
     </div>
 
     <!-- SIGNATURES -->
-    <div style="margin-top: 50px;">
+    <div style="margin-top: 80px;">
         <table width="100%">
             <tr>
                 <td width="45%" class="text-center">
                     <div style="border-bottom: 1px solid #000; margin-bottom: 5px;"></div>
-                    <span style="font-size: 10px;">{{ $tenant->name }}</span>
+                    <span style="font-size: 10px;">{{ $tenant->name }}</span><br>
+                    <span style="font-size: 10px;">CNPJ: {{ $tenant->document ?? '' }}</span>
                 </td>
                 <td width="10%"></td>
                 <td width="45%" class="text-center">
                     <div style="border-bottom: 1px solid #000; margin-bottom: 5px;"></div>
-                    <span style="font-size: 10px;">{{ $person->name }}</span>
+                    <span style="font-size: 10px;">{{ $person->name }}</span><br>
+                    <span style="font-size: 10px;">CPF/CNPJ: {{ $person->document ?? '' }}</span>
                 </td>
             </tr>
         </table>
@@ -362,8 +368,7 @@
 
     <!-- FOOTER -->
     <div style="margin-top: 20px; font-size: 8px; text-align: center; color: #666; border-top: 1px solid #ccc; padding-top: 5px;">
-        {{ $tenant->name }} - {{ $tenant->website ?? '' }} - Documento gerado em {{ now()->format('d/m/Y H:i:s') }}
-        <br>O consumidor tem direito à garantia legal de 90 dias, conforme art. 26 do Código de Defesa do Consumidor.
+        {{ $tenant->name }} - Documento gerado em {{ now()->format('d/m/Y H:i:s') }}
     </div>
-
-</x-layouts.pdf>
+</body>
+</html>

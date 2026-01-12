@@ -73,7 +73,7 @@ final class ServiceOrder extends Model implements Eventable
         'attachments' => 'array',
     ];
 
-    public static function getForm(): array
+    public static function getForm(bool $disableStatus = false, ?ServiceOrderStatus $defaultStatus = null): array
     {
         return [
             Tabs::make('service_order_tabs')
@@ -96,9 +96,10 @@ final class ServiceOrder extends Model implements Eventable
                                         ->label('Status')
                                         ->options(ServiceOrderStatus::toSelectArray())
                                         ->live()
-                                        ->default(ServiceOrderStatus::DRAFT->value)
+                                        ->default($defaultStatus?->value ?? ServiceOrderStatus::DRAFT->value)
                                         ->required()
                                         ->native(false)
+                                        ->disabled($disableStatus)
                                         ->columnSpan(1),
                                     Select::make('priority')
                                         ->label('Prioridade')

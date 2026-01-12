@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Widgets;
 
 use App\Enum\AccountsReceivable\PaymentStatusEnum;
+use App\Helpers\FormatterHelper;
 use App\Models\Accounts\AccountsInstallments;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -131,22 +132,22 @@ final class FinancialDashboardOverview extends BaseWidget
             ->count();
 
         return [
-            Stat::make('Saldo em caixa', 'R$ '.number_format($monthlyBalance, 2, ',', '.'))
+            Stat::make('Saldo em caixa', 'R$ '.FormatterHelper::money($monthlyBalance))
                 ->icon('heroicon-m-currency-dollar')
                 ->description(($balanceVariation >= 0 ? '+ ' : '- ').number_format(abs($balanceVariation), 1, ',', '.').'% vs mês anterior')
                 ->color($monthlyBalance >= 0 ? 'success' : 'danger'),
 
-            Stat::make('A Receber', 'R$ '.number_format($totalToReceive, 2, ',', '.'))
+            Stat::make('A Receber', 'R$ '.FormatterHelper::money($totalToReceive))
                 ->icon('heroicon-m-arrow-trending-up')
                 ->description($countToReceive.' '.($countToReceive === 1 ? 'conta pendente' : 'contas pendentes'))
                 ->color('success'),
 
-            Stat::make('A Pagar', 'R$ '.number_format($totalToPay, 2, ',', '.'))
+            Stat::make('A Pagar', 'R$ '.FormatterHelper::money($totalToPay))
                 ->icon('heroicon-m-arrow-trending-down')
                 ->description($countToPay.' '.($countToPay === 1 ? 'conta pendente' : 'contas pendentes'))
                 ->color('danger'),
 
-            Stat::make('Inadimplência', 'R$ '.number_format($totalOverdue, 2, ',', '.'))
+            Stat::make('Inadimplência', 'R$ '.FormatterHelper::money($totalOverdue))
                 ->icon('heroicon-m-exclamation-triangle')
                 ->description($countOverdue.' '.($countOverdue === 1 ? 'conta atrasada' : 'contas atrasadas'))
                 ->color('danger'),
