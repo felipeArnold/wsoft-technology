@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -51,24 +52,78 @@ final class ListNonPayments extends ListRecords
     {
         return [
             Action::make('export_overdue')
-                ->label('Exportar PDF')
+                ->label('Exportar Relatório')
                 ->icon('heroicon-o-document-arrow-down')
-                ->color(Color::Gray)
+                ->color('danger')
+                ->modalHeading('Exportar Relatório de Inadimplência')
+                ->modalDescription('Gere um relatório detalhado com análise de inadimplência por período.')
+                ->modalIcon('heroicon-o-document-chart-bar')
+                ->modalWidth('md')
                 ->form([
-                    Section::make('Período de Exportação')
-                        ->description('Selecione o período para exportar o relatório de inadimplência.')
-                        ->icon('heroicon-o-calendar')
+                    Section::make('Configurações do Relatório')
+                        ->description('Defina o período e os critérios para o relatório de inadimplência')
+                        ->icon('heroicon-o-adjustments-horizontal')
                         ->schema([
                             DatePicker::make('start_date')
                                 ->label('Data Inicial')
+                                ->helperText('Data de início do período de análise')
                                 ->default(now()->startOfMonth())
-                                ->required(),
+                                ->native(false)
+                                ->displayFormat('d/m/Y')
+                                ->maxDate(now())
+                                ->required()
+                                ->columnSpan(1),
                             DatePicker::make('end_date')
                                 ->label('Data Final')
-                                ->default(now()->endOfMonth())
-                                ->required(),
+                                ->helperText('Data de término do período de análise')
+                                ->default(now())
+                                ->native(false)
+                                ->displayFormat('d/m/Y')
+                                ->maxDate(now())
+                                ->afterOrEqual('start_date')
+                                ->required()
+                                ->columnSpan(1),
                         ])
-                        ->columns(2),
+                        ->columns(1)
+                        ->columnSpanFull(),
+
+                    Section::make('Resumo Atual')
+                        ->description('Estatísticas atuais de inadimplência')
+                        ->icon('heroicon-o-chart-bar')
+                        ->schema([
+                            Placeholder::make('current_stats')
+                                ->label('')
+                                ->content(function () {
+                                    $criticalCount = $this->getCriticalOverdueCount();
+                                    $overdueCount = $this->getOverdueCount();
+                                    $recentCount = $this->getRecentOverdueCount();
+                                    $totalCount = $criticalCount + $overdueCount + $recentCount;
+
+                                    return new \Illuminate\Support\HtmlString("
+                                        <div style='display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px;'>
+                                            <div style='background: #f3f4f6; padding: 12px; border-radius: 6px; text-align: center;'>
+                                                <div style='font-size: 11px; color: #6b7280; font-weight: 600; margin-bottom: 4px;'>TOTAL</div>
+                                                <div style='font-size: 24px; font-weight: bold; color: #1f2937;'>{$totalCount}</div>
+                                            </div>
+                                            <div style='background: #fee2e2; padding: 12px; border-radius: 6px; text-align: center;'>
+                                                <div style='font-size: 11px; color: #991b1b; font-weight: 600; margin-bottom: 4px;'>CRÍTICO</div>
+                                                <div style='font-size: 24px; font-weight: bold; color: #dc2626;'>{$criticalCount}</div>
+                                            </div>
+                                            <div style='background: #fef3c7; padding: 12px; border-radius: 6px; text-align: center;'>
+                                                <div style='font-size: 11px; color: #92400e; font-weight: 600; margin-bottom: 4px;'>VENCIDO</div>
+                                                <div style='font-size: 24px; font-weight: bold; color: #d97706;'>{$overdueCount}</div>
+                                            </div>
+                                            <div style='background: #dbeafe; padding: 12px; border-radius: 6px; text-align: center;'>
+                                                <div style='font-size: 11px; color: #1e40af; font-weight: 600; margin-bottom: 4px;'>RECENTE</div>
+                                                <div style='font-size: 24px; font-weight: bold; color: #3b82f6;'>{$recentCount}</div>
+                                            </div>
+                                        </div>
+                                    ");
+                                })
+                                ->columnSpanFull(),
+                        ])
+                        ->columnSpanFull()
+                        ->collapsed(),
                 ])
                 ->action(function (array $data): Response {
                     $tenant = Filament::getTenant();
@@ -126,10 +181,20 @@ final class ListNonPayments extends ListRecords
                         ->setOption('margin-left', 10)
                         ->setOption('margin-right', 10);
 
+                    $fileName = sprintf(
+                        'relatorio-inadimplencia-%s-a-%s.pdf',
+                        $startDate->format('d-m-Y'),
+                        $endDate->format('d-m-Y')
+                    );
+
                     return response()->streamDownload(
                         fn () => print ($pdf->output()),
-                        'inadimplencia-'.now()->format('Y-m-d').'.pdf'
+                        $fileName
                     );
+                })
+                ->successNotificationTitle('Relatório gerado com sucesso!')
+                ->after(function (): void {
+                    // Notificação adicional com informações do relatório
                 }),
             Action::make('send_bulk_reminders')
                 ->label('Enviar Lembretes')

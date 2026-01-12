@@ -57,15 +57,18 @@ abstract class FormatterHelper
 
     final public static function money(mixed $value, bool $currency = false): string
     {
-        $currency = new NumberFormatter(
+        // Converter para float primeiro para garantir compatibilidade com NumberFormatter
+        $numericValue = self::toDecimal($value);
+
+        $formatter = new NumberFormatter(
             'pt_BR',
             $currency
                 ? NumberFormatter::CURRENCY
                 : NumberFormatter::DECIMAL
         );
-        $currency->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);
+        $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);
 
-        return $currency->format($value);
+        return $formatter->format($numericValue);
     }
 
     final public static function decimal(mixed $value, int $afterComma = 2): string
