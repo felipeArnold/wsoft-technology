@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Widgets;
 
+use App\Helpers\FormatterHelper;
 use App\Models\Sale;
 use Filament\Facades\Filament;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -35,9 +36,9 @@ final class SalesOverviewWidget extends BaseWidget
         $lastMonthQuery->whereMonth('created_at', now()->subMonth()->month)
             ->whereYear('created_at', now()->subMonth()->year);
 
-        $currentMonthRevenue = $currentMonthQuery->sum('total');
+        $currentMonthRevenue = (float) $currentMonthQuery->sum('total');
         $currentMonthSales = $currentMonthQuery->count();
-        $lastMonthRevenue = $lastMonthQuery->sum('total');
+        $lastMonthRevenue = (float) $lastMonthQuery->sum('total');
         $lastMonthSales = $lastMonthQuery->count();
 
         $revenueChange = $lastMonthRevenue > 0
@@ -52,7 +53,7 @@ final class SalesOverviewWidget extends BaseWidget
             ? $currentMonthRevenue / $currentMonthSales
             : 0;
 
-        $totalRevenue = $query->sum('total');
+        $totalRevenue = (float) $query->sum('total');
         $totalSales = $query->count();
 
         $last7Days = [];
@@ -65,7 +66,7 @@ final class SalesOverviewWidget extends BaseWidget
         }
 
         return [
-            Stat::make('Receita do Mês', 'R$ '.number_format($currentMonthRevenue, 2, ',', '.'))
+            Stat::make('Receita do Mês', 'R$ '.FormatterHelper::money($currentMonthRevenue))
                 ->description(
                     abs($revenueChange) > 0
                         ? ($revenueChange > 0 ? '+' : '').number_format($revenueChange, 1, ',', '.').'% vs mês anterior'
@@ -84,12 +85,12 @@ final class SalesOverviewWidget extends BaseWidget
                 ->descriptionIcon($salesChange > 0 ? 'heroicon-o-arrow-trending-up' : 'heroicon-o-arrow-trending-down')
                 ->color($salesChange >= 0 ? 'success' : 'danger'),
 
-            Stat::make('Ticket Médio', 'R$ '.number_format($averageTicket, 2, ',', '.'))
+            Stat::make('Ticket Médio', 'R$ '.FormatterHelper::money($averageTicket))
                 ->description('Média do mês atual')
                 ->descriptionIcon('heroicon-o-shopping-cart')
                 ->color('info'),
 
-            Stat::make('Receita Total', 'R$ '.number_format($totalRevenue, 2, ',', '.'))
+            Stat::make('Receita Total', 'R$ '.FormatterHelper::money($totalRevenue))
                 ->description($totalSales.' vendas realizadas')
                 ->descriptionIcon('heroicon-o-currency-dollar')
                 ->color('success'),
