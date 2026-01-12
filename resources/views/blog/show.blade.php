@@ -1,4 +1,6 @@
 @php
+use Illuminate\Support\Facades\Storage;
+
 $structuredData = [
     [
         '@context' => 'https://schema.org',
