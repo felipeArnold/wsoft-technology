@@ -75,8 +75,8 @@
             'name' => 'WSoft Tecnologia',
             'legalName' => 'WSoft Tecnologia',
             'url' => 'https://www.wsoft.dev.br',
-            'logo' => asset('images/logo.png'),
-            'image' => asset('images/og-image.png'),
+            'logo' => asset('images/icon.png'),
+            'image' => asset('images/icon.png'),
             'description' => 'Empresa de software especializada em sistemas de gestão empresarial para pequenas empresas, MEI e diversos segmentos de negócios.',
             'foundingDate' => '2023',
             'email' => 'contato@wsoft.com.br',
@@ -113,9 +113,6 @@
         ];
 
         if(isset($structuredData)) {
-            // Se já existe structuredData da página, adicionamos o Organization como um elemento extra se for array de arrays,
-            // ou se for um único objeto, transformamos em array.
-            // O padrão adotado nas páginas é um array de objetos (schemas).
             $finalStructuredData = array_merge($structuredData, [$globalSchema]);
         } else {
             $finalStructuredData = [$globalSchema];
@@ -126,10 +123,11 @@
     {!! json_encode($finalStructuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
 
-    <link href="{{ asset('images/icon.webp') }}" rel="apple-touch-icon">
-    <link rel="icon" type="image/png" href="{{ asset('images/icon.webp') }}">
-    <link rel="preload" href="{{ asset('images/icon.webp') }}" as="image" fetchpriority="high">
-    <link rel="preload" href="{{ asset('images/icon.webp') }}" as="image">
+    <link rel="icon" href="{{ asset('images/icon.png') }}" sizes="any">
+    <link href="{{ asset('images/icon.png') }}" rel="apple-touch-icon">
+    <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}">
+    <link rel="preload" href="{{ asset('images/icon.png') }}" as="image" fetchpriority="high">
+    <link rel="preload" href="{{ asset('images/icon.png') }}" as="image">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
 

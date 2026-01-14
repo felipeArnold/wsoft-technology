@@ -53,16 +53,6 @@ WSoft Technology é uma plataforma SaaS de gestão empresarial desenvolvida com 
 - Controle de garantias de serviços
 - Notificações de vencimento
 
-## Tecnologias
-
-- **Backend**: Laravel 12.x, PHP 8.2+
-- **Frontend**: Filament 4.x, Livewire, Alpine.js
-- **Database**: MySQL/PostgreSQL
-- **Pagamentos**: Stripe, Laravel Cashier
-- **IA**: OpenAI API para geração de conteúdo
-- **Assinatura Digital**: ZapSign
-- **E-mail**: Resend
-- **Queue**: Laravel Horizon
 
 ## Segmentos Atendidos
 
