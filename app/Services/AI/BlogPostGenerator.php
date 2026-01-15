@@ -43,9 +43,8 @@ final class BlogPostGenerator
 
         $content = $response->choices[0]->message->content ?? '';
 
-
         // Valida se a resposta não está vazia
-        if (empty(trim($content))) {
+        if (empty(mb_trim($content))) {
             throw new Exception(
                 'A OpenAI retornou uma resposta vazia. Possíveis causas: limite de tokens, erro na API ou problema com o prompt. Por favor, tente novamente ou reduza o tamanho do post.'
             );
@@ -273,7 +272,7 @@ PROMPT;
             while ($attempt < $this->maxRetries) {
                 try {
                     // Log do tamanho do prompt para debug
-                    $promptLength = strlen($messages[array_key_last($messages)]['content'] ?? '');
+                    $promptLength = mb_strlen($messages[array_key_last($messages)]['content'] ?? '');
 
                     $response = OpenAI::chat()->create([
                         'model' => 'gpt-4o-mini',
@@ -283,7 +282,7 @@ PROMPT;
                     ]);
 
                     // Log da resposta para debug
-                    $contentLength = strlen($response->choices[0]->message->content ?? '');
+                    $contentLength = mb_strlen($response->choices[0]->message->content ?? '');
                     $finishReason = $response->choices[0]->finishReason ?? 'unknown';
 
                     // Se a resposta foi truncada, tenta novamente com mais tokens
@@ -621,10 +620,8 @@ PROMPT;
 
         $data['content'] = $this->cleanContent(implode("\n", $contentLines));
 
-
-
         // Valida se o conteúdo foi gerado
-        if (empty(trim(strip_tags($data['content'])))) {
+        if (empty(mb_trim(strip_tags($data['content'])))) {
             throw new Exception(
                 'Conteúdo vazio gerado pela IA. Resposta completa: '.mb_substr($content, 0, 500)
             );
@@ -754,7 +751,7 @@ PROMPT;
         $data['content'] = mb_trim($cleanedContent);
 
         // Valida se o conteúdo foi gerado
-        if (empty(trim(strip_tags($data['content'])))) {
+        if (empty(mb_trim(strip_tags($data['content'])))) {
             throw new Exception(
                 'Conteúdo vazio após parse HTML. Resposta: '.mb_substr($content, 0, 500)
             );
@@ -790,5 +787,4 @@ PROMPT;
 
         return $data;
     }
-
 }

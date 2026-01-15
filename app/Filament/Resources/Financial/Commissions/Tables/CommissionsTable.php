@@ -184,7 +184,7 @@ final class CommissionsTable
                         ->modalHeading('Marcar comissões como pagas')
                         ->modalDescription('Tem certeza que deseja marcar as comissões selecionadas como pagas?')
                         ->modalSubmitActionLabel('Sim, marcar como pagas')
-                        ->action(function (Collection $records) {
+                        ->action(function (Collection $records): void {
                             $user = Auth::user();
                             $count = 0;
 
@@ -208,7 +208,7 @@ final class CommissionsTable
                         ->modalHeading('Marcar comissões como pendentes')
                         ->modalDescription('Tem certeza que deseja reverter o pagamento das comissões selecionadas?')
                         ->modalSubmitActionLabel('Sim, marcar como pendentes')
-                        ->action(function (Collection $records) {
+                        ->action(function (Collection $records): void {
                             $count = 0;
 
                             foreach ($records as $record) {

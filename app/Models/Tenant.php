@@ -5,20 +5,23 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enum\TenantType;
+use App\Models\Asaas\AsaasAccount;
 use App\Models\Person\Addresses;
 use App\Models\Person\Emails;
 use App\Models\Person\Phones;
 use App\Observers\TenantObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Cashier\Billable;
 use Illuminate\Support\Str;
+use Laravel\Cashier\Billable;
 
 /**
  * @property int $id
@@ -50,6 +53,7 @@ use Illuminate\Support\Str;
 final class Tenant extends Model
 {
     use Billable;
+    use HasFactory;
     use SoftDeletes;
 
     protected $guarded = ['id'];
@@ -125,6 +129,11 @@ final class Tenant extends Model
     public function emails(): MorphMany
     {
         return $this->morphMany(Emails::class, 'emailable');
+    }
+
+    public function asaasAccount(): HasOne
+    {
+        return $this->hasOne(AsaasAccount::class);
     }
 
     public function getFilamentAvatarUrl(): ?string

@@ -127,6 +127,6 @@ return [
 
     'aliases' => [
         'Formatter' => App\Helpers\FormatterHelper::class,
-    ]
+    ],
 
 ];

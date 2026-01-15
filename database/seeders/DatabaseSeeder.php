@@ -21,7 +21,7 @@ final class DatabaseSeeder extends Seeder
             'name' => 'WSoft Technology',
             'slug' => Tenant::generateUniqueSlug('WSoft Technology'),
             'stripe_id' => 'cus_test_'.uniqid(),
-            'type' => TenantType::AUTO_REPAIR
+            'type' => TenantType::AUTO_REPAIR,
         ]);
 
         // Criar usuário

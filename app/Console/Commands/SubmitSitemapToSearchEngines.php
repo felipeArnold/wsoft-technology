@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Models\Blog\BlogPost;
 use App\Services\SEO\IndexNowService;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -41,12 +42,12 @@ final class SubmitSitemapToSearchEngines extends Command
         }
 
         // Submit sitemap to Google
-        if ($this->option('google') || !$this->option('bing')) {
+        if ($this->option('google') || ! $this->option('bing')) {
             $this->submitToGoogle();
         }
 
         // Submit sitemap to Bing
-        if ($this->option('bing') || !$this->option('google')) {
+        if ($this->option('bing') || ! $this->option('google')) {
             $this->submitToBing();
         }
 
@@ -67,10 +68,11 @@ final class SubmitSitemapToSearchEngines extends Command
 
         if ($posts->isEmpty()) {
             $this->warn('No published blog posts found.');
+
             return;
         }
 
-        $urls = $posts->map(fn($post) => route('blog.show', $post->slug))->toArray();
+        $urls = $posts->map(fn ($post) => route('blog.show', $post->slug))->toArray();
 
         $this->info("📝 Submitting {$posts->count()} blog posts via IndexNow...");
 
@@ -87,7 +89,7 @@ final class SubmitSitemapToSearchEngines extends Command
     private function submitToGoogle(): void
     {
         $sitemapUrl = url('/sitemap.xml');
-        $pingUrl = "https://www.google.com/ping?sitemap=" . urlencode($sitemapUrl);
+        $pingUrl = 'https://www.google.com/ping?sitemap='.urlencode($sitemapUrl);
 
         $this->info('🔍 Submitting sitemap to Google...');
 
@@ -99,7 +101,7 @@ final class SubmitSitemapToSearchEngines extends Command
             } else {
                 $this->warn("⚠️  Google returned status: {$response->status()}");
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->error("❌ Failed to submit to Google: {$e->getMessage()}");
         }
     }
@@ -114,6 +116,7 @@ final class SubmitSitemapToSearchEngines extends Command
 
         if (empty($apiKey)) {
             $this->warn('⚠️  Bing Webmaster API key not configured. Skipping...');
+
             return;
         }
 
@@ -124,7 +127,7 @@ final class SubmitSitemapToSearchEngines extends Command
                 ->withHeaders(['Content-Type' => 'application/json'])
                 ->post("https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey={$apiKey}", [
                     'siteUrl' => url('/'),
-                    'urlList' => [$sitemapUrl]
+                    'urlList' => [$sitemapUrl],
                 ]);
 
             if ($response->successful()) {
@@ -132,7 +135,7 @@ final class SubmitSitemapToSearchEngines extends Command
             } else {
                 $this->warn("⚠️  Bing returned status: {$response->status()}");
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->error("❌ Failed to submit to Bing: {$e->getMessage()}");
         }
     }

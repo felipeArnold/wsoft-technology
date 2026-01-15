@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Clusters\Settings\CRM\Sources\Tables;
 
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
-use App\Filament\Clusters\Settings\CRM\Sources\SourceResource;
 use Exception;
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;

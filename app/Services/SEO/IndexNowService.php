@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SEO;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -36,22 +37,30 @@ final class IndexNowService
     }
 
     /**
+     * Gera uma chave API aleatória para IndexNow
+     */
+    public static function generateApiKey(): string
+    {
+        return bin2hex(random_bytes(16));
+    }
+
+    /**
      * Notifica buscadores sobre uma URL atualizada
      *
-     * @param string $url URL completa da página atualizada
-     * @return bool
+     * @param  string  $url  URL completa da página atualizada
      */
     public function submitUrl(string $url): bool
     {
         if (empty($this->apiKey)) {
             Log::warning('IndexNow API key not configured');
+
             return false;
         }
 
         $payload = [
             'host' => parse_url($url, PHP_URL_HOST),
             'key' => $this->apiKey,
-            'keyLocation' => url('/') . '/' . $this->apiKey . '.txt',
+            'keyLocation' => url('/').'/'.$this->apiKey.'.txt',
             'urlList' => [$url],
         ];
 
@@ -70,7 +79,7 @@ final class IndexNowService
                         'status' => $response->status(),
                     ]);
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::error("IndexNow: Exception submitting to {$name}", [
                     'url' => $url,
                     'error' => $e->getMessage(),
@@ -84,8 +93,7 @@ final class IndexNowService
     /**
      * Notifica buscadores sobre múltiplas URLs atualizadas
      *
-     * @param array $urls Array de URLs completas
-     * @return bool
+     * @param  array  $urls  Array de URLs completas
      */
     public function submitUrls(array $urls): bool
     {
@@ -96,7 +104,7 @@ final class IndexNowService
         $payload = [
             'host' => parse_url($urls[0], PHP_URL_HOST),
             'key' => $this->apiKey,
-            'keyLocation' => url('/') . '/' . $this->apiKey . '.txt',
+            'keyLocation' => url('/').'/'.$this->apiKey.'.txt',
             'urlList' => $urls,
         ];
 
@@ -112,7 +120,7 @@ final class IndexNowService
                     ]);
                     $success = true;
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::error("IndexNow: Exception submitting to {$name}", [
                     'error' => $e->getMessage(),
                 ]);
@@ -120,15 +128,5 @@ final class IndexNowService
         }
 
         return $success;
-    }
-
-    /**
-     * Gera uma chave API aleatória para IndexNow
-     *
-     * @return string
-     */
-    public static function generateApiKey(): string
-    {
-        return bin2hex(random_bytes(16));
     }
 }

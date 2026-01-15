@@ -6,7 +6,7 @@ use App\Models\Product;
 
 test('product has correct guarded attributes', function (): void {
     $product = new Product();
-    
+
     $guarded = ['net_profit', 'profit_margin'];
 
     expect($product->getGuarded())->toBe($guarded);
@@ -26,7 +26,7 @@ test('product uses SoftDeletes trait', function (): void {
 
 test('product uses Categorizable trait', function (): void {
     $product = new Product();
-    
+
     expect(method_exists($product, 'categories'))->toBeTrue();
 });
 

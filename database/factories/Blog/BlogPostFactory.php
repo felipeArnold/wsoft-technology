@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Database\Factories\Blog;
 
 use App\Models\Blog\BlogPost;
-use App\Models\User;
-use App\Models\Tenant;
 use App\Models\Category;
+use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +27,7 @@ final class BlogPostFactory extends Factory
     {
         $title = $this->faker->sentence();
         $slug = \Illuminate\Support\Str::slug($title);
-        
+
         return [
             'user_id' => User::factory(),
             'tenant_id' => Tenant::factory(),

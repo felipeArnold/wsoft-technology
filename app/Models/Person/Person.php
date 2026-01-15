@@ -6,6 +6,7 @@ namespace App\Models\Person;
 
 use App\Filament\Components\CnpjComponent;
 use App\Models\Accounts\Accounts;
+use App\Models\Asaas\PersonIntegrationAsaas;
 use App\Models\Concerns\Categorizable;
 use App\Models\Sale;
 use App\Models\ServiceOrder;
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
@@ -326,7 +328,7 @@ final class Person extends Model
                         ->options([
                             'client' => 'Cliente',
                             'supplier' => 'Fornecedor',
-                            'both' => 'Ambos'
+                            'both' => 'Ambos',
                         ])
                         ->default('client')
                         ->inline()
@@ -334,7 +336,7 @@ final class Person extends Model
                         ->required()
                         ->reactive()
                         ->columnSpanFull()
-                        ->afterStateHydrated(function ($state, callable $set, callable $get) {
+                        ->afterStateHydrated(function ($state, callable $set, callable $get): void {
                             $isClient = $get('is_client');
                             $isSupplier = $get('is_supplier');
 
@@ -346,7 +348,7 @@ final class Person extends Model
                                 $set('person_type', 'client');
                             }
                         })
-                        ->afterStateUpdated(function ($state, callable $set) {
+                        ->afterStateUpdated(function ($state, callable $set): void {
                             $set('is_client', in_array($state, ['client', 'both']));
                             $set('is_supplier', in_array($state, ['supplier', 'both']));
                         })
@@ -447,6 +449,37 @@ final class Person extends Model
         ];
     }
 
+    /**
+     * Get a reusable Select component for Person with create option
+     *
+     * @param  string  $label  The label for the select field
+     * @param  string  $placeholder  The placeholder text
+     * @param  int  $columnSpan  The column span for the field
+     * @param  bool  $required  Whether the field is required
+     * @param  callable|null  $modifyQueryUsing  Optional callback to modify the relationship query
+     */
+    public static function getSelectComponent(
+        string $label = 'Cliente/Fornecedor',
+        string $placeholder = 'Selecione o cliente/fornecedor',
+        int $columnSpan = 1,
+        bool $required = false,
+        ?callable $modifyQueryUsing = null
+    ): Select {
+        return Select::make('person_id')
+            ->label($label)
+            ->placeholder($placeholder)
+            ->relationship('person', 'name', $modifyQueryUsing)
+            ->searchable()
+            ->preload()
+            ->native(false)
+            ->createOptionForm(self::getFormSimple())
+            ->createOptionUsing(function (array $data): int {
+                return self::query()->create($data)->getKey();
+            })
+            ->required($required)
+            ->columnSpan($columnSpan);
+    }
+
     public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
@@ -492,35 +525,8 @@ final class Person extends Model
         return $this->hasMany(Sale::class);
     }
 
-    /**
-     * Get a reusable Select component for Person with create option
-     *
-     * @param string $label The label for the select field
-     * @param string $placeholder The placeholder text
-     * @param int $columnSpan The column span for the field
-     * @param bool $required Whether the field is required
-     * @param callable|null $modifyQueryUsing Optional callback to modify the relationship query
-     * @return Select
-     */
-    public static function getSelectComponent(
-        string $label = 'Cliente/Fornecedor',
-        string $placeholder = 'Selecione o cliente/fornecedor',
-        int $columnSpan = 1,
-        bool $required = false,
-        ?callable $modifyQueryUsing = null
-    ): Select {
-        return Select::make('person_id')
-            ->label($label)
-            ->placeholder($placeholder)
-            ->relationship('person', 'name', $modifyQueryUsing)
-            ->searchable()
-            ->preload()
-            ->native(false)
-            ->createOptionForm(self::getFormSimple())
-            ->createOptionUsing(function (array $data): int {
-                return self::query()->create($data)->getKey();
-            })
-            ->required($required)
-            ->columnSpan($columnSpan);
+    public function asaasIntegration(): HasOne
+    {
+        return $this->hasOne(PersonIntegrationAsaas::class);
     }
 }

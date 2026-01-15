@@ -6,7 +6,7 @@ use App\Models\Tenant;
 
 test('tenant has correct fillable attributes', function (): void {
     $tenant = new Tenant();
-    
+
     $fillable = [
         'name',
         'slug',
@@ -32,7 +32,7 @@ test('tenant has correct fillable attributes', function (): void {
 
 test('tenant has correct guarded attributes', function (): void {
     $tenant = new Tenant();
-    
+
     $guarded = ['id'];
 
     expect($tenant->getGuarded())->toBe($guarded);

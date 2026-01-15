@@ -32,7 +32,7 @@ final class GenerateCommissionAction extends Action
                     return 'Configuração da comissão';
                 }
 
-                return "Gerar comissão para o técnico {$record->userAssigned->name} no valor de R$ " . number_format($record->labor_value, 2, ',', '.');
+                return "Gerar comissão para o técnico {$record->userAssigned->name} no valor de R$ ".number_format($record->labor_value, 2, ',', '.');
             })
             ->modalSubmitActionLabel('Gerar Comissão')
             ->modalWidth('md')
@@ -125,7 +125,7 @@ final class GenerateCommissionAction extends Action
         Notification::make()
             ->title('Comissão gerada com sucesso!')
             ->success()
-            ->body("Comissão de R$ " . number_format($commissionAmount, 2, ',', '.') . " ({$user->commission_percentage}%) gerada para {$user->name}.")
+            ->body('Comissão de R$ '.number_format($commissionAmount, 2, ',', '.')." ({$user->commission_percentage}%) gerada para {$user->name}.")
             ->send();
     }
 }

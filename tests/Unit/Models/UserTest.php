@@ -6,7 +6,7 @@ use App\Models\User;
 
 test('user has correct fillable attributes', function (): void {
     $user = new User();
-    
+
     $fillable = [
         'name',
         'email',
@@ -22,7 +22,7 @@ test('user has correct fillable attributes', function (): void {
 
 test('user has correct hidden attributes', function (): void {
     $user = new User();
-    
+
     $hidden = [
         'password',
         'remember_token',

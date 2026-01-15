@@ -15,7 +15,6 @@ use Illuminate\Support\Str;
 
 final class SaleObserver
 {
-
     public static function generateAccountsReceivable(Sale $sale): ?Accounts
     {
         $account = Accounts::create([

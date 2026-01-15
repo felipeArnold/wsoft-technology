@@ -13,7 +13,6 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action as TableAction;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -147,7 +146,7 @@ final class SalesTable
                     ->visible(fn (Sale $record): bool => ! $record->hasCommission() && $record->status === 'completed')
                     ->requiresConfirmation()
                     ->modalHeading('Gerar Comissão')
-                    ->modalDescription(fn (Sale $record): string => "Gerar comissão para o vendedor {$record->user?->name} no valor total de R$ " . number_format($record->total, 2, ',', '.'))
+                    ->modalDescription(fn (Sale $record): string => "Gerar comissão para o vendedor {$record->user?->name} no valor total de R$ ".number_format($record->total, 2, ',', '.'))
                     ->modalSubmitActionLabel('Gerar Comissão')
                     ->action(function (Sale $record): void {
                         // Verificar se tem vendedor
@@ -201,7 +200,7 @@ final class SalesTable
                         Notification::make()
                             ->success()
                             ->title('Comissão gerada com sucesso!')
-                            ->body("Comissão de R$ " . number_format($commissionAmount, 2, ',', '.') . " ({$user->commission_percentage}%) gerada para {$user->name}.")
+                            ->body('Comissão de R$ '.number_format($commissionAmount, 2, ',', '.')." ({$user->commission_percentage}%) gerada para {$user->name}.")
                             ->send();
                     }),
             ])

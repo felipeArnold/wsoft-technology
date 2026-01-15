@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Services\Budegets\Pages;
 
 use App\Filament\Resources\Services\Budegets\BudegetResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListBudegets extends ListRecords
+final class ListBudegets extends ListRecords
 {
     protected static string $resource = BudegetResource::class;
 
@@ -15,7 +17,7 @@ class ListBudegets extends ListRecords
         return [
             CreateAction::make()
                 ->icon('heroicon-s-plus')
-                ->label('Criar Orçamento')
+                ->label('Criar Orçamento'),
         ];
     }
 }

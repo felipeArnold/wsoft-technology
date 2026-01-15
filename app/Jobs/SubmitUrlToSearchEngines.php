@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Jobs;
 
 use App\Services\SEO\IndexNowService;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 /**
  * Job para submeter URLs aos buscadores em background
@@ -59,7 +61,7 @@ final class SubmitUrlToSearchEngines implements ShouldQueue
                     'url' => $this->url,
                 ]);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error('❌ Error submitting URL to search engines', [
                 'url' => $this->url,
                 'error' => $e->getMessage(),
@@ -74,7 +76,7 @@ final class SubmitUrlToSearchEngines implements ShouldQueue
     /**
      * Handle a job failure.
      */
-    public function failed(\Throwable $exception): void
+    public function failed(Throwable $exception): void
     {
         Log::error('❌ Job failed after all retries', [
             'url' => $this->url,

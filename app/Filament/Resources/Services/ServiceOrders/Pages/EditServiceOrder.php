@@ -6,7 +6,6 @@ namespace App\Filament\Resources\Services\ServiceOrders\Pages;
 
 use App\Filament\Resources\Services\ServiceOrders\Actions\CreateAccountReceivableAction;
 use App\Filament\Resources\Services\ServiceOrders\Actions\DownloadServiceOrderPdfAction;
-use App\Filament\Resources\Services\ServiceOrders\Actions\GenerateCommissionAction;
 use App\Filament\Resources\Services\ServiceOrders\Actions\SendServiceOrderEmailAction;
 use App\Filament\Resources\Services\ServiceOrders\ServiceOrderResource;
 use Filament\Actions\ActionGroup;

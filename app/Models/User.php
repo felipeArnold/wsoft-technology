@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Storage;
  * @property Carbon|null $deleted_at
  */
 #[ObservedBy(UserObserver::class)]
-final class User extends Authenticatable implements FilamentUser, HasAvatar, HasEmailAuthentication, HasTenants, HasAppAuthenticationRecovery, MustVerifyEmail, HasAppAuthentication
+final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery, HasAvatar, HasEmailAuthentication, HasTenants, MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;

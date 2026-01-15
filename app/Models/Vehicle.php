@@ -68,28 +68,12 @@ final class Vehicle extends Model
         'notes',
     ];
 
-    public function tenant(): BelongsTo
-    {
-        return $this->belongsTo(Tenant::class);
-    }
-
-    public function person(): BelongsTo
-    {
-        return $this->belongsTo(Person::class);
-    }
-
-    public function serviceOrders(): HasMany
-    {
-        return $this->hasMany(ServiceOrder::class);
-    }
-
     /**
      * Get reusable form fields for Vehicle
      *
-     * @param bool $includePersonField Whether to include the person_id field
-     * @param bool $disablePersonField Whether to disable the person_id field (only applies if includePersonField is true)
-     * @param callable|null $personIdDefault Optional callback to set default value for person_id
-     * @return array
+     * @param  bool  $includePersonField  Whether to include the person_id field
+     * @param  bool  $disablePersonField  Whether to disable the person_id field (only applies if includePersonField is true)
+     * @param  callable|null  $personIdDefault  Optional callback to set default value for person_id
      */
     public static function getFormFields(bool $includePersonField = true, bool $disablePersonField = false, ?callable $personIdDefault = null): array
     {
@@ -108,7 +92,7 @@ final class Vehicle extends Model
                     ->dehydrated(false)
                     ->columnSpan(2)
                     ->helperText('Cliente selecionado anteriormente')
-                    ->afterStateHydrated(function ($component) use ($personIdDefault) {
+                    ->afterStateHydrated(function ($component) use ($personIdDefault): void {
                         $personId = is_callable($personIdDefault) ? $personIdDefault() : null;
                         if ($personId) {
                             $person = Person::find($personId);
@@ -122,7 +106,7 @@ final class Vehicle extends Model
                     label: 'Cliente',
                     placeholder: 'Selecione o cliente',
                     columnSpan: 2,
-                    required: !$disablePersonField,
+                    required: ! $disablePersonField,
                     modifyQueryUsing: fn ($query) => $query->where('is_client', true)
                 );
 
@@ -192,5 +176,20 @@ final class Vehicle extends Model
                 ->rows(3)
                 ->columnSpanFull(),
         ]);
+    }
+
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    public function person(): BelongsTo
+    {
+        return $this->belongsTo(Person::class);
+    }
+
+    public function serviceOrders(): HasMany
+    {
+        return $this->hasMany(ServiceOrder::class);
     }
 }

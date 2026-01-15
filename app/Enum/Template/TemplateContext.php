@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Enum\Template;
 
 use Filament\Support\Contracts\HasColor;
-use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
 enum TemplateContext: string implements HasColor, HasLabel
@@ -24,7 +23,6 @@ enum TemplateContext: string implements HasColor, HasLabel
             self::Overdue => 'Inadimplência',
         };
     }
-
 
     public function getColor(): string
     {

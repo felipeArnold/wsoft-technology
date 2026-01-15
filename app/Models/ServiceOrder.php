@@ -209,7 +209,7 @@ final class ServiceOrder extends Model implements Eventable
                                         ->displayFormat('d/m/Y H:i')
                                         ->helperText('Defina o horário exato para o cliente trazer o veículo')
                                         ->reactive()
-                                        ->afterStateUpdated(function ($state, $set, $get) {
+                                        ->afterStateUpdated(function ($state, $set, $get): void {
                                             // Auto-set end time to 2 hours after start if not set
                                             if ($state && ! $get('scheduled_end_at')) {
                                                 $endTime = Carbon::parse($state)->addHours(2);

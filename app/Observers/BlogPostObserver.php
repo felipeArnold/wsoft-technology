@@ -6,12 +6,12 @@ namespace App\Observers;
 
 use App\Jobs\SubmitUrlToSearchEngines;
 use App\Models\Blog\BlogPost;
+use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 final class BlogPostObserver
 {
-
     /**
      * Handle the BlogPost "saved" event (created or updated).
      */
@@ -66,7 +66,7 @@ final class BlogPostObserver
                 'title' => $blogPost->title,
                 'url' => $url,
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error('❌ Failed to queue blog post for search engine submission', [
                 'post_id' => $blogPost->id,
                 'error' => $e->getMessage(),

@@ -14,7 +14,7 @@ declare(strict_types=1);
 */
 
 uses(Illuminate\Foundation\Testing\TestCase::class)
-    ->beforeEach(function () {
+    ->beforeEach(function (): void {
         //
     })
     ->in('Feature');

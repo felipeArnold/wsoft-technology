@@ -16,7 +16,6 @@ use Filament\Forms\Components\Select;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Support\Colors\Color;
 use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -176,10 +175,10 @@ final class ListExtracts extends ListRecords
                                             </div>
                                             <div style='background: ".($balance >= 0 ? '#dcfce7' : '#fee2e2')."; padding: 12px; border-radius: 6px; text-align: center;'>
                                                 <div style='font-size: 11px; color: ".($balance >= 0 ? '#166534' : '#991b1b')."; font-weight: 600; margin-bottom: 4px;'>SALDO</div>
-                                                <div style='font-size: 18px; font-weight: bold; color: ".($balance >= 0 ? '#16a34a' : '#dc2626').";'>R$ ".number_format($balance, 2, ',', '.')."</div>
+                                                <div style='font-size: 18px; font-weight: bold; color: ".($balance >= 0 ? '#16a34a' : '#dc2626').";'>R$ ".number_format($balance, 2, ',', '.').'</div>
                                             </div>
                                         </div>
-                                    ");
+                                    ');
                                 })
                                 ->columnSpanFull(),
                         ])

@@ -51,7 +51,7 @@ final class GenerateEmailTemplateWithAI extends Action
                 ->required()
                 ->native(false)
                 ->live()
-                ->afterStateUpdated(function ($state, callable $set) {
+                ->afterStateUpdated(function ($state, callable $set): void {
                     if ($state === 'custom') {
                         $set('context', '');
                     } else {

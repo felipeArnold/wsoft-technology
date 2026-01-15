@@ -33,20 +33,21 @@ final class TestBlogPostIndexing extends Command
         // Buscar post
         $post = $this->getPost();
 
-        if (!$post) {
+        if (! $post) {
             $this->error('❌ Nenhum post encontrado!');
+
             return Command::FAILURE;
         }
 
-        $this->line("📄 Post selecionado:");
+        $this->line('📄 Post selecionado:');
         $this->line("   ID: {$post->id}");
         $this->line("   Título: {$post->title}");
         $this->line("   Status: {$post->status}");
-        $this->line("   Publicado em: " . ($post->published_at?->format('d/m/Y H:i') ?? 'Não publicado'));
+        $this->line('   Publicado em: '.($post->published_at?->format('d/m/Y H:i') ?? 'Não publicado'));
         $this->newLine();
 
         // Verificar se está publicado
-        if (!$post->isPublished()) {
+        if (! $post->isPublished()) {
             $this->warn('⚠️  Este post ainda NÃO está publicado!');
             $this->line('   Para ser indexado automaticamente, o post precisa estar com status "published"');
             $this->newLine();
@@ -58,8 +59,9 @@ final class TestBlogPostIndexing extends Command
         $this->newLine();
 
         // Confirmar envio
-        if (!$this->confirm('Deseja enviar este post para os buscadores agora?', true)) {
+        if (! $this->confirm('Deseja enviar este post para os buscadores agora?', true)) {
             $this->info('Operação cancelada.');
+
             return Command::SUCCESS;
         }
 

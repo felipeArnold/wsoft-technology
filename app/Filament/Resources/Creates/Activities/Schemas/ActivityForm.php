@@ -6,7 +6,6 @@ namespace App\Filament\Resources\Creates\Activities\Schemas;
 
 use App\Models\Category;
 use App\Models\Person\Person;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
