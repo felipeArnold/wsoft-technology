@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::table('service_orders', function (Blueprint $table) {
             // Checklist de entrada do veículo
-            $table->json('entry_checklist')->nullable()->after('attachments');
-            $table->json('entry_checklist_images')->nullable()->after('entry_checklist');
+            $table->json('entry_checklist')->nullable();
+            $table->json('entry_checklist_images')->nullable();
 
             // Checklist de saída do veículo
-            $table->json('exit_checklist')->nullable()->after('entry_checklist_images');
-            $table->json('exit_checklist_images')->nullable()->after('exit_checklist');
+            $table->json('exit_checklist')->nullable();
+            $table->json('exit_checklist_images')->nullable();
         });
     }
 
