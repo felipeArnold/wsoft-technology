@@ -30,6 +30,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Repeater\TableColumn;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
@@ -71,6 +72,10 @@ final class ServiceOrder extends Model implements Eventable
         'labor_value' => 'float',
         'parts_value' => 'float',
         'attachments' => 'array',
+        'entry_checklist' => 'array',
+        'entry_checklist_images' => 'array',
+        'exit_checklist' => 'array',
+        'exit_checklist_images' => 'array',
     ];
 
     public static function getForm(bool $disableStatus = false, ?ServiceOrderStatus $defaultStatus = null): array
@@ -363,6 +368,14 @@ final class ServiceOrder extends Model implements Eventable
                             self::getServicesSection(),
                             self::getProductsSection(),
                             self::getValuesSection(),
+                        ]),
+
+                    Tab::make('vehicle_checklist')
+                        ->label('Checklist do Veículo')
+                        ->icon('heroicon-o-clipboard-document-check')
+                        ->schema([
+                            self::getEntryChecklistSection(),
+                            self::getExitChecklistSection(),
                         ]),
 
                     Tab::make('attachments_tags')
@@ -975,5 +988,457 @@ final class ServiceOrder extends Model implements Eventable
         $set('labor_value', FormatterHelper::money($laborValue));
         $set('parts_value', FormatterHelper::money($partsValue));
         $set('total_value', FormatterHelper::money($laborValue + $partsValue));
+    }
+
+    private static function getEntryChecklistSection(): Section
+    {
+        return Section::make('Checklist de Entrada do Veículo')
+            ->description('Preencha os dados do veículo no momento da entrada')
+            ->icon('heroicon-o-arrow-down-tray')
+            ->schema([
+                TextInput::make('entry_checklist.odometer')
+                    ->label('Hodômetro (KM)')
+                    ->numeric()
+                    ->placeholder('Ex: 45000')
+                    ->suffix('km')
+                    ->columnSpan(1),
+
+                Select::make('entry_checklist.fuel_level')
+                    ->label('Nível de Combustível')
+                    ->options([
+                        '0' => 'Vazio',
+                        '1/4' => '1/4 (25%)',
+                        '1/2' => '1/2 (50%)',
+                        '3/4' => '3/4 (75%)',
+                        'full' => 'Cheio (100%)',
+                    ])
+                    ->native(false)
+                    ->columnSpan(1),
+
+                Select::make('entry_checklist.cleanliness')
+                    ->label('Limpeza Geral')
+                    ->options([
+                        'clean' => 'Limpo',
+                        'regular' => 'Regular',
+                        'dirty' => 'Sujo',
+                    ])
+                    ->native(false)
+                    ->columnSpan(1),
+
+                Section::make('Itens Internos do Veículo')
+                    ->description('Marque os itens presentes no veículo')
+                    ->icon('heroicon-o-squares-2x2')
+                    ->schema([
+                        CheckboxList::make('entry_checklist.internal_items')
+                            ->label('Itens Presentes')
+                            ->options([
+                                'documents' => 'Documentos do Veículo',
+                                'fire_extinguisher' => 'Extintor de Incêndio',
+                                'spare_tire' => 'Estepe',
+                                'jack' => 'Macaco',
+                                'wheel_wrench' => 'Chave de Roda',
+                                'triangle' => 'Triângulo de Sinalização',
+                                'first_aid_kit' => 'Kit de Primeiros Socorros',
+                                'tool_kit' => 'Kit de Ferramentas',
+                                'floor_mats' => 'Tapetes',
+                                'spare_key' => 'Chave Reserva',
+                                'manual' => 'Manual do Proprietário',
+                                'radio_code' => 'Código do Rádio',
+                            ])
+                            ->columns(3)
+                            ->gridDirection('row')
+                            ->bulkToggleable()
+                            ->columnSpanFull(),
+                    ])
+                    ->columnSpan(2)
+                    ->collapsible()
+                    ->collapsed(),
+
+                Section::make('Condições Externas')
+                    ->description('Avalie as condições externas do veículo')
+                    ->icon('heroicon-o-eye')
+                    ->schema([
+                        Select::make('entry_checklist.body_front')
+                            ->label('Lataria Frontal')
+                            ->options([
+                                'ok' => 'OK',
+                                'scratches' => 'Arranhões',
+                                'dents' => 'Amassados',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.body_rear')
+                            ->label('Lataria Traseira')
+                            ->options([
+                                'ok' => 'OK',
+                                'scratches' => 'Arranhões',
+                                'dents' => 'Amassados',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.body_left')
+                            ->label('Lataria Esquerda')
+                            ->options([
+                                'ok' => 'OK',
+                                'scratches' => 'Arranhões',
+                                'dents' => 'Amassados',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.body_right')
+                            ->label('Lataria Direita')
+                            ->options([
+                                'ok' => 'OK',
+                                'scratches' => 'Arranhões',
+                                'dents' => 'Amassados',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.windshield')
+                            ->label('Para-brisa')
+                            ->options([
+                                'ok' => 'OK',
+                                'cracks' => 'Trincas',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.headlights')
+                            ->label('Faróis')
+                            ->options([
+                                'ok' => 'OK',
+                                'opaque' => 'Opacos',
+                                'damaged' => 'Danificados',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.mirrors')
+                            ->label('Retrovisores')
+                            ->options([
+                                'ok' => 'OK',
+                                'damaged' => 'Danificados',
+                                'missing' => 'Faltando',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.tire_front_left')
+                            ->label('Pneu Dianteiro Esquerdo')
+                            ->options([
+                                'good' => 'Bom',
+                                'worn' => 'Gasto',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('good')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.tire_front_right')
+                            ->label('Pneu Dianteiro Direito')
+                            ->options([
+                                'good' => 'Bom',
+                                'worn' => 'Gasto',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('good')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.tire_rear_left')
+                            ->label('Pneu Traseiro Esquerdo')
+                            ->options([
+                                'good' => 'Bom',
+                                'worn' => 'Gasto',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('good')
+                            ->columnSpan(1),
+
+                        Select::make('entry_checklist.tire_rear_right')
+                            ->label('Pneu Traseiro Direito')
+                            ->options([
+                                'good' => 'Bom',
+                                'worn' => 'Gasto',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('good')
+                            ->columnSpan(1),
+                    ])
+                    ->columns(4)
+                    ->columnSpan(2)
+                    ->collapsible()
+                    ->collapsed(),
+
+                Textarea::make('entry_checklist.observations')
+                    ->label('Observações Adicionais')
+                    ->placeholder('Descreva quaisquer detalhes relevantes sobre o estado do veículo')
+                    ->rows(3)
+                    ->columnSpanFull(),
+
+                FileUpload::make('entry_checklist_images')
+                    ->label('Fotos do Veículo na Entrada')
+                    ->helperText('Tire fotos de todos os ângulos do veículo para registro')
+                    ->image()
+                    ->multiple()
+                    ->maxFiles(10)
+                    ->maxSize(5120)
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        null,
+                        '16:9',
+                        '4:3',
+                        '1:1',
+                    ])
+                    ->panelLayout('grid')
+                    ->columnSpanFull(),
+
+            ])
+            ->columns(4)
+            ->columnSpanFull();
+    }
+
+    private static function getExitChecklistSection(): Section
+    {
+        return Section::make('Checklist de Saída do Veículo')
+            ->description('Preencha os dados do veículo no momento da saída')
+            ->icon('heroicon-o-arrow-up-tray')
+            ->schema([
+                TextInput::make('exit_checklist.odometer')
+                    ->label('Hodômetro (KM)')
+                    ->numeric()
+                    ->placeholder('Ex: 45050')
+                    ->suffix('km')
+                    ->columnSpan(1),
+
+                Select::make('exit_checklist.fuel_level')
+                    ->label('Nível de Combustível')
+                    ->options([
+                        '0' => 'Vazio',
+                        '1/4' => '1/4 (25%)',
+                        '1/2' => '1/2 (50%)',
+                        '3/4' => '3/4 (75%)',
+                        'full' => 'Cheio (100%)',
+                    ])
+                    ->native(false)
+                    ->columnSpan(1),
+
+                Select::make('exit_checklist.cleanliness')
+                    ->label('Limpeza Geral')
+                    ->options([
+                        'clean' => 'Limpo',
+                        'regular' => 'Regular',
+                        'dirty' => 'Sujo',
+                    ])
+                    ->native(false)
+                    ->columnSpan(1),
+
+                Section::make('Itens Devolvidos ao Cliente')
+                    ->description('Confirme os itens que estão sendo devolvidos')
+                    ->icon('heroicon-o-squares-2x2')
+                    ->schema([
+                        CheckboxList::make('exit_checklist.returned_items')
+                            ->label('Itens Devolvidos')
+                            ->options([
+                                'documents' => 'Documentos do Veículo',
+                                'fire_extinguisher' => 'Extintor de Incêndio',
+                                'spare_tire' => 'Estepe',
+                                'jack' => 'Macaco',
+                                'wheel_wrench' => 'Chave de Roda',
+                                'triangle' => 'Triângulo de Sinalização',
+                                'first_aid_kit' => 'Kit de Primeiros Socorros',
+                                'tool_kit' => 'Kit de Ferramentas',
+                                'floor_mats' => 'Tapetes',
+                                'spare_key' => 'Chave Reserva',
+                                'manual' => 'Manual do Proprietário',
+                                'radio_code' => 'Código do Rádio',
+                            ])
+                            ->columns(3)
+                            ->gridDirection('row')
+                            ->bulkToggleable()
+                            ->columnSpanFull(),
+                    ])
+                    ->columnSpan(2)
+                    ->collapsible()
+                    ->collapsed(),
+
+                Section::make('Condições Externas na Saída')
+                    ->description('Avalie as condições externas do veículo na entrega')
+                    ->icon('heroicon-o-eye')
+                    ->schema([
+                        Select::make('exit_checklist.body_front')
+                            ->label('Lataria Frontal')
+                            ->options([
+                                'ok' => 'OK',
+                                'scratches' => 'Arranhões',
+                                'dents' => 'Amassados',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.body_rear')
+                            ->label('Lataria Traseira')
+                            ->options([
+                                'ok' => 'OK',
+                                'scratches' => 'Arranhões',
+                                'dents' => 'Amassados',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.body_left')
+                            ->label('Lataria Esquerda')
+                            ->options([
+                                'ok' => 'OK',
+                                'scratches' => 'Arranhões',
+                                'dents' => 'Amassados',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.body_right')
+                            ->label('Lataria Direita')
+                            ->options([
+                                'ok' => 'OK',
+                                'scratches' => 'Arranhões',
+                                'dents' => 'Amassados',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.windshield')
+                            ->label('Para-brisa')
+                            ->options([
+                                'ok' => 'OK',
+                                'cracks' => 'Trincas',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.headlights')
+                            ->label('Faróis')
+                            ->options([
+                                'ok' => 'OK',
+                                'opaque' => 'Opacos',
+                                'damaged' => 'Danificados',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.mirrors')
+                            ->label('Retrovisores')
+                            ->options([
+                                'ok' => 'OK',
+                                'damaged' => 'Danificados',
+                                'missing' => 'Faltando',
+                            ])
+                            ->native(false)
+                            ->default('ok')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.tire_front_left')
+                            ->label('Pneu Dianteiro Esquerdo')
+                            ->options([
+                                'good' => 'Bom',
+                                'worn' => 'Gasto',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('good')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.tire_front_right')
+                            ->label('Pneu Dianteiro Direito')
+                            ->options([
+                                'good' => 'Bom',
+                                'worn' => 'Gasto',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('good')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.tire_rear_left')
+                            ->label('Pneu Traseiro Esquerdo')
+                            ->options([
+                                'good' => 'Bom',
+                                'worn' => 'Gasto',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('good')
+                            ->columnSpan(1),
+
+                        Select::make('exit_checklist.tire_rear_right')
+                            ->label('Pneu Traseiro Direito')
+                            ->options([
+                                'good' => 'Bom',
+                                'worn' => 'Gasto',
+                                'damaged' => 'Danificado',
+                            ])
+                            ->native(false)
+                            ->default('good')
+                            ->columnSpan(1),
+                    ])
+                    ->columns(4)
+                    ->columnSpan(2)
+                    ->collapsible()
+                    ->collapsed(),
+
+                Textarea::make('exit_checklist.observations')
+                    ->label('Observações Adicionais')
+                    ->placeholder('Descreva quaisquer detalhes relevantes sobre o estado do veículo na saída')
+                    ->rows(3)
+                    ->columnSpanFull(),
+
+                FileUpload::make('exit_checklist_images')
+                    ->label('Fotos do Veículo na Saída')
+                    ->helperText('Tire fotos de todos os ângulos do veículo para registro da entrega')
+                    ->image()
+                    ->multiple()
+                    ->maxFiles(10)
+                    ->maxSize(5120)
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        null,
+                        '16:9',
+                        '4:3',
+                        '1:1',
+                    ])
+                    ->panelLayout('grid')
+                    ->columnSpanFull(),
+
+            ])
+            ->columns(4)
+            ->columnSpanFull();
     }
 }
